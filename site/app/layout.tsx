@@ -22,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/layouts">Layouts</Link>
             <Link href="/components">Components</Link>
             <Link href="/llm">For LLMs</Link>
+            <Link href="/playground">Playground</Link>
           </nav>
           <div data-slot="actions">
             <a
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/layouts">Layouts</Link>
               <Link href="/components">Components</Link>
               <Link href="/llm">For LLMs</Link>
+              <Link href="/playground">Playground</Link>
             </div>
           </div>
         </footer>

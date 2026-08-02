@@ -55,6 +55,21 @@ th {
   font-size: var(--text-sm);
 }
 
+.playground-editor {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  min-height: 480px;
+  resize: vertical;
+}
+
+.playground-preview {
+  min-height: 480px;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
 .swatch {
   display: inline-block;
   width: 1.25rem;

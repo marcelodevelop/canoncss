@@ -34,6 +34,31 @@ export default function Home() {
 
       <div data-layout="centered" data-width="content">
         <div data-layout="stack" data-gap="xl" data-padding="2xl">
+          <h2>Try it in 60 seconds</h2>
+          <div data-layout="grid" data-cols="3" data-gap="lg">
+            <article data-component="card">
+              <div data-slot="header">1 · Copy the prompt</div>
+              <div data-slot="body">
+                Grab the ~600-token system prompt from{' '}
+                <a href="/llm">For LLMs</a> with one click.
+              </div>
+            </article>
+            <article data-component="card">
+              <div data-slot="header">2 · Ask your LLM</div>
+              <div data-slot="body">
+                Paste it into Claude, Cursor or ChatGPT and ask for any page or
+                component.
+              </div>
+            </article>
+            <article data-component="card">
+              <div data-slot="header">3 · See it live</div>
+              <div data-slot="body">
+                Paste the result into the <a href="/playground">Playground</a> —
+                rendered instantly, light or dark.
+              </div>
+            </article>
+          </div>
+
           <h2>Install</h2>
           <pre>
             <code>{`<link rel="stylesheet" href="canon.css">`}</code>
