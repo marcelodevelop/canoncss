@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canon CSS — Tokens</title>
+  <link rel="stylesheet" href="../dist/canon.css">
+  <!-- docs-only chrome; the framework itself needs none of this -->
+  <style>
+    pre { background: var(--color-surface-sunken); border: 1px solid var(--color-border);
+          border-radius: var(--radius-md); padding: var(--space-md); overflow-x: auto;
+          font-size: var(--text-sm); }
+    code { font-family: ui-monospace, monospace; }
+    table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+    th, td { text-align: left; padding: var(--space-sm); border-bottom: 1px solid var(--color-border); }
+    th { color: var(--color-content-subtle); font-weight: var(--weight-medium); }
+    .swatch { display: inline-block; width: 1.25rem; height: 1.25rem;
+              border-radius: var(--radius-sm); border: 1px solid var(--color-border);
+              vertical-align: middle; margin-right: var(--space-sm); }
+  </style>
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="index.html">Canon</a>
+    <nav data-slot="nav">
+      <a href="tokens.html">Tokens</a>
+      <a href="layouts.html">Layouts</a>
+      <a href="components.html">Components</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="secondary" data-size="sm"
+         href="https://github.com/canon-css/canon">GitHub</a>
+    </div>
+  </header>
+
+  <div data-layout="centered" data-width="content">
+    <div data-layout="stack" data-gap="xl" data-padding="2xl">
+
+      <div data-layout="stack" data-gap="sm">
+        <h1>Tokens</h1>
+        <p data-tone="subtle">The complete vocabulary. If a value has no token, it does not exist.</p>
+      </div>
+
+      <h2>Spacing — 6 levels</h2>
+      <table>
+        <tr><th>Token</th><th>Value</th></tr>
+        <tr><td><code>--space-xs</code></td><td>0.25rem / 4px</td></tr>
+        <tr><td><code>--space-sm</code></td><td>0.5rem / 8px</td></tr>
+        <tr><td><code>--space-md</code></td><td>1rem / 16px</td></tr>
+        <tr><td><code>--space-lg</code></td><td>1.5rem / 24px</td></tr>
+        <tr><td><code>--space-xl</code></td><td>2.5rem / 40px</td></tr>
+        <tr><td><code>--space-2xl</code></td><td>4rem / 64px</td></tr>
+      </table>
+
+      <h2>Type scale — 7 levels</h2>
+      <table>
+        <tr><th>Token</th><th>Value</th></tr>
+        <tr><td><code>--text-xs</code></td><td>0.75rem / 12px</td></tr>
+        <tr><td><code>--text-sm</code></td><td>0.875rem / 14px</td></tr>
+        <tr><td><code>--text-md</code></td><td>1rem / 16px — body</td></tr>
+        <tr><td><code>--text-lg</code></td><td>1.125rem / 18px</td></tr>
+        <tr><td><code>--text-xl</code></td><td>1.5rem / 24px</td></tr>
+        <tr><td><code>--text-2xl</code></td><td>2rem / 32px</td></tr>
+        <tr><td><code>--text-3xl</code></td><td>3rem / 48px</td></tr>
+      </table>
+      <p>Headings <code>h1</code>–<code>h6</code> map onto the scale
+         automatically (<code>h1</code> = 3xl … <code>h6</code> = sm).
+         Never restyle them.</p>
+
+      <h2>Color — semantic</h2>
+      <table>
+        <tr><th>Token</th><th>Role</th></tr>
+        <tr><td><span class="swatch" style="background:var(--color-brand)"></span><code>--color-brand</code></td><td>Primary actions, links</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-brand-subtle)"></span><code>--color-brand-subtle</code></td><td>Brand tints, focus rings</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-accent)"></span><code>--color-accent</code></td><td>Secondary emphasis</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-surface)"></span><code>--color-surface</code></td><td>Page background</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-surface-raised)"></span><code>--color-surface-raised</code></td><td>Cards, panels</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-surface-sunken)"></span><code>--color-surface-sunken</code></td><td>Wells, footers</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-content)"></span><code>--color-content</code></td><td>Body text</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-content-subtle)"></span><code>--color-content-subtle</code></td><td>Secondary text</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-border)"></span><code>--color-border</code></td><td>Default borders</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-border-strong)"></span><code>--color-border-strong</code></td><td>Inputs, emphasis borders</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-success)"></span><code>--color-success</code></td><td rowspan="4">Status. Each has a <code>-subtle</code> background tint.</td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-warning)"></span><code>--color-warning</code></td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-error)"></span><code>--color-error</code></td></tr>
+        <tr><td><span class="swatch" style="background:var(--color-info)"></span><code>--color-info</code></td></tr>
+      </table>
+
+      <h2>Radius, shadow, typography, motion</h2>
+      <table>
+        <tr><th>Group</th><th>Tokens</th></tr>
+        <tr><td>Radius</td><td><code>--radius-{sm|md|lg|full}</code></td></tr>
+        <tr><td>Shadow</td><td><code>--shadow-{sm|md|lg}</code></td></tr>
+        <tr><td>Weight</td><td><code>--weight-{normal|medium|bold}</code></td></tr>
+        <tr><td>Leading</td><td><code>--leading-{tight|normal|loose}</code></td></tr>
+        <tr><td>Motion</td><td><code>--ease-default</code>, <code>--duration-{fast|normal|slow}</code></td></tr>
+      </table>
+
+      <h2>Dark mode</h2>
+      <pre><code>&lt;html data-theme="dark"&gt;</code></pre>
+      <p>Surfaces, content, borders and subtle tints all remap. Systems set to
+         dark get it automatically via <code>prefers-color-scheme</code> unless
+         you pin <code>data-theme="light"</code>.</p>
+
+      <h2>Theming</h2>
+      <pre><code>:root {
+  --color-brand: #0ea5e9;   /* the only sanctioned override point */
+}</code></pre>
+
+    </div>
+  </div>
+
+</body>
+</html>

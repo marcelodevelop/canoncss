@@ -1,0 +1,84 @@
+@layer canon.reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    color: var(--color-content);
+    background-color: var(--color-surface);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, video, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: var(--leading-tight);
+    font-weight: var(--weight-bold);
+  }
+
+  /* Heading sizes come from the type scale so markup never needs inline styles.
+     Negative tracking on display sizes is what makes them read as designed. */
+  h1 { font-size: var(--text-3xl); letter-spacing: -0.025em; }
+  h2 { font-size: var(--text-2xl); letter-spacing: -0.02em; }
+  h3 { font-size: var(--text-xl); letter-spacing: -0.01em; }
+  h4 { font-size: var(--text-lg); }
+  h5 { font-size: var(--text-md); }
+  h6 { font-size: var(--text-sm); }
+
+  a {
+    color: var(--color-brand);
+    text-decoration-skip-ink: auto;
+  }
+
+  /* Links dentro de <nav> son navegación, no prosa: sin subrayado, tono neutro. */
+  nav a {
+    color: var(--color-content-subtle);
+    text-decoration: none;
+    font-weight: var(--weight-medium);
+    font-size: var(--text-sm);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    transition: color var(--duration-fast) var(--ease-default),
+                background-color var(--duration-fast) var(--ease-default);
+  }
+
+  nav a:hover {
+    color: var(--color-content);
+    background-color: var(--color-surface-raised);
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background-color: var(--color-accent-subtle);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}

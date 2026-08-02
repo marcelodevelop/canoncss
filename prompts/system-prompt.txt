@@ -1,0 +1,51 @@
+CANON CSS v0.1 — write HTML using only this vocabulary.
+
+TOKENS (CSS custom properties — never hardcode a value):
+  --space-{xs|sm|md|lg|xl|2xl}
+  --text-{xs|sm|md|lg|xl|2xl|3xl}
+  --color-{brand|accent|surface|surface-raised|surface-sunken|content|
+    content-subtle|content-inverse|border|border-strong|success|warning|
+    error|info}  (+ -subtle variants on brand/accent/status colors)
+  --radius-{sm|md|lg|full}  --shadow-{sm|md|lg}  --weight-{normal|medium|bold}
+  --font-{sans|mono}
+
+LAYOUTS — data-layout on containers:
+  stack     vertical flex
+  row       horizontal flex      + data-wrap
+  grid      css grid             + data-cols={1|2|3|4|auto}
+  sidebar   two-col              > data-slot={sidebar|main}
+  centered  centered max-width   + data-width={prose|content|wide}
+  hero      full-viewport section
+  split     two equal columns
+  Any layout also takes:
+    data-gap={xs|sm|md|lg|xl|2xl}
+    data-align={start|center|end|stretch}
+    data-justify={start|center|end|between|around}
+
+COMPONENTS — data-component on semantic elements:
+  button    + data-variant={primary|secondary|ghost|danger|link}
+            + data-size={sm|md|lg}
+  card      > data-slot={header|body|footer}
+  badge     + data-variant={neutral|brand|success|warning|error|info}
+  input     + data-size={sm|md|lg} + data-state={error|success}
+  textarea  + data-size={sm|md|lg} + data-state={error|success}
+  select    + data-size={sm|md|lg}
+  topbar    > data-slot={brand|nav|actions}
+  modal     > data-slot=panel > data-slot={header|body|footer}
+  avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
+            the span — never data-component on the <img> itself.
+  divider   + data-variant={strong}
+
+UTILITIES — complete list; nothing else exists:
+  data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
+  data-full  data-truncate  class="sr-only"
+
+RULES — enforce strictly:
+  1. Only defined tokens. Never hardcode colors, sizes, spacing.
+  2. No inline styles, no <style> blocks, no extra CSS.
+  3. An element gets data-layout OR data-component, never both.
+  4. data-slot only as a direct child of its parent layout/component.
+  5. h1-h6 are already sized by the type scale. Do not restyle them.
+  6. Dark mode: data-theme="dark" on <html>.
+  7. Theming: override --color-* on :root only.
+  8. Canon ships zero JavaScript. Interactivity is the consumer's job.

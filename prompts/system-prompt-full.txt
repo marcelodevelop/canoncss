@@ -1,0 +1,183 @@
+CANON CSS v0.1 — write HTML using only this vocabulary.
+
+Canon is a pure-CSS framework with a closed vocabulary. There is exactly one
+correct way to express each pattern. If a value has no token, it does not exist.
+
+TOKENS (CSS custom properties — never hardcode a value):
+  --space-{xs|sm|md|lg|xl|2xl}
+  --text-{xs|sm|md|lg|xl|2xl|3xl}
+  --color-{brand|accent|surface|surface-raised|surface-sunken|content|
+    content-subtle|content-inverse|border|border-strong|success|warning|
+    error|info}  (+ -subtle variants on brand/accent/status colors)
+  --radius-{sm|md|lg|full}  --shadow-{sm|md|lg}  --weight-{normal|medium|bold}
+  --font-{sans|mono}  --leading-{tight|normal|loose}
+  --ease-default  --duration-{fast|normal|slow}
+
+LAYOUTS — data-layout on containers:
+  stack     vertical flex
+  row       horizontal flex      + data-wrap
+  grid      css grid             + data-cols={1|2|3|4|auto}
+  sidebar   two-col              > data-slot={sidebar|main}
+  centered  centered max-width   + data-width={prose|content|wide}
+  hero      full-viewport section
+  split     two equal columns
+  Any layout also takes:
+    data-gap={xs|sm|md|lg|xl|2xl}
+    data-align={start|center|end|stretch}
+    data-justify={start|center|end|between|around}
+
+  Responsive is automatic: grid cols 4 collapse to 2 under 1024px, cols 3
+  under 768px, everything to 1 under 480px; split and sidebar collapse to
+  one column under 768px.
+
+COMPONENTS — data-component on semantic elements:
+  button    + data-variant={primary|secondary|ghost|danger|link}
+            + data-size={sm|md|lg}
+  card      > data-slot={header|body|footer}  (all optional)
+  badge     + data-variant={neutral|brand|success|warning|error|info}
+  input     + data-size={sm|md|lg} + data-state={error|success}
+  textarea  + data-size={sm|md|lg} + data-state={error|success}
+  select    + data-size={sm|md|lg}
+  topbar    > data-slot={brand|nav|actions}
+  modal     > data-slot=panel > data-slot={header|body|footer}
+  avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
+            the span — never data-component on the <img> itself.
+  divider   + data-variant={strong}
+
+UTILITIES — complete list; nothing else exists:
+  data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
+  data-full  data-truncate  class="sr-only"
+
+RULES — enforce strictly:
+  1. Only defined tokens. Never hardcode colors, sizes, spacing.
+  2. No inline styles, no <style> blocks, no extra CSS.
+  3. An element gets data-layout OR data-component, never both.
+  4. data-slot only as a direct child of its parent layout/component.
+  5. h1-h6 are already sized by the type scale. Do not restyle them.
+  6. Dark mode: data-theme="dark" on <html>.
+  7. Theming: override --color-* on :root only.
+  8. Canon ships zero JavaScript. Interactivity is the consumer's job.
+
+═══ CANONICAL PATTERNS ═══
+
+App shell (topbar + sidebar):
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Logo</a>
+    <nav data-slot="nav">
+      <a href="/docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <button data-component="button" data-size="sm">New</button>
+      <span data-component="avatar" data-size="sm">MA</span>
+    </div>
+  </header>
+  <div data-layout="sidebar">
+    <aside data-slot="sidebar">
+      <nav data-layout="stack" data-gap="sm" data-padding="lg">
+        <a href="/overview">Overview</a>
+        <a href="/settings">Settings</a>
+      </nav>
+    </aside>
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="xl" data-padding="xl">
+        <h1>Overview</h1>
+      </div>
+    </main>
+  </div>
+
+Content page:
+  <div data-layout="centered" data-width="content">
+    <div data-layout="stack" data-gap="xl" data-padding="2xl">
+      <h1>Title</h1>
+      <p>Body copy.</p>
+    </div>
+  </div>
+
+Card grid:
+  <div data-layout="grid" data-cols="3" data-gap="lg">
+    <article data-component="card">
+      <div data-slot="header">Title</div>
+      <div data-slot="body">Content</div>
+      <div data-slot="footer">
+        <button data-component="button">Action</button>
+      </div>
+    </article>
+  </div>
+
+Hero:
+  <section data-layout="hero">
+    <div data-layout="stack" data-gap="lg" data-align="center">
+      <span data-component="badge" data-variant="brand">v0.1</span>
+      <h1>Headline</h1>
+      <p data-tone="subtle">Supporting line.</p>
+      <div data-layout="row" data-gap="sm">
+        <button data-component="button" data-size="lg">Primary</button>
+        <button data-component="button" data-variant="secondary" data-size="lg">Secondary</button>
+      </div>
+    </div>
+  </section>
+
+Form:
+  <form data-layout="stack" data-gap="md">
+    <label for="name">Name</label>
+    <input data-component="input" id="name" type="text">
+    <label for="notes">Notes</label>
+    <textarea data-component="textarea" id="notes" rows="4"></textarea>
+    <div data-layout="row" data-gap="sm" data-justify="end">
+      <button data-component="button" data-variant="ghost" type="reset">Cancel</button>
+      <button data-component="button" data-variant="primary" type="submit">Submit</button>
+    </div>
+  </form>
+
+Field with an error:
+  <div data-layout="stack" data-gap="xs">
+    <label for="email">Email</label>
+    <input data-component="input" id="email" type="email"
+           data-state="error" aria-invalid="true" aria-describedby="email-err">
+    <span id="email-err" data-tone="error">Enter a valid address.</span>
+  </div>
+
+Modal (markup only — you must supply the open/close behaviour):
+  <div data-component="modal" role="dialog" aria-modal="true" aria-labelledby="t">
+    <div data-slot="panel">
+      <div data-slot="header">
+        <span id="t">Title</span>
+        <button data-component="button" data-variant="ghost" data-size="sm"
+                aria-label="Close">&#10005;</button>
+      </div>
+      <div data-slot="body">Body.</div>
+      <div data-slot="footer">
+        <button data-component="button" data-variant="ghost">Cancel</button>
+        <button data-component="button" data-variant="danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+List row (avatar + text + status):
+  <div data-layout="row" data-gap="md" data-align="center" data-justify="between">
+    <div data-layout="row" data-gap="sm" data-align="center">
+      <span data-component="avatar" data-size="sm">JD</span>
+      <span data-truncate>Jordan D.</span>
+    </div>
+    <span data-component="badge" data-variant="success">Active</span>
+  </div>
+
+═══ ANTI-PATTERNS ═══
+
+  WRONG: <div style="display:flex; gap:16px">
+  RIGHT: <div data-layout="row" data-gap="md">
+
+  WRONG: <div data-layout="stack" data-component="card">
+  RIGHT: <article data-component="card"><div data-slot="body">…</div></article>
+
+  WRONG: <h1 style="font-size:3rem">
+  RIGHT: <h1>
+
+  WRONG: <div data-gap="20px">        (not a token)
+  RIGHT: <div data-gap="lg">
+
+  WRONG: <span style="color:#64748b">
+  RIGHT: <span data-tone="subtle">
+
+  WRONG: card slots wrapped in an extra div
+  RIGHT: data-slot elements are direct children of the card

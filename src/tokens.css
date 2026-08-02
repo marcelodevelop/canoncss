@@ -1,0 +1,139 @@
+@layer canon.tokens {
+  :root {
+    /* ── SPACING (6 niveles) ── */
+    --space-xs:  0.25rem;   /* 4px  */
+    --space-sm:  0.5rem;    /* 8px  */
+    --space-md:  1rem;      /* 16px */
+    --space-lg:  1.5rem;    /* 24px */
+    --space-xl:  2.5rem;    /* 40px */
+    --space-2xl: 4rem;      /* 64px */
+
+    /* ── TYPE SCALE (7 niveles) ── */
+    --text-xs:   0.75rem;   /* 12px */
+    --text-sm:   0.875rem;  /* 14px */
+    --text-md:   1rem;      /* 16px — body */
+    --text-lg:   1.125rem;  /* 18px */
+    --text-xl:   1.5rem;    /* 24px */
+    --text-2xl:  2rem;      /* 32px */
+    --text-3xl:  3rem;      /* 48px */
+
+    /* ── FONTS ── */
+    --font-sans: "Avenir Next", Avenir, "Segoe UI Variable", "Segoe UI",
+                 "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+
+    /* ── COLOR — semántico. Monocromo zinc + acento ámbar. ── */
+    /* brand = foreground: el primario es casi-negro en light, casi-blanco en dark. */
+    --color-brand:           #18181b;
+    --color-brand-subtle:    color-mix(in srgb, #18181b 6%, white);
+    --color-accent:          #d97706;
+    --color-accent-subtle:   color-mix(in srgb, #d97706 12%, white);
+
+    --color-surface:         #ffffff;
+    --color-surface-raised:  #fafafa;
+    --color-surface-sunken:  #f4f4f5;
+
+    --color-content:         #18181b;
+    --color-content-subtle:  #71717a;
+    --color-content-inverse: #ffffff;
+
+    --color-border:          #e4e4e7;
+    --color-border-strong:   #d4d4d8;
+
+    --color-success:         #16a34a;
+    --color-warning:         #d97706;
+    --color-error:           #dc2626;
+    --color-info:            #2563eb;
+
+    --color-success-subtle:  color-mix(in srgb, #16a34a 10%, white);
+    --color-warning-subtle:  color-mix(in srgb, #d97706 10%, white);
+    --color-error-subtle:    color-mix(in srgb, #dc2626 10%, white);
+    --color-info-subtle:     color-mix(in srgb, #2563eb 10%, white);
+
+    /* ── RADIUS (4 niveles) ── */
+    --radius-sm:   0.25rem;
+    --radius-md:   0.5rem;
+    --radius-lg:   0.75rem;
+    --radius-full: 9999px;
+
+    /* ── SHADOW (3 niveles) ── */
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
+    --shadow-md: 0 2px 4px rgb(0 0 0 / 0.04), 0 4px 8px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 4px 8px rgb(0 0 0 / 0.05), 0 12px 24px rgb(0 0 0 / 0.08);
+
+    /* ── TYPOGRAPHY ── */
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-bold:   600;
+
+    --leading-tight:  1.2;
+    --leading-normal: 1.5;
+    --leading-loose:  1.75;
+
+    /* ── TRANSITIONS ── */
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-fast:   150ms;
+    --duration-normal: 200ms;
+    --duration-slow:   300ms;
+  }
+
+  /* ── DARK MODE ── */
+  [data-theme="dark"] {
+    --color-brand:           #fafafa;
+    --color-brand-subtle:    color-mix(in srgb, #fafafa 8%, #09090b);
+    --color-accent:          #f59e0b;
+    --color-accent-subtle:   color-mix(in srgb, #f59e0b 15%, #09090b);
+
+    --color-surface:         #09090b;
+    --color-surface-raised:  #141417;
+    --color-surface-sunken:  #000000;
+
+    --color-content:         #fafafa;
+    --color-content-subtle:  #a1a1aa;
+    --color-content-inverse: #18181b;
+
+    --color-border:          #27272a;
+    --color-border-strong:   #3f3f46;
+
+    --color-success:         #4ade80;
+    --color-warning:         #fbbf24;
+    --color-error:           #f87171;
+    --color-info:            #60a5fa;
+
+    --color-success-subtle:  color-mix(in srgb, #16a34a 18%, #09090b);
+    --color-warning-subtle:  color-mix(in srgb, #d97706 18%, #09090b);
+    --color-error-subtle:    color-mix(in srgb, #dc2626 18%, #09090b);
+    --color-info-subtle:     color-mix(in srgb, #2563eb 18%, #09090b);
+  }
+
+  /* Soporte adicional para prefers-color-scheme si no hay data-theme */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-brand:           #fafafa;
+      --color-brand-subtle:    color-mix(in srgb, #fafafa 8%, #09090b);
+      --color-accent:          #f59e0b;
+      --color-accent-subtle:   color-mix(in srgb, #f59e0b 15%, #09090b);
+
+      --color-surface:         #09090b;
+      --color-surface-raised:  #141417;
+      --color-surface-sunken:  #000000;
+
+      --color-content:         #fafafa;
+      --color-content-subtle:  #a1a1aa;
+      --color-content-inverse: #18181b;
+
+      --color-border:          #27272a;
+      --color-border-strong:   #3f3f46;
+
+      --color-success:         #4ade80;
+      --color-warning:         #fbbf24;
+      --color-error:           #f87171;
+      --color-info:            #60a5fa;
+
+      --color-success-subtle:  color-mix(in srgb, #16a34a 18%, #09090b);
+      --color-warning-subtle:  color-mix(in srgb, #d97706 18%, #09090b);
+      --color-error-subtle:    color-mix(in srgb, #dc2626 18%, #09090b);
+      --color-info-subtle:     color-mix(in srgb, #2563eb 18%, #09090b);
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@layer canon.utilities {
+
+  /* Accesibilidad */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Truncate texto */
+  [data-truncate] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Padding directo sobre cualquier elemento */
+  [data-padding="xs"]  { padding: var(--space-xs); }
+  [data-padding="sm"]  { padding: var(--space-sm); }
+  [data-padding="md"]  { padding: var(--space-md); }
+  [data-padding="lg"]  { padding: var(--space-lg); }
+  [data-padding="xl"]  { padding: var(--space-xl); }
+  [data-padding="2xl"] { padding: var(--space-2xl); }
+
+  /* Tono de texto — la única forma de bajar el énfasis */
+  [data-tone="subtle"]  { color: var(--color-content-subtle); }
+  [data-tone="brand"]   { color: var(--color-brand); }
+  [data-tone="success"] { color: var(--color-success); }
+  [data-tone="error"]   { color: var(--color-error); }
+
+  /* Full width */
+  [data-full] { width: 100%; }
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canon CSS — Example Landing</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Canon</a>
+    <nav data-slot="nav">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <button data-component="button" data-variant="ghost" data-size="sm">Sign in</button>
+      <button data-component="button" data-variant="primary" data-size="sm">Get started</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section data-layout="hero">
+    <div data-layout="stack" data-gap="lg" data-align="center">
+      <span data-component="badge" data-variant="brand">Open source · v0.1</span>
+      <h1>CSS built for the way<br>code is written today.</h1>
+      <p data-tone="subtle">One right way to do each thing. Designed for humans and LLMs alike.</p>
+      <div data-layout="row" data-gap="sm">
+        <button data-component="button" data-variant="primary" data-size="lg">Read the docs</button>
+        <button data-component="button" data-variant="secondary" data-size="lg">View on GitHub</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" data-layout="centered" data-width="wide">
+    <div data-layout="stack" data-gap="xl" data-padding="2xl">
+      <h2>Everything you need</h2>
+      <div data-layout="grid" data-cols="3" data-gap="lg">
+        <article data-component="card">
+          <div data-slot="header">Closed vocabulary</div>
+          <div data-slot="body">6 spacing values. 7 text sizes. Every decision is made for you.</div>
+        </article>
+        <article data-component="card">
+          <div data-slot="header">Intent-first API</div>
+          <div data-slot="body">Declare what something <em>is</em>, not how it looks. <code>data-layout="sidebar"</code>, not a stack of flex utilities.</div>
+        </article>
+        <article data-component="card">
+          <div data-slot="header">LLM-ready prompts</div>
+          <div data-slot="body">The <code>/prompts</code> directory ships with every install. Inject it. Get consistent UI.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <!-- PRICING -->
+  <section id="pricing" data-layout="centered" data-width="wide">
+    <div data-layout="stack" data-gap="xl" data-padding="2xl">
+      <h2>Pricing</h2>
+      <div data-layout="grid" data-cols="3" data-gap="lg">
+        <article data-component="card">
+          <div data-slot="header">Free</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="sm">
+              <span data-component="badge">MIT</span>
+              <p>Everything. Forever. It is a stylesheet.</p>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <button data-component="button" data-variant="primary" data-full>Install</button>
+          </div>
+        </article>
+        <article data-component="card">
+          <div data-slot="header">Also free</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="sm">
+              <span data-component="badge" data-variant="success">Recommended</span>
+              <p>The same stylesheet, but you star the repo.</p>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <button data-component="button" data-variant="primary" data-full>Star on GitHub</button>
+          </div>
+        </article>
+        <article data-component="card">
+          <div data-slot="header">Enterprise</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="sm">
+              <span data-component="badge" data-variant="info">Self-serve</span>
+              <p>Copy <code>dist/canon.css</code> into your repo. Done.</p>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <button data-component="button" data-variant="secondary" data-full>Download</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <!-- CONTACT -->
+  <section id="docs" data-layout="centered" data-width="content">
+    <div data-layout="stack" data-gap="xl" data-padding="2xl">
+      <h2>Stay in the loop</h2>
+      <form data-layout="stack" data-gap="md">
+        <label for="email">Email</label>
+        <input data-component="input" id="email" type="email" placeholder="you@example.com">
+        <label for="use-case">What are you building?</label>
+        <textarea data-component="textarea" id="use-case" rows="4"></textarea>
+        <div data-layout="row" data-gap="sm" data-justify="end">
+          <button data-component="button" data-variant="ghost" type="reset">Clear</button>
+          <button data-component="button" data-variant="primary" type="submit">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-layout="centered" data-width="wide">
+    <div data-layout="row" data-gap="md" data-justify="between" data-align="center" data-padding="lg" data-wrap>
+      <p data-tone="subtle">Canon CSS · MIT License</p>
+      <div data-layout="row" data-gap="md">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#docs">Docs</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

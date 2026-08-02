@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.tfstate
+*-outputs.env
+.DS_Store
+Thumbs.db

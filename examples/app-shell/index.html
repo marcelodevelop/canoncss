@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canon CSS — Example App Shell</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Canon</a>
+    <nav data-slot="nav">
+      <a href="#inbox">Inbox</a>
+      <a href="#drafts">Drafts</a>
+      <a href="#archive">Archive</a>
+    </nav>
+    <div data-slot="actions">
+      <button data-component="button" data-variant="ghost" data-size="sm">Search</button>
+      <span data-component="avatar" data-size="sm">MA</span>
+    </div>
+  </header>
+
+  <div data-layout="sidebar">
+
+    <aside data-slot="sidebar">
+      <div data-layout="stack" data-gap="lg" data-padding="lg">
+        <button data-component="button" data-full>Compose</button>
+
+        <nav data-layout="stack" data-gap="sm">
+          <a href="#inbox">Inbox</a>
+          <a href="#drafts">Drafts</a>
+          <a href="#sent">Sent</a>
+          <a href="#archive">Archive</a>
+          <a href="#trash">Trash</a>
+        </nav>
+
+        <hr data-component="divider">
+
+        <div data-layout="stack" data-gap="sm" data-align="start">
+          <p data-tone="subtle">Labels</p>
+          <span data-component="badge" data-variant="brand">Product</span>
+          <span data-component="badge" data-variant="info">Support</span>
+          <span data-component="badge" data-variant="warning">Billing</span>
+        </div>
+      </div>
+    </aside>
+
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="lg" data-padding="xl">
+
+        <div data-layout="row" data-gap="md" data-justify="between" data-align="center" data-wrap>
+          <h1 id="inbox">Inbox</h1>
+          <div data-layout="row" data-gap="sm">
+            <input data-component="input" data-size="sm" type="search" placeholder="Filter…">
+            <button data-component="button" data-variant="secondary" data-size="sm">Refresh</button>
+          </div>
+        </div>
+
+        <div data-layout="stack" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="row" data-gap="md" data-align="center">
+                <span data-component="avatar">JD</span>
+                <div data-layout="stack" data-gap="xs" data-full>
+                  <div data-layout="row" data-gap="sm" data-justify="between" data-align="center">
+                    <strong>Jordan D.</strong>
+                    <span data-component="badge" data-variant="brand">Product</span>
+                  </div>
+                  <span data-truncate data-tone="subtle">Re: the closed-vocabulary proposal — I think six spacing steps is exactly right, but…</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="row" data-gap="md" data-align="center">
+                <span data-component="avatar">RK</span>
+                <div data-layout="stack" data-gap="xs" data-full>
+                  <div data-layout="row" data-gap="sm" data-justify="between" data-align="center">
+                    <strong>Riley K.</strong>
+                    <span data-component="badge" data-variant="warning">Billing</span>
+                  </div>
+                  <span data-truncate data-tone="subtle">Invoice inv_8812 was declined and the retry window closes on Friday…</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="row" data-gap="md" data-align="center">
+                <span data-component="avatar">SV</span>
+                <div data-layout="stack" data-gap="xs" data-full>
+                  <div data-layout="row" data-gap="sm" data-justify="between" data-align="center">
+                    <strong>Sam V.</strong>
+                    <span data-component="badge" data-variant="info">Support</span>
+                  </div>
+                  <span data-truncate data-tone="subtle">Customer asks whether data-slot works on non-direct children. It does not…</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!--
+    MODAL — rendered open on purpose: Canon ships zero JavaScript, so opening
+    and closing is the consumer's job. Delete this block to see the bare shell.
+  -->
+  <div data-component="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div data-slot="panel">
+      <div data-slot="header">
+        <span id="modal-title">Move to archive</span>
+        <button data-component="button" data-variant="ghost" data-size="sm" aria-label="Close">✕</button>
+      </div>
+      <div data-slot="body">
+        <div data-layout="stack" data-gap="md">
+          <p>Three conversations will be moved out of your inbox. You can restore them from Archive at any time.</p>
+          <label for="reason">Note (optional)</label>
+          <textarea data-component="textarea" id="reason" rows="3"></textarea>
+        </div>
+      </div>
+      <div data-slot="footer">
+        <button data-component="button" data-variant="ghost">Cancel</button>
+        <button data-component="button" data-variant="primary">Archive</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

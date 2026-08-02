@@ -1,0 +1,99 @@
+# Canon CSS
+
+**A CSS framework designed for LLMs. One right way to do each thing.**
+
+Canon's hypothesis: the problem with current frameworks isn't technical, it's
+epistemological — they have too many degrees of freedom. Tailwind has hundreds
+of valid ways to center a div; an LLM picks between them by statistical
+distribution, not reasoning, and the output is inconsistent. Canon's answer is
+**semantic restriction**:
+
+- **Closed vocabulary** — exactly N options per dimension, never more
+- **Intent over implementation** — declare what something *is*, not how it looks
+- **One canonical form per pattern** — the framework offers no alternatives
+- **Docs as a technical artifact** — `/prompts` is a first-class citizen you
+  inject into any model
+
+Pure CSS. Zero JavaScript. Zero build step. One file.
+
+## Install
+
+```html
+<link rel="stylesheet" href="canon.css">
+```
+
+Grab [`dist/canon.css`](dist/canon.css) — **~19kb raw, ~3.8kb gzipped**, smaller
+than a single webfont. There is deliberately no modular install: at this size a
+pick-what-you-need build step would cost more in tooling than it saves in bytes.
+(If you insist, `src/` is modular — concatenate only the files you use.)
+
+Or build it yourself:
+
+```bash
+npm run build
+```
+
+## Use
+
+```html
+<div data-layout="grid" data-cols="3" data-gap="lg">
+  <article data-component="card">
+    <div data-slot="header">Title</div>
+    <div data-slot="body">Content</div>
+    <div data-slot="footer">
+      <button data-component="button" data-variant="primary">Action</button>
+    </div>
+  </article>
+</div>
+```
+
+The API is `data-*` attributes, not classes:
+
+| Attribute | Purpose |
+|-----------|---------|
+| `data-layout` | 7 layout patterns: `stack` `row` `grid` `sidebar` `centered` `hero` `split` |
+| `data-component` | 10 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `divider` |
+| `data-slot` | Named children (`header`, `body`, `footer`, `sidebar`, `main`, …) |
+| `data-gap` / `data-align` / `data-justify` | Layout modifiers |
+| `data-variant` / `data-size` / `data-state` | Component modifiers |
+
+Dark mode is one attribute: `<html data-theme="dark">`.
+
+## For LLMs
+
+Inject [`prompts/system-prompt.txt`](prompts/system-prompt.txt) (~600 tokens)
+as a system message and any model generates valid, consistent Canon markup.
+If output drifts, use [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt),
+which adds canonical patterns and anti-patterns. See
+[`prompts/README.md`](prompts/README.md).
+
+## Explore
+
+- [Docs](docs/index.html) — tokens, layouts, components
+- [Examples](examples/) — [landing](examples/landing/), [dashboard](examples/dashboard/),
+  [app-shell](examples/app-shell/) (dark mode), [blog](examples/blog/)
+
+## Repo layout
+
+```
+src/        Modular source (reset, tokens, layouts, components, utilities)
+dist/       canon.css — single-file build
+prompts/    System prompts for LLMs
+examples/   Four pages built with zero extra CSS
+docs/       Static documentation
+scripts/    build.sh (cat + comment-strip)
+```
+
+Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.components → canon.utilities`.
+
+## Rules
+
+1. Only defined tokens. If a value has no token, it does not exist.
+2. No inline styles, no extra CSS.
+3. An element gets `data-layout` **or** `data-component`, never both.
+4. `data-slot` only as a direct child of its parent layout/component.
+5. Theming: override `--color-*` on `:root` only.
+
+## License
+
+MIT

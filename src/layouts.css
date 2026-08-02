@@ -1,0 +1,141 @@
+@layer canon.layouts {
+
+  /* ── STACK: flujo vertical con gap uniforme ── */
+  [data-layout="stack"] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── ROW: flujo horizontal ── */
+  [data-layout="row"] {
+    display: flex;
+    flex-direction: row;
+  }
+
+  [data-layout="row"][data-wrap] {
+    flex-wrap: wrap;
+  }
+
+  /* ── GRID: grilla responsiva ── */
+  [data-layout="grid"] {
+    display: grid;
+  }
+
+  [data-layout="grid"][data-cols="1"] { grid-template-columns: repeat(1, 1fr); }
+  [data-layout="grid"][data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+  [data-layout="grid"][data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+  [data-layout="grid"][data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+  [data-layout="grid"][data-cols="auto"] {
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  }
+
+  /* ── SIDEBAR: sidebar fija + main fluido ── */
+  [data-layout="sidebar"] {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+
+  [data-layout="sidebar"] > [data-slot="sidebar"] {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: var(--color-surface-raised);
+    border-right: 1px solid var(--color-border);
+  }
+
+  [data-layout="sidebar"] > [data-slot="main"] {
+    overflow-y: auto;
+  }
+
+  /* ── CENTERED: max-width centrado ── */
+  [data-layout="centered"] {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+  }
+
+  [data-layout="centered"][data-width="prose"]   { max-width: 65ch; }
+  [data-layout="centered"][data-width="content"] { max-width: 768px; }
+  [data-layout="centered"][data-width="wide"]    { max-width: 1200px; }
+  /* Default cuando no hay data-width */
+  [data-layout="centered"]:not([data-width]) { max-width: 1200px; }
+
+  /* ── HERO: sección full-viewport ── */
+  [data-layout="hero"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100svh;
+    padding: var(--space-2xl) var(--space-md);
+  }
+
+  /* ── SPLIT: dos columnas iguales ── */
+  [data-layout="split"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* ── MODIFICADORES COMPARTIDOS ── */
+
+  /* gap */
+  [data-gap="xs"]  { gap: var(--space-xs); }
+  [data-gap="sm"]  { gap: var(--space-sm); }
+  [data-gap="md"]  { gap: var(--space-md); }
+  [data-gap="lg"]  { gap: var(--space-lg); }
+  [data-gap="xl"]  { gap: var(--space-xl); }
+  [data-gap="2xl"] { gap: var(--space-2xl); }
+
+  /* align (cross axis) */
+  [data-align="start"]   { align-items: flex-start; }
+  [data-align="center"]  { align-items: center; }
+  [data-align="end"]     { align-items: flex-end; }
+  [data-align="stretch"] { align-items: stretch; }
+
+  /* justify (main axis) */
+  [data-justify="start"]   { justify-content: flex-start; }
+  [data-justify="center"]  { justify-content: center; }
+  [data-justify="end"]     { justify-content: flex-end; }
+  [data-justify="between"] { justify-content: space-between; }
+  [data-justify="around"]  { justify-content: space-around; }
+
+  /* ── RESPONSIVE: mobile-first breakpoints ── */
+  @media (max-width: 1024px) {
+    [data-layout="grid"][data-cols="4"] {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    [data-layout="grid"][data-cols="3"],
+    [data-layout="grid"][data-cols="4"] {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    [data-layout="split"] {
+      grid-template-columns: 1fr;
+    }
+
+    [data-layout="sidebar"] {
+      grid-template-columns: 1fr;
+    }
+
+    [data-layout="sidebar"] > [data-slot="sidebar"] {
+      position: static;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+  }
+
+  @media (max-width: 480px) {
+    [data-layout="grid"][data-cols="2"],
+    [data-layout="grid"][data-cols="3"],
+    [data-layout="grid"][data-cols="4"] {
+      grid-template-columns: 1fr;
+    }
+  }
+}
