@@ -1,4 +1,16 @@
 /* Chrome exclusivo del sitio de docs — el framework no necesita nada de esto. */
+
+/* Wordmark: "Canon." con el punto en vermellón de rúbrica. */
+[data-component='topbar'] > [data-slot='brand'] {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  gap: 0;
+}
+
+[data-component='topbar'] > [data-slot='brand']::after {
+  content: '.';
+  color: var(--color-accent);
+}
 pre {
   background: var(--color-surface-sunken);
   border: 1px solid var(--color-border);

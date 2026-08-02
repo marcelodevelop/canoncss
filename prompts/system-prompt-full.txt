@@ -10,7 +10,7 @@ TOKENS (CSS custom properties — never hardcode a value):
     content-subtle|content-inverse|border|border-strong|success|warning|
     error|info}  (+ -subtle variants on brand/accent/status colors)
   --radius-{sm|md|lg|full}  --shadow-{sm|md|lg}  --weight-{normal|medium|bold}
-  --font-{sans|mono}  --leading-{tight|normal|loose}
+  --font-{sans|display|mono}  --leading-{tight|normal|loose}
   --ease-default  --duration-{fast|normal|slow}
 
 LAYOUTS — data-layout on containers:

@@ -114,7 +114,7 @@ export default function Tokens() {
             <tr>
               <td>Fonts</td>
               <td>
-                <code>{'--font-{sans|mono}'}</code>
+                <code>{'--font-{sans|display|mono}'}</code>
               </td>
             </tr>
             <tr>
@@ -143,9 +143,9 @@ export default function Tokens() {
           <code>{`<html data-theme="dark">`}</code>
         </pre>
         <p>
-          Surfaces, content, borders and subtle tints all remap. Systems set to dark
-          get it automatically via <code>prefers-color-scheme</code> unless you pin{' '}
-          <code>data-theme=&quot;light&quot;</code>.
+          Light is Canon&apos;s default. Dark mode is always explicit — one
+          attribute, and surfaces, content, borders and subtle tints all remap. No
+          automatic theme switching: one right way.
         </p>
 
         <h2>Theming</h2>

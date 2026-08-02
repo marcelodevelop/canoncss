@@ -33,8 +33,8 @@ h1, h2, h3, h4, h5, h6 {
 line-height: var(--leading-tight);
 font-weight: var(--weight-bold);
 }
-h1 { font-size: var(--text-3xl); letter-spacing: -0.025em; }
-h2 { font-size: var(--text-2xl); letter-spacing: -0.02em; }
+h1 { font-family: var(--font-display); font-size: var(--text-3xl); letter-spacing: -0.015em; }
+h2 { font-family: var(--font-display); font-size: var(--text-2xl); letter-spacing: -0.01em; }
 h3 { font-size: var(--text-xl); letter-spacing: -0.01em; }
 h4 { font-size: var(--text-lg); }
 h5 { font-size: var(--text-md); }
@@ -85,34 +85,36 @@ outline-offset: 2px;
 --text-3xl:  3rem;
 --font-sans: "Avenir Next", Avenir, "Segoe UI Variable", "Segoe UI",
 "Helvetica Neue", sans-serif;
+--font-display: "Charter", "Iowan Old Style", "Palatino Linotype",
+Palatino, Georgia, serif;
 --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
---color-brand:           #18181b;
---color-brand-subtle:    color-mix(in srgb, #18181b 6%, white);
---color-accent:          #d97706;
---color-accent-subtle:   color-mix(in srgb, #d97706 12%, white);
---color-surface:         #ffffff;
---color-surface-raised:  #fafafa;
---color-surface-sunken:  #f4f4f5;
---color-content:         #18181b;
---color-content-subtle:  #71717a;
+--color-brand:           #1c1917;
+--color-brand-subtle:    color-mix(in srgb, #1c1917 6%, #fdfcfb);
+--color-accent:          #c2410c;
+--color-accent-subtle:   color-mix(in srgb, #c2410c 10%, #fdfcfb);
+--color-surface:         #fdfcfb;
+--color-surface-raised:  #f7f5f2;
+--color-surface-sunken:  #f0ede9;
+--color-content:         #1c1917;
+--color-content-subtle:  #78716c;
 --color-content-inverse: #ffffff;
---color-border:          #e4e4e7;
---color-border-strong:   #d4d4d8;
---color-success:         #16a34a;
---color-warning:         #d97706;
---color-error:           #dc2626;
---color-info:            #2563eb;
---color-success-subtle:  color-mix(in srgb, #16a34a 10%, white);
---color-warning-subtle:  color-mix(in srgb, #d97706 10%, white);
---color-error-subtle:    color-mix(in srgb, #dc2626 10%, white);
---color-info-subtle:     color-mix(in srgb, #2563eb 10%, white);
+--color-border:          #e7e3de;
+--color-border-strong:   #d3cec7;
+--color-success:         #15803d;
+--color-warning:         #a16207;
+--color-error:           #b91c1c;
+--color-info:            #1d4ed8;
+--color-success-subtle:  color-mix(in srgb, #15803d 10%, #fdfcfb);
+--color-warning-subtle:  color-mix(in srgb, #a16207 10%, #fdfcfb);
+--color-error-subtle:    color-mix(in srgb, #b91c1c 8%, #fdfcfb);
+--color-info-subtle:     color-mix(in srgb, #1d4ed8 8%, #fdfcfb);
 --radius-sm:   0.25rem;
 --radius-md:   0.5rem;
 --radius-lg:   0.75rem;
 --radius-full: 9999px;
---shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
---shadow-md: 0 2px 4px rgb(0 0 0 / 0.04), 0 4px 8px rgb(0 0 0 / 0.05);
---shadow-lg: 0 4px 8px rgb(0 0 0 / 0.05), 0 12px 24px rgb(0 0 0 / 0.08);
+--shadow-sm: 0 1px 2px rgb(28 25 23 / 0.05);
+--shadow-md: 0 2px 4px rgb(28 25 23 / 0.05), 0 4px 8px rgb(28 25 23 / 0.05);
+--shadow-lg: 0 4px 8px rgb(28 25 23 / 0.06), 0 12px 24px rgb(28 25 23 / 0.09);
 --weight-normal: 400;
 --weight-medium: 500;
 --weight-bold:   600;
@@ -125,50 +127,26 @@ outline-offset: 2px;
 --duration-slow:   300ms;
 }
 [data-theme="dark"] {
---color-brand:           #fafafa;
---color-brand-subtle:    color-mix(in srgb, #fafafa 8%, #09090b);
---color-accent:          #f59e0b;
---color-accent-subtle:   color-mix(in srgb, #f59e0b 15%, #09090b);
---color-surface:         #09090b;
---color-surface-raised:  #141417;
---color-surface-sunken:  #000000;
---color-content:         #fafafa;
---color-content-subtle:  #a1a1aa;
---color-content-inverse: #18181b;
---color-border:          #27272a;
---color-border-strong:   #3f3f46;
+--color-brand:           #f5f4f2;
+--color-brand-subtle:    color-mix(in srgb, #f5f4f2 8%, #12100e);
+--color-accent:          #e8593a;
+--color-accent-subtle:   color-mix(in srgb, #e8593a 14%, #12100e);
+--color-surface:         #12100e;
+--color-surface-raised:  #1c1917;
+--color-surface-sunken:  #0c0a09;
+--color-content:         #f5f4f2;
+--color-content-subtle:  #a8a29e;
+--color-content-inverse: #1c1917;
+--color-border:          #2c2825;
+--color-border-strong:   #44403c;
 --color-success:         #4ade80;
 --color-warning:         #fbbf24;
 --color-error:           #f87171;
 --color-info:            #60a5fa;
---color-success-subtle:  color-mix(in srgb, #16a34a 18%, #09090b);
---color-warning-subtle:  color-mix(in srgb, #d97706 18%, #09090b);
---color-error-subtle:    color-mix(in srgb, #dc2626 18%, #09090b);
---color-info-subtle:     color-mix(in srgb, #2563eb 18%, #09090b);
-}
-@media (prefers-color-scheme: dark) {
-:root:not([data-theme="light"]) {
---color-brand:           #fafafa;
---color-brand-subtle:    color-mix(in srgb, #fafafa 8%, #09090b);
---color-accent:          #f59e0b;
---color-accent-subtle:   color-mix(in srgb, #f59e0b 15%, #09090b);
---color-surface:         #09090b;
---color-surface-raised:  #141417;
---color-surface-sunken:  #000000;
---color-content:         #fafafa;
---color-content-subtle:  #a1a1aa;
---color-content-inverse: #18181b;
---color-border:          #27272a;
---color-border-strong:   #3f3f46;
---color-success:         #4ade80;
---color-warning:         #fbbf24;
---color-error:           #f87171;
---color-info:            #60a5fa;
---color-success-subtle:  color-mix(in srgb, #16a34a 18%, #09090b);
---color-warning-subtle:  color-mix(in srgb, #d97706 18%, #09090b);
---color-error-subtle:    color-mix(in srgb, #dc2626 18%, #09090b);
---color-info-subtle:     color-mix(in srgb, #2563eb 18%, #09090b);
-}
+--color-success-subtle:  color-mix(in srgb, #15803d 20%, #12100e);
+--color-warning-subtle:  color-mix(in srgb, #a16207 22%, #12100e);
+--color-error-subtle:    color-mix(in srgb, #b91c1c 22%, #12100e);
+--color-info-subtle:     color-mix(in srgb, #1d4ed8 24%, #12100e);
 }
 }
 @layer canon.layouts {

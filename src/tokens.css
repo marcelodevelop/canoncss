@@ -20,35 +20,37 @@
     /* ── FONTS ── */
     --font-sans: "Avenir Next", Avenir, "Segoe UI Variable", "Segoe UI",
                  "Helvetica Neue", sans-serif;
+    --font-display: "Charter", "Iowan Old Style", "Palatino Linotype",
+                    Palatino, Georgia, serif;
     --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
 
-    /* ── COLOR — semántico. Monocromo zinc + acento ámbar. ── */
-    /* brand = foreground: el primario es casi-negro en light, casi-blanco en dark. */
-    --color-brand:           #18181b;
-    --color-brand-subtle:    color-mix(in srgb, #18181b 6%, white);
-    --color-accent:          #d97706;
-    --color-accent-subtle:   color-mix(in srgb, #d97706 12%, white);
+    /* ── COLOR — semántico. Identidad "tinta y rúbrica":
+       papel cálido, tinta como primario, vermellón de rúbrica como acento. ── */
+    --color-brand:           #1c1917;
+    --color-brand-subtle:    color-mix(in srgb, #1c1917 6%, #fdfcfb);
+    --color-accent:          #c2410c;
+    --color-accent-subtle:   color-mix(in srgb, #c2410c 10%, #fdfcfb);
 
-    --color-surface:         #ffffff;
-    --color-surface-raised:  #fafafa;
-    --color-surface-sunken:  #f4f4f5;
+    --color-surface:         #fdfcfb;
+    --color-surface-raised:  #f7f5f2;
+    --color-surface-sunken:  #f0ede9;
 
-    --color-content:         #18181b;
-    --color-content-subtle:  #71717a;
+    --color-content:         #1c1917;
+    --color-content-subtle:  #78716c;
     --color-content-inverse: #ffffff;
 
-    --color-border:          #e4e4e7;
-    --color-border-strong:   #d4d4d8;
+    --color-border:          #e7e3de;
+    --color-border-strong:   #d3cec7;
 
-    --color-success:         #16a34a;
-    --color-warning:         #d97706;
-    --color-error:           #dc2626;
-    --color-info:            #2563eb;
+    --color-success:         #15803d;
+    --color-warning:         #a16207;
+    --color-error:           #b91c1c;
+    --color-info:            #1d4ed8;
 
-    --color-success-subtle:  color-mix(in srgb, #16a34a 10%, white);
-    --color-warning-subtle:  color-mix(in srgb, #d97706 10%, white);
-    --color-error-subtle:    color-mix(in srgb, #dc2626 10%, white);
-    --color-info-subtle:     color-mix(in srgb, #2563eb 10%, white);
+    --color-success-subtle:  color-mix(in srgb, #15803d 10%, #fdfcfb);
+    --color-warning-subtle:  color-mix(in srgb, #a16207 10%, #fdfcfb);
+    --color-error-subtle:    color-mix(in srgb, #b91c1c 8%, #fdfcfb);
+    --color-info-subtle:     color-mix(in srgb, #1d4ed8 8%, #fdfcfb);
 
     /* ── RADIUS (4 niveles) ── */
     --radius-sm:   0.25rem;
@@ -56,10 +58,10 @@
     --radius-lg:   0.75rem;
     --radius-full: 9999px;
 
-    /* ── SHADOW (3 niveles) ── */
-    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
-    --shadow-md: 0 2px 4px rgb(0 0 0 / 0.04), 0 4px 8px rgb(0 0 0 / 0.05);
-    --shadow-lg: 0 4px 8px rgb(0 0 0 / 0.05), 0 12px 24px rgb(0 0 0 / 0.08);
+    /* ── SHADOW (3 niveles) — tinta cálida, nunca negro puro ── */
+    --shadow-sm: 0 1px 2px rgb(28 25 23 / 0.05);
+    --shadow-md: 0 2px 4px rgb(28 25 23 / 0.05), 0 4px 8px rgb(28 25 23 / 0.05);
+    --shadow-lg: 0 4px 8px rgb(28 25 23 / 0.06), 0 12px 24px rgb(28 25 23 / 0.09);
 
     /* ── TYPOGRAPHY ── */
     --weight-normal: 400;
@@ -77,63 +79,33 @@
     --duration-slow:   300ms;
   }
 
-  /* ── DARK MODE ── */
+  /* ── DARK MODE — solo explícito, nunca automático.
+     Light es el default de Canon; dark se pide con data-theme="dark". ── */
   [data-theme="dark"] {
-    --color-brand:           #fafafa;
-    --color-brand-subtle:    color-mix(in srgb, #fafafa 8%, #09090b);
-    --color-accent:          #f59e0b;
-    --color-accent-subtle:   color-mix(in srgb, #f59e0b 15%, #09090b);
+    --color-brand:           #f5f4f2;
+    --color-brand-subtle:    color-mix(in srgb, #f5f4f2 8%, #12100e);
+    --color-accent:          #e8593a;
+    --color-accent-subtle:   color-mix(in srgb, #e8593a 14%, #12100e);
 
-    --color-surface:         #09090b;
-    --color-surface-raised:  #141417;
-    --color-surface-sunken:  #000000;
+    --color-surface:         #12100e;
+    --color-surface-raised:  #1c1917;
+    --color-surface-sunken:  #0c0a09;
 
-    --color-content:         #fafafa;
-    --color-content-subtle:  #a1a1aa;
-    --color-content-inverse: #18181b;
+    --color-content:         #f5f4f2;
+    --color-content-subtle:  #a8a29e;
+    --color-content-inverse: #1c1917;
 
-    --color-border:          #27272a;
-    --color-border-strong:   #3f3f46;
+    --color-border:          #2c2825;
+    --color-border-strong:   #44403c;
 
     --color-success:         #4ade80;
     --color-warning:         #fbbf24;
     --color-error:           #f87171;
     --color-info:            #60a5fa;
 
-    --color-success-subtle:  color-mix(in srgb, #16a34a 18%, #09090b);
-    --color-warning-subtle:  color-mix(in srgb, #d97706 18%, #09090b);
-    --color-error-subtle:    color-mix(in srgb, #dc2626 18%, #09090b);
-    --color-info-subtle:     color-mix(in srgb, #2563eb 18%, #09090b);
-  }
-
-  /* Soporte adicional para prefers-color-scheme si no hay data-theme */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --color-brand:           #fafafa;
-      --color-brand-subtle:    color-mix(in srgb, #fafafa 8%, #09090b);
-      --color-accent:          #f59e0b;
-      --color-accent-subtle:   color-mix(in srgb, #f59e0b 15%, #09090b);
-
-      --color-surface:         #09090b;
-      --color-surface-raised:  #141417;
-      --color-surface-sunken:  #000000;
-
-      --color-content:         #fafafa;
-      --color-content-subtle:  #a1a1aa;
-      --color-content-inverse: #18181b;
-
-      --color-border:          #27272a;
-      --color-border-strong:   #3f3f46;
-
-      --color-success:         #4ade80;
-      --color-warning:         #fbbf24;
-      --color-error:           #f87171;
-      --color-info:            #60a5fa;
-
-      --color-success-subtle:  color-mix(in srgb, #16a34a 18%, #09090b);
-      --color-warning-subtle:  color-mix(in srgb, #d97706 18%, #09090b);
-      --color-error-subtle:    color-mix(in srgb, #dc2626 18%, #09090b);
-      --color-info-subtle:     color-mix(in srgb, #2563eb 18%, #09090b);
-    }
+    --color-success-subtle:  color-mix(in srgb, #15803d 20%, #12100e);
+    --color-warning-subtle:  color-mix(in srgb, #a16207 22%, #12100e);
+    --color-error-subtle:    color-mix(in srgb, #b91c1c 22%, #12100e);
+    --color-info-subtle:     color-mix(in srgb, #1d4ed8 24%, #12100e);
   }
 }
