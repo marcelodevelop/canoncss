@@ -12,22 +12,24 @@
     <div data-slot="brand">
       <strong>Orbit</strong>
     </div>
-    <nav data-slot="nav" aria-label="Primary">
+    <nav data-slot="nav" aria-label="Main navigation">
       <a href="#" data-component="button" data-variant="ghost" data-size="sm">Dashboard</a>
       <a href="#" data-component="button" data-variant="ghost" data-size="sm">Projects</a>
-      <a href="#" data-component="button" data-variant="secondary" data-size="sm" aria-current="page">Settings</a>
+      <a href="#" data-component="button" data-variant="ghost" data-size="sm" aria-current="page">Settings</a>
     </nav>
     <div data-slot="actions">
       <span data-component="badge" data-variant="brand">Pro</span>
-      <img data-component="avatar" data-size="sm" src="avatar.png" alt="Ada Lovelace">
+      <span data-component="avatar" data-size="md">
+        <img src="../assets/avatar-ava.png" alt="Ava Chen">
+      </span>
     </div>
   </header>
 
   <div data-layout="centered" data-width="wide" data-padding="lg">
     <div data-layout="sidebar" data-gap="xl">
 
-      <nav data-slot="sidebar" aria-label="Settings sections">
-        <div data-layout="stack" data-gap="xs">
+      <aside data-slot="sidebar">
+        <nav data-layout="stack" data-gap="xs" aria-label="Settings sections">
           <a href="#profile" data-component="button" data-variant="secondary" data-size="sm" data-full aria-current="page">Profile</a>
           <a href="#team" data-component="button" data-variant="ghost" data-size="sm" data-full>Team</a>
           <a href="#notifications" data-component="button" data-variant="ghost" data-size="sm" data-full>Notifications</a>
@@ -35,59 +37,49 @@
           <a href="#api-keys" data-component="button" data-variant="ghost" data-size="sm" data-full>API Keys</a>
           <hr data-component="divider">
           <a href="#danger-zone" data-component="button" data-variant="ghost" data-size="sm" data-full data-tone="error">Danger Zone</a>
-        </div>
-      </nav>
+        </nav>
+      </aside>
 
       <main data-slot="main">
         <div data-layout="stack" data-gap="xl">
 
-          <div data-layout="row" data-justify="between" data-align="center">
-            <h1>Settings</h1>
-            <span data-component="badge" data-variant="warning">Unsaved changes</span>
+          <div data-layout="row" data-justify="between" data-align="center" data-wrap>
+            <div data-layout="stack" data-gap="xs">
+              <h1>Settings</h1>
+              <p data-tone="subtle">Manage your account, notifications, and workspace preferences.</p>
+            </div>
+            <span data-component="badge" data-variant="success">Account active</span>
           </div>
 
           <section id="profile" data-component="card">
             <div data-slot="header">
               <div data-layout="row" data-justify="between" data-align="center">
                 <h2>Profile</h2>
-                <span data-component="badge" data-variant="success">Verified</span>
+                <span data-component="badge" data-variant="warning">Unsaved changes</span>
               </div>
             </div>
             <div data-slot="body">
-              <div data-layout="stack" data-gap="lg">
-                <div data-layout="row" data-gap="md" data-align="center">
-                  <img data-component="avatar" data-size="lg" src="avatar.png" alt="Ada Lovelace">
-                  <div data-layout="stack" data-gap="xs">
-                    <p>Your photo appears across Orbit.</p>
-                    <p data-tone="subtle">PNG or JPG, up to 2 MB.</p>
-                  </div>
-                </div>
-
-                <hr data-component="divider">
-
-                <div data-layout="grid" data-cols="2" data-gap="lg">
-                  <div data-layout="stack" data-gap="xs">
-                    <label for="full-name">Full name</label>
-                    <input data-component="input" id="full-name" name="full-name" type="text" value="Ada Lovelace" data-full>
-                  </div>
-                  <div data-layout="stack" data-gap="xs">
-                    <label for="email">Email address</label>
-                    <input data-component="input" id="email" name="email" type="email" value="ada@orbit" data-state="error" aria-invalid="true" aria-describedby="email-error" data-full>
-                    <p id="email-error" data-tone="error">Please enter a valid email address.</p>
-                  </div>
-                </div>
-
+              <form data-layout="stack" data-gap="lg">
                 <div data-layout="stack" data-gap="xs">
-                  <label for="bio">Bio</label>
-                  <textarea data-component="textarea" id="bio" name="bio" rows="4" data-full placeholder="Tell your teammates a little about yourself."></textarea>
+                  <label for="profile-name">Full name</label>
+                  <input id="profile-name" name="name" type="text" data-component="input" data-size="md" value="Ava Chen" autocomplete="name">
+                </div>
+                <div data-layout="stack" data-gap="xs">
+                  <label for="profile-email">Email address</label>
+                  <input id="profile-email" name="email" type="email" data-component="input" data-size="md" data-state="error" value="ava.chen@orbit" aria-invalid="true" aria-describedby="profile-email-error" autocomplete="email">
+                  <p id="profile-email-error" data-tone="error">Please enter a valid email address.</p>
+                </div>
+                <div data-layout="stack" data-gap="xs">
+                  <label for="profile-bio">Bio</label>
+                  <textarea id="profile-bio" name="bio" data-component="textarea" data-size="md" rows="4" placeholder="Tell your team a little about yourself">Product designer at Orbit. Coffee first, pixels second.</textarea>
                   <p data-tone="subtle">Shown on your public profile and in team directories.</p>
                 </div>
-              </div>
+              </form>
             </div>
             <div data-slot="footer">
               <div data-layout="row" data-gap="sm" data-justify="end">
-                <button type="button" data-component="button" data-variant="secondary">Cancel</button>
-                <button type="submit" data-component="button" data-variant="primary">Save changes</button>
+                <button type="button" data-component="button" data-variant="secondary" data-size="md">Cancel</button>
+                <button type="submit" data-component="button" data-variant="primary" data-size="md">Save changes</button>
               </div>
             </div>
           </section>
@@ -100,52 +92,45 @@
               <div data-layout="stack" data-gap="lg">
                 <div data-layout="row" data-justify="between" data-align="center" data-gap="md" data-wrap>
                   <div data-layout="stack" data-gap="xs">
-                    <label for="email-digest">Email digest</label>
-                    <p data-tone="subtle">A summary of activity across your projects.</p>
+                    <label for="notify-frequency">Email digest frequency</label>
+                    <p data-tone="subtle">How often we bundle activity into a single email.</p>
                   </div>
-                  <select data-component="select" id="email-digest" name="email-digest">
-                    <option>Daily</option>
-                    <option selected>Weekly</option>
-                    <option>Monthly</option>
-                    <option>Never</option>
+                  <select id="notify-frequency" name="digest-frequency" data-component="select" data-size="md">
+                    <option value="realtime">Real-time</option>
+                    <option value="daily" selected>Daily digest</option>
+                    <option value="weekly">Weekly digest</option>
+                    <option value="never">Never</option>
                   </select>
                 </div>
-
                 <hr data-component="divider">
-
                 <div data-layout="row" data-justify="between" data-align="center" data-gap="md" data-wrap>
                   <div data-layout="stack" data-gap="xs">
-                    <label for="mention-alerts">Mentions and replies</label>
-                    <p data-tone="subtle">When someone mentions you or replies to your comment.</p>
+                    <label for="notify-mentions">Mentions and replies</label>
+                    <p data-tone="subtle">Get notified when a teammate mentions you.</p>
                   </div>
-                  <select data-component="select" id="mention-alerts" name="mention-alerts">
-                    <option selected>Instant</option>
-                    <option>Hourly batch</option>
-                    <option>Off</option>
+                  <select id="notify-mentions" name="mentions" data-component="select" data-size="sm">
+                    <option value="all" selected>All mentions</option>
+                    <option value="direct">Direct mentions only</option>
+                    <option value="off">Off</option>
                   </select>
                 </div>
-
                 <hr data-component="divider">
-
                 <div data-layout="row" data-justify="between" data-align="center" data-gap="md" data-wrap>
                   <div data-layout="stack" data-gap="xs">
-                    <div data-layout="row" data-gap="sm" data-align="center">
-                      <label for="product-updates">Product updates</label>
-                      <span data-component="badge" data-variant="info">New</span>
-                    </div>
-                    <p data-tone="subtle">Release notes and feature announcements from Orbit.</p>
+                    <label for="notify-billing">Billing alerts</label>
+                    <p data-tone="subtle">Invoices, payment failures, and plan changes.</p>
                   </div>
-                  <select data-component="select" id="product-updates" name="product-updates">
-                    <option>All updates</option>
-                    <option selected>Major releases only</option>
-                    <option>Off</option>
+                  <select id="notify-billing" name="billing-alerts" data-component="select" data-size="sm">
+                    <option value="email" selected>Email</option>
+                    <option value="email-sms">Email and SMS</option>
+                    <option value="off">Off</option>
                   </select>
                 </div>
               </div>
             </div>
             <div data-slot="footer">
               <div data-layout="row" data-gap="sm" data-justify="end">
-                <button type="submit" data-component="button" data-variant="primary">Save preferences</button>
+                <button type="button" data-component="button" data-variant="primary" data-size="md">Save preferences</button>
               </div>
             </div>
           </section>
@@ -160,10 +145,10 @@
             <div data-slot="body">
               <div data-layout="row" data-justify="between" data-align="center" data-gap="md" data-wrap>
                 <div data-layout="stack" data-gap="xs">
-                  <p>Delete this account</p>
-                  <p data-tone="subtle">All projects, data, and API keys will be permanently removed. This action cannot be undone.</p>
+                  <h3>Delete account</h3>
+                  <p data-tone="subtle">Permanently remove your account, projects, and all associated data. This action cannot be undone.</p>
                 </div>
-                <button type="button" data-component="button" data-variant="danger">Delete account</button>
+                <button type="button" data-component="button" data-variant="danger" data-size="md">Delete account</button>
               </div>
             </div>
           </section>
