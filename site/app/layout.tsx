@@ -23,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/components">Components</Link>
             <Link href="/llm">For LLMs</Link>
             <Link href="/playground">Playground</Link>
+            <Link href="/compare">Compare</Link>
           </nav>
           <div data-slot="actions">
             <a
