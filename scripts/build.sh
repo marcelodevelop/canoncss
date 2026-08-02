@@ -18,3 +18,16 @@ mkdir -p dist
 } > $OUTPUT
 
 echo "✓ Built $OUTPUT ($(wc -c < $OUTPUT) bytes)"
+
+# AGENTS.md drop-in: generado desde system-prompt.txt — una sola fuente de verdad.
+{
+  echo "# Canon CSS — agent instructions"
+  echo ""
+  echo "> Drop this file into your repo root (or append it to AGENTS.md / CLAUDE.md /"
+  echo "> .cursor/rules). Any coding agent will then generate valid Canon markup."
+  echo ""
+  echo '```'
+  cat prompts/system-prompt.txt
+  echo '```'
+} > prompts/AGENTS.md
+echo "✓ Built prompts/AGENTS.md"

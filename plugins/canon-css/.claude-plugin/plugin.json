@@ -1,0 +1,11 @@
+{
+  "name": "canon-css",
+  "description": "Canon CSS — closed-vocabulary CSS framework designed for LLMs. One right way to do each thing.",
+  "version": "0.1.0",
+  "author": {
+    "name": "marcelodevelop"
+  },
+  "homepage": "https://github.com/marcelodevelop/canonframework",
+  "license": "MIT",
+  "keywords": ["css", "framework", "llm", "design-system", "ui"]
+}

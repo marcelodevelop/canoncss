@@ -19,7 +19,7 @@ Pure CSS. Zero JavaScript. Zero build step. One file.
 ## Install
 
 ```html
-<link rel="stylesheet" href="canon.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canonframework@main/dist/canon.css">
 ```
 
 Grab [`dist/canon.css`](dist/canon.css) — **~19kb raw, ~3.8kb gzipped**, smaller
@@ -61,11 +61,17 @@ Dark mode is one attribute: `<html data-theme="dark">`.
 
 ## For LLMs
 
-Inject [`prompts/system-prompt.txt`](prompts/system-prompt.txt) (~600 tokens)
-as a system message and any model generates valid, consistent Canon markup.
-If output drifts, use [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt),
-which adds canonical patterns and anti-patterns. See
-[`prompts/README.md`](prompts/README.md).
+Three ways, pick one:
+
+- **Claude Code plugin** — `/plugin marketplace add marcelodevelop/canonframework`,
+  then `/plugin install canon-css@canon`. Claude speaks Canon in every project
+  automatically.
+- **Any coding agent** — copy [`prompts/AGENTS.md`](prompts/AGENTS.md) into your
+  repo root (works with Cursor, Copilot, Codex, Claude Code).
+- **Raw prompt** — inject [`prompts/system-prompt.txt`](prompts/system-prompt.txt)
+  (~600 tokens) as a system message. If output drifts, use
+  [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt), which adds
+  canonical patterns and anti-patterns. See [`prompts/README.md`](prompts/README.md).
 
 ## Explore
 
