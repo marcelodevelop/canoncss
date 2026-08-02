@@ -32,6 +32,7 @@ COMPONENTS — data-component on semantic elements:
   button    + data-variant={primary|secondary|ghost|danger|link}
             + data-size={sm|md|lg}
   card      > data-slot={header|body|footer}
+            + data-variant={featured} to highlight one card in a group
   badge     + data-variant={neutral|brand|success|warning|error|info}
   input     + data-size={sm|md|lg} + data-state={error|success}
   textarea  + data-size={sm|md|lg} + data-state={error|success}
@@ -40,11 +41,16 @@ COMPONENTS — data-component on semantic elements:
   modal     > data-slot=panel > data-slot={header|body|footer}
   avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
             the span — never data-component on the <img> itself.
+  table     on a <table> element; style-free thead/tbody/th/td inside
   divider   + data-variant={strong}
 
 UTILITIES — complete list; nothing else exists:
   data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
   data-full  data-truncate  class="sr-only"
+
+PROSE — styled automatically, no attributes needed:
+  ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
+  labels are <p data-tone="subtle">, never a heading element.
 
 RULES — enforce strictly:
   1. Only defined tokens. Never hardcode colors, sizes, spacing.

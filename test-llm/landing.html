@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relay — API Mocking for Modern Teams</title>
+  <meta name="description" content="Relay lets you mock any API in seconds. Ship frontends without waiting on backends.">
+  <link rel="stylesheet" href="../dist/canon.css">
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header data-component="topbar">
+    <div data-slot="brand">
+      <a href="#"><strong>Relay</strong></a>
+    </div>
+    <nav data-slot="nav" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div data-slot="actions">
+      <a href="#" data-component="button" data-variant="ghost" data-size="sm">Sign in</a>
+      <a href="#" data-component="button" data-variant="primary" data-size="sm">Get started</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section data-layout="hero">
+      <div data-layout="centered" data-width="content">
+        <div data-layout="stack" data-gap="lg" data-align="center">
+          <span data-component="badge" data-variant="brand">Now in public beta</span>
+          <h1>Mock any API in seconds</h1>
+          <p>Relay spins up realistic, stateful API mocks from your OpenAPI spec or from scratch — so your frontend team ships without waiting on the backend.</p>
+          <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+            <a href="#" data-component="button" data-variant="primary" data-size="lg">Start mocking free</a>
+            <a href="#features" data-component="button" data-variant="secondary" data-size="lg">See how it works</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" data-padding="2xl">
+      <div data-layout="centered" data-width="wide">
+        <div data-layout="stack" data-gap="xl">
+          <div data-layout="stack" data-gap="sm" data-align="center">
+            <span data-component="badge" data-variant="neutral">Features</span>
+            <h2>Everything you need to fake it till you make it</h2>
+            <p>From a single endpoint to a full staging environment, Relay keeps your team unblocked.</p>
+          </div>
+          <div data-layout="grid" data-cols="3" data-gap="lg">
+            <article data-component="card">
+              <div data-slot="header">
+                <h3>Instant mock servers</h3>
+              </div>
+              <div data-slot="body">
+                <p>Import an OpenAPI or GraphQL schema and get a live, hosted mock endpoint in under ten seconds. No config files, no deploys, no waiting.</p>
+              </div>
+              <div data-slot="footer">
+                <a href="#" data-component="button" data-variant="link">Learn more</a>
+              </div>
+            </article>
+            <article data-component="card">
+              <div data-slot="header">
+                <h3>Stateful scenarios</h3>
+              </div>
+              <div data-slot="body">
+                <p>Go beyond canned JSON. Relay mocks remember writes, simulate latency and error rates, and replay real production traffic shapes.</p>
+              </div>
+              <div data-slot="footer">
+                <a href="#" data-component="button" data-variant="link">Learn more</a>
+              </div>
+            </article>
+            <article data-component="card">
+              <div data-slot="header">
+                <h3>Team workspaces</h3>
+              </div>
+              <div data-slot="body">
+                <p>Share mocks across your org with versioned collections, per-branch environments, and access controls that mirror your repo permissions.</p>
+              </div>
+              <div data-slot="footer">
+                <a href="#" data-component="button" data-variant="link">Learn more</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr data-component="divider">
+
+    <!-- Pricing -->
+    <section id="pricing" data-padding="2xl">
+      <div data-layout="centered" data-width="wide">
+        <div data-layout="stack" data-gap="xl">
+          <div data-layout="stack" data-gap="sm" data-align="center">
+            <span data-component="badge" data-variant="neutral">Pricing</span>
+            <h2>Simple plans that scale with you</h2>
+            <p>Start free. Upgrade when your team does.</p>
+          </div>
+          <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+            <!-- Free -->
+            <article data-component="card">
+              <div data-slot="header">
+                <div data-layout="stack" data-gap="xs">
+                  <h3>Free</h3>
+                  <p><strong>$0</strong> / month</p>
+                  <p data-tone="subtle">For side projects and quick prototypes.</p>
+                </div>
+              </div>
+              <div data-slot="body">
+                <ul>
+                  <li>1 workspace</li>
+                  <li>3 mock servers</li>
+                  <li>10,000 requests / month</li>
+                  <li>OpenAPI import</li>
+                  <li>Community support</li>
+                </ul>
+              </div>
+              <div data-slot="footer">
+                <a href="#" data-component="button" data-variant="secondary" data-full>Start for free</a>
+              </div>
+            </article>
+
+            <!-- Team (highlighted) -->
+            <article data-component="card" data-variant="featured">
+              <div data-slot="header">
+                <div data-layout="stack" data-gap="xs">
+                  <div data-layout="row" data-gap="sm" data-align="center" data-justify="between">
+                    <h3>Team</h3>
+                    <span data-component="badge" data-variant="brand">Most popular</span>
+                  </div>
+                  <p><strong>$29</strong> / user / month</p>
+                  <p data-tone="subtle">For product teams shipping together.</p>
+                </div>
+              </div>
+              <div data-slot="body">
+                <ul>
+                  <li>Unlimited workspaces</li>
+                  <li>Unlimited mock servers</li>
+                  <li>1 million requests / month</li>
+                  <li>Stateful scenarios &amp; chaos testing</li>
+                  <li>Per-branch environments</li>
+                  <li>GitHub &amp; GitLab integration</li>
+                  <li>Priority email support</li>
+                </ul>
+              </div>
+              <div data-slot="footer">
+                <a href="#" data-component="button" data-variant="primary" data-full>Start 14-day trial</a>
+              </div>
+            </article>
+
+            <!-- Enterprise -->
+            <article data-component="card">
+              <div data-slot="header">
+                <div data-layout="stack" data-gap="xs">
+                  <h3>Enterprise</h3>
+                  <p><strong>Custom</strong> pricing</p>
+                  <p data-tone="subtle">For organizations with serious scale.</p>
+                </div>
+              </div>
+              <div data-slot="body">
+                <ul>
+                  <li>Everything in Team</li>
+                  <li>Unlimited requests</li>
+                  <li>SSO / SAML &amp; SCIM</li>
+                  <li>Self-hosted or private cloud</li>
+                  <li>Audit logs &amp; compliance reports</li>
+                  <li>99.99% uptime SLA</li>
+                  <li>Dedicated success engineer</li>
+                </ul>
+              </div>
+              <div data-slot="footer">
+                <a href="#" data-component="button" data-variant="secondary" data-full>Contact sales</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr data-component="divider">
+
+    <!-- FAQ -->
+    <section id="faq" data-padding="2xl">
+      <div data-layout="centered" data-width="prose">
+        <div data-layout="stack" data-gap="xl">
+          <div data-layout="stack" data-gap="sm" data-align="center">
+            <span data-component="badge" data-variant="neutral">FAQ</span>
+            <h2>Frequently asked questions</h2>
+          </div>
+          <div data-layout="stack" data-gap="lg">
+            <div data-layout="stack" data-gap="xs">
+              <h3>How is Relay different from running a local mock server?</h3>
+              <p>Relay mocks are hosted and shared. Your whole team — and your CI pipeline — hits the same URL, with the same scenario state, without anyone maintaining a local process or a fixtures folder.</p>
+            </div>
+            <hr data-component="divider">
+            <div data-layout="stack" data-gap="xs">
+              <h3>Do I need an OpenAPI spec to get started?</h3>
+              <p>No. A spec gets you a full mock in seconds, but you can also build endpoints by hand in the dashboard, or record real responses from an existing API and replay them.</p>
+            </div>
+            <hr data-component="divider">
+            <div data-layout="stack" data-gap="xs">
+              <h3>Can Relay simulate failures and slow responses?</h3>
+              <p>Yes. Every endpoint can be configured with latency distributions, error rates, and timeout behavior, so you can test how your app behaves when the real API has a bad day.</p>
+            </div>
+            <hr data-component="divider">
+            <div data-layout="stack" data-gap="xs">
+              <h3>Is my mock data private?</h3>
+              <p>Mock servers are private to your workspace by default and protected by scoped tokens. Enterprise plans add SSO, audit logs, and fully self-hosted deployment options.</p>
+            </div>
+            <hr data-component="divider">
+            <div data-layout="stack" data-gap="xs">
+              <h3>Can I cancel at any time?</h3>
+              <p>Absolutely. Plans are month-to-month, downgrades take effect at the end of the billing cycle, and your mocks stay readable on the Free tier.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section data-padding="2xl">
+      <div data-layout="centered" data-width="content">
+        <div data-layout="stack" data-gap="lg" data-align="center">
+          <h2>Stop waiting on the backend</h2>
+          <p>Join thousands of teams shipping faster with Relay. Your first mock server is ten seconds away.</p>
+          <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+            <a href="#" data-component="button" data-variant="primary" data-size="lg">Get started free</a>
+            <a href="#" data-component="button" data-variant="ghost" data-size="lg">Talk to sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer data-padding="xl">
+    <div data-layout="centered" data-width="wide">
+      <div data-layout="stack" data-gap="lg">
+        <div data-layout="grid" data-cols="4" data-gap="lg">
+          <div data-layout="stack" data-gap="sm">
+            <p><strong>Relay</strong></p>
+            <p data-tone="subtle">API mocking for modern teams.</p>
+          </div>
+          <div data-layout="stack" data-gap="sm">
+            <h4>Product</h4>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#">Changelog</a>
+            <a href="#">Status</a>
+          </div>
+          <div data-layout="stack" data-gap="sm">
+            <h4>Resources</h4>
+            <a href="#">Documentation</a>
+            <a href="#">API reference</a>
+            <a href="#">Blog</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div data-layout="stack" data-gap="sm">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Careers</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+        <hr data-component="divider">
+        <div data-layout="row" data-justify="between" data-align="center" data-wrap data-gap="sm">
+          <p data-tone="subtle">&copy; 2026 Relay, Inc. All rights reserved.</p>
+          <div data-layout="row" data-gap="md">
+            <a href="#">GitHub</a>
+            <a href="#">X</a>
+            <a href="#">Discord</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

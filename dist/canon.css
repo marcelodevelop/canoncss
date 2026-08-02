@@ -57,8 +57,40 @@ nav a:hover {
 color: var(--color-content);
 background-color: var(--color-surface-raised);
 }
+ul, ol {
+padding-inline-start: 1.5em;
+}
+li + li {
+margin-top: var(--space-xs);
+}
+blockquote {
+border-inline-start: 3px solid var(--color-accent);
+padding: var(--space-xs) var(--space-lg);
+font-family: var(--font-display);
+font-size: var(--text-lg);
+color: var(--color-content-subtle);
+}
 code, pre, kbd, samp {
 font-family: var(--font-mono);
+}
+code {
+background-color: var(--color-surface-sunken);
+padding: 0.125em 0.375em;
+border-radius: var(--radius-sm);
+font-size: 0.875em;
+}
+pre {
+background-color: var(--color-surface-sunken);
+border: 1px solid var(--color-border);
+border-radius: var(--radius-md);
+padding: var(--space-md);
+overflow-x: auto;
+font-size: var(--text-sm);
+}
+pre code {
+background: none;
+padding: 0;
+font-size: inherit;
 }
 ::selection {
 background-color: var(--color-accent-subtle);
@@ -359,6 +391,10 @@ background-color: var(--color-surface-sunken);
 [data-component="card"]:not(:has(> [data-slot])) {
 padding: var(--space-lg);
 }
+[data-component="card"][data-variant="featured"] {
+border-color: var(--color-accent);
+box-shadow: var(--shadow-md);
+}
 [data-component="badge"] {
 display: inline-flex;
 width: fit-content;
@@ -478,6 +514,10 @@ font-size: var(--text-lg);
 text-decoration: none;
 color: var(--color-content);
 }
+[data-component="topbar"] > [data-slot="brand"] a {
+color: inherit;
+text-decoration: none;
+}
 [data-component="topbar"] > [data-slot="nav"] {
 display: flex;
 align-items: center;
@@ -574,6 +614,28 @@ font-size: var(--text-lg);
 width: 100%;
 height: 100%;
 object-fit: cover;
+}
+[data-component="table"] {
+width: 100%;
+border-collapse: collapse;
+font-size: var(--text-sm);
+text-align: left;
+}
+[data-component="table"] th {
+color: var(--color-content-subtle);
+font-weight: var(--weight-medium);
+padding: var(--space-sm) var(--space-md);
+border-bottom: 1px solid var(--color-border-strong);
+}
+[data-component="table"] td {
+padding: var(--space-sm) var(--space-md);
+border-bottom: 1px solid var(--color-border);
+}
+[data-component="table"] tbody tr {
+transition: background-color var(--duration-fast) var(--ease-default);
+}
+[data-component="table"] tbody tr:hover {
+background-color: var(--color-surface-raised);
 }
 [data-component="divider"] {
 border: none;

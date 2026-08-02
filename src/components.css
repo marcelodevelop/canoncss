@@ -139,6 +139,12 @@
     padding: var(--space-lg);
   }
 
+  /* Featured: la card destacada de un grupo (pricing "most popular", etc.) */
+  [data-component="card"][data-variant="featured"] {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
 
   /* ════════════════════════════════
      BADGE
@@ -291,6 +297,12 @@
     color: var(--color-content);
   }
 
+  /* El brand suele venir como <a> anidado: hereda, no parezcas link */
+  [data-component="topbar"] > [data-slot="brand"] a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   [data-component="topbar"] > [data-slot="nav"] {
     display: flex;
     align-items: center;
@@ -410,6 +422,37 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+
+  /* ════════════════════════════════
+     TABLE
+  ════════════════════════════════ */
+  [data-component="table"] {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    text-align: left;
+  }
+
+  [data-component="table"] th {
+    color: var(--color-content-subtle);
+    font-weight: var(--weight-medium);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border-strong);
+  }
+
+  [data-component="table"] td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  [data-component="table"] tbody tr {
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  [data-component="table"] tbody tr:hover {
+    background-color: var(--color-surface-raised);
   }
 
 

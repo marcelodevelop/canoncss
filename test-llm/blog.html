@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why We Rewrote Our Event Pipeline in Rust — The Ledger</title>
+  <link rel="stylesheet" href="../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <div data-slot="brand">
+      <a href="/">The Ledger</a>
+    </div>
+    <nav data-slot="nav" aria-label="Main navigation">
+      <a href="/articles">Articles</a>
+      <a href="/series">Series</a>
+      <a href="/about">About</a>
+    </nav>
+    <div data-slot="actions">
+      <a href="/subscribe" data-component="button" data-variant="primary" data-size="sm">Subscribe</a>
+    </div>
+  </header>
+
+  <main data-layout="centered" data-width="prose" data-padding="xl">
+    <article data-layout="stack" data-gap="lg">
+
+      <header data-layout="stack" data-gap="md">
+        <span data-component="badge" data-variant="brand">Engineering</span>
+        <h1>Why We Rewrote Our Event Pipeline in Rust</h1>
+        <p data-tone="subtle">How we cut p99 latency by 87% and stopped paging the on-call engineer at 3 a.m.</p>
+
+        <div data-layout="row" data-gap="sm" data-align="center">
+          <span data-component="avatar" data-size="md">
+            <img src="../assets/authors/mira-castellanos.jpg" alt="Mira Castellanos">
+          </span>
+          <div data-layout="stack" data-gap="xs">
+            <span>Mira Castellanos, Staff Engineer</span>
+            <time datetime="2026-07-28" data-tone="subtle">July 28, 2026 · 11 min read</time>
+          </div>
+        </div>
+
+        <hr data-component="divider">
+      </header>
+
+      <section data-layout="stack" data-gap="md">
+        <p>
+          Eighteen months ago, our event pipeline was a Node.js service that had grown by accretion.
+          It ingested roughly 40,000 events per second at peak, fanned them out to a dozen downstream
+          consumers, and did so with a p99 latency that we described internally as "aspirational."
+          Every Black Friday it fell over, and every Black Friday we added another cache in front of it.
+        </p>
+        <p>
+          This is the story of how we replaced it with a Rust service, what we got wrong along the way,
+          and the numbers that convinced a skeptical leadership team that a rewrite — the most dangerous
+          project in software engineering — was actually the conservative choice.
+        </p>
+
+        <blockquote data-tone="subtle" data-padding="lg">
+          <p>
+            "A rewrite is not a bet on a new language. It is a bet that you finally understand
+            the problem you were solving all along."
+          </p>
+        </blockquote>
+
+        <h2>The symptoms we could no longer ignore</h2>
+        <p>
+          The old pipeline was not slow because Node.js is slow. It was slow because the architecture
+          forced every event through a single serialization boundary, and garbage collection pauses
+          stacked up behind it. By the time we committed to the rewrite, we had a list of symptoms
+          that no amount of tuning had fixed:
+        </p>
+        <ul>
+          <li>GC pauses of 300–800 ms during peak traffic, which blew our 250 ms latency budget on their own.</li>
+          <li>Backpressure that propagated upstream unpredictably, causing producers to buffer and occasionally drop events.</li>
+          <li>Memory usage that grew roughly linearly with connected consumers, capping horizontal scale.</li>
+          <li>A serialization layer (<code>JSON.parse</code> on every hop) that consumed 40% of total CPU time in flame graphs.</li>
+          <li>An on-call rotation where "restart the pipeline" was the documented first response to five separate alert types.</li>
+        </ul>
+
+        <h3>What we measured before writing a line of Rust</h3>
+        <p>
+          Before touching the new codebase we spent three weeks instrumenting the old one. The rule
+          was simple: no claim about the rewrite would be accepted without a baseline number from
+          production. We captured throughput, tail latency, memory ceilings, and — critically — the
+          cost per billion events, because infrastructure spend was the argument leadership actually
+          cared about.
+        </p>
+
+        <table data-component="table">
+          <caption class="sr-only">Comparison of the legacy Node.js pipeline and the new Rust pipeline</caption>
+          <thead>
+            <tr>
+              <th scope="col">Metric</th>
+              <th scope="col">Node.js (legacy)</th>
+              <th scope="col">Rust (new)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>p99 latency</td>
+              <td>412 ms</td>
+              <td>53 ms</td>
+            </tr>
+            <tr>
+              <td>Peak throughput per node</td>
+              <td>11,000 events/s</td>
+              <td>96,000 events/s</td>
+            </tr>
+            <tr>
+              <td>Memory at peak</td>
+              <td>6.2 GB</td>
+              <td>410 MB</td>
+            </tr>
+            <tr>
+              <td>Cost per billion events</td>
+              <td>$184</td>
+              <td>$23</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>How we migrated without a big-bang cutover</h2>
+        <p>
+          The rewrite shipped incrementally over four months. Nothing here is novel — it is the
+          strangler-fig pattern applied with discipline — but the ordering mattered more than we expected:
+        </p>
+        <ol>
+          <li>Mirror production traffic to the new service in shadow mode, discarding its output.</li>
+          <li>Diff the shadow output against the legacy output for two weeks and fix every divergence, however small.</li>
+          <li>Route 1% of real consumers to the new pipeline behind a feature flag, then 10%, then 50%.</li>
+          <li>Run both pipelines at 100% in parallel for one full weekly traffic cycle, including a load-test day.</li>
+          <li>Decommission the legacy service — and delete the code, so nobody could quietly route back to it.</li>
+        </ol>
+        <p>
+          The shadow-mode diffing in step two was where the real work happened. We found eleven
+          behavioral differences, and nine of them were bugs in the <em>old</em> pipeline that
+          consumers had silently learned to tolerate. Deciding whether to preserve or fix each one
+          was a product decision, not an engineering one.
+        </p>
+
+        <h3>Reproducing the benchmark yourself</h3>
+        <p>
+          We open-sourced the load harness. If you want to reproduce the throughput numbers on your
+          own hardware, the whole run is one command:
+        </p>
+        <pre><code>cargo run --release -p ledger-bench -- \
+  --events 10000000 \
+  --consumers 12 \
+  --payload-size 2kb \
+  --report json &gt; results.json</code></pre>
+        <p>
+          The harness spins up an in-process broker, so the numbers isolate the pipeline itself
+          from network variance. Pass <code>--report human</code> instead of <code>--report json</code>
+          for a readable summary, and use <code>--consumers</code> to match your production fan-out.
+          On an 8-core machine you should see results within about 10% of ours.
+        </p>
+
+        <h2>What we would do differently</h2>
+        <p>
+          The rewrite succeeded, but not because Rust is magic. It succeeded because we spent three
+          weeks measuring before we spent four months building, because shadow mode caught the bugs
+          a test suite never would have, and because we deleted the old code instead of leaving it
+          as a comfort blanket. The borrow checker was the easiest part. If your pipeline is falling
+          over, start with the flame graph — the language decision comes last.
+        </p>
+      </section>
+
+      <footer data-layout="stack" data-gap="lg">
+        <hr data-component="divider">
+
+        <div data-layout="row" data-wrap data-gap="sm" aria-label="Article tags">
+          <span data-component="badge" data-variant="neutral">rust</span>
+          <span data-component="badge" data-variant="neutral">performance</span>
+          <span data-component="badge" data-variant="neutral">event-driven</span>
+          <span data-component="badge" data-variant="neutral">migration</span>
+          <span data-component="badge" data-variant="neutral">observability</span>
+        </div>
+      </footer>
+
+    </article>
+  </main>
+
+  <section data-layout="centered" data-width="content" data-padding="xl" aria-labelledby="related-heading">
+    <div data-layout="stack" data-gap="lg">
+      <h2 id="related-heading">Related posts</h2>
+      <div data-layout="grid" data-cols="3" data-gap="lg">
+
+        <article data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="info">Observability</span>
+          </div>
+          <div data-slot="body" data-layout="stack" data-gap="sm">
+            <h3><a href="/articles/flame-graphs-in-anger">Reading Flame Graphs in Anger</a></h3>
+            <p data-tone="subtle">A field guide to finding the 40% of CPU time you are wasting on serialization.</p>
+          </div>
+          <div data-slot="footer">
+            <time datetime="2026-06-14" data-tone="subtle">June 14, 2026</time>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="success">Reliability</span>
+          </div>
+          <div data-slot="body" data-layout="stack" data-gap="sm">
+            <h3><a href="/articles/shadow-traffic-playbook">The Shadow Traffic Playbook</a></h3>
+            <p data-tone="subtle">How to mirror production safely, diff outputs, and catch bugs your tests never will.</p>
+          </div>
+          <div data-slot="footer">
+            <time datetime="2026-05-02" data-tone="subtle">May 2, 2026</time>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="warning">Culture</span>
+          </div>
+          <div data-slot="body" data-layout="stack" data-gap="sm">
+            <h3><a href="/articles/case-against-rewrites">The Case Against Rewrites (Usually)</a></h3>
+            <p data-tone="subtle">Most rewrites fail. Here is the checklist we use to decide when one is the conservative bet.</p>
+          </div>
+          <div data-slot="footer">
+            <time datetime="2026-03-19" data-tone="subtle">March 19, 2026</time>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -52,6 +52,8 @@ COMPONENTS — `data-component` on semantic elements:
     button    + data-variant={primary|secondary|ghost|danger|link}
               + data-size={sm|md|lg}
     card      > data-slot={header|body|footer}
+              + data-variant={featured} to highlight one card in a group
+    table     on a <table> element; plain thead/tbody/th/td inside
     badge     + data-variant={neutral|brand|success|warning|error|info}
     input     + data-size={sm|md|lg} + data-state={error|success}
     textarea  + data-size={sm|md|lg} + data-state={error|success}
@@ -66,6 +68,11 @@ UTILITIES — complete list; nothing else exists:
 
     data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
     data-full  data-truncate  class="sr-only"
+
+## Prose — styled automatically, no attributes needed
+
+ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
+labels are `<p data-tone="subtle">`, never a heading element.
 
 ## Rules — enforce strictly
 
