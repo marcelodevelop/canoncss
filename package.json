@@ -4,9 +4,11 @@
   "description": "A CSS framework designed for LLMs. One right way to do each thing.",
   "main": "dist/canon.css",
   "style": "dist/canon.css",
-  "files": ["dist", "prompts", "src"],
+  "bin": { "canon-lint": "bin/canon-lint.mjs" },
+  "files": ["dist", "prompts", "src", "bin"],
   "scripts": {
     "build": "bash scripts/build.sh",
+    "test": "bash scripts/test.sh",
     "dev": "bash scripts/build.sh && echo 'Watching...' && fswatch -o src/ | xargs -n1 bash scripts/build.sh"
   },
   "keywords": ["css", "framework", "llm", "ai", "design-system", "data-attributes"],

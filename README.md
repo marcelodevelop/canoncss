@@ -73,6 +73,19 @@ Three ways, pick one:
   [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt), which adds
   canonical patterns and anti-patterns. See [`prompts/README.md`](prompts/README.md).
 
+## Validate
+
+LLM generated the markup? Verify it mechanically:
+
+```bash
+npx canon-lint src/
+```
+
+Zero-dependency linter that enforces the rules: closed-vocabulary values (R1),
+no inline styles (R2), no `<style>` blocks (R3), never `data-layout` +
+`data-component` on one element (R4). Exit 1 on violations — CI-ready. This
+closes the loop: *the LLM generates, Canon validates.*
+
 ## Explore
 
 - [Docs](docs/index.html) — tokens, layouts, components

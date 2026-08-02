@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<!-- Fixture for canon-lint tests: every block below is a KNOWN violation. -->
+<html lang="en">
+<head>
+  <title>canon-lint fixture — 5 expected violations</title>
+  <style>.bad { color: red; }</style>
+</head>
+<body>
+  <div style="display:flex; gap:16px">R2: inline style</div>
+  <div data-layout="stack" data-component="card">R4: both on one element</div>
+  <div data-layout="grid" data-cols="5">R1: invalid cols</div>
+  <div data-gap="20px">R1: invalid gap</div>
+</body>
+</html>
