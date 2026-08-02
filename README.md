@@ -76,6 +76,7 @@ which adds canonical patterns and anti-patterns. See
 ## Repo layout
 
 ```
+site/       Next.js docs site (Vercel-ready, root dir: site/) — Canon's first consumer
 src/        Modular source (reset, tokens, layouts, components, utilities)
 dist/       canon.css — single-file build
 prompts/    System prompts for LLMs
