@@ -10,3 +10,4 @@ node_modules/
 *-outputs.env
 .DS_Store
 Thumbs.db
+.claude/handoff*.md
