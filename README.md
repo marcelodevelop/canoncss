@@ -101,6 +101,17 @@ visual identity. `npm test` re-validates the whole corpus on every change.
 - [Examples](examples/) - [landing](examples/landing/), [dashboard](examples/dashboard/),
   [app-shell](examples/app-shell/) (dark mode), [blog](examples/blog/)
 
+## Live in production
+
+[marceloacevedo.com/blog](https://marceloacevedo.com/blog) - the author's
+portfolio blog runs on Canon while the rest of the site stays on hand-crafted
+Tailwind. Both coexist in one Next.js app via sibling root layouts: each tree
+loads only its own stylesheet. That split is the positioning in practice -
+utilities for the human-crafted brand pages, Canon for the content a model can
+write. See the setup in
+[portfolio2026](https://github.com/marcelodevelop/portfolio2026): `canon.css`
+is committed next to the blog layout, no package install needed.
+
 ## Repo layout
 
 ```
