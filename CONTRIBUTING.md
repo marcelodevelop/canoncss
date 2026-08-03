@@ -20,10 +20,10 @@ layout, token, modifier or slot must land in the same PR across:
 2. `prompts/system-prompt.txt` - the short prompt (keep it under ~800 tokens)
 3. `prompts/system-prompt-full.txt` - patterns/anti-patterns if relevant
 4. `plugins/canon-css/skills/canon-css/SKILL.md` - the Claude Code skill
-5. `bin/canon-lint.mjs` - the `VOCAB` tables
+5. `bin/vocab.mjs` - the `VOCAB` and `ELEMENTS` tables
 
-`prompts/AGENTS.md` regenerates from the short prompt at build time - never
-edit it by hand.
+`prompts/AGENTS.md` and `vscode/canon.html-data.json` regenerate at build time
+(from the short prompt and from `bin/vocab.mjs`) - never edit them by hand.
 
 ## Design principles (non-negotiable)
 

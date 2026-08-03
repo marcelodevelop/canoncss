@@ -1,0 +1,391 @@
+{
+  "version": 1.1,
+  "globalAttributes": [
+    {
+      "name": "data-layout",
+      "description": "Canon layout primitive.",
+      "values": [
+        {
+          "name": "stack"
+        },
+        {
+          "name": "row"
+        },
+        {
+          "name": "grid"
+        },
+        {
+          "name": "sidebar"
+        },
+        {
+          "name": "centered"
+        },
+        {
+          "name": "hero"
+        },
+        {
+          "name": "split"
+        }
+      ]
+    },
+    {
+      "name": "data-component",
+      "description": "Canon component role. Must sit on its canonical element (R5).\n\nbutton: <button>, <a>\ncard: <article>, <div>, <section>, <li>, <a>, <blockquote>\nbadge: <span>\ninput: <input>\ntextarea: <textarea>\nselect: <select>\ntopbar: <header>\nmodal: <dialog>, <div>\navatar: <span>\nstat: <span>\ntable: <table>\ndivider: <hr>, <div>",
+      "values": [
+        {
+          "name": "button"
+        },
+        {
+          "name": "card"
+        },
+        {
+          "name": "badge"
+        },
+        {
+          "name": "input"
+        },
+        {
+          "name": "textarea"
+        },
+        {
+          "name": "select"
+        },
+        {
+          "name": "topbar"
+        },
+        {
+          "name": "modal"
+        },
+        {
+          "name": "avatar"
+        },
+        {
+          "name": "stat"
+        },
+        {
+          "name": "table"
+        },
+        {
+          "name": "divider"
+        }
+      ]
+    },
+    {
+      "name": "data-gap",
+      "description": "Gap between children, from the space scale.",
+      "values": [
+        {
+          "name": "xs"
+        },
+        {
+          "name": "sm"
+        },
+        {
+          "name": "md"
+        },
+        {
+          "name": "lg"
+        },
+        {
+          "name": "xl"
+        },
+        {
+          "name": "2xl"
+        }
+      ]
+    },
+    {
+      "name": "data-padding",
+      "description": "Inner padding, from the space scale.",
+      "values": [
+        {
+          "name": "xs"
+        },
+        {
+          "name": "sm"
+        },
+        {
+          "name": "md"
+        },
+        {
+          "name": "lg"
+        },
+        {
+          "name": "xl"
+        },
+        {
+          "name": "2xl"
+        }
+      ]
+    },
+    {
+      "name": "data-align",
+      "description": "Cross-axis alignment.",
+      "values": [
+        {
+          "name": "start"
+        },
+        {
+          "name": "center"
+        },
+        {
+          "name": "end"
+        },
+        {
+          "name": "stretch"
+        }
+      ]
+    },
+    {
+      "name": "data-justify",
+      "description": "Main-axis distribution.",
+      "values": [
+        {
+          "name": "start"
+        },
+        {
+          "name": "center"
+        },
+        {
+          "name": "end"
+        },
+        {
+          "name": "between"
+        },
+        {
+          "name": "around"
+        }
+      ]
+    },
+    {
+      "name": "data-cols",
+      "description": "Column count for data-layout=\"grid\".",
+      "values": [
+        {
+          "name": "1"
+        },
+        {
+          "name": "2"
+        },
+        {
+          "name": "3"
+        },
+        {
+          "name": "4"
+        },
+        {
+          "name": "auto"
+        }
+      ]
+    },
+    {
+      "name": "data-width",
+      "description": "Max width for data-layout=\"centered\".",
+      "values": [
+        {
+          "name": "prose"
+        },
+        {
+          "name": "content"
+        },
+        {
+          "name": "wide"
+        }
+      ]
+    },
+    {
+      "name": "data-size",
+      "description": "Component size.",
+      "values": [
+        {
+          "name": "sm"
+        },
+        {
+          "name": "md"
+        },
+        {
+          "name": "lg"
+        }
+      ]
+    },
+    {
+      "name": "data-variant",
+      "description": "Component variant.",
+      "values": [
+        {
+          "name": "primary"
+        },
+        {
+          "name": "secondary"
+        },
+        {
+          "name": "ghost"
+        },
+        {
+          "name": "danger"
+        },
+        {
+          "name": "link"
+        },
+        {
+          "name": "neutral"
+        },
+        {
+          "name": "brand"
+        },
+        {
+          "name": "success"
+        },
+        {
+          "name": "warning"
+        },
+        {
+          "name": "error"
+        },
+        {
+          "name": "info"
+        },
+        {
+          "name": "strong"
+        },
+        {
+          "name": "featured"
+        }
+      ]
+    },
+    {
+      "name": "data-state",
+      "description": "Validation state of a form control.",
+      "values": [
+        {
+          "name": "error"
+        },
+        {
+          "name": "success"
+        }
+      ]
+    },
+    {
+      "name": "data-tone",
+      "description": "Text or surface tone.",
+      "values": [
+        {
+          "name": "subtle"
+        },
+        {
+          "name": "brand"
+        },
+        {
+          "name": "accent"
+        },
+        {
+          "name": "success"
+        },
+        {
+          "name": "error"
+        }
+      ]
+    },
+    {
+      "name": "data-hide",
+      "description": "Hide at this breakpoint.",
+      "values": [
+        {
+          "name": "mobile"
+        },
+        {
+          "name": "desktop"
+        }
+      ]
+    },
+    {
+      "name": "data-motion",
+      "description": "Motion preset. Auto-respects prefers-reduced-motion.",
+      "values": [
+        {
+          "name": "rise"
+        },
+        {
+          "name": "float"
+        },
+        {
+          "name": "pulse"
+        },
+        {
+          "name": "lift"
+        }
+      ]
+    },
+    {
+      "name": "data-slot",
+      "description": "Named region. Only valid as a direct child of its parent (R4).",
+      "values": [
+        {
+          "name": "header"
+        },
+        {
+          "name": "body"
+        },
+        {
+          "name": "footer"
+        },
+        {
+          "name": "media"
+        },
+        {
+          "name": "sidebar"
+        },
+        {
+          "name": "main"
+        },
+        {
+          "name": "brand"
+        },
+        {
+          "name": "nav"
+        },
+        {
+          "name": "actions"
+        },
+        {
+          "name": "menu"
+        },
+        {
+          "name": "panel"
+        }
+      ]
+    },
+    {
+      "name": "data-theme",
+      "description": "Colour scheme. Goes on <html>.",
+      "values": [
+        {
+          "name": "dark"
+        },
+        {
+          "name": "light"
+        }
+      ]
+    },
+    {
+      "name": "data-mono",
+      "description": "Canon utility (no value).",
+      "valueSet": "v"
+    },
+    {
+      "name": "data-full",
+      "description": "Canon utility (no value).",
+      "valueSet": "v"
+    },
+    {
+      "name": "data-truncate",
+      "description": "Canon utility (no value).",
+      "valueSet": "v"
+    },
+    {
+      "name": "data-wrap",
+      "description": "Canon utility (no value).",
+      "valueSet": "v"
+    }
+  ]
+}

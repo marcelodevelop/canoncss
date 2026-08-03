@@ -6,14 +6,14 @@ cd "$(dirname "$0")/.."
 echo "- clean files must pass:"
 node bin/canon-lint.mjs examples test-llm/settings.html test-llm/dashboard.html test-llm/landing.html test-llm/blog.html test-llm/v2 test-llm/v3 test-llm/site-relay
 
-echo "- fixture must fail with exactly 5 violations:"
+echo "- fixture must fail with exactly 6 violations:"
 set +e
 OUT=$(node bin/canon-lint.mjs test-llm/violations-fixture.html)
 CODE=$?
 set -e
 COUNT=$(echo "$OUT" | grep -cE '  R[0-9]  ')
-if [ "$CODE" -ne 1 ] || [ "$COUNT" -ne 5 ]; then
-  echo "FAIL: expected exit 1 with 5 violations, got exit $CODE with $COUNT:"
+if [ "$CODE" -ne 1 ] || [ "$COUNT" -ne 6 ]; then
+  echo "FAIL: expected exit 1 with 6 violations, got exit $CODE with $COUNT:"
   echo "$OUT"
   exit 1
 fi

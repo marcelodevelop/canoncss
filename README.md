@@ -94,8 +94,22 @@ npx canon-lint src/
 
 Zero-dependency linter that enforces the rules: closed-vocabulary values (R1),
 no inline styles (R2), no `<style>` blocks (R3), never `data-layout` +
-`data-component` on one element (R4). Exit 1 on violations - CI-ready. This
-closes the loop: *the LLM generates, Canon validates.*
+`data-component` on one element (R4), and every component role on its canonical
+element (R5, so `<div data-component="button">` fails). Exit 1 on violations -
+CI-ready. This closes the loop: *the LLM generates, Canon validates.*
+
+## Editor autocomplete
+
+Canon ships a VS Code [custom data](https://code.visualstudio.com/api/extension-guides/custom-data-extension)
+file, generated from the same vocabulary the linter enforces. Point your
+workspace settings at it and every `data-*` attribute and value autocompletes,
+no extension required:
+
+```json
+{
+  "html.customData": ["./node_modules/canoncss/vscode/canon.html-data.json"]
+}
+```
 
 ## Proof
 
@@ -133,6 +147,7 @@ prompts/    System prompts for LLMs
 examples/   Four pages built with zero extra CSS
 docs/       Static documentation
 scripts/    build.sh (cat + comment-strip)
+vscode/     generated html.customData for editor autocomplete
 ```
 
 Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.components → canon.utilities`.
@@ -143,7 +158,9 @@ Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.compone
 2. No inline styles, no extra CSS.
 3. An element gets `data-layout` **or** `data-component`, never both.
 4. `data-slot` only as a direct child of its parent layout/component.
-5. Theming: adapt Canon to the brand, never bend the markup. A theme file
+5. Every component role sits on its canonical element. A role is a promise
+   about behaviour, not just looks.
+6. Theming: adapt Canon to the brand, never bend the markup. A theme file
    overrides any token on `:root` (colors, fonts, type scale, radii, shadows)
    plus a small `@layer canon.theme` block for details tokens cannot express.
    This is how an LLM ports an existing site to Canon while keeping its exact
