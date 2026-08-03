@@ -3,7 +3,7 @@ name: Release to npm
 # Publishes canoncss to npm when a GitHub Release is published.
 # Auth is npm Trusted Publishing (OIDC): no token stored anywhere.
 # One-time setup on npmjs.com: package canoncss > Settings >
-# Trusted Publisher > GitHub Actions > repo marcelodevelop/canonframework,
+# Trusted Publisher > GitHub Actions > repo marcelodevelop/canoncss,
 # workflow release.yml.
 
 on:

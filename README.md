@@ -1,7 +1,7 @@
 # Canon CSS
 
 [![npm](https://img.shields.io/npm/v/canoncss)](https://www.npmjs.com/package/canoncss)
-[![CI](https://github.com/marcelodevelop/canonframework/actions/workflows/ci.yml/badge.svg)](https://github.com/marcelodevelop/canonframework/actions)
+[![CI](https://github.com/marcelodevelop/canoncss/actions/workflows/ci.yml/badge.svg)](https://github.com/marcelodevelop/canoncss/actions)
 
 **[canoncss.com](https://www.canoncss.com)** - docs, live playground, comparison.
 
@@ -30,10 +30,10 @@ npm install canoncss
 or zero-install via CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canonframework@main/dist/canon.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) - **~21kb raw, ~4.2kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) - **~24kb raw, ~4.8kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular - concatenate only the files you use.)
@@ -63,7 +63,7 @@ The API is `data-*` attributes, not classes:
 | Attribute | Purpose |
 |-----------|---------|
 | `data-layout` | 7 layout patterns: `stack` `row` `grid` `sidebar` `centered` `hero` `split` |
-| `data-component` | 10 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `divider` |
+| `data-component` | 12 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` |
 | `data-slot` | Named children (`header`, `body`, `footer`, `sidebar`, `main`, …) |
 | `data-gap` / `data-align` / `data-justify` | Layout modifiers |
 | `data-variant` / `data-size` / `data-state` | Component modifiers |
@@ -74,13 +74,13 @@ Dark mode is one attribute: `<html data-theme="dark">`.
 
 Three ways, pick one:
 
-- **Claude Code plugin** - `/plugin marketplace add marcelodevelop/canonframework`,
+- **Claude Code plugin** - `/plugin marketplace add marcelodevelop/canoncss`,
   then `/plugin install canon-css@canon`. Claude speaks Canon in every project
   automatically.
 - **Any coding agent** - copy [`prompts/AGENTS.md`](prompts/AGENTS.md) into your
   repo root (works with Cursor, Copilot, Codex, Claude Code).
 - **Raw prompt** - inject [`prompts/system-prompt.txt`](prompts/system-prompt.txt)
-  (~600 tokens) as a system message. If output drifts, use
+  (3.7kb, roughly 1k tokens) as a system message. If output drifts, use
   [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt), which adds
   canonical patterns and anti-patterns. See [`prompts/README.md`](prompts/README.md).
 
