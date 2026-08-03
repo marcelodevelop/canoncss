@@ -161,6 +161,12 @@
     padding: var(--space-lg);
   }
 
+  /* Card clickeable: un <a> card no se tiñe ni se subraya como link */
+  a[data-component="card"] {
+    color: inherit;
+    text-decoration: none;
+  }
+
   /* Featured: la card destacada de un grupo (pricing "most popular", etc.) */
   [data-component="card"][data-variant="featured"] {
     border-color: var(--color-accent);
