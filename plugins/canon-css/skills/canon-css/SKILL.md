@@ -51,8 +51,10 @@ COMPONENTS — `data-component` on semantic elements:
 
     button    + data-variant={primary|secondary|ghost|danger|link}
               + data-size={sm|md|lg}
-    card      > data-slot={header|body|footer}
-              + data-variant={featured} to highlight one card in a group
+    card      > data-slot={media|header|body|footer}  (media = full-bleed top
+              image). + data-variant={featured} to highlight one card in a
+              group. Header text is auto-styled — no heading tags needed.
+    stat      the big number of a metric (<span data-component="stat">4.8M</span>)
     table     on a <table> element; plain thead/tbody/th/td inside
     badge     + data-variant={neutral|brand|success|warning|error|info}
     input     + data-size={sm|md|lg} + data-state={error|success}

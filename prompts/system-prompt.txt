@@ -25,8 +25,9 @@ LAYOUTS — data-layout on containers:
 COMPONENTS — data-component on semantic elements:
   button    + data-variant={primary|secondary|ghost|danger|link}
             + data-size={sm|md|lg}
-  card      > data-slot={header|body|footer}
+  card      > data-slot={media|header|body|footer}  (media = full-bleed top img)
             + data-variant={featured} to highlight one card in a group
+            Header text is auto-styled — plain text, no heading tags needed.
   badge     + data-variant={neutral|brand|success|warning|error|info}
   input     + data-size={sm|md|lg} + data-state={error|success}
   textarea  + data-size={sm|md|lg} + data-state={error|success}
@@ -35,6 +36,7 @@ COMPONENTS — data-component on semantic elements:
   modal     > data-slot=panel > data-slot={header|body|footer}
   avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
             the span — never data-component on the <img> itself.
+  stat      the big number of a metric (<span data-component="stat">4.8M</span>)
   table     on a <table> element; style-free thead/tbody/th/td inside
   divider   + data-variant={strong}
 

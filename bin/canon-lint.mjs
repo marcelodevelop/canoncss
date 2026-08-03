@@ -7,7 +7,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 
 const LAYOUTS = new Set(['stack', 'row', 'grid', 'sidebar', 'centered', 'hero', 'split']);
-const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'table', 'divider']);
+const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider']);
 const SCALE = new Set(['xs', 'sm', 'md', 'lg', 'xl', '2xl']);
 const VOCAB = {
   'data-layout': LAYOUTS,
@@ -23,7 +23,7 @@ const VOCAB = {
   'data-variant': new Set(['primary', 'secondary', 'ghost', 'danger', 'link', 'neutral', 'brand', 'success', 'warning', 'error', 'info', 'strong', 'featured']),
   'data-state': new Set(['error', 'success']),
   'data-tone': new Set(['subtle', 'brand', 'success', 'error']),
-  'data-slot': new Set(['header', 'body', 'footer', 'sidebar', 'main', 'brand', 'nav', 'actions', 'panel']),
+  'data-slot': new Set(['header', 'body', 'footer', 'media', 'sidebar', 'main', 'brand', 'nav', 'actions', 'panel']),
   'data-theme': new Set(['dark', 'light']),
 };
 
