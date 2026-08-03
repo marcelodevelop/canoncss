@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relay — Hosted API mocking for dev teams</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="index.html">Relay</a>
+    <nav data-slot="nav">
+      <a href="index.html">Product</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="changelog.html">Changelog</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="ghost" data-size="sm" href="login.html">Sign in</a>
+      <a data-component="button" data-variant="primary" data-size="sm" href="login.html">Get started</a>
+    </div>
+  </header>
+
+  <main>
+
+    <section data-layout="hero">
+      <div data-layout="centered" data-width="content">
+        <div data-layout="stack" data-gap="lg" data-align="center">
+          <span data-component="badge" data-variant="brand">v2.4 · SOC 2 Type II</span>
+          <h1>Mock any API before it exists</h1>
+          <p data-tone="subtle">Relay gives your team hosted, versioned API mocks that behave like production — latency, auth, error states and all. Frontend ships while backend builds. Nobody waits.</p>
+          <div data-layout="row" data-gap="sm" data-justify="center">
+            <a data-component="button" data-variant="primary" data-size="lg" href="login.html">Start mocking free</a>
+            <a data-component="button" data-variant="secondary" data-size="lg" href="pricing.html">See pricing</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="wide" data-padding="2xl">
+      <div data-layout="stack" data-gap="xl">
+        <div data-layout="stack" data-gap="sm" data-align="center">
+          <p data-tone="subtle">How it works</p>
+          <h2>From spec to shared mock in minutes</h2>
+        </div>
+        <div data-layout="grid" data-cols="3" data-gap="lg">
+          <div data-component="card">
+            <div data-slot="header">1. Import your spec</div>
+            <div data-slot="body">
+              <p>Drop in an OpenAPI or GraphQL schema — or paste a sample response. Relay generates realistic mock endpoints for every route, instantly.</p>
+            </div>
+          </div>
+          <div data-component="card">
+            <div data-slot="header">2. Shape the behavior</div>
+            <div data-slot="body">
+              <p>Add latency profiles, auth rules, stateful sequences, and error scenarios. Test the 429s and 503s your happy-path staging server never throws.</p>
+            </div>
+          </div>
+          <div data-component="card">
+            <div data-slot="header">3. Share the URL</div>
+            <div data-slot="body">
+              <p>Every mock gets a stable hosted URL. Point your app, your tests, or your CI at it — teammates see changes the moment you publish.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="wide" data-padding="2xl">
+      <div data-layout="stack" data-gap="xl">
+        <div data-layout="stack" data-gap="sm" data-align="center">
+          <p data-tone="subtle">Features</p>
+          <h2>Built for teams that ship in parallel</h2>
+        </div>
+        <div data-layout="grid" data-cols="4" data-gap="lg">
+          <div data-component="card">
+            <div data-slot="header">Versioned mocks</div>
+            <div data-slot="body">
+              <p>Every mock is versioned like code. Pin CI to a version, iterate on the next one, roll back in one click.</p>
+            </div>
+          </div>
+          <div data-component="card">
+            <div data-slot="header">Stateful scenarios</div>
+            <div data-slot="body">
+              <p>Model real flows: create a resource, fetch it, delete it. Relay keeps per-session state so mocks behave like a real backend.</p>
+            </div>
+          </div>
+          <div data-component="card">
+            <div data-slot="header">Chaos on demand</div>
+            <div data-slot="body">
+              <p>Inject timeouts, malformed payloads, and rate limits with a toggle. Find your retry bugs before your users do.</p>
+            </div>
+          </div>
+          <div data-component="card">
+            <div data-slot="header">Request inspection</div>
+            <div data-slot="body">
+              <p>Every request to a mock is logged with headers, body, and timing. Debug integration issues without a proxy in sight.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="wide" data-padding="2xl" data-tone="brand">
+      <div data-layout="grid" data-cols="3" data-gap="xl">
+        <div data-layout="stack" data-gap="xs" data-align="center">
+          <span data-component="stat">99.99%</span>
+          <p data-tone="subtle">Uptime over the last 12 months</p>
+        </div>
+        <div data-layout="stack" data-gap="xs" data-align="center">
+          <span data-component="stat">4.8B</span>
+          <p data-tone="subtle">Mock requests served</p>
+        </div>
+        <div data-layout="stack" data-gap="xs" data-align="center">
+          <span data-component="stat">12,000+</span>
+          <p data-tone="subtle">Teams building on Relay</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="wide" data-padding="2xl">
+      <div data-layout="stack" data-gap="xl">
+        <div data-layout="stack" data-gap="sm" data-align="center">
+          <p data-tone="subtle">Testimonials</p>
+          <h2>Teams stopped waiting on backends</h2>
+        </div>
+        <div data-layout="grid" data-cols="2" data-gap="lg">
+          <div data-component="card">
+            <div data-slot="body">
+              <blockquote>We cut two weeks off every feature cycle. Frontend starts against a Relay mock on day one, and by the time the real API lands, the integration is already tested.</blockquote>
+            </div>
+            <div data-slot="footer">
+              <div data-layout="row" data-gap="sm" data-align="center">
+                <span data-component="avatar" data-size="md">MK</span>
+                <div data-layout="stack" data-gap="xs">
+                  <p>Mara Kimura</p>
+                  <p data-tone="subtle">Engineering Lead, Fieldstone</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-component="card">
+            <div data-slot="body">
+              <blockquote>The chaos toggles alone paid for it. We found three retry bugs in our mobile client that had been shipping to production for months.</blockquote>
+            </div>
+            <div data-slot="footer">
+              <div data-layout="row" data-gap="sm" data-align="center">
+                <span data-component="avatar" data-size="md">DO</span>
+                <div data-layout="stack" data-gap="xs">
+                  <p>Dayo Okafor</p>
+                  <p data-tone="subtle">Staff Engineer, Brightline</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="content" data-padding="2xl">
+      <div data-layout="stack" data-gap="lg" data-align="center">
+        <h2>Ship the frontend today</h2>
+        <p data-tone="subtle">Free for individuals. Five minutes to your first hosted mock. No credit card required.</p>
+        <div data-layout="row" data-gap="sm" data-justify="center">
+          <a data-component="button" data-variant="primary" data-size="lg" href="login.html">Get started</a>
+          <a data-component="button" data-variant="link" data-size="lg" href="pricing.html">Compare plans</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <hr data-component="divider">
+
+  <footer data-layout="centered" data-width="wide" data-padding="lg">
+    <div data-layout="row" data-justify="between" data-gap="md" data-wrap>
+      <p data-tone="subtle">© 2026 Relay, Inc.</p>
+      <div data-layout="row" data-gap="md">
+        <a href="pricing.html">Pricing</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="login.html">Sign in</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

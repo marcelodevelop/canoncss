@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in — Relay</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="index.html">Relay</a>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="ghost" data-size="sm" href="signup.html">Create account</a>
+    </div>
+  </header>
+
+  <section data-layout="hero" data-align="center" data-justify="center">
+    <div data-layout="centered" data-width="prose">
+      <div data-layout="stack" data-gap="lg">
+
+        <div data-component="card">
+          <div data-slot="header">Sign in to Relay</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+              <label class="sr-only" for="email">Email</label>
+              <input data-component="input" data-size="md" type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email">
+              <label class="sr-only" for="password">Password</label>
+              <input data-component="input" data-size="md" type="password" id="password" name="password" placeholder="Password" autocomplete="current-password">
+              <div data-layout="row" data-justify="end">
+                <a data-component="button" data-variant="link" data-size="sm" href="forgot-password.html">Forgot password?</a>
+              </div>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <button data-component="button" data-variant="primary" data-size="lg" data-full type="submit">Sign in</button>
+          </div>
+        </div>
+
+        <div data-layout="row" data-gap="xs" data-justify="center">
+          <p data-tone="subtle">New to Relay?</p>
+          <a data-component="button" data-variant="link" data-size="sm" href="index.html">Start mocking APIs in minutes</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

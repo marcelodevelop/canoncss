@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock servers — Relay</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+  <header data-component="topbar">
+    <a data-slot="brand" href="app.html">Relay</a>
+    <nav data-slot="nav">
+      <a href="app.html">Dashboard</a>
+      <a href="mocks.html">Mock servers</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <div data-slot="actions">
+      <button data-component="button" data-variant="ghost" data-size="sm">Docs</button>
+      <span data-component="avatar">AC</span>
+    </div>
+  </header>
+
+  <div data-layout="sidebar" data-gap="lg">
+    <aside data-slot="sidebar" data-padding="md">
+      <div data-layout="stack" data-gap="md">
+        <p data-tone="subtle">Workspace</p>
+        <div data-layout="row" data-gap="sm" data-align="center">
+          <span data-component="avatar" data-size="sm">RL</span>
+          <span>Relay Labs</span>
+        </div>
+        <hr data-component="divider">
+        <nav data-layout="stack" data-gap="xs">
+          <a href="app.html">Dashboard</a>
+          <a href="mocks.html">Mock servers</a>
+          <a href="#">Requests</a>
+          <a href="#">Scenarios</a>
+          <a href="settings.html">Settings</a>
+        </nav>
+        <hr data-component="divider">
+        <p data-tone="subtle">Plan</p>
+        <span data-component="badge" data-variant="brand">Team</span>
+        <button data-component="button" data-variant="secondary" data-size="sm" data-full>Upgrade</button>
+      </div>
+    </aside>
+
+    <main data-slot="main" data-padding="lg">
+      <div data-layout="stack" data-gap="lg">
+        <div data-layout="row" data-justify="between" data-align="center" data-wrap>
+          <h1>Mock servers</h1>
+          <div data-layout="row" data-gap="sm" data-align="center">
+            <input data-component="input" data-size="sm" type="search" placeholder="Search mocks…" aria-label="Search mock servers">
+            <button data-component="button" data-variant="primary" data-size="sm">New mock server</button>
+          </div>
+        </div>
+
+        <div data-component="card">
+          <div data-slot="body">
+            <table data-component="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Base URL</th>
+                  <th>Spec source</th>
+                  <th>Status</th>
+                  <th>Requests 24h</th>
+                  <th><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>payments-api</td>
+                  <td><code>https://payments.mock.relay.dev</code></td>
+                  <td><span data-component="badge" data-variant="brand">OpenAPI</span></td>
+                  <td><span data-component="badge" data-variant="success">Live</span></td>
+                  <td>128,442</td>
+                  <td><button data-component="button" data-variant="ghost" data-size="sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>identity-service</td>
+                  <td><code>https://identity.mock.relay.dev</code></td>
+                  <td><span data-component="badge" data-variant="brand">OpenAPI</span></td>
+                  <td><span data-component="badge" data-variant="success">Live</span></td>
+                  <td>94,105</td>
+                  <td><button data-component="button" data-variant="ghost" data-size="sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>orders-graph</td>
+                  <td><code>https://orders.mock.relay.dev</code></td>
+                  <td><span data-component="badge" data-variant="info">GraphQL</span></td>
+                  <td><span data-component="badge" data-variant="success">Live</span></td>
+                  <td>61,873</td>
+                  <td><button data-component="button" data-variant="ghost" data-size="sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>shipping-quotes</td>
+                  <td><code>https://shipping.mock.relay.dev</code></td>
+                  <td><span data-component="badge" data-variant="neutral">Manual</span></td>
+                  <td><span data-component="badge" data-variant="warning">Paused</span></td>
+                  <td>3,207</td>
+                  <td><button data-component="button" data-variant="ghost" data-size="sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>notifications-api</td>
+                  <td><code>https://notify.mock.relay.dev</code></td>
+                  <td><span data-component="badge" data-variant="brand">OpenAPI</span></td>
+                  <td><span data-component="badge" data-variant="success">Live</span></td>
+                  <td>27,559</td>
+                  <td><button data-component="button" data-variant="ghost" data-size="sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>catalog-graph</td>
+                  <td><code>https://catalog.mock.relay.dev</code></td>
+                  <td><span data-component="badge" data-variant="info">GraphQL</span></td>
+                  <td><span data-component="badge" data-variant="warning">Paused</span></td>
+                  <td>1,984</td>
+                  <td><button data-component="button" data-variant="ghost" data-size="sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>legacy-billing</td>
+                  <td><code>https://billing.mock.relay.dev</code></td>
+                  <td><span data-component="badge" data-variant="neutral">Manual</span></td>
+                  <td><span data-component="badge" data-variant="warning">Paused</span></td>
+                  <td>412</td>
+                  <td><button data-component="button" data-variant="ghost" data-size="sm">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-layout="split" data-gap="lg">
+          <div data-component="card">
+            <div data-slot="header">Scenario presets</div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="warning">Latency spike</span>
+                    <span data-tone="subtle">+2,500 ms on every response</span>
+                  </div>
+                  <button data-component="button" data-variant="secondary" data-size="sm">Run</button>
+                </div>
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="error">Error storm</span>
+                    <span data-tone="subtle">40% of requests return 500</span>
+                  </div>
+                  <button data-component="button" data-variant="secondary" data-size="sm">Run</button>
+                </div>
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="info">Rate limit</span>
+                    <span data-tone="subtle">429 after 100 req/min</span>
+                  </div>
+                  <button data-component="button" data-variant="secondary" data-size="sm">Run</button>
+                </div>
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="neutral">Offline</span>
+                    <span data-tone="subtle">Connections refused entirely</span>
+                  </div>
+                  <button data-component="button" data-variant="secondary" data-size="sm">Run</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div data-component="card">
+            <div data-slot="header">Danger zone</div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <p data-tone="subtle">Deleting removes every mock server, its routes, and recorded traffic for this workspace. This cannot be undone.</p>
+                <button data-component="button" data-variant="danger">Delete workspace mocks</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div data-component="modal" role="dialog" aria-modal="true" aria-labelledby="delete-paused-title">
+    <div data-slot="panel">
+      <div data-slot="header" id="delete-paused-title">Delete 3 paused mocks?</div>
+      <div data-slot="body">
+        <p>shipping-quotes, catalog-graph, and legacy-billing will be permanently deleted along with 5,603 recorded requests. Live mock servers are not affected.</p>
+      </div>
+      <div data-slot="footer">
+        <button data-component="button" data-variant="ghost">Cancel</button>
+        <button data-component="button" data-variant="danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

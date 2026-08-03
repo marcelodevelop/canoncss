@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changelog — Relay</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="index.html">Relay</a>
+    <nav data-slot="nav">
+      <a href="index.html">Product</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="changelog.html">Changelog</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="ghost" data-size="sm" href="login.html">Sign in</a>
+      <a data-component="button" data-variant="primary" data-size="sm" href="login.html">Get started</a>
+    </div>
+  </header>
+
+  <main data-layout="centered" data-width="prose" data-padding="xl">
+    <div data-layout="stack" data-gap="2xl">
+
+      <div data-layout="stack" data-gap="sm">
+        <h1>Changelog</h1>
+        <p data-tone="subtle">Every release, every fix, in one place. Relay ships every two weeks — here is what changed and why it matters to your team.</p>
+      </div>
+
+      <article data-layout="stack" data-gap="md">
+        <p data-tone="subtle">July 14, 2026</p>
+        <div data-layout="row" data-gap="sm" data-wrap>
+          <span data-component="badge" data-variant="neutral">v2.4</span>
+          <span data-component="badge" data-variant="brand">New</span>
+          <span data-component="badge" data-variant="info">Improved</span>
+        </div>
+        <p>Scenario chaining is here. Mocks can now hand state to each other, so a POST that creates a resource makes the follow-up GET return it — no scripting required.</p>
+        <ul>
+          <li>Chain up to 20 scenarios per workspace with shared state variables.</li>
+          <li>New scenario timeline view shows exactly which mock fired and when.</li>
+          <li>Response latency simulation now supports jitter ranges, not just fixed delays.</li>
+          <li>Workspace search indexes request bodies, not just paths and names.</li>
+        </ul>
+      </article>
+
+      <hr data-component="divider">
+
+      <article data-layout="stack" data-gap="md">
+        <p data-tone="subtle">June 22, 2026</p>
+        <div data-layout="row" data-gap="sm" data-wrap>
+          <span data-component="badge" data-variant="neutral">v2.3</span>
+          <span data-component="badge" data-variant="brand">New</span>
+          <span data-component="badge" data-variant="success">Fixed</span>
+        </div>
+        <p>The Relay CLI can now record real traffic and turn it into mocks in one step. Point it at your staging environment, run your test suite, and get a ready-to-share workspace.</p>
+        <pre><code>relay record --target https://staging.api.acme.dev --out acme-checkout</code></pre>
+        <ul>
+          <li>Recorded mocks automatically redact Authorization headers and known secret patterns.</li>
+          <li>Fixed: gRPC-Web responses were double-encoded when proxied through the EU region.</li>
+          <li>Fixed: workspace exports over 50 MB no longer time out.</li>
+        </ul>
+      </article>
+
+      <hr data-component="divider">
+
+      <article data-layout="stack" data-gap="md">
+        <p data-tone="subtle">May 18, 2026</p>
+        <div data-layout="row" data-gap="sm" data-wrap>
+          <span data-component="badge" data-variant="neutral">v2.2</span>
+          <span data-component="badge" data-variant="info">Improved</span>
+          <span data-component="badge" data-variant="success">Fixed</span>
+        </div>
+        <p>A performance release. We rewrote the request matcher in Rust and cut median mock response time from 38 ms to 6 ms across all regions.</p>
+        <ul>
+          <li>Matcher throughput up 6x; large workspaces with 1,000+ routes resolve instantly.</li>
+          <li>Dashboard request log streams live instead of polling every 5 seconds.</li>
+          <li>Fixed: wildcard path parameters occasionally matched in the wrong priority order.</li>
+          <li>Fixed: OpenAPI 3.1 imports dropped nullable union types.</li>
+        </ul>
+      </article>
+
+      <hr data-component="divider">
+
+      <article data-layout="stack" data-gap="md">
+        <p data-tone="subtle">April 9, 2026</p>
+        <div data-layout="row" data-gap="sm" data-wrap>
+          <span data-component="badge" data-variant="neutral">v2.1</span>
+          <span data-component="badge" data-variant="brand">New</span>
+        </div>
+        <p>Team workspaces graduate from beta. Share mocks across your whole org with role-based access, and keep production-like fixtures in sync from a single source of truth.</p>
+        <ul>
+          <li>Roles: admin, editor, and viewer, assignable per workspace.</li>
+          <li>Audit log records every mock change with author and diff.</li>
+          <li>SSO via SAML and OIDC on the Team plan and above.</li>
+          <li>Workspace templates: spin up a preconfigured mock set for new services in seconds.</li>
+        </ul>
+      </article>
+
+      <hr data-component="divider">
+
+      <article data-layout="stack" data-gap="md">
+        <p data-tone="subtle">March 3, 2026</p>
+        <div data-layout="row" data-gap="sm" data-wrap>
+          <span data-component="badge" data-variant="neutral">v2.0</span>
+          <span data-component="badge" data-variant="brand">New</span>
+          <span data-component="badge" data-variant="info">Improved</span>
+        </div>
+        <p>Relay 2.0 is the biggest release since launch. A new edge network serves your mocks from 14 regions, and the mock editor was rebuilt around schemas instead of raw JSON.</p>
+        <ul>
+          <li>Edge delivery: mocks respond from the region closest to your CI runners.</li>
+          <li>Schema-first editor with validation against your imported OpenAPI spec.</li>
+          <li>Dynamic response templating with request-aware variables.</li>
+          <li>Legacy v1 endpoints remain available until March 2027 with no action required.</li>
+        </ul>
+      </article>
+
+    </div>
+  </main>
+
+  <footer data-layout="centered" data-width="wide" data-padding="lg">
+    <div data-layout="row" data-justify="between" data-wrap data-gap="md">
+      <p data-tone="subtle">© 2026 Relay, Inc.</p>
+      <div data-layout="row" data-gap="md">
+        <a href="pricing.html">Pricing</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="login.html">Sign in</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
