@@ -22,7 +22,7 @@ Pure CSS. Zero JavaScript. Zero build step. One file.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canonframework@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) — **~19kb raw, ~3.8kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) — **~21kb raw, ~4.2kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular — concatenate only the files you use.)
