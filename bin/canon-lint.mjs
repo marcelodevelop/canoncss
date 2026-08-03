@@ -5,29 +5,7 @@
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
-
-const LAYOUTS = new Set(['stack', 'row', 'grid', 'sidebar', 'centered', 'hero', 'split']);
-const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider']);
-const SCALE = new Set(['xs', 'sm', 'md', 'lg', 'xl', '2xl']);
-const VOCAB = {
-  'data-layout': LAYOUTS,
-  'data-component': COMPONENTS,
-  'data-gap': SCALE,
-  'data-padding': SCALE,
-  'data-align': new Set(['start', 'center', 'end', 'stretch']),
-  'data-justify': new Set(['start', 'center', 'end', 'between', 'around']),
-  'data-cols': new Set(['1', '2', '3', '4', 'auto']),
-  'data-width': new Set(['prose', 'content', 'wide']),
-  'data-size': new Set(['sm', 'md', 'lg']),
-  // ponytail: unión de variants de todos los componentes; per-component si hace falta
-  'data-variant': new Set(['primary', 'secondary', 'ghost', 'danger', 'link', 'neutral', 'brand', 'success', 'warning', 'error', 'info', 'strong', 'featured']),
-  'data-state': new Set(['error', 'success']),
-  'data-tone': new Set(['subtle', 'brand', 'accent', 'success', 'error']),
-  'data-hide': new Set(['mobile', 'desktop']),
-  'data-motion': new Set(['rise', 'float', 'pulse', 'lift']),
-  'data-slot': new Set(['header', 'body', 'footer', 'media', 'sidebar', 'main', 'brand', 'nav', 'actions', 'menu', 'panel']),
-  'data-theme': new Set(['dark', 'light']),
-};
+import { VOCAB, ELEMENTS } from './vocab.mjs';
 
 const EXTS = new Set(['.html', '.htm', '.jsx', '.tsx']);
 const SKIP_DIRS = new Set(['node_modules', 'dist', '.next', '.git']);
@@ -70,8 +48,9 @@ function lintFile(file) {
   }
 
   // Per-tag checks
-  for (const tag of src.matchAll(/<[a-zA-Z][^<>]*>/g)) {
+  for (const tag of src.matchAll(/<([a-zA-Z][a-zA-Z0-9-]*)[^<>]*>/g)) {
     const text = tag[0];
+    const name = tag[1];
     const line = lineOf(src, tag.index);
     const attrs = new Map();
     for (const a of text.matchAll(/([a-zA-Z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|(\{))/g)) {
@@ -86,6 +65,16 @@ function lintFile(file) {
     // R4 - data-layout + data-component on the same element
     if (attrs.has('data-layout') && attrs.has('data-component')) {
       violations.push([line, 'R4', 'an element gets data-layout OR data-component, never both']);
+    }
+
+    // R5 - a component role only sits on its canonical element.
+    // Skipped for JSX components (<Card …>), which forward the attribute down.
+    if (attrs.has('data-component') && name === name.toLowerCase()) {
+      const role = attrs.get('data-component');
+      const allowed = ELEMENTS[role];
+      if (allowed && !allowed.has(name)) {
+        violations.push([line, 'R5', `<${name} data-component="${role}"> - use ${[...allowed].map((t) => `<${t}>`).join(' or ')}`]);
+      }
     }
 
     // R1 - closed vocabulary values
