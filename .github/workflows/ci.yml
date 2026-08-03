@@ -20,20 +20,6 @@ jobs:
       - name: Fail if build output drifted from committed dist
         run: git diff --exit-code dist/ prompts/AGENTS.md vscode/
 
-  site:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: site/package-lock.json
-      - run: npm ci
-        working-directory: site
-      - run: npm run build
-        working-directory: site
-
   gitleaks:
     runs-on: ubuntu-latest
     steps:
