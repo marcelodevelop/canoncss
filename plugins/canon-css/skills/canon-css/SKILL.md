@@ -68,8 +68,9 @@ COMPONENTS - `data-component` on semantic elements:
 
 UTILITIES - complete list; nothing else exists:
 
-    data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
-    data-full  data-truncate  class="sr-only"
+    data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|accent|success|error}
+    data-mono  data-full  data-truncate  data-hide={mobile|desktop}
+    class="sr-only"
 
 ## Prose - styled automatically, no attributes needed
 
@@ -84,7 +85,11 @@ labels are `<p data-tone="subtle">`, never a heading element.
 4. `data-slot` only as a direct child of its parent layout/component.
 5. h1–h6 are already sized by the type scale. Do not restyle them.
 6. Dark mode: `data-theme="dark"` on `<html>`.
-7. Theming: override `--color-*` on `:root` only.
+7. Theming: adapt Canon to the brand, never bend the markup. Write a theme
+   file that overrides ANY token on `:root` (colors, fonts, type scale,
+   radii, shadows) plus a small `@layer canon.theme` block for the few brand
+   details tokens cannot express. This is how you port an existing site to
+   Canon while keeping its exact look.
 8. Canon ships zero JavaScript. Interactivity is the consumer's job.
 
 ## Canonical patterns

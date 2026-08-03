@@ -132,7 +132,11 @@ Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.compone
 2. No inline styles, no extra CSS.
 3. An element gets `data-layout` **or** `data-component`, never both.
 4. `data-slot` only as a direct child of its parent layout/component.
-5. Theming: override `--color-*` on `:root` only.
+5. Theming: adapt Canon to the brand, never bend the markup. A theme file
+   overrides any token on `:root` (colors, fonts, type scale, radii, shadows)
+   plus a small `@layer canon.theme` block for details tokens cannot express.
+   This is how an LLM ports an existing site to Canon while keeping its exact
+   look - see the live example below.
 
 ## License
 

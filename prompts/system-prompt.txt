@@ -41,8 +41,9 @@ COMPONENTS - data-component on semantic elements:
   divider   + data-variant={strong}
 
 UTILITIES - complete list; nothing else exists:
-  data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
-  data-full  data-truncate  class="sr-only"
+  data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|accent|success|error}
+  data-mono  data-full  data-truncate  data-hide={mobile|desktop}
+  class="sr-only"
 
 PROSE - styled automatically, no attributes needed:
   ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
@@ -55,5 +56,8 @@ RULES - enforce strictly:
   4. data-slot only as a direct child of its parent layout/component.
   5. h1-h6 are already sized by the type scale. Do not restyle them.
   6. Dark mode: data-theme="dark" on <html>.
-  7. Theming: override --color-* on :root only.
+  7. Theming: adapt Canon to the brand, never bend the markup. A theme file
+     may override ANY token on :root (colors, fonts, type scale, radii,
+     shadows) and may add a small `@layer canon.theme` block for the few
+     brand details tokens cannot express. Markup stays pure vocabulary.
   8. Canon ships zero JavaScript. Interactivity is the consumer's job.

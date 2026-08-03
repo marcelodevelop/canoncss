@@ -60,6 +60,11 @@ nav a:hover {
 color: var(--color-content);
 background-color: var(--color-surface-raised);
 }
+nav a[aria-current="page"] {
+color: var(--color-content);
+box-shadow: inset 0 -2px 0 var(--color-accent);
+border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
 ul, ol {
 padding-inline-start: 1.5em;
 }
@@ -707,7 +712,15 @@ white-space: nowrap;
 [data-padding="2xl"] { padding: var(--space-2xl); }
 [data-tone="subtle"]  { color: var(--color-content-subtle); }
 [data-tone="brand"]   { color: var(--color-brand); }
+[data-tone="accent"]  { color: var(--color-accent); }
 [data-tone="success"] { color: var(--color-success); }
 [data-tone="error"]   { color: var(--color-error); }
+[data-mono] { font-family: var(--font-mono); }
 [data-full] { width: 100%; }
+@media (min-width: 769px) {
+[data-hide="desktop"] { display: none; }
+}
+@media (max-width: 768px) {
+[data-hide="mobile"] { display: none; }
+}
 }

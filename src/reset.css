@@ -73,6 +73,13 @@
     background-color: var(--color-surface-raised);
   }
 
+  /* Item activo: aria-current es el contrato, el accent lo marca */
+  nav a[aria-current="page"] {
+    color: var(--color-content);
+    box-shadow: inset 0 -2px 0 var(--color-accent);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+
   /* Prose primitives: el reset global mata margin/padding, así que las
      primitivas de texto se restauran acá con la voz editorial de Canon. */
   ul, ol {

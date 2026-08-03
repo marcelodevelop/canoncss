@@ -31,9 +31,22 @@
   /* Tono de texto - la única forma de bajar el énfasis */
   [data-tone="subtle"]  { color: var(--color-content-subtle); }
   [data-tone="brand"]   { color: var(--color-brand); }
+  [data-tone="accent"]  { color: var(--color-accent); }
   [data-tone="success"] { color: var(--color-success); }
   [data-tone="error"]   { color: var(--color-error); }
 
+  /* Mono sin chip: eyebrows, labels tecnicos. code es para codigo. */
+  [data-mono] { font-family: var(--font-mono); }
+
   /* Full width */
   [data-full] { width: 100%; }
+
+  /* Visibilidad responsive: la unica concesion a breakpoints en markup */
+  @media (min-width: 769px) {
+    [data-hide="desktop"] { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    [data-hide="mobile"] { display: none; }
+  }
 }

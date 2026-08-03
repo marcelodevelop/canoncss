@@ -22,7 +22,8 @@ const VOCAB = {
   // ponytail: unión de variants de todos los componentes; per-component si hace falta
   'data-variant': new Set(['primary', 'secondary', 'ghost', 'danger', 'link', 'neutral', 'brand', 'success', 'warning', 'error', 'info', 'strong', 'featured']),
   'data-state': new Set(['error', 'success']),
-  'data-tone': new Set(['subtle', 'brand', 'success', 'error']),
+  'data-tone': new Set(['subtle', 'brand', 'accent', 'success', 'error']),
+  'data-hide': new Set(['mobile', 'desktop']),
   'data-slot': new Set(['header', 'body', 'footer', 'media', 'sidebar', 'main', 'brand', 'nav', 'actions', 'panel']),
   'data-theme': new Set(['dark', 'light']),
 };
