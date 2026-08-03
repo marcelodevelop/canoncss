@@ -132,10 +132,7 @@ visual identity. `npm test` re-validates the whole corpus on every change.
 trilingual portfolio was refactored from Tailwind to Canon **by LLM agents**,
 keeping its exact brand (fonts, colors, pill buttons, oversized type) via a
 ~60-line theme file of token overrides. Net result: -770 lines, zero Tailwind,
-same look. See [portfolio2026](https://github.com/marcelodevelop/portfolio2026):
-`src/app/theme.css` is the whole brand adaptation, `canon.css` is committed
-next to it, no package install needed. That is the thesis in practice - the
-markup is canonical, the aesthetic is yours.
+same look.
 
 ## Repo layout
 
