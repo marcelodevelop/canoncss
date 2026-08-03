@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// canon-lint — mechanical validation of Canon CSS rules in HTML/JSX files.
+// canon-lint - mechanical validation of Canon CSS rules in HTML/JSX files.
 // Zero dependencies. Usage: canon-lint <files|dirs...>
 // Exit 0 = clean, 1 = violations, 2 = usage error.
 
@@ -62,9 +62,9 @@ function lintFile(file) {
   src = blank(src, /<!--[\s\S]*?-->/g);
   src = blank(src, /\{\/\*[\s\S]*?\*\/\}/g);
 
-  // R3 — <style> blocks
+  // R3 - <style> blocks
   for (const m of src.matchAll(/<style[\s>]/gi)) {
-    violations.push([lineOf(src, m.index), 'R3', 'no <style> blocks — Canon markup needs no extra CSS']);
+    violations.push([lineOf(src, m.index), 'R3', 'no <style> blocks - Canon markup needs no extra CSS']);
   }
 
   // Per-tag checks
@@ -76,17 +76,17 @@ function lintFile(file) {
       attrs.set(a[1], a[4] ? '{expr}' : (a[2] ?? a[3] ?? ''));
     }
 
-    // R2 — inline styles (style="…" or JSX style={…})
+    // R2 - inline styles (style="…" or JSX style={…})
     if (attrs.has('style')) {
-      violations.push([line, 'R2', 'no inline styles — use tokens via data-* attributes']);
+      violations.push([line, 'R2', 'no inline styles - use tokens via data-* attributes']);
     }
 
-    // R4 — data-layout + data-component on the same element
+    // R4 - data-layout + data-component on the same element
     if (attrs.has('data-layout') && attrs.has('data-component')) {
       violations.push([line, 'R4', 'an element gets data-layout OR data-component, never both']);
     }
 
-    // R1 — closed vocabulary values
+    // R1 - closed vocabulary values
     for (const [name, allowed] of Object.entries(VOCAB)) {
       if (attrs.has(name)) {
         const value = attrs.get(name);

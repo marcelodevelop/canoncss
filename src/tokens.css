@@ -11,7 +11,7 @@
     /* ── TYPE SCALE (7 niveles) ── */
     --text-xs:   0.75rem;   /* 12px */
     --text-sm:   0.875rem;  /* 14px */
-    --text-md:   1rem;      /* 16px — body */
+    --text-md:   1rem;      /* 16px - body */
     --text-lg:   1.125rem;  /* 18px */
     --text-xl:   1.5rem;    /* 24px */
     --text-2xl:  2rem;      /* 32px */
@@ -24,7 +24,7 @@
                     Palatino, Georgia, serif;
     --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
 
-    /* ── COLOR — semántico. Identidad "tinta y rúbrica":
+    /* ── COLOR - semántico. Identidad "tinta y rúbrica":
        papel cálido, tinta como primario, vermellón de rúbrica como acento. ── */
     --color-brand:           #1c1917;
     --color-brand-subtle:    color-mix(in srgb, #1c1917 6%, #fdfcfb);
@@ -58,7 +58,7 @@
     --radius-lg:   0.75rem;
     --radius-full: 9999px;
 
-    /* ── SHADOW (3 niveles) — tinta cálida, nunca negro puro ── */
+    /* ── SHADOW (3 niveles) - tinta cálida, nunca negro puro ── */
     --shadow-sm: 0 1px 2px rgb(28 25 23 / 0.05);
     --shadow-md: 0 2px 4px rgb(28 25 23 / 0.05), 0 4px 8px rgb(28 25 23 / 0.05);
     --shadow-lg: 0 4px 8px rgb(28 25 23 / 0.06), 0 12px 24px rgb(28 25 23 / 0.09);
@@ -79,7 +79,7 @@
     --duration-slow:   300ms;
   }
 
-  /* ── DARK MODE — solo explícito, nunca automático.
+  /* ── DARK MODE - solo explícito, nunca automático.
      Light es el default de Canon; dark se pide con data-theme="dark". ── */
   [data-theme="dark"] {
     --color-brand:           #f5f4f2;

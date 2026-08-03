@@ -1,7 +1,7 @@
 # Landing example
 
 Marketing page: topbar, hero, feature grid, pricing cards, subscribe form,
-footer. This is Canon's smoke test — it must render complete with only
+footer. This is Canon's smoke test - it must render complete with only
 `dist/canon.css`, zero extra CSS.
 
 Patterns shown: `topbar`, `hero`, `centered` + `grid` sections, card slots

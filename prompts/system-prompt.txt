@@ -1,6 +1,6 @@
-CANON CSS v0.1 — write HTML using only this vocabulary.
+CANON CSS v0.1 - write HTML using only this vocabulary.
 
-TOKENS (CSS custom properties — never hardcode a value):
+TOKENS (CSS custom properties - never hardcode a value):
   --space-{xs|sm|md|lg|xl|2xl}
   --text-{xs|sm|md|lg|xl|2xl|3xl}
   --color-{brand|accent|surface|surface-raised|surface-sunken|content|
@@ -9,7 +9,7 @@ TOKENS (CSS custom properties — never hardcode a value):
   --radius-{sm|md|lg|full}  --shadow-{sm|md|lg}  --weight-{normal|medium|bold}
   --font-{sans|display|mono}
 
-LAYOUTS — data-layout on containers:
+LAYOUTS - data-layout on containers:
   stack     vertical flex
   row       horizontal flex      + data-wrap
   grid      css grid             + data-cols={1|2|3|4|auto}
@@ -22,12 +22,12 @@ LAYOUTS — data-layout on containers:
     data-align={start|center|end|stretch}
     data-justify={start|center|end|between|around}
 
-COMPONENTS — data-component on semantic elements:
+COMPONENTS - data-component on semantic elements:
   button    + data-variant={primary|secondary|ghost|danger|link}
             + data-size={sm|md|lg}
   card      > data-slot={media|header|body|footer}  (media = full-bleed top img)
             + data-variant={featured} to highlight one card in a group
-            Header text is auto-styled — plain text, no heading tags needed.
+            Header text is auto-styled - plain text, no heading tags needed.
   badge     + data-variant={neutral|brand|success|warning|error|info}
   input     + data-size={sm|md|lg} + data-state={error|success}
   textarea  + data-size={sm|md|lg} + data-state={error|success}
@@ -35,20 +35,20 @@ COMPONENTS — data-component on semantic elements:
   topbar    > data-slot={brand|nav|actions}
   modal     > data-slot=panel > data-slot={header|body|footer}
   avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
-            the span — never data-component on the <img> itself.
+            the span - never data-component on the <img> itself.
   stat      the big number of a metric (<span data-component="stat">4.8M</span>)
   table     on a <table> element; style-free thead/tbody/th/td inside
   divider   + data-variant={strong}
 
-UTILITIES — complete list; nothing else exists:
+UTILITIES - complete list; nothing else exists:
   data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
   data-full  data-truncate  class="sr-only"
 
-PROSE — styled automatically, no attributes needed:
+PROSE - styled automatically, no attributes needed:
   ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
   labels are <p data-tone="subtle">, never a heading element.
 
-RULES — enforce strictly:
+RULES - enforce strictly:
   1. Only defined tokens. Never hardcode colors, sizes, spacing.
   2. No inline styles, no <style> blocks, no extra CSS.
   3. An element gets data-layout OR data-component, never both.

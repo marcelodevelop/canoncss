@@ -14,7 +14,7 @@ const SPACING = [
 const TYPE = [
   ['--text-xs', '0.75rem / 12px'],
   ['--text-sm', '0.875rem / 14px'],
-  ['--text-md', '1rem / 16px — body'],
+  ['--text-md', '1rem / 16px - body'],
   ['--text-lg', '1.125rem / 18px'],
   ['--text-xl', '1.5rem / 24px'],
   ['--text-2xl', '2rem / 32px'],
@@ -32,10 +32,10 @@ const COLORS = [
   ['--color-content-subtle', 'Secondary text'],
   ['--color-border', 'Default borders'],
   ['--color-border-strong', 'Inputs, emphasis borders'],
-  ['--color-success', 'Status — has a -subtle tint'],
-  ['--color-warning', 'Status — has a -subtle tint'],
-  ['--color-error', 'Status — has a -subtle tint'],
-  ['--color-info', 'Status — has a -subtle tint'],
+  ['--color-success', 'Status - has a -subtle tint'],
+  ['--color-warning', 'Status - has a -subtle tint'],
+  ['--color-error', 'Status - has a -subtle tint'],
+  ['--color-info', 'Status - has a -subtle tint'],
 ];
 
 export default function Tokens() {
@@ -49,7 +49,7 @@ export default function Tokens() {
           </p>
         </div>
 
-        <h2>Spacing — 6 levels</h2>
+        <h2>Spacing - 6 levels</h2>
         <table>
           <tbody>
             {SPACING.map(([token, value]) => (
@@ -63,7 +63,7 @@ export default function Tokens() {
           </tbody>
         </table>
 
-        <h2>Type scale — 7 levels</h2>
+        <h2>Type scale - 7 levels</h2>
         <table>
           <tbody>
             {TYPE.map(([token, value]) => (
@@ -81,7 +81,7 @@ export default function Tokens() {
           (<code>h1</code> = 3xl … <code>h6</code> = sm). Never restyle them.
         </p>
 
-        <h2>Color — semantic</h2>
+        <h2>Color - semantic</h2>
         <table>
           <tbody>
             {COLORS.map(([token, role]) => (
@@ -143,7 +143,7 @@ export default function Tokens() {
           <code>{`<html data-theme="dark">`}</code>
         </pre>
         <p>
-          Light is Canon&apos;s default. Dark mode is always explicit — one
+          Light is Canon&apos;s default. Dark mode is always explicit - one
           attribute, and surfaces, content, borders and subtle tints all remap. No
           automatic theme switching: one right way.
         </p>

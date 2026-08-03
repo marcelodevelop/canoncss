@@ -65,7 +65,7 @@ export default function Components() {
               </div>
             </article>
             <article data-component="card">
-              No slots at all — the card pads itself.
+              No slots at all - the card pads itself.
             </article>
           </div>
         </div>
@@ -146,7 +146,7 @@ export default function Components() {
 
         <h2>modal</h2>
         <p>
-          Pure markup — Canon ships no JavaScript, so showing and hiding it is yours.
+          Pure markup - Canon ships no JavaScript, so showing and hiding it is yours.
         </p>
         <pre>
           <code>{`<div data-component="modal" role="dialog" aria-modal="true">

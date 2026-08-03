@@ -6,7 +6,7 @@ labels: bug
 
 **What happened**
 
-**Minimal markup that reproduces it** (paste into the Playground first — does it reproduce there?)
+**Minimal markup that reproduces it** (paste into the Playground first - does it reproduce there?)
 
 ```html
 

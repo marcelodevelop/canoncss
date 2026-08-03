@@ -7,7 +7,7 @@ labels: vocabulary
 **What can't be expressed today**
 
 **Evidence an LLM reached for it** (paste the markup a model produced when the
-vocabulary fell short — this is the strongest argument; see `test-llm/` for examples)
+vocabulary fell short - this is the strongest argument; see `test-llm/` for examples)
 
 ```html
 
@@ -17,5 +17,5 @@ vocabulary fell short — this is the strongest argument; see `test-llm/` for ex
 
 **Why it can't be a combination of existing vocabulary**
 
-> Note: Canon adds vocabulary reluctantly. "Nice to have" is not enough —
+> Note: Canon adds vocabulary reluctantly. "Nice to have" is not enough -
 > the bar is a real generation that had no correct way to express intent.

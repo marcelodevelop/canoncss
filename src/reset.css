@@ -43,7 +43,7 @@
   }
 
   /* Heading sizes come from the type scale so markup never needs inline styles.
-     h1/h2 use the display serif — the editorial signature of Canon. */
+     h1/h2 use the display serif - the editorial signature of Canon. */
   h1 { font-family: var(--font-display); font-size: var(--text-3xl); letter-spacing: -0.015em; }
   h2 { font-family: var(--font-display); font-size: var(--text-2xl); letter-spacing: -0.01em; }
   h3 { font-size: var(--text-xl); letter-spacing: -0.01em; }

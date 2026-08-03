@@ -7,7 +7,7 @@ OUTPUT="dist/canon.css"
 SOURCES="src/reset.css src/tokens.css src/layouts.css src/components.css src/utilities.css"
 mkdir -p dist
 
-# ponytail: strip comments + indentation only. No token/selector rewriting —
+# ponytail: strip comments + indentation only. No token/selector rewriting -
 # that is where CSS minifiers break data: URIs. 17kb is small enough.
 {
   echo "/* Canon CSS v0.1.0 | MIT License | https://canon.css */"
@@ -19,9 +19,9 @@ mkdir -p dist
 
 echo "✓ Built $OUTPUT ($(wc -c < $OUTPUT) bytes)"
 
-# AGENTS.md drop-in: generado desde system-prompt.txt — una sola fuente de verdad.
+# AGENTS.md drop-in: generado desde system-prompt.txt - una sola fuente de verdad.
 {
-  echo "# Canon CSS — agent instructions"
+  echo "# Canon CSS - agent instructions"
   echo ""
   echo "> Drop this file into your repo root (or append it to AGENTS.md / CLAUDE.md /"
   echo "> .cursor/rules). Any coding agent will then generate valid Canon markup."

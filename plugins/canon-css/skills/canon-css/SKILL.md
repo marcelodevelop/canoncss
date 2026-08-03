@@ -7,7 +7,7 @@ description: Write UI markup with Canon CSS, the closed-vocabulary framework. Us
 
 Canon is a pure-CSS framework with a closed vocabulary. There is exactly one
 correct way to express each pattern. Your job: generate markup using ONLY the
-vocabulary below — in HTML or JSX (the `data-*` attributes are identical in both).
+vocabulary below - in HTML or JSX (the `data-*` attributes are identical in both).
 
 ## Setup (if the project doesn't have Canon yet)
 
@@ -22,7 +22,7 @@ into the project and link/import it (`import './canon.css'` in a Next.js root la
 
 ## Vocabulary
 
-TOKENS (CSS custom properties — never hardcode a value):
+TOKENS (CSS custom properties - never hardcode a value):
 
     --space-{xs|sm|md|lg|xl|2xl}
     --text-{xs|sm|md|lg|xl|2xl|3xl}
@@ -32,7 +32,7 @@ TOKENS (CSS custom properties — never hardcode a value):
     --radius-{sm|md|lg|full}  --shadow-{sm|md|lg}  --weight-{normal|medium|bold}
     --font-{sans|display|mono}
 
-LAYOUTS — `data-layout` on containers:
+LAYOUTS - `data-layout` on containers:
 
     stack     vertical flex
     row       horizontal flex      + data-wrap
@@ -47,13 +47,13 @@ LAYOUTS — `data-layout` on containers:
       data-align={start|center|end|stretch}
       data-justify={start|center|end|between|around}
 
-COMPONENTS — `data-component` on semantic elements:
+COMPONENTS - `data-component` on semantic elements:
 
     button    + data-variant={primary|secondary|ghost|danger|link}
               + data-size={sm|md|lg}
     card      > data-slot={media|header|body|footer}  (media = full-bleed top
               image). + data-variant={featured} to highlight one card in a
-              group. Header text is auto-styled — no heading tags needed.
+              group. Header text is auto-styled - no heading tags needed.
     stat      the big number of a metric (<span data-component="stat">4.8M</span>)
     table     on a <table> element; plain thead/tbody/th/td inside
     badge     + data-variant={neutral|brand|success|warning|error|info}
@@ -63,20 +63,20 @@ COMPONENTS — `data-component` on semantic elements:
     topbar    > data-slot={brand|nav|actions}
     modal     > data-slot=panel > data-slot={header|body|footer}
     avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
-              the span — never data-component on the <img> itself.
+              the span - never data-component on the <img> itself.
     divider   + data-variant={strong}
 
-UTILITIES — complete list; nothing else exists:
+UTILITIES - complete list; nothing else exists:
 
     data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|success|error}
     data-full  data-truncate  class="sr-only"
 
-## Prose — styled automatically, no attributes needed
+## Prose - styled automatically, no attributes needed
 
 ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
 labels are `<p data-tone="subtle">`, never a heading element.
 
-## Rules — enforce strictly
+## Rules - enforce strictly
 
 1. Only defined tokens. Never hardcode colors, sizes, spacing.
 2. No inline styles, no `<style>` blocks, no extra CSS.
@@ -138,5 +138,5 @@ Form:
 ## When reviewing existing markup
 
 Flag every violation of the 8 rules with the exact line and the canonical
-replacement. Inline styles and invented token values are always violations —
+replacement. Inline styles and invented token values are always violations -
 there are no exceptions.

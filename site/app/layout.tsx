@@ -4,7 +4,7 @@ import './canon.css';
 import './site.css';
 
 export const metadata: Metadata = {
-  title: { default: 'Canon CSS', template: '%s — Canon CSS' },
+  title: { default: 'Canon CSS', template: '%s - Canon CSS' },
   description:
     'A closed-vocabulary CSS framework designed for LLMs. One right way to do each thing.',
 };

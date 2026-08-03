@@ -1,4 +1,4 @@
-/* Chrome exclusivo del sitio de docs — el framework no necesita nada de esto. */
+/* Chrome exclusivo del sitio de docs - el framework no necesita nada de esto. */
 
 /* Wordmark: "Canon." con el punto en vermellón de rúbrica. */
 [data-component='topbar'] > [data-slot='brand'] {

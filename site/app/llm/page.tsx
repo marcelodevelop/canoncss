@@ -28,14 +28,14 @@ export default function Llm() {
         <h2>How to use</h2>
         <div data-layout="stack" data-gap="sm">
           <p>
-            <strong>Chat UIs</strong> — paste the prompt at the top of your
+            <strong>Chat UIs</strong> - paste the prompt at the top of your
             conversation, then ask for UI.
           </p>
           <p>
-            <strong>API calls</strong> — send it as the system message.
+            <strong>API calls</strong> - send it as the system message.
           </p>
           <p>
-            <strong>Claude Code / Cursor / agents</strong> — append it to your{' '}
+            <strong>Claude Code / Cursor / agents</strong> - append it to your{' '}
             <code>CLAUDE.md</code> or rules file. Every generation in the repo then
             speaks Canon.
           </p>
@@ -62,7 +62,7 @@ export default function Llm() {
           <CopyButton text={full} />
         </div>
         <p data-tone="subtle">
-          Use the full prompt when output drifts — its anti-pattern section is what
+          Use the full prompt when output drifts - its anti-pattern section is what
           corrects drift.
         </p>
         <pre>

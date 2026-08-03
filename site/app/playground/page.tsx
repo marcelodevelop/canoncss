@@ -15,7 +15,7 @@ export default function PlaygroundPage() {
         <div data-layout="stack" data-gap="sm">
           <h1>Playground</h1>
           <p data-tone="subtle">
-            Paste the markup your LLM generated — see it rendered with Canon
+            Paste the markup your LLM generated - see it rendered with Canon
             instantly. Nothing leaves your browser.
           </p>
         </div>

@@ -3,10 +3,10 @@
 set -e
 cd "$(dirname "$0")/.."
 
-echo "— clean files must pass:"
+echo "- clean files must pass:"
 node bin/canon-lint.mjs examples test-llm/settings.html test-llm/dashboard.html test-llm/landing.html test-llm/blog.html test-llm/v2 test-llm/v3 test-llm/site-relay
 
-echo "— fixture must fail with exactly 5 violations:"
+echo "- fixture must fail with exactly 5 violations:"
 set +e
 OUT=$(node bin/canon-lint.mjs test-llm/violations-fixture.html)
 CODE=$?

@@ -28,7 +28,7 @@
   [data-padding="xl"]  { padding: var(--space-xl); }
   [data-padding="2xl"] { padding: var(--space-2xl); }
 
-  /* Tono de texto — la única forma de bajar el énfasis */
+  /* Tono de texto - la única forma de bajar el énfasis */
   [data-tone="subtle"]  { color: var(--color-content-subtle); }
   [data-tone="brand"]   { color: var(--color-brand); }
   [data-tone="success"] { color: var(--color-success); }

@@ -53,7 +53,7 @@ export default function Home() {
             <article data-component="card">
               <div data-slot="header">3 · See it live</div>
               <div data-slot="body">
-                Paste the result into the <a href="/playground">Playground</a> —
+                Paste the result into the <a href="/playground">Playground</a> -
                 rendered instantly, light or dark.
               </div>
             </article>
@@ -64,7 +64,7 @@ export default function Home() {
             <code>{`<link rel="stylesheet" href="canon.css">`}</code>
           </pre>
           <p>
-            That&apos;s the whole install — <strong>19kb raw, 3.8kb gzipped</strong>,
+            That&apos;s the whole install - <strong>19kb raw, 3.8kb gzipped</strong>,
             zero JavaScript, zero build step. In Next.js it&apos;s one import in your
             root layout:
           </p>
@@ -115,17 +115,17 @@ export default function Home() {
 
           <h2>The rules</h2>
           <div data-layout="stack" data-gap="sm">
-            <p>1 — Only defined tokens. If a value has no token, it does not exist.</p>
-            <p>2 — No inline styles, no extra CSS.</p>
+            <p>1 - Only defined tokens. If a value has no token, it does not exist.</p>
+            <p>2 - No inline styles, no extra CSS.</p>
             <p>
-              3 — An element gets <code>data-layout</code> or{' '}
+              3 - An element gets <code>data-layout</code> or{' '}
               <code>data-component</code>, never both.
             </p>
             <p>
-              4 — <code>data-slot</code> only as a direct child of its parent.
+              4 - <code>data-slot</code> only as a direct child of its parent.
             </p>
             <p>
-              5 — Dark mode is <code>data-theme=&quot;dark&quot;</code> on{' '}
+              5 - Dark mode is <code>data-theme=&quot;dark&quot;</code> on{' '}
               <code>&lt;html&gt;</code>.
             </p>
           </div>

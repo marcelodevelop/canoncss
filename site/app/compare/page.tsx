@@ -31,7 +31,7 @@ const VANILLA = `<!-- HTML -->
   </div>
 </article>
 
-/* CSS — written, named and maintained by you */
+/* CSS - written, named and maintained by you */
 .card { border: 1px solid #e5e7eb; border-radius: 12px;
         background: #f9fafb; box-shadow: 0 1px 2px rgb(0 0 0 / .05);
         overflow: hidden; }
@@ -60,7 +60,7 @@ export default function Compare() {
         <div data-layout="stack" data-gap="sm">
           <h1>The same card, three ways</h1>
           <p data-tone="subtle">
-            Not a takedown — Tailwind is excellent for humans who want control.
+            Not a takedown - Tailwind is excellent for humans who want control.
             This is about what happens when a <em>model</em> writes your UI.
           </p>
         </div>
@@ -74,7 +74,7 @@ export default function Compare() {
         </pre>
         <p data-tone="subtle">
           Every value is a decision: gray-50 or gray-100? rounded-lg or xl? px-6 or
-          p-6? Each is valid — so each generation chooses differently.
+          p-6? Each is valid - so each generation chooses differently.
         </p>
 
         <div data-layout="row" data-gap="sm" data-align="center">
@@ -97,7 +97,7 @@ export default function Compare() {
           <code>{CANON}</code>
         </pre>
         <p data-tone="subtle">
-          One canonical form. Ask five times, get the same markup five times — and{' '}
+          One canonical form. Ask five times, get the same markup five times - and{' '}
           <code>canon-lint</code> proves it mechanically.
         </p>
 
@@ -126,8 +126,8 @@ export default function Compare() {
             </tr>
             <tr>
               <td>Mechanical validation</td>
-              <td>—</td>
-              <td>—</td>
+              <td>-</td>
+              <td>-</td>
               <td>
                 <code>npx canon-lint</code>
               </td>
@@ -159,7 +159,7 @@ export default function Compare() {
           </tbody>
         </table>
 
-        <h2>When to use what — honestly</h2>
+        <h2>When to use what - honestly</h2>
         <div data-layout="grid" data-cols="3" data-gap="lg">
           <article data-component="card">
             <div data-slot="header">Use Tailwind when…</div>
@@ -171,7 +171,7 @@ export default function Compare() {
           <article data-component="card">
             <div data-slot="header">Use vanilla CSS when…</div>
             <div data-slot="body">
-              You need something no framework expresses — bespoke art direction,
+              You need something no framework expresses - bespoke art direction,
               unusual layouts, heavy animation.
             </div>
           </article>
@@ -179,7 +179,7 @@ export default function Compare() {
             <div data-slot="header">Use Canon when…</div>
             <div data-slot="body">
               An LLM writes most of your UI and you want every page it produces to
-              look like one coherent product — dashboards, internal tools, MVPs,
+              look like one coherent product - dashboards, internal tools, MVPs,
               agent-generated apps.
             </div>
           </article>

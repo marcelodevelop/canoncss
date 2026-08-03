@@ -8,7 +8,7 @@
     {
       "name": "canon-css",
       "source": "./plugins/canon-css",
-      "description": "Write UI with Canon CSS — a closed-vocabulary framework designed for LLMs. Adds a skill that makes Claude generate valid, consistent Canon markup in HTML or JSX."
+      "description": "Write UI with Canon CSS - a closed-vocabulary framework designed for LLMs. Adds a skill that makes Claude generate valid, consistent Canon markup in HTML or JSX."
     }
   ]
 }

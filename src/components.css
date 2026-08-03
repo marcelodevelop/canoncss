@@ -120,7 +120,7 @@
     font-weight: var(--weight-medium);
   }
 
-  /* LLM-proof: cualquier heading dentro del header se normaliza — la card
+  /* LLM-proof: cualquier heading dentro del header se normaliza - la card
      es dueña de su tipografía, sin importar qué tag eligió el autor. */
   [data-component="card"] > [data-slot="header"] :is(h1, h2, h3, h4, h5, h6),
   [data-component="card"] > [data-slot="header"] :is(h1, h2, h3, h4, h5, h6) * {
@@ -454,7 +454,7 @@
 
 
   /* ════════════════════════════════
-     STAT — el número grande de una métrica
+     STAT - el número grande de una métrica
   ════════════════════════════════ */
   [data-component="stat"] {
     display: block;

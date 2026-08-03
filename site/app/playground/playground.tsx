@@ -5,7 +5,7 @@ import { useState } from 'react';
 const SAMPLE = `<div data-layout="centered" data-width="content">
   <div data-layout="stack" data-gap="lg" data-padding="xl">
     <h1>Hello, Canon</h1>
-    <p data-tone="subtle">Paste your own markup here — this preview updates live.</p>
+    <p data-tone="subtle">Paste your own markup here - this preview updates live.</p>
 
     <div data-layout="grid" data-cols="2" data-gap="lg">
       <article data-component="card">

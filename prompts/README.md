@@ -9,7 +9,7 @@ human reads is injected into an LLM so it generates consistent Canon markup.
 |------|------|----------|
 | `system-prompt.txt` | ~600 tokens | Default. The full vocabulary + rules. |
 | `system-prompt-full.txt` | ~1600 tokens | The model keeps inventing markup, or you want canonical patterns and anti-patterns included. |
-| `AGENTS.md` | generated | Drop into a repo root for Cursor / Copilot / Codex / Claude Code. Auto-built from `system-prompt.txt` by `npm run build` — edit the source, not this file. |
+| `AGENTS.md` | generated | Drop into a repo root for Cursor / Copilot / Codex / Claude Code. Auto-built from `system-prompt.txt` by `npm run build` - edit the source, not this file. |
 
 Claude Code users can skip all of this and install the plugin instead:
 `/plugin marketplace add marcelodevelop/canonframework` →
@@ -17,14 +17,14 @@ Claude Code users can skip all of this and install the plugin instead:
 
 ## How to use
 
-**Claude / ChatGPT / any chat UI** — paste the file at the top of your
+**Claude / ChatGPT / any chat UI** - paste the file at the top of your
 conversation (or into a Project / custom-instructions field), then ask for UI:
 
 > [paste system-prompt.txt]
 >
 > Build a settings page with a sidebar and a danger zone card.
 
-**API calls** — send it as the system message:
+**API calls** - send it as the system message:
 
 ```python
 client.messages.create(
@@ -34,13 +34,13 @@ client.messages.create(
 )
 ```
 
-**Claude Code / Cursor / agents** — append the file to your project's
+**Claude Code / Cursor / agents** - append the file to your project's
 `CLAUDE.md` / rules file. Every generation in the repo then speaks Canon.
 
 ## Rules of thumb
 
 - The short prompt is enough for models in the GPT-4/Claude-3 class and above.
-- If output drifts (inline styles, invented tokens), switch to the full prompt —
+- If output drifts (inline styles, invented tokens), switch to the full prompt -
   its anti-pattern section is what corrects drift.
 - Don't paraphrase the prompts. They are worded so that the closed vocabulary
   reads as a hard constraint, not a suggestion.
