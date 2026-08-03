@@ -31,7 +31,7 @@ Initial release.
   (with canonical patterns + anti-patterns).
 - `prompts/AGENTS.md` - drop-in for Cursor/Copilot/Codex, auto-generated from
   the system prompt by the build.
-- Claude Code plugin: `/plugin marketplace add marcelodevelop/canonframework`.
+- Claude Code plugin: `/plugin marketplace add marcelodevelop/canoncss`.
 - `canon-lint` - zero-dependency validator for the four rules (closed
   vocabulary, no inline styles, no style blocks, layout XOR component).
 

@@ -1,7 +1,7 @@
 # Canon CSS
 
 [![npm](https://img.shields.io/npm/v/canoncss)](https://www.npmjs.com/package/canoncss)
-[![CI](https://github.com/marcelodevelop/canonframework/actions/workflows/ci.yml/badge.svg)](https://github.com/marcelodevelop/canonframework/actions)
+[![CI](https://github.com/marcelodevelop/canoncss/actions/workflows/ci.yml/badge.svg)](https://github.com/marcelodevelop/canoncss/actions)
 
 **[canoncss.com](https://www.canoncss.com)** - docs, live playground, comparison.
 
@@ -30,10 +30,10 @@ npm install canoncss
 or zero-install via CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canonframework@main/dist/canon.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) - **~21kb raw, ~4.2kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) - **~24kb raw, ~4.8kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular - concatenate only the files you use.)
@@ -63,7 +63,7 @@ The API is `data-*` attributes, not classes:
 | Attribute | Purpose |
 |-----------|---------|
 | `data-layout` | 7 layout patterns: `stack` `row` `grid` `sidebar` `centered` `hero` `split` |
-| `data-component` | 10 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `divider` |
+| `data-component` | 12 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` |
 | `data-slot` | Named children (`header`, `body`, `footer`, `sidebar`, `main`, …) |
 | `data-gap` / `data-align` / `data-justify` | Layout modifiers |
 | `data-variant` / `data-size` / `data-state` | Component modifiers |
@@ -74,13 +74,13 @@ Dark mode is one attribute: `<html data-theme="dark">`.
 
 Three ways, pick one:
 
-- **Claude Code plugin** - `/plugin marketplace add marcelodevelop/canonframework`,
+- **Claude Code plugin** - `/plugin marketplace add marcelodevelop/canoncss`,
   then `/plugin install canon-css@canon`. Claude speaks Canon in every project
   automatically.
 - **Any coding agent** - copy [`prompts/AGENTS.md`](prompts/AGENTS.md) into your
   repo root (works with Cursor, Copilot, Codex, Claude Code).
 - **Raw prompt** - inject [`prompts/system-prompt.txt`](prompts/system-prompt.txt)
-  (~600 tokens) as a system message. If output drifts, use
+  (3.7kb, roughly 1k tokens) as a system message. If output drifts, use
   [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt), which adds
   canonical patterns and anti-patterns. See [`prompts/README.md`](prompts/README.md).
 
@@ -94,8 +94,22 @@ npx canon-lint src/
 
 Zero-dependency linter that enforces the rules: closed-vocabulary values (R1),
 no inline styles (R2), no `<style>` blocks (R3), never `data-layout` +
-`data-component` on one element (R4). Exit 1 on violations - CI-ready. This
-closes the loop: *the LLM generates, Canon validates.*
+`data-component` on one element (R4), and every component role on its canonical
+element (R5, so `<div data-component="button">` fails). Exit 1 on violations -
+CI-ready. This closes the loop: *the LLM generates, Canon validates.*
+
+## Editor autocomplete
+
+Canon ships a VS Code [custom data](https://code.visualstudio.com/api/extension-guides/custom-data-extension)
+file, generated from the same vocabulary the linter enforces. Point your
+workspace settings at it and every `data-*` attribute and value autocompletes,
+no extension required:
+
+```json
+{
+  "html.customData": ["./node_modules/canoncss/vscode/canon.html-data.json"]
+}
+```
 
 ## Proof
 
@@ -133,6 +147,7 @@ bin/        canon-lint + the vocabulary tables it validates against
 examples/   Four pages built with zero extra CSS
 test-llm/   LLM regression corpus
 scripts/    build.sh (cat + comment-strip)
+vscode/     generated html.customData for editor autocomplete
 ```
 
 Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.components → canon.utilities`.
@@ -143,7 +158,9 @@ Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.compone
 2. No inline styles, no extra CSS.
 3. An element gets `data-layout` **or** `data-component`, never both.
 4. `data-slot` only as a direct child of its parent layout/component.
-5. Theming: adapt Canon to the brand, never bend the markup. A theme file
+5. Every component role sits on its canonical element. A role is a promise
+   about behaviour, not just looks.
+6. Theming: adapt Canon to the brand, never bend the markup. A theme file
    overrides any token on `:root` (colors, fonts, type scale, radii, shadows)
    plus a small `@layer canon.theme` block for details tokens cannot express.
    This is how an LLM ports an existing site to Canon while keeping its exact

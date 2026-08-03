@@ -14,10 +14,10 @@ vocabulary below - in HTML or JSX (the `data-*` attributes are identical in both
 One of:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canonframework@main/dist/canon.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-or copy `dist/canon.css` from https://github.com/marcelodevelop/canonframework
+or copy `dist/canon.css` from https://github.com/marcelodevelop/canoncss
 into the project and link/import it (`import './canon.css'` in a Next.js root layout).
 
 ## Vocabulary
@@ -97,6 +97,12 @@ labels are `<p data-tone="subtle">`, never a heading element.
    details tokens cannot express. This is how you port an existing site to
    Canon while keeping its exact look.
 8. Canon ships zero JavaScript. Interactivity is the consumer's job.
+9. Component roles sit on their canonical element: `button` = `<button>` or
+   `<a>`, `badge`/`avatar`/`stat` = `<span>`, `topbar` = `<header>`,
+   `divider` = `<hr>`, `modal` = `<dialog>`, `card` = `<article>`/`<div>`/`<a>`.
+   Form controls and `table` use their own tag. A role is a promise about
+   behaviour: `<div data-component="button">` is not focusable, not
+   keyboard-operable and not announced as a button.
 
 ## Canonical patterns
 

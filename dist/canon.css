@@ -445,6 +445,10 @@ background-color: var(--color-surface-sunken);
 [data-component="card"]:not(:has(> [data-slot])) {
 padding: var(--space-lg);
 }
+a[data-component="card"] {
+color: inherit;
+text-decoration: none;
+}
 [data-component="card"][data-variant="featured"] {
 border-color: var(--color-accent);
 box-shadow: var(--shadow-md);

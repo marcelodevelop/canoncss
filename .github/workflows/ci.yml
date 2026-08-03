@@ -9,8 +9,8 @@ jobs:
   framework:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - name: Build canon.css + AGENTS.md
@@ -18,12 +18,12 @@ jobs:
       - name: Lint 20-page LLM regression corpus + fixture
         run: npm test
       - name: Fail if build output drifted from committed dist
-        run: git diff --exit-code dist/ prompts/AGENTS.md
+        run: git diff --exit-code dist/ prompts/AGENTS.md vscode/
 
   gitleaks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: gitleaks/gitleaks-action@v2
