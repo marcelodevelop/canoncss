@@ -7,12 +7,12 @@ human reads is injected into an LLM so it generates consistent Canon markup.
 
 | File | Size | Use when |
 |------|------|----------|
-| `system-prompt.txt` | ~600 tokens | Default. The full vocabulary + rules. |
-| `system-prompt-full.txt` | ~1600 tokens | The model keeps inventing markup, or you want canonical patterns and anti-patterns included. |
+| `system-prompt.txt` | 3.7kb, ~1k tokens | Default. The full vocabulary + rules. |
+| `system-prompt-full.txt` | 8.6kb, ~2.4k tokens | The model keeps inventing markup, or you want canonical patterns and anti-patterns included. |
 | `AGENTS.md` | generated | Drop into a repo root for Cursor / Copilot / Codex / Claude Code. Auto-built from `system-prompt.txt` by `npm run build` - edit the source, not this file. |
 
 Claude Code users can skip all of this and install the plugin instead:
-`/plugin marketplace add marcelodevelop/canonframework` →
+`/plugin marketplace add marcelodevelop/canoncss` →
 `/plugin install canon-css@canon`.
 
 ## How to use

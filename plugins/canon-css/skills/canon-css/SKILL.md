@@ -14,10 +14,10 @@ vocabulary below - in HTML or JSX (the `data-*` attributes are identical in both
 One of:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canonframework@main/dist/canon.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-or copy `dist/canon.css` from https://github.com/marcelodevelop/canonframework
+or copy `dist/canon.css` from https://github.com/marcelodevelop/canoncss
 into the project and link/import it (`import './canon.css'` in a Next.js root layout).
 
 ## Vocabulary
