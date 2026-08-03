@@ -1,5 +1,8 @@
 # Canon CSS
 
+[![npm](https://img.shields.io/npm/v/canoncss)](https://www.npmjs.com/package/canoncss)
+[![CI](https://github.com/marcelodevelop/canonframework/actions/workflows/ci.yml/badge.svg)](https://github.com/marcelodevelop/canonframework/actions)
+
 **[canoncss.com](https://www.canoncss.com)** - docs, live playground, comparison.
 
 **A CSS framework designed for LLMs. One right way to do each thing.**
@@ -19,6 +22,12 @@ distribution, not reasoning, and the output is inconsistent. Canon's answer is
 Pure CSS. Zero JavaScript. Zero build step. One file.
 
 ## Install
+
+```bash
+npm install canoncss
+```
+
+or zero-install via CDN:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canonframework@main/dist/canon.css">
