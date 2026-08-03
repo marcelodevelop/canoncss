@@ -69,7 +69,7 @@ export default function Home() {
             root layout:
           </p>
           <pre>
-            <code>{`import '@canon/css'`}</code>
+            <code>{`import 'canoncss'`}</code>
           </pre>
 
           <h2>Write intent, not implementation</h2>

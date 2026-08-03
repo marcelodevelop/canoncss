@@ -1,5 +1,5 @@
 {
-  "name": "@canon/css",
+  "name": "canoncss",
   "version": "0.1.0",
   "description": "A CSS framework designed for LLMs. One right way to do each thing.",
   "main": "dist/canon.css",
