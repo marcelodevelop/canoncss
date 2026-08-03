@@ -18,7 +18,7 @@ jobs:
       - name: Lint 20-page LLM regression corpus + fixture
         run: npm test
       - name: Fail if build output drifted from committed dist
-        run: git diff --exit-code dist/ prompts/AGENTS.md
+        run: git diff --exit-code dist/ prompts/AGENTS.md vscode/
 
   site:
     runs-on: ubuntu-latest
