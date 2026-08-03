@@ -108,7 +108,7 @@ visual identity. `npm test` re-validates the whole corpus on every change.
 
 ## Explore
 
-- [Docs](docs/index.html) - tokens, layouts, components
+- [Docs](https://www.canoncss.com) - tokens, layouts, components, live playground
 - [Examples](examples/) - [landing](examples/landing/), [dashboard](examples/dashboard/),
   [app-shell](examples/app-shell/) (dark mode), [blog](examples/blog/)
 
@@ -126,12 +126,12 @@ markup is canonical, the aesthetic is yours.
 ## Repo layout
 
 ```
-site/       Next.js docs site (Vercel-ready, root dir: site/) - Canon's first consumer
 src/        Modular source (reset, tokens, layouts, components, utilities)
 dist/       canon.css - single-file build
 prompts/    System prompts for LLMs
+bin/        canon-lint + the vocabulary tables it validates against
 examples/   Four pages built with zero extra CSS
-docs/       Static documentation
+test-llm/   LLM regression corpus
 scripts/    build.sh (cat + comment-strip)
 ```
 

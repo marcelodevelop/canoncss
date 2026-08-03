@@ -9,7 +9,10 @@ npm run build   # concatenates src/ into dist/canon.css + regenerates prompts/AG
 npm test        # lints the 20-page LLM regression corpus + the violations fixture
 ```
 
-The docs site lives in `site/` (Next.js): `cd site && npm install && npm run dev`.
+The docs site is a separate repo,
+[canonframework-landing](https://github.com/marcelodevelop/canonframework-landing),
+deployed at [canoncss.com](https://www.canoncss.com). It vendors a snapshot of
+`dist/canon.css` and `prompts/`, so propagate framework changes there by hand.
 
 ## The golden rule
 
