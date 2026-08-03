@@ -1,5 +1,7 @@
 # Canon CSS
 
+**[canoncss.com](https://www.canoncss.com)** - docs, live playground, comparison.
+
 **A CSS framework designed for LLMs. One right way to do each thing.**
 
 Canon's hypothesis: the problem with current frameworks isn't technical, it's
@@ -103,14 +105,14 @@ visual identity. `npm test` re-validates the whole corpus on every change.
 
 ## Live in production
 
-[marceloacevedo.com/blog](https://marceloacevedo.com/blog) - the author's
-portfolio blog runs on Canon while the rest of the site stays on hand-crafted
-Tailwind. Both coexist in one Next.js app via sibling root layouts: each tree
-loads only its own stylesheet. That split is the positioning in practice -
-utilities for the human-crafted brand pages, Canon for the content a model can
-write. See the setup in
-[portfolio2026](https://github.com/marcelodevelop/portfolio2026): `canon.css`
-is committed next to the blog layout, no package install needed.
+[marceloacevedo.com](https://marceloacevedo.com) - the author's entire
+trilingual portfolio was refactored from Tailwind to Canon **by LLM agents**,
+keeping its exact brand (fonts, colors, pill buttons, oversized type) via a
+~60-line theme file of token overrides. Net result: -770 lines, zero Tailwind,
+same look. See [portfolio2026](https://github.com/marcelodevelop/portfolio2026):
+`src/app/theme.css` is the whole brand adaptation, `canon.css` is committed
+next to it, no package install needed. That is the thesis in practice - the
+markup is canonical, the aesthetic is yours.
 
 ## Repo layout
 

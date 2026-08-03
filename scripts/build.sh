@@ -10,7 +10,7 @@ mkdir -p dist
 # ponytail: strip comments + indentation only. No token/selector rewriting -
 # that is where CSS minifiers break data: URIs. 17kb is small enough.
 {
-  echo "/* Canon CSS v0.1.0 | MIT License | https://canon.css */"
+  echo "/* Canon CSS v0.1.0 | MIT License | https://canoncss.com */"
   echo "@layer canon.reset, canon.tokens, canon.layouts, canon.components, canon.utilities;"
   cat $SOURCES \
     | sed -e ':a' -e 'N' -e '$!ba' -e 's|/\*[^*]*\*\+\([^/*][^*]*\*\+\)*/||g' \

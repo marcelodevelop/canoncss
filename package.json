@@ -13,8 +13,9 @@
   },
   "keywords": ["css", "framework", "llm", "ai", "design-system", "data-attributes"],
   "license": "MIT",
+  "homepage": "https://www.canoncss.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/canon-css/canon"
+    "url": "https://github.com/marcelodevelop/canonframework"
   }
 }
