@@ -110,6 +110,12 @@
     padding-inline-start: 0;
   }
 
+  /* Listas dentro de nav son navegacion, no prosa: sin markers */
+  nav ul, nav ol {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
   li + li {
     margin-top: var(--space-xs);
   }
