@@ -87,6 +87,10 @@ ul:has(input), ol:has(input) {
 list-style: none;
 padding-inline-start: 0;
 }
+nav ul, nav ol {
+list-style: none;
+padding-inline-start: 0;
+}
 li + li {
 margin-top: var(--space-xs);
 }
