@@ -29,6 +29,10 @@
     color: inherit;
   }
 
+  input[type="checkbox"], input[type="radio"], progress {
+    accent-color: var(--color-brand);
+  }
+
   p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
   }
@@ -73,6 +77,12 @@
      primitivas de texto se restauran acá con la voz editorial de Canon. */
   ul, ol {
     padding-inline-start: 1.5em;
+  }
+
+  /* Listas con controles (filtros, settings) son UI, no prosa: sin bullets */
+  ul:has(input), ol:has(input) {
+    list-style: none;
+    padding-inline-start: 0;
   }
 
   li + li {

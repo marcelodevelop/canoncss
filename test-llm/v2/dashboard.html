@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — Analytics Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <div data-slot="brand">
+      <strong>Pulse</strong>
+    </div>
+    <nav data-slot="nav" aria-label="Main navigation">
+      <a href="#" aria-current="page">Overview</a>
+      <a href="#">Reports</a>
+      <a href="#">Alerts</a>
+    </nav>
+    <div data-slot="actions">
+      <button data-component="button" data-variant="ghost" data-size="sm">Feedback</button>
+      <span data-component="avatar" data-size="sm" aria-label="Marcelo Acees">MA</span>
+    </div>
+  </header>
+
+  <div data-layout="sidebar" data-gap="lg">
+
+    <aside data-slot="sidebar" data-padding="lg">
+      <div data-layout="stack" data-gap="lg">
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">Monitor</p>
+          <nav aria-label="Monitor">
+            <div data-layout="stack" data-gap="xs">
+              <a href="#" aria-current="page">Overview</a>
+              <a href="#">Traffic</a>
+              <a href="#">Performance</a>
+              <a href="#">Errors</a>
+            </div>
+          </nav>
+        </div>
+
+        <div data-component="divider" role="separator"></div>
+
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">Manage</p>
+          <nav aria-label="Manage">
+            <div data-layout="stack" data-gap="xs">
+              <a href="#">Services</a>
+              <a href="#">Alert rules</a>
+              <a href="#">Integrations</a>
+            </div>
+          </nav>
+        </div>
+
+        <div data-component="divider" role="separator"></div>
+
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">Account</p>
+          <nav aria-label="Account">
+            <div data-layout="stack" data-gap="xs">
+              <a href="#">Team</a>
+              <a href="#">Billing</a>
+              <a href="#">Settings</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </aside>
+
+    <main data-slot="main" data-padding="lg">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="row" data-justify="between" data-align="center" data-wrap data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <h1>Overview</h1>
+            <p data-tone="subtle">Production · Last 24 hours</p>
+          </div>
+          <div data-layout="row" data-gap="sm" data-align="center">
+            <select data-component="select" data-size="sm" aria-label="Time range">
+              <option>Last 24 hours</option>
+              <option>Last 7 days</option>
+              <option>Last 30 days</option>
+            </select>
+            <button data-component="button" data-variant="secondary" data-size="sm">Export</button>
+            <button data-component="button" data-variant="primary" data-size="sm">New alert rule</button>
+          </div>
+        </div>
+
+        <section aria-label="Key metrics">
+          <div data-layout="grid" data-cols="4" data-gap="md">
+
+            <article data-component="card">
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <div data-layout="row" data-justify="between" data-align="center">
+                    <p data-tone="subtle">Requests</p>
+                    <span data-component="badge" data-variant="success">+12.4%</span>
+                  </div>
+                  <h2>4.8M</h2>
+                  <p data-tone="subtle">vs 4.3M previous period</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <div data-layout="row" data-justify="between" data-align="center">
+                    <p data-tone="subtle">Latency (p95)</p>
+                    <span data-component="badge" data-variant="success">-8.1%</span>
+                  </div>
+                  <h2>184 ms</h2>
+                  <p data-tone="subtle">vs 200 ms previous period</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <div data-layout="row" data-justify="between" data-align="center">
+                    <p data-tone="subtle">Error rate</p>
+                    <span data-component="badge" data-variant="error">+0.3%</span>
+                  </div>
+                  <h2>0.42%</h2>
+                  <p data-tone="subtle">vs 0.12% previous period</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <div data-layout="row" data-justify="between" data-align="center">
+                    <p data-tone="subtle">Uptime</p>
+                    <span data-component="badge" data-variant="neutral">±0.0%</span>
+                  </div>
+                  <h2>99.98%</h2>
+                  <p data-tone="subtle">SLO target 99.95%</p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section aria-label="Recent incidents">
+          <article data-component="card">
+            <div data-slot="header">
+              <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                <h2>Recent incidents</h2>
+                <button data-component="button" data-variant="link" data-size="sm">View all</button>
+              </div>
+            </div>
+            <div data-slot="body">
+              <table data-component="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Incident</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Severity</th>
+                    <th scope="col">Started</th>
+                    <th scope="col">Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>API gateway 5xx spike</td>
+                    <td>gateway</td>
+                    <td><span data-component="badge" data-variant="error">Critical</span></td>
+                    <td>Aug 2, 06:14</td>
+                    <td>32m</td>
+                  </tr>
+                  <tr>
+                    <td>Elevated checkout latency</td>
+                    <td>payments</td>
+                    <td><span data-component="badge" data-variant="warning">Major</span></td>
+                    <td>Aug 1, 22:41</td>
+                    <td>1h 07m</td>
+                  </tr>
+                  <tr>
+                    <td>Search index replication lag</td>
+                    <td>search</td>
+                    <td><span data-component="badge" data-variant="warning">Major</span></td>
+                    <td>Aug 1, 15:02</td>
+                    <td>48m</td>
+                  </tr>
+                  <tr>
+                    <td>Webhook delivery retries</td>
+                    <td>events</td>
+                    <td><span data-component="badge" data-variant="info">Minor</span></td>
+                    <td>Jul 31, 11:26</td>
+                    <td>19m</td>
+                  </tr>
+                  <tr>
+                    <td>CDN cache miss surge</td>
+                    <td>edge</td>
+                    <td><span data-component="badge" data-variant="info">Minor</span></td>
+                    <td>Jul 30, 09:53</td>
+                    <td>14m</td>
+                  </tr>
+                  <tr>
+                    <td>Database connection pool exhaustion</td>
+                    <td>core-db</td>
+                    <td><span data-component="badge" data-variant="error">Critical</span></td>
+                    <td>Jul 29, 18:37</td>
+                    <td>26m</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section aria-label="Endpoints and alert rules">
+          <div data-layout="split" data-gap="md">
+
+            <article data-component="card">
+              <div data-slot="header">
+                <h2>Top endpoints</h2>
+              </div>
+              <div data-slot="body">
+                <ol>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code data-truncate>GET /api/v1/events</code>
+                      <span data-tone="subtle">1.9M</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code data-truncate>POST /api/v1/ingest</code>
+                      <span data-tone="subtle">1.2M</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code data-truncate>GET /api/v1/metrics</code>
+                      <span data-tone="subtle">840K</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code data-truncate>GET /api/v1/users/:id</code>
+                      <span data-tone="subtle">512K</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code data-truncate>POST /api/v1/auth/token</code>
+                      <span data-tone="subtle">301K</span>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="link" data-size="sm">All endpoints</button>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="header">
+                <h2>Alert rules</h2>
+              </div>
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="md">
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>Error rate &gt; 1% for 5m</p>
+                      <p data-tone="subtle">gateway · pages on-call</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="success">Active</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                  <div data-component="divider" role="separator"></div>
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>p95 latency &gt; 500 ms for 10m</p>
+                      <p data-tone="subtle">payments · notifies #ops</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="success">Active</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                  <div data-component="divider" role="separator"></div>
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>Uptime &lt; 99.9% daily</p>
+                      <p data-tone="subtle">edge · emails team</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="warning">Paused</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                  <div data-component="divider" role="separator"></div>
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>Queue depth &gt; 10K for 15m</p>
+                      <p data-tone="subtle">events · pages on-call</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="neutral">Draft</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="secondary" data-size="sm">New rule</button>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

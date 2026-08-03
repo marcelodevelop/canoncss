@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relay — API Mocking for Modern Teams</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header data-component="topbar">
+    <div data-slot="brand">
+      <strong>Relay</strong>
+    </div>
+    <nav data-slot="nav" aria-label="Main navigation">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div data-slot="actions">
+      <a href="#signin" data-component="button" data-variant="ghost" data-size="sm">Sign in</a>
+      <a href="#get-started" data-component="button" data-variant="primary" data-size="sm">Get started</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section data-layout="hero">
+    <div data-layout="centered" data-width="content">
+      <div data-layout="stack" data-gap="lg" data-align="center">
+        <span data-component="badge" data-variant="brand">Now in public beta</span>
+        <h1>Mock any API in seconds, not sprints</h1>
+        <p data-tone="subtle">Relay gives your team instant, realistic API mocks so frontend and backend can ship in parallel. Define once, mock everywhere — no servers to babysit.</p>
+        <div data-layout="row" data-gap="md" data-justify="center" data-wrap>
+          <a href="#get-started" data-component="button" data-variant="primary" data-size="lg">Start mocking free</a>
+          <a href="#docs" data-component="button" data-variant="secondary" data-size="lg">Read the docs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <!-- Features -->
+  <section id="features" data-layout="centered" data-width="wide" data-padding="2xl">
+    <div data-layout="stack" data-gap="xl">
+      <div data-layout="stack" data-gap="sm" data-align="center">
+        <p data-tone="subtle">Features</p>
+        <h2>Everything you need to fake it till you ship it</h2>
+      </div>
+      <div data-layout="grid" data-cols="3" data-gap="lg">
+        <div data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="info">Instant</span>
+          </div>
+          <div data-slot="body">
+            <h3>Zero-config mock servers</h3>
+            <p>Paste an OpenAPI spec or a sample response and Relay spins up a fully functional mock endpoint instantly. No YAML rituals, no local daemons.</p>
+          </div>
+        </div>
+        <div data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="success">Realistic</span>
+          </div>
+          <div data-slot="body">
+            <h3>Stateful, dynamic responses</h3>
+            <p>Relay mocks remember. POST a record, GET it back. Simulate latency, pagination, rate limits, and error scenarios that behave like production.</p>
+          </div>
+        </div>
+        <div data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="brand">Together</span>
+          </div>
+          <div data-slot="body">
+            <h3>Shared team workspaces</h3>
+            <p>Every mock lives in a versioned workspace your whole team can see. Branch mocks alongside your code and review changes before they land.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <!-- Pricing -->
+  <section id="pricing" data-layout="centered" data-width="wide" data-padding="2xl">
+    <div data-layout="stack" data-gap="xl">
+      <div data-layout="stack" data-gap="sm" data-align="center">
+        <p data-tone="subtle">Pricing</p>
+        <h2>Plans that scale with your team</h2>
+        <p data-tone="subtle">Start free. Upgrade when your mocks outgrow you.</p>
+      </div>
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <div data-component="card">
+          <div data-slot="header">
+            <div data-layout="stack" data-gap="xs">
+              <h3>Free</h3>
+              <p><strong>$0</strong> / month</p>
+              <p data-tone="subtle">For solo developers and side projects.</p>
+            </div>
+          </div>
+          <div data-slot="body">
+            <ul>
+              <li>3 mock projects</li>
+              <li>10,000 requests per month</li>
+              <li>OpenAPI import</li>
+              <li>Community support</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a href="#signup-free" data-component="button" data-variant="secondary" data-full>Start for free</a>
+          </div>
+        </div>
+
+        <div data-component="card" data-variant="featured">
+          <div data-slot="header">
+            <div data-layout="stack" data-gap="xs">
+              <div data-layout="row" data-gap="sm" data-align="center" data-justify="between">
+                <h3>Team</h3>
+                <span data-component="badge" data-variant="brand">Most popular</span>
+              </div>
+              <p><strong>$29</strong> / user / month</p>
+              <p data-tone="subtle">For teams shipping frontend and backend in parallel.</p>
+            </div>
+          </div>
+          <div data-slot="body">
+            <ul>
+              <li>Unlimited mock projects</li>
+              <li>1 million requests per month</li>
+              <li>Stateful mocks and scenario testing</li>
+              <li>Shared workspaces with versioning</li>
+              <li>CI integration and mock branching</li>
+              <li>Priority email support</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a href="#signup-team" data-component="button" data-variant="primary" data-full>Start 14-day trial</a>
+          </div>
+        </div>
+
+        <div data-component="card">
+          <div data-slot="header">
+            <div data-layout="stack" data-gap="xs">
+              <h3>Enterprise</h3>
+              <p><strong>Custom</strong> pricing</p>
+              <p data-tone="subtle">For organizations with compliance and scale needs.</p>
+            </div>
+          </div>
+          <div data-slot="body">
+            <ul>
+              <li>Everything in Team</li>
+              <li>Unlimited requests</li>
+              <li>SSO and SCIM provisioning</li>
+              <li>Self-hosted or private cloud deployment</li>
+              <li>Audit logs and SLA guarantees</li>
+              <li>Dedicated success engineer</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a href="#contact-sales" data-component="button" data-variant="secondary" data-full>Contact sales</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <!-- FAQ -->
+  <section id="faq" data-layout="centered" data-width="prose" data-padding="2xl">
+    <div data-layout="stack" data-gap="xl">
+      <div data-layout="stack" data-gap="sm" data-align="center">
+        <p data-tone="subtle">FAQ</p>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div data-layout="stack" data-gap="lg">
+        <div data-layout="stack" data-gap="sm">
+          <h3>How is Relay different from running mocks locally?</h3>
+          <p>Local mocks drift and die on individual laptops. Relay mocks live in the cloud, stay in sync with your specs, and are shared by your whole team — the same mock your frontend hits in dev is the one CI hits in your pipeline.</p>
+        </div>
+        <hr data-component="divider">
+        <div data-layout="stack" data-gap="sm">
+          <h3>Can Relay import my existing OpenAPI or Postman collections?</h3>
+          <p>Yes. Upload an OpenAPI 3.x spec or a Postman collection and Relay generates working endpoints with realistic example data immediately. You can refine responses per route afterwards.</p>
+        </div>
+        <hr data-component="divider">
+        <div data-layout="stack" data-gap="sm">
+          <h3>Does Relay support error and latency simulation?</h3>
+          <p>Every endpoint can be configured with response delays, failure rates, and scripted error scenarios — so you can test how your app behaves when the real API has a bad day.</p>
+        </div>
+        <hr data-component="divider">
+        <div data-layout="stack" data-gap="sm">
+          <h3>What happens when I hit my request limit?</h3>
+          <p>We never hard-cut your mocks mid-sprint. You will get a warning at 80 percent usage, and overage requests are throttled — not dropped — until the next billing cycle or an upgrade.</p>
+        </div>
+        <hr data-component="divider">
+        <div data-layout="stack" data-gap="sm">
+          <h3>Can I self-host Relay?</h3>
+          <p>Self-hosted and private cloud deployments are available on the Enterprise plan, with the same feature set as our managed cloud plus audit logging and SSO.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section data-layout="centered" data-width="content" data-padding="2xl" data-tone="brand">
+    <div data-layout="stack" data-gap="lg" data-align="center">
+      <h2>Stop waiting on the backend</h2>
+      <p>Join thousands of teams shipping faster with Relay. Your first mock is live in under a minute.</p>
+      <div data-layout="row" data-gap="md" data-justify="center" data-wrap>
+        <a href="#get-started" data-component="button" data-variant="primary" data-size="lg">Get started free</a>
+        <a href="#contact-sales" data-component="button" data-variant="ghost" data-size="lg">Talk to sales</a>
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider" data-variant="strong">
+
+  <!-- Footer -->
+  <footer data-layout="centered" data-width="wide" data-padding="xl">
+    <div data-layout="stack" data-gap="lg">
+      <div data-layout="grid" data-cols="4" data-gap="lg">
+        <div data-layout="stack" data-gap="sm">
+          <strong>Relay</strong>
+          <p data-tone="subtle">API mocking for modern teams.</p>
+        </div>
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Product</p>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#changelog">Changelog</a>
+          <a href="#status">Status</a>
+        </div>
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Resources</p>
+          <a href="#docs">Documentation</a>
+          <a href="#guides">Guides</a>
+          <a href="#api">API reference</a>
+          <a href="#blog">Blog</a>
+        </div>
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Company</p>
+          <a href="#about">About</a>
+          <a href="#careers">Careers</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+        </div>
+      </div>
+      <hr data-component="divider">
+      <div data-layout="row" data-justify="between" data-wrap data-gap="md">
+        <p data-tone="subtle">© 2026 Relay, Inc. All rights reserved.</p>
+        <div data-layout="row" data-gap="md">
+          <a href="#github">GitHub</a>
+          <a href="#twitter">Twitter</a>
+          <a href="#discord">Discord</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

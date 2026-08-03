@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpine Supply — Shop Outdoor Gear</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <div data-slot="brand">
+      <strong>Alpine Supply</strong>
+    </div>
+    <nav data-slot="nav" aria-label="Main navigation">
+      <a href="#">Shop</a>
+      <a href="#">Collections</a>
+      <a href="#">About</a>
+    </nav>
+    <div data-slot="actions">
+      <label class="sr-only" for="site-search">Search products</label>
+      <input data-component="input" data-size="sm" type="search" id="site-search" placeholder="Search gear…">
+      <button data-component="button" data-variant="secondary" data-size="sm">
+        Cart (3)
+      </button>
+    </div>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl" data-padding="lg">
+
+    <!-- Filters -->
+    <aside data-slot="sidebar">
+      <div data-layout="stack" data-gap="lg">
+
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Category</p>
+          <ul>
+            <li>
+              <label>
+                <input type="checkbox" checked> Tents &amp; Shelters
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox"> Backpacks
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox"> Sleeping Bags
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox"> Footwear
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox"> Cookware
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <hr data-component="divider">
+
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Price range</p>
+          <div data-layout="row" data-gap="sm" data-align="center">
+            <label class="sr-only" for="price-min">Minimum price</label>
+            <input data-component="input" data-size="sm" type="number" id="price-min" placeholder="Min" min="0">
+            <span data-tone="subtle">–</span>
+            <label class="sr-only" for="price-max">Maximum price</label>
+            <input data-component="input" data-size="sm" type="number" id="price-max" placeholder="Max" min="0">
+          </div>
+        </div>
+
+        <hr data-component="divider">
+
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Brand</p>
+          <label class="sr-only" for="brand-filter">Filter by brand</label>
+          <select data-component="select" data-size="sm" id="brand-filter">
+            <option value="">All brands</option>
+            <option value="alpine-supply">Alpine Supply</option>
+            <option value="ridgeline">Ridgeline</option>
+            <option value="northtrail">NorthTrail</option>
+            <option value="basecamp-co">Basecamp Co.</option>
+          </select>
+        </div>
+
+        <button data-component="button" data-variant="primary" data-full>Apply filters</button>
+
+      </div>
+    </aside>
+
+    <!-- Catalog -->
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="lg">
+
+        <div data-layout="row" data-justify="between" data-align="center" data-wrap data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <h1>Outdoor Gear</h1>
+            <p data-tone="subtle">Showing 24 of 187 results</p>
+          </div>
+          <div data-layout="row" data-gap="sm" data-align="center">
+            <label for="sort-order" data-tone="subtle">Sort by</label>
+            <select data-component="select" data-size="sm" id="sort-order">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="newest">Newest</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <div data-layout="grid" data-cols="auto" data-gap="lg">
+
+          <article data-component="card">
+            <div data-slot="header">
+              <img src="…" alt="Summit Ridge 2-person backpacking tent pitched on a rocky ledge" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                  <h3>Summit Ridge 2P Tent</h3>
+                  <span data-component="badge" data-variant="error">Sale</span>
+                </div>
+                <p data-tone="subtle">Ultralight two-person shelter with full-coverage rainfly and dual vestibules.</p>
+                <p><strong>$249.00</strong> <s data-tone="subtle">$329.00</s></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+          <article data-component="card" data-variant="featured">
+            <div data-slot="header">
+              <img src="…" alt="Ridgeline 65-liter expedition backpack in forest green" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                  <h3>Ridgeline 65L Pack</h3>
+                  <span data-component="badge" data-variant="brand">Staff Pick</span>
+                </div>
+                <p data-tone="subtle">Adjustable torso suspension and a stormproof roll-top for week-long hauls.</p>
+                <p><strong>$189.00</strong></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">
+              <img src="…" alt="NorthTrail down sleeping bag rated to minus ten degrees, shown rolled out" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                  <h3>NorthTrail −10° Down Bag</h3>
+                  <span data-component="badge" data-variant="info">New</span>
+                </div>
+                <p data-tone="subtle">800-fill hydrophobic down with a draft collar for deep-winter comfort.</p>
+                <p><strong>$299.00</strong></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">
+              <img src="…" alt="Basecamp Co. titanium cook set with pot, pan, and folding spork" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                  <h3>Basecamp Titanium Cook Set</h3>
+                  <span data-component="badge" data-variant="warning">Low stock</span>
+                </div>
+                <p data-tone="subtle">Nesting 3-piece kit that weighs less than your water bottle.</p>
+                <p><strong>$74.00</strong></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">
+              <img src="…" alt="Alpine Supply waterproof hiking boots with aggressive lug soles" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                  <h3>Trailhead Waterproof Boots</h3>
+                  <span data-component="badge" data-variant="error">Sale</span>
+                </div>
+                <p data-tone="subtle">Full-grain leather uppers with a grippy outsole for mixed terrain.</p>
+                <p><strong>$129.00</strong> <s data-tone="subtle">$165.00</s></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">
+              <img src="…" alt="Compact camp stove burning under a small pot at a campsite" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                  <h3>Firefly Micro Stove</h3>
+                  <span data-component="badge" data-variant="info">New</span>
+                </div>
+                <p data-tone="subtle">Boils a liter in under three minutes and folds to pocket size.</p>
+                <p><strong>$49.00</strong></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">
+              <img src="…" alt="Insulated ultralight sleeping pad inflated on forest floor" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                  <h3>Cloudrest Insulated Pad</h3>
+                  <span data-component="badge" data-variant="warning">Low stock</span>
+                </div>
+                <p data-tone="subtle">R-value 4.5 warmth at just 14 oz, with a whisper-quiet surface.</p>
+                <p><strong>$139.00</strong></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">
+              <img src="…" alt="Pair of collapsible carbon trekking poles leaning against a boulder" data-full>
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="sm">
+                <h3>Switchback Carbon Poles</h3>
+                <p data-tone="subtle">Three-section carbon poles with cork grips and flick locks.</p>
+                <p><strong>$119.00</strong></p>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+            </div>
+          </article>
+
+        </div>
+
+        <hr data-component="divider">
+
+        <div data-layout="row" data-justify="between" data-align="center">
+          <button data-component="button" data-variant="secondary">Previous</button>
+          <p data-tone="subtle">Page 1 of 8</p>
+          <button data-component="button" data-variant="secondary">Next</button>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

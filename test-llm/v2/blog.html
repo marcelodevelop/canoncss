@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why We Moved Our Event Pipeline to Append-Only Logs — The Ledger</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <div data-slot="brand">
+      <a href="#"><strong>The Ledger</strong></a>
+    </div>
+    <nav data-slot="nav">
+      <a href="#">Articles</a>
+      <a href="#">Engineering</a>
+      <a href="#">Open Source</a>
+      <a href="#">About</a>
+    </nav>
+    <div data-slot="actions">
+      <button data-component="button" data-variant="ghost" data-size="sm">Sign in</button>
+      <button data-component="button" data-variant="primary" data-size="sm">Subscribe</button>
+    </div>
+  </header>
+
+  <main data-layout="centered" data-width="prose" data-padding="xl">
+    <article data-layout="stack" data-gap="lg">
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Engineering &middot; Infrastructure</p>
+        <h1>Why We Moved Our Event Pipeline to Append-Only Logs</h1>
+        <div data-layout="row" data-gap="md" data-align="center">
+          <span data-component="avatar" data-size="md">MA</span>
+          <div data-layout="stack" data-gap="xs">
+            <p><strong>Marcela Andrade</strong></p>
+            <p data-tone="subtle">Staff Engineer, Platform &middot; Published July 28, 2026 &middot; 9 min read</p>
+          </div>
+        </div>
+      </div>
+
+      <hr data-component="divider">
+
+      <div data-layout="stack" data-gap="md">
+        <p>
+          Eighteen months ago, our event pipeline was a tangle of queues, cron jobs, and a
+          shared Postgres table that everyone was afraid to touch. Events were mutated in
+          place, consumers stepped on each other, and every incident review ended with the
+          same sentence: "we can't reconstruct what actually happened." This is the story
+          of how we replaced all of it with a single append-only log, and what we learned
+          along the way.
+        </p>
+        <p>
+          The core insight is not new. Databases have been built on write-ahead logs for
+          decades, and systems like Kafka turned the log itself into the product. What was
+          new for us was committing to the discipline: no updates, no deletes, no
+          <code>status</code> column that flips from <code>pending</code> to
+          <code>processed</code>. Every fact that enters the system stays exactly as it
+          was written, forever.
+        </p>
+
+        <h2>The problem with mutable state</h2>
+        <p>
+          Our old pipeline stored events in a table and updated rows as they moved through
+          processing stages. It worked at small scale, but as we grew we kept hitting the
+          same categories of failure:
+        </p>
+        <ul>
+          <li><strong>Lost history.</strong> Once a row was updated, the previous state was gone. Debugging a mis-processed event meant guessing.</li>
+          <li><strong>Consumer coupling.</strong> Two services reading the same table had to coordinate locks, which meant they had to know about each other.</li>
+          <li><strong>Impossible replays.</strong> Backfilling a new downstream service required a bespoke migration script every single time.</li>
+          <li><strong>Write contention.</strong> Status updates and new inserts fought over the same hot pages, and vacuum churn degraded every query in the database.</li>
+          <li><strong>Audit gaps.</strong> Compliance asked "who changed this and when," and our honest answer was a shrug.</li>
+        </ul>
+
+        <blockquote>
+          <p>
+            An update is a fact that destroys another fact. An append is a fact that
+            respects the ones that came before it.
+          </p>
+        </blockquote>
+
+        <h2>How the migration actually worked</h2>
+        <p>
+          We did not rewrite the pipeline in one heroic quarter. We ran the old and new
+          systems side by side and moved consumers over one at a time. The sequence that
+          worked for us:
+        </p>
+        <ol>
+          <li>Introduce the log as a shadow write: every mutation to the old table also emits an immutable event.</li>
+          <li>Verify parity with a differ that replays the log and compares the result against the live table, row by row.</li>
+          <li>Migrate read-only consumers first, since they can fall back to the old table instantly if something looks wrong.</li>
+          <li>Migrate writers, flipping each one behind a feature flag with a one-command rollback.</li>
+          <li>Freeze the old table, keep it for ninety days as a safety net, then archive it to cold storage.</li>
+        </ol>
+
+        <h3>Bootstrapping a local replica</h3>
+        <p>
+          One underrated benefit: any engineer can now rebuild the entire derived state on
+          a laptop. The <code>ledgerctl</code> CLI streams the log from the first offset
+          and applies it to a local materialized view:
+        </p>
+        <pre><code>$ ledgerctl replay --from-offset 0 --topic orders.v2 --target sqlite://local.db
+replaying 4,218,067 events... done in 3m12s (21,970 events/s)</code></pre>
+        <p>
+          Because the log is the source of truth, the local replica is not a fixture or a
+          mock — it is bit-for-bit the same state production would compute. When someone
+          reports a bug at offset <code>1883412</code>, you replay to that offset and you
+          are standing exactly where production stood.
+        </p>
+
+        <h3>What it cost us</h3>
+        <p>
+          Append-only is not free. Storage grows monotonically, so we compact aged
+          segments into snapshots. Reads that used to be a single indexed lookup are now
+          served from materialized views that must be kept fresh. And every engineer had
+          to unlearn the reflex of reaching for <code>UPDATE</code>. Here is how the two
+          architectures compare on the dimensions we cared about most:
+        </p>
+
+        <table data-component="table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Mutable table (before)</th>
+              <th>Append-only log (after)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Debugging an incident</td>
+              <td>Reconstruct from partial logs and guesswork</td>
+              <td>Replay the exact event sequence to any offset</td>
+            </tr>
+            <tr>
+              <td>Adding a new consumer</td>
+              <td>Custom backfill script, days of work</td>
+              <td>Subscribe from offset zero, hours of work</td>
+            </tr>
+            <tr>
+              <td>Write throughput (p99)</td>
+              <td>~1,200 events/s before lock contention</td>
+              <td>~48,000 events/s, sequential appends</td>
+            </tr>
+            <tr>
+              <td>Storage cost per month</td>
+              <td>Low, but history is destroyed</td>
+              <td>Higher, mitigated by segment compaction</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          Would we do it again? Without hesitation. The pipeline has been in production
+          for a year, has survived two region failovers, and — for the first time in the
+          company's history — every incident review starts from a complete, ordered,
+          immutable record of what happened. The log does not lie, and it turns out that
+          is worth paying for.
+        </p>
+      </div>
+
+      <hr data-component="divider">
+
+      <div data-layout="row" data-gap="sm" data-wrap>
+        <span data-component="badge" data-variant="brand">Architecture</span>
+        <span data-component="badge" data-variant="info">Event Sourcing</span>
+        <span data-component="badge" data-variant="neutral">Postgres</span>
+        <span data-component="badge" data-variant="neutral">Kafka</span>
+        <span data-component="badge" data-variant="success">Case Study</span>
+      </div>
+
+    </article>
+  </main>
+
+  <section data-layout="centered" data-width="wide" data-padding="xl">
+    <div data-layout="stack" data-gap="lg">
+      <h2>Related posts</h2>
+      <div data-layout="grid" data-cols="3" data-gap="lg">
+
+        <article data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="info">Reliability</span>
+          </div>
+          <div data-slot="body">
+            <h3>Exactly-Once Is a Lie (and That's Fine)</h3>
+            <p data-tone="subtle">
+              Idempotency keys, deduplication windows, and how we stopped worrying about
+              delivery guarantees that no broker can truly make.
+            </p>
+          </div>
+          <div data-slot="footer">
+            <div data-layout="row" data-gap="sm" data-align="center">
+              <span data-component="avatar" data-size="sm">JK</span>
+              <p data-tone="subtle">Jonas Kim &middot; Jul 14, 2026</p>
+            </div>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="brand">Deep Dive</span>
+          </div>
+          <div data-slot="body">
+            <h3>Segment Compaction Without Downtime</h3>
+            <p data-tone="subtle">
+              A follow-up to this article: the copy-on-write compactor that keeps our
+              log storage flat while replays stay byte-identical.
+            </p>
+          </div>
+          <div data-slot="footer">
+            <div data-layout="row" data-gap="sm" data-align="center">
+              <span data-component="avatar" data-size="sm">MA</span>
+              <p data-tone="subtle">Marcela Andrade &middot; Jun 30, 2026</p>
+            </div>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="success">Tooling</span>
+          </div>
+          <div data-slot="body">
+            <h3>Building ledgerctl: a CLI for Time Travel</h3>
+            <p data-tone="subtle">
+              How a weekend hack for replaying events to a laptop became the most-used
+              internal tool on the platform team.
+            </p>
+          </div>
+          <div data-slot="footer">
+            <div data-layout="row" data-gap="sm" data-align="center">
+              <span data-component="avatar" data-size="sm">RS</span>
+              <p data-tone="subtle">Priya Raghavan-Singh &middot; Jun 09, 2026</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
