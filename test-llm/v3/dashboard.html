@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — Analytics Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <div data-slot="brand">Pulse</div>
+    <nav data-slot="nav">
+      <a href="#" aria-current="page">Overview</a>
+      <a href="#">Reports</a>
+      <a href="#">Alerts</a>
+    </nav>
+    <div data-slot="actions">
+      <button data-component="button" data-variant="ghost" data-size="sm">Feedback</button>
+      <span data-component="avatar" data-size="sm">MA</span>
+    </div>
+  </header>
+
+  <div data-layout="sidebar" data-gap="lg">
+
+    <aside data-slot="sidebar" data-padding="lg">
+      <div data-layout="stack" data-gap="lg">
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Monitor</p>
+          <div data-layout="stack" data-gap="xs">
+            <a href="#">Overview</a>
+            <a href="#">Traffic</a>
+            <a href="#">Errors</a>
+            <a href="#">Latency</a>
+          </div>
+        </div>
+
+        <hr data-component="divider">
+
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Manage</p>
+          <div data-layout="stack" data-gap="xs">
+            <a href="#">Services</a>
+            <a href="#">Alert rules</a>
+            <a href="#">Integrations</a>
+            <a href="#">API keys</a>
+          </div>
+        </div>
+
+        <hr data-component="divider">
+
+        <div data-layout="stack" data-gap="sm">
+          <p data-tone="subtle">Workspace</p>
+          <div data-layout="stack" data-gap="xs">
+            <a href="#">Team</a>
+            <a href="#">Billing</a>
+            <a href="#">Settings</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main data-slot="main" data-padding="lg">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="row" data-justify="between" data-align="center" data-wrap data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <h1>Overview</h1>
+            <p data-tone="subtle">Production · Last 24 hours</p>
+          </div>
+          <div data-layout="row" data-gap="sm">
+            <button data-component="button" data-variant="secondary" data-size="sm">Export</button>
+            <button data-component="button" data-variant="primary" data-size="sm">New alert rule</button>
+          </div>
+        </div>
+
+        <section aria-label="Key metrics">
+          <div data-layout="grid" data-cols="4" data-gap="md">
+
+            <article data-component="card">
+              <div data-slot="header">Requests</div>
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <span data-component="stat">4.8M</span>
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="success">+12.4%</span>
+                    <p data-tone="subtle">vs yesterday</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="header">Latency (p95)</div>
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <span data-component="stat">241ms</span>
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="warning">+18ms</span>
+                    <p data-tone="subtle">vs yesterday</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="header">Error rate</div>
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <span data-component="stat">0.42%</span>
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="error">+0.09%</span>
+                    <p data-tone="subtle">vs yesterday</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="header">Uptime</div>
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="sm">
+                  <span data-component="stat">99.98%</span>
+                  <div data-layout="row" data-gap="sm" data-align="center">
+                    <span data-component="badge" data-variant="success">On target</span>
+                    <p data-tone="subtle">30-day SLO</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section aria-label="Recent incidents">
+          <article data-component="card">
+            <div data-slot="header">Recent incidents</div>
+            <div data-slot="body">
+              <table data-component="table">
+                <thead>
+                  <tr>
+                    <th>Incident</th>
+                    <th>Service</th>
+                    <th>Severity</th>
+                    <th>Started</th>
+                    <th>Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Elevated 5xx on checkout API</td>
+                    <td>checkout-api</td>
+                    <td><span data-component="badge" data-variant="error">Critical</span></td>
+                    <td>Aug 2, 06:14</td>
+                    <td>38m</td>
+                  </tr>
+                  <tr>
+                    <td>Latency spike in EU region</td>
+                    <td>edge-gateway</td>
+                    <td><span data-component="badge" data-variant="warning">Major</span></td>
+                    <td>Aug 1, 22:47</td>
+                    <td>1h 12m</td>
+                  </tr>
+                  <tr>
+                    <td>Queue backlog on event ingestion</td>
+                    <td>ingest-worker</td>
+                    <td><span data-component="badge" data-variant="warning">Major</span></td>
+                    <td>Aug 1, 15:03</td>
+                    <td>52m</td>
+                  </tr>
+                  <tr>
+                    <td>Slow queries on analytics replica</td>
+                    <td>analytics-db</td>
+                    <td><span data-component="badge" data-variant="info">Minor</span></td>
+                    <td>Jul 31, 09:26</td>
+                    <td>2h 05m</td>
+                  </tr>
+                  <tr>
+                    <td>Webhook delivery retries elevated</td>
+                    <td>webhook-dispatch</td>
+                    <td><span data-component="badge" data-variant="info">Minor</span></td>
+                    <td>Jul 30, 18:39</td>
+                    <td>26m</td>
+                  </tr>
+                  <tr>
+                    <td>Cache eviction storm after deploy</td>
+                    <td>cache-layer</td>
+                    <td><span data-component="badge" data-variant="neutral">Resolved</span></td>
+                    <td>Jul 30, 11:02</td>
+                    <td>14m</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div data-slot="footer">
+              <div data-layout="row" data-justify="between" data-align="center">
+                <p data-tone="subtle">Showing 6 of 23 incidents</p>
+                <button data-component="button" data-variant="link" data-size="sm">View all incidents</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section aria-label="Endpoints and alert rules">
+          <div data-layout="grid" data-cols="2" data-gap="md">
+
+            <article data-component="card">
+              <div data-slot="header">Top endpoints</div>
+              <div data-slot="body">
+                <ol>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code>GET /api/v1/events</code>
+                      <span data-tone="subtle">1.9M req</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code>POST /api/v1/track</code>
+                      <span data-tone="subtle">1.2M req</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code>GET /api/v1/sessions</code>
+                      <span data-tone="subtle">684K req</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code>GET /api/v1/users/:id</code>
+                      <span data-tone="subtle">402K req</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div data-layout="row" data-justify="between" data-gap="md">
+                      <code>POST /api/v1/exports</code>
+                      <span data-tone="subtle">118K req</span>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="link" data-size="sm">View all endpoints</button>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="header">Alert rules</div>
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="md">
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>Error rate &gt; 1% for 5m</p>
+                      <p data-tone="subtle">checkout-api · pages on-call</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="success">Active</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                  <hr data-component="divider">
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>p95 latency &gt; 500ms for 10m</p>
+                      <p data-tone="subtle">edge-gateway · notifies #ops</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="success">Active</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                  <hr data-component="divider">
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>Queue depth &gt; 10K messages</p>
+                      <p data-tone="subtle">ingest-worker · notifies #ops</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="warning">Firing</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                  <hr data-component="divider">
+
+                  <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+                    <div data-layout="stack" data-gap="xs">
+                      <p>Disk usage &gt; 85%</p>
+                      <p data-tone="subtle">analytics-db · pages on-call</p>
+                    </div>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="badge" data-variant="neutral">Paused</span>
+                      <button data-component="button" data-variant="ghost" data-size="sm">Edit</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="secondary" data-size="sm">Manage rules</button>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

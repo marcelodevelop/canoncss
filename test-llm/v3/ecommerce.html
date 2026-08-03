@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alpine Supply — Shop Outdoor Gear</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a href="#" data-slot="brand">Alpine Supply</a>
+    <nav data-slot="nav">
+      <a href="#">Shop</a>
+      <a href="#">Collections</a>
+      <a href="#">About</a>
+    </nav>
+    <div data-slot="actions">
+      <input data-component="input" data-size="sm" type="search" placeholder="Search gear…" aria-label="Search products">
+      <button data-component="button" data-variant="secondary" data-size="sm">Cart (3)</button>
+    </div>
+  </header>
+
+  <div data-layout="centered" data-width="wide" data-padding="lg">
+    <div data-layout="sidebar" data-gap="xl">
+
+      <aside data-slot="sidebar">
+        <form data-layout="stack" data-gap="lg">
+          <div data-layout="stack" data-gap="sm">
+            <p data-tone="subtle">Category</p>
+            <ul>
+              <li><label><input type="checkbox" checked> Tents &amp; Shelters</label></li>
+              <li><label><input type="checkbox"> Backpacks</label></li>
+              <li><label><input type="checkbox"> Sleeping Bags</label></li>
+              <li><label><input type="checkbox"> Footwear</label></li>
+              <li><label><input type="checkbox"> Climbing</label></li>
+            </ul>
+          </div>
+
+          <hr data-component="divider">
+
+          <div data-layout="stack" data-gap="sm">
+            <p data-tone="subtle">Price range</p>
+            <div data-layout="row" data-gap="sm" data-align="center">
+              <input data-component="input" data-size="sm" type="number" min="0" placeholder="Min" aria-label="Minimum price">
+              <span data-tone="subtle">–</span>
+              <input data-component="input" data-size="sm" type="number" min="0" placeholder="Max" aria-label="Maximum price">
+            </div>
+          </div>
+
+          <hr data-component="divider">
+
+          <div data-layout="stack" data-gap="sm">
+            <p data-tone="subtle">Brand</p>
+            <select data-component="select" data-size="sm" aria-label="Filter by brand">
+              <option>All brands</option>
+              <option>Alpine Supply</option>
+              <option>Cascade Peak</option>
+              <option>Timberline</option>
+              <option>Northbound</option>
+            </select>
+          </div>
+
+          <button data-component="button" data-variant="primary" data-full type="submit">Apply filters</button>
+        </form>
+      </aside>
+
+      <main data-slot="main">
+        <div data-layout="stack" data-gap="lg">
+
+          <div data-layout="row" data-justify="between" data-align="center" data-wrap>
+            <p data-tone="subtle">Showing 6 of 42 products</p>
+            <select data-component="select" data-size="sm" aria-label="Sort products">
+              <option>Sort: Most popular</option>
+              <option>Price: Low to high</option>
+              <option>Price: High to low</option>
+              <option>Newest arrivals</option>
+            </select>
+          </div>
+
+          <div data-layout="grid" data-cols="auto" data-gap="lg">
+
+            <article data-component="card" data-variant="featured">
+              <img data-slot="media" src="…" alt="Ridgeline 2-person tent pitched on a rocky alpine ledge at sunrise">
+              <div data-slot="header">Ridgeline 2P Tent</div>
+              <div data-slot="body">
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <span data-component="stat">$349</span>
+                  <span data-component="badge" data-variant="brand">Bestseller</span>
+                </div>
+                <p>Freestanding two-person shelter with a full-coverage fly. Built for four-season ridgelines and shoulder-season storms.</p>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="primary" data-full>Add to cart</button>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <img data-slot="media" src="…" alt="Cascade 55L backpack in forest green with trekking poles strapped to the side">
+              <div data-slot="header">Cascade 55L Pack</div>
+              <div data-slot="body">
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <span data-component="stat">$189</span>
+                  <span data-component="badge" data-variant="error">Sale</span>
+                </div>
+                <p>Adjustable torso suspension and a floating lid. Carries a week of gear without carrying you down.</p>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="secondary" data-full>Add to cart</button>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <img data-slot="media" src="…" alt="Down sleeping bag in burnt orange laid out inside a tent">
+              <div data-slot="header">Solstice 15° Down Bag</div>
+              <div data-slot="body">
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <span data-component="stat">$279</span>
+                  <span data-component="badge" data-variant="info">New</span>
+                </div>
+                <p>800-fill hydrophobic down in a trim mummy cut. Warmth for cold nights at just 2 lb 1 oz.</p>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="secondary" data-full>Add to cart</button>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <img data-slot="media" src="…" alt="Pair of leather hiking boots on a mossy trail boulder">
+              <div data-slot="header">Timberline Mid Boot</div>
+              <div data-slot="body">
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <span data-component="stat">$165</span>
+                  <span data-component="badge" data-variant="warning">Low stock</span>
+                </div>
+                <p>Waterproof nubuck leather over a grippy lugged outsole. Broken-in comfort from the first mile.</p>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="secondary" data-full>Add to cart</button>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <img data-slot="media" src="…" alt="Coiled dry-treated climbing rope in blue and yellow on granite">
+              <div data-slot="header">Northbound 9.5mm Rope</div>
+              <div data-slot="body">
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <span data-component="stat">$219</span>
+                  <span data-component="badge" data-variant="neutral">60m</span>
+                </div>
+                <p>Dry-treated single rope with a middle mark. Smooth clipping on sport routes, tough enough for the alpine.</p>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="secondary" data-full>Add to cart</button>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <img data-slot="media" src="…" alt="Titanium camp stove boiling water in a small pot at a lakeside campsite">
+              <div data-slot="header">Ember Ti Stove</div>
+              <div data-slot="body">
+                <div data-layout="row" data-justify="between" data-align="center">
+                  <span data-component="stat">$89</span>
+                  <span data-component="badge" data-variant="error">Sale</span>
+                </div>
+                <p>Titanium canister stove at 1.9 oz. Boils a liter in under three minutes, folds smaller than a lighter.</p>
+              </div>
+              <div data-slot="footer">
+                <button data-component="button" data-variant="secondary" data-full>Add to cart</button>
+              </div>
+            </article>
+
+          </div>
+
+          <hr data-component="divider">
+
+          <div data-layout="row" data-justify="between" data-align="center">
+            <button data-component="button" data-variant="ghost">Previous</button>
+            <p data-tone="subtle">Page 1 of 7</p>
+            <button data-component="button" data-variant="secondary">Next</button>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+</body>
+</html>
