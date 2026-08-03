@@ -1,0 +1,39 @@
+name: Release to npm
+
+# Publishes canoncss to npm when a GitHub Release is published.
+# Auth is npm Trusted Publishing (OIDC): no token stored anywhere.
+# One-time setup on npmjs.com: package canoncss > Settings >
+# Trusted Publisher > GitHub Actions > repo marcelodevelop/canonframework,
+# workflow release.yml.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - name: Build and verify
+        run: |
+          npm run build
+          npm test
+          git diff --exit-code dist/ prompts/AGENTS.md
+      - name: Version must match the release tag
+        run: |
+          PKG=$(node -p "require('./package.json').version")
+          TAG="${GITHUB_REF_NAME#v}"
+          if [ "$PKG" != "$TAG" ]; then
+            echo "package.json is $PKG but tag is $TAG"; exit 1
+          fi
+      - name: Publish
+        run: npm publish --access public --provenance
