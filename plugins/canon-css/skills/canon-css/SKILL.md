@@ -29,6 +29,7 @@ TOKENS (CSS custom properties - never hardcode a value):
     --color-{brand|accent|surface|surface-raised|surface-sunken|content|
       content-subtle|content-inverse|border|border-strong|success|warning|
       error|info}  (+ -subtle variants on brand/accent/status colors)
+    --width-{prose|content|wide}
     --radius-{sm|md|lg|full}  --shadow-{sm|md|lg}  --weight-{normal|medium|bold}
     --font-{sans|display|mono}
 

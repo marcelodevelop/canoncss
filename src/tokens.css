@@ -52,6 +52,11 @@
     --color-error-subtle:    color-mix(in srgb, #b91c1c 8%, #fdfcfb);
     --color-info-subtle:     color-mix(in srgb, #1d4ed8 8%, #fdfcfb);
 
+    /* ── WIDTHS (3 niveles, para data-layout="centered") ── */
+    --width-prose:   65ch;
+    --width-content: 768px;
+    --width-wide:    1200px;
+
     /* ── RADIUS (4 niveles) ── */
     --radius-sm:   0.25rem;
     --radius-md:   0.5rem;

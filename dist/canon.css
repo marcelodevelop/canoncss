@@ -167,6 +167,9 @@ Palatino, Georgia, serif;
 --color-warning-subtle:  color-mix(in srgb, #a16207 10%, #fdfcfb);
 --color-error-subtle:    color-mix(in srgb, #b91c1c 8%, #fdfcfb);
 --color-info-subtle:     color-mix(in srgb, #1d4ed8 8%, #fdfcfb);
+--width-prose:   65ch;
+--width-content: 768px;
+--width-wide:    1200px;
 --radius-sm:   0.25rem;
 --radius-md:   0.5rem;
 --radius-lg:   0.75rem;
@@ -251,10 +254,10 @@ width: 100%;
 margin-inline: auto;
 padding-inline: var(--space-md);
 }
-[data-layout="centered"][data-width="prose"]   { max-width: 65ch; }
-[data-layout="centered"][data-width="content"] { max-width: 768px; }
-[data-layout="centered"][data-width="wide"]    { max-width: 1200px; }
-[data-layout="centered"]:not([data-width]) { max-width: 1200px; }
+[data-layout="centered"][data-width="prose"]   { max-width: var(--width-prose); }
+[data-layout="centered"][data-width="content"] { max-width: var(--width-content); }
+[data-layout="centered"][data-width="wide"]    { max-width: var(--width-wide); }
+[data-layout="centered"]:not([data-width]) { max-width: var(--width-wide); }
 [data-layout="hero"] {
 display: flex;
 flex-direction: column;

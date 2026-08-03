@@ -56,11 +56,11 @@
     padding-inline: var(--space-md);
   }
 
-  [data-layout="centered"][data-width="prose"]   { max-width: 65ch; }
-  [data-layout="centered"][data-width="content"] { max-width: 768px; }
-  [data-layout="centered"][data-width="wide"]    { max-width: 1200px; }
+  [data-layout="centered"][data-width="prose"]   { max-width: var(--width-prose); }
+  [data-layout="centered"][data-width="content"] { max-width: var(--width-content); }
+  [data-layout="centered"][data-width="wide"]    { max-width: var(--width-wide); }
   /* Default cuando no hay data-width */
-  [data-layout="centered"]:not([data-width]) { max-width: 1200px; }
+  [data-layout="centered"]:not([data-width]) { max-width: var(--width-wide); }
 
   /* ── HERO: sección full-viewport ── */
   [data-layout="hero"] {
