@@ -73,6 +73,24 @@
     background-color: var(--color-surface-raised);
   }
 
+  /* Underline animado en hover: el detalle que separa nav de prosa */
+  @media (prefers-reduced-motion: no-preference) {
+    nav a {
+      background-image: linear-gradient(var(--color-accent), var(--color-accent));
+      background-repeat: no-repeat;
+      background-position: left calc(100% - 1px);
+      background-size: 0% 2px;
+      transition:
+        background-size var(--duration-normal) var(--ease-default),
+        color var(--duration-fast) var(--ease-default),
+        background-color var(--duration-fast) var(--ease-default);
+    }
+
+    nav a:hover {
+      background-size: 100% 2px;
+    }
+  }
+
   /* Item activo: aria-current es el contrato, el accent lo marca */
   nav a[aria-current="page"] {
     color: var(--color-content);

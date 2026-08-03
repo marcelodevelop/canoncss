@@ -51,6 +51,8 @@ COMPONENTS - data-component on semantic elements:
 UTILITIES - complete list; nothing else exists:
   data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|accent|success|error}
   data-mono  data-full  data-truncate  data-hide={mobile|desktop}
+  data-motion={rise|float|pulse|lift}  (entrance | idle drift | attention |
+    hover elevation; all auto-respect prefers-reduced-motion)
   class="sr-only"
 
 RULES - enforce strictly:

@@ -24,6 +24,7 @@ const VOCAB = {
   'data-state': new Set(['error', 'success']),
   'data-tone': new Set(['subtle', 'brand', 'accent', 'success', 'error']),
   'data-hide': new Set(['mobile', 'desktop']),
+  'data-motion': new Set(['rise', 'float', 'pulse', 'lift']),
   'data-slot': new Set(['header', 'body', 'footer', 'media', 'sidebar', 'main', 'brand', 'nav', 'actions', 'panel']),
   'data-theme': new Set(['dark', 'light']),
 };
