@@ -81,20 +81,27 @@ function pct(n) {
 
 const IGNORED_TAGS = new Set(['html', 'head', 'meta', 'link', 'title', 'script', 'style', 'body', 'br']);
 
+/** Every styling decision in the file, with repeats kept. The set form below
+ *  answers "which vocabulary did it use"; this answers "how many decisions are
+ *  written down", which is the one churn needs: rewriting forty `py-6` into
+ *  forty `py-4` is forty edits, not one. */
+export function styleTokens(source) {
+  const out = [];
+  for (const m of source.matchAll(/\bdata-([a-z]+)="([^"]*)"/g)) {
+    if (m[1] !== 'theme') out.push(`${m[1]}=${m[2]}`);
+  }
+  for (const m of source.matchAll(/\bclass="([^"]*)"/g)) {
+    for (const cls of m[1].split(/\s+/)) if (cls) out.push(cls);
+  }
+  return out;
+}
+
 export function neutral(source) {
   const tags = [];
   for (const m of source.matchAll(/<([a-z][a-z0-9]*)\b/g)) {
     if (!IGNORED_TAGS.has(m[1])) tags.push(m[1]);
   }
-
-  const style = new Set();
-  for (const m of source.matchAll(/\bdata-([a-z]+)="([^"]*)"/g)) {
-    if (m[1] !== 'theme') style.add(`${m[1]}=${m[2]}`);
-  }
-  for (const m of source.matchAll(/\bclass="([^"]*)"/g)) {
-    for (const cls of m[1].split(/\s+/)) if (cls) style.add(cls);
-  }
-  return { tags, style };
+  return { tags, style: new Set(styleTokens(source)) };
 }
 
 export function jaccard(a, b) {
@@ -120,6 +127,67 @@ function runNeutral(files) {
   console.log(`  element sequence   ${pct(avg(tagScores))}`);
   console.log(`  styling vocabulary ${pct(avg(styleScores))}  (Jaccard over distinct decisions)`);
   console.log(`  distinct decisions per file: ${vocab.join(', ')}`);
+}
+
+// ── Churn: how much of a page an edit rewrites ──────────────────────────────
+// Reproduction measures generating the same page twice. It says nothing about
+// the operation a codebase actually spends its life in: changing a page that
+// already exists. A closed vocabulary should win here by construction rather
+// than by prompt strictness, because the styling lives in a few enumerated
+// values instead of on every element. Should. That is what this measures.
+//
+// Two numbers, both normalised by the base file so a verbose system is not
+// punished for verbosity:
+//   decisions  multiset difference over styling tokens. Changing forty `py-6`
+//              into forty `py-4` is forty edits, not one, so repeats are kept.
+//   lines      changed lines over base lines. Cruder, and the closest thing to
+//              what a reviewer actually reads in the diff.
+
+function multisetDiff(a, b) {
+  const count = (xs) => xs.reduce((m, x) => m.set(x, (m.get(x) ?? 0) + 1), new Map());
+  const ca = count(a);
+  const cb = count(b);
+  let added = 0;
+  let removed = 0;
+  for (const k of new Set([...ca.keys(), ...cb.keys()])) {
+    const d = (cb.get(k) ?? 0) - (ca.get(k) ?? 0);
+    if (d > 0) added += d;
+    else removed += -d;
+  }
+  return { added, removed };
+}
+
+/** Changed lines between two files, via the same subsequence logic as above:
+ *  an inserted block should cost its own length, not realign the rest. */
+export function lineChurn(a, b) {
+  const la = a.split('\n').map((l) => l.trim()).filter(Boolean);
+  const lb = b.split('\n').map((l) => l.trim()).filter(Boolean);
+  const shared = lcs(la, lb);
+  return { changed: la.length + lb.length - 2 * shared, baseLines: la.length };
+}
+
+function runChurn(baseFile, editedFiles) {
+  const base = readFileSync(baseFile, 'utf-8');
+  const baseTokens = styleTokens(base);
+  console.log(`base: ${baseFile}  (${baseTokens.length} styling decisions, ${lineChurn(base, base).baseLines} lines)`);
+
+  const rows = editedFiles.map((f) => {
+    const edited = readFileSync(f, 'utf-8');
+    const { added, removed } = multisetDiff(baseTokens, styleTokens(edited));
+    const { changed, baseLines } = lineChurn(base, edited);
+    return { f, touched: added + removed, added, removed, changed, baseLines };
+  });
+
+  for (const r of rows) {
+    console.log(`\n${r.f}`);
+    console.log(`  decisions rewritten  ${pct(r.touched / baseTokens.length)}  (+${r.added} / -${r.removed} of ${baseTokens.length})`);
+    console.log(`  lines changed        ${pct(r.changed / r.baseLines)}  (${r.changed} of ${r.baseLines})`);
+  }
+
+  const avg = (k) => rows.reduce((s, r) => s + r[k], 0) / rows.length;
+  console.log(
+    `\nmean over ${rows.length} edits:  decisions ${pct(avg('touched') / baseTokens.length)}  lines ${pct(avg('changed') / rows[0].baseLines)}`,
+  );
 }
 
 /** Which modifiers actually disagree, ranked. Sequence similarity punishes a
@@ -198,6 +266,12 @@ function selftest() {
   eq(jaccard(new Set(['a', 'b']), new Set(['b', 'c'])), 1 / 3, 'jaccard partial');
   eq(jaccard(new Set(), new Set()), 1, 'jaccard both empty');
 
+  // Churn keeps repeats: forty identical edits must count forty, or the whole
+  // measure collapses to "did the vocabulary change at all", which is not it.
+  eq(styleTokens('<a class="p-2"><b class="p-2">'), ['p-2', 'p-2'], 'style tokens keep repeats');
+  eq(lineChurn('a\nb\nc', 'a\nb\nc').changed, 0, 'line churn of a file against itself');
+  eq(lineChurn('a\nb', 'a\nb\nc').changed, 1, 'line churn of one insertion');
+
   console.log('repro selftest: ok');
 }
 
@@ -211,8 +285,15 @@ if (args[0] === '--selftest') {
     process.exit(2);
   }
   runNeutral(files);
+} else if (args[0] === '--churn') {
+  const [base, ...edited] = args.slice(1);
+  if (!base || edited.length === 0) {
+    console.error('Usage: repro.mjs --churn <base> <edited> [...]');
+    process.exit(2);
+  }
+  runChurn(base, edited);
 } else if (args.length < 2) {
-  console.error('Usage: repro.mjs <fileA> <fileB> [...]  |  repro.mjs --neutral <files>  |  repro.mjs --selftest');
+  console.error('Usage: repro.mjs <fileA> <fileB> [...]  |  repro.mjs --neutral <files>  |  repro.mjs --churn <base> <edited...>  |  repro.mjs --selftest');
   process.exit(2);
 } else {
   const parsed = args.map((f) => ({ name: f, ...extract(readFileSync(f, 'utf-8')) }));
