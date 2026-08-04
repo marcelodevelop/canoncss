@@ -1,6 +1,6 @@
 # How reproducible is LLM-generated UI?
 
-**A measurement across three styling conditions, three page specs and 86
+**A measurement across three styling conditions, three page specs and 96
 generations. August 2026.**
 
 Ask a language model to build the same page twice and you get two different
