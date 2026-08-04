@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Margin</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Margin</a>
+  <nav data-slot="nav">
+    <a href="/fiction">Fiction</a>
+    <a href="/nonfiction">Non-fiction</a>
+    <a href="/poetry">Poetry</a>
+    <a href="/secondhand">Secondhand</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="ghost" href="/cart">
+      Cart <span data-component="badge" data-variant="brand">5</span> · £47.46
+    </a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/fiction">Fiction</a>
+      <a href="/nonfiction">Non-fiction</a>
+      <a href="/poetry">Poetry</a>
+      <a href="/secondhand">Secondhand</a>
+      <a href="/cart">Cart · £47.46</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="wide">
+  <div data-layout="stack" data-gap="xl">
+
+    <div data-layout="stack" data-gap="md">
+      <h1>Checkout</h1>
+      <nav data-x-component="progress-steps" aria-label="Checkout progress">
+        <ol>
+          <li data-x-state="complete"><a href="/cart">Cart</a></li>
+          <li data-x-state="current"><a href="/checkout/delivery" aria-current="step">Delivery</a></li>
+          <li data-x-state="upcoming">Payment</li>
+          <li data-x-state="upcoming">Review</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div data-layout="sidebar" data-gap="xl">
+
+      <div data-slot="main">
+        <form data-layout="stack" data-gap="xl" action="/checkout/payment" method="post">
+
+          <section data-layout="stack" data-gap="md">
+            <h2>Where should we send it?</h2>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="fullname">Full name</label>
+              <input data-component="input" id="fullname" name="fullname" type="text" autocomplete="name" placeholder="Eleanor Whitfield" required>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="street">Street address</label>
+              <input data-component="input" id="street" name="street" type="text" autocomplete="street-address" placeholder="14 Wolseley Road" required>
+            </div>
+
+            <div data-layout="grid" data-cols="2" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <label for="city">City</label>
+                <input data-component="input" id="city" name="city" type="text" autocomplete="address-level2" placeholder="Bristol" required>
+              </div>
+              <div data-layout="stack" data-gap="xs">
+                <label for="postcode">Postcode</label>
+                <input data-component="input" id="postcode" name="postcode" type="text" autocomplete="postal-code" data-mono placeholder="BS6 5JP" required>
+              </div>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="country">Country</label>
+              <select data-component="select" id="country" name="country" autocomplete="country-name">
+                <option selected>United Kingdom</option>
+                <option>Ireland</option>
+                <option>France</option>
+                <option>Germany</option>
+                <option>Spain</option>
+                <option>Netherlands</option>
+              </select>
+            </div>
+
+            <label>
+              <input type="checkbox" name="billing-same" checked>
+              Billing address is the same as the delivery address
+            </label>
+          </section>
+
+          <hr data-component="divider">
+
+          <section data-layout="stack" data-gap="md">
+            <h2>How fast do you want it?</h2>
+
+            <label data-layout="row" data-gap="md" data-align="center">
+              <input type="radio" name="speed" value="standard" checked>
+              <span data-layout="stack" data-gap="xs" data-full>
+                <strong>Standard post</strong>
+                <span data-tone="subtle">Arrives Monday 10 August</span>
+              </span>
+              <span>£2.95</span>
+            </label>
+
+            <label data-layout="row" data-gap="md" data-align="center">
+              <input type="radio" name="speed" value="express">
+              <span data-layout="stack" data-gap="xs" data-full>
+                <strong>Express</strong>
+                <span data-tone="subtle">Arrives Thursday 6 August</span>
+              </span>
+              <span>£5.95</span>
+            </label>
+
+            <label data-layout="row" data-gap="md" data-align="center">
+              <input type="radio" name="speed" value="next-day">
+              <span data-layout="stack" data-gap="xs" data-full>
+                <strong>Next day, before 1pm</strong>
+                <span data-tone="subtle">Arrives Wednesday 5 August</span>
+              </span>
+              <span>£8.95</span>
+            </label>
+          </section>
+
+          <details data-component="disclosure">
+            <summary>Add a gift message</summary>
+            <div data-layout="stack" data-gap="xs" data-padding="md">
+              <label for="gift">We will write this on a card and tuck it inside the parcel. No prices appear anywhere in a gift order.</label>
+              <textarea data-component="textarea" id="gift" name="gift" rows="4" placeholder="Happy birthday, Tom. Read the Murray first — the last hundred pages are worth the wait. Love, El."></textarea>
+            </div>
+          </details>
+
+          <hr data-component="divider">
+
+          <div data-layout="row" data-gap="sm" data-justify="between" data-wrap>
+            <a data-component="button" data-variant="secondary" href="/cart">Back to cart</a>
+            <button data-component="button" data-variant="primary" data-size="lg" type="submit">Continue to payment</button>
+          </div>
+
+        </form>
+      </div>
+
+      <aside data-slot="sidebar">
+        <article data-component="card">
+          <div data-slot="header">Your order</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+
+              <table data-component="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Book</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">The Bee Sting<br><span data-tone="subtle">Paul Murray</span></th>
+                    <td>1</td>
+                    <td>£9.99</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Piranesi<br><span data-tone="subtle">Susanna Clarke</span></th>
+                    <td>2</td>
+                    <td>£17.98</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">The Overstory<br><span data-tone="subtle">Richard Powers</span></th>
+                    <td>1</td>
+                    <td>£10.99</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Small Things Like These<br><span data-tone="subtle">Claire Keegan</span></th>
+                    <td>1</td>
+                    <td>£8.50</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <hr data-component="divider">
+
+              <div data-layout="row" data-gap="sm" data-justify="between">
+                <span data-tone="subtle">Subtotal</span>
+                <span>£47.46</span>
+              </div>
+              <div data-layout="row" data-gap="sm" data-justify="between">
+                <span data-tone="subtle">Delivery (Standard post)</span>
+                <span>£2.95</span>
+              </div>
+
+              <hr data-component="divider" data-variant="strong">
+
+              <div data-layout="row" data-gap="sm" data-justify="between" data-align="center">
+                <span data-tone="subtle">Total</span>
+                <span data-component="stat">£50.41</span>
+              </div>
+
+              <p data-tone="subtle">Every order is wrapped in paper, never plastic. Free returns for thirty days.</p>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="link" data-size="sm" href="/cart">Edit basket</a>
+          </div>
+        </article>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
