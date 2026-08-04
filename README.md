@@ -143,6 +143,7 @@ prompts/    System prompts for LLMs
 bin/        canon-lint + the vocabulary tables it validates against
 examples/   Four pages built with zero extra CSS
 test-llm/   LLM regression corpus
+docs/       Design specs and drift evidence
 scripts/    build.sh (cat + comment-strip)
 vscode/     generated html.customData for editor autocomplete
 ```
