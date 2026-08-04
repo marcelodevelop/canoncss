@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay - Pricing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white dark:bg-zinc-900 text-zinc-900">
+
+<header class="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
+  <span class="text-xl font-bold text-zinc-900">Relay</span>
+  <nav class="flex items-center gap-2">
+    <a href="#product" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Product</a>
+    <a href="#pricing" class="block rounded-md bg-teal-50 px-3 py-2 text-teal-700 font-medium">Pricing</a>
+    <a href="#docs" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Docs</a>
+  </nav>
+  <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Sign up</button>
+</header>
+
+<section class="flex min-h-screen flex-col items-center justify-center">
+  <div class="mx-auto max-w-prose px-6 py-12">
+    <div class="flex flex-col gap-6">
+      <h1 class="text-3xl font-bold">Every incident, handled in one thread</h1>
+      <p class="text-lg text-zinc-600">Relay routes alerts from your monitoring stack into a single on-call channel, pages the right engineer, and writes the timeline while you fix things. No tab juggling at 3am.</p>
+      <div class="flex items-center gap-4">
+        <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Start free trial</button>
+        <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Book a demo</button>
+      </div>
+      <p class="text-sm text-zinc-400">14 days free. No credit card. Cancel from the dashboard in two clicks.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="mx-auto max-w-6xl px-6 py-12">
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-2xl font-bold">Pricing</h2>
+      <p class="text-base text-zinc-600">Per user, billed monthly. Annual billing takes two months off every plan.</p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+
+      <div class="rounded-lg border border-zinc-200 bg-white p-6">
+        <div class="flex flex-col gap-4">
+          <h3 class="text-xl font-medium">Starter</h3>
+          <p class="text-3xl font-bold">$0</p>
+          <p class="text-sm text-zinc-600">For a single team getting alerts under control.</p>
+          <ul class="flex flex-col gap-2">
+            <li class="text-sm text-zinc-600">Up to 5 responders</li>
+            <li class="text-sm text-zinc-600">3 alert sources</li>
+            <li class="text-sm text-zinc-600">Email and Slack notifications</li>
+            <li class="text-sm text-zinc-600">30 days of incident history</li>
+          </ul>
+          <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Create free account</button>
+        </div>
+      </div>
+
+      <div class="rounded-lg border-2 border-teal-700 bg-white p-6 shadow-lg">
+        <div class="flex flex-col gap-4">
+          <span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs">Recommended</span>
+          <h3 class="text-xl font-medium">Team</h3>
+          <p class="text-3xl font-bold">$24</p>
+          <p class="text-sm text-zinc-600">For growing engineering teams running real on-call rotations.</p>
+          <ul class="flex flex-col gap-2">
+            <li class="text-sm text-zinc-600">Unlimited responders</li>
+            <li class="text-sm text-zinc-600">Unlimited alert sources and webhooks</li>
+            <li class="text-sm text-zinc-600">Phone, SMS and push escalation</li>
+            <li class="text-sm text-zinc-600">Automatic postmortem timelines</li>
+          </ul>
+          <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Start free trial</button>
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 bg-white p-6">
+        <div class="flex flex-col gap-4">
+          <h3 class="text-xl font-medium">Business</h3>
+          <p class="text-3xl font-bold">$79</p>
+          <p class="text-sm text-zinc-600">For companies with compliance requirements and many teams.</p>
+          <ul class="flex flex-col gap-2">
+            <li class="text-sm text-zinc-600">SAML single sign-on and SCIM</li>
+            <li class="text-sm text-zinc-600">Audit log with 3 year retention</li>
+            <li class="text-sm text-zinc-600">99.95% uptime SLA</li>
+            <li class="text-sm text-zinc-600">Named support engineer</li>
+          </ul>
+          <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Talk to sales</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-prose px-6 py-12">
+  <div class="flex flex-col gap-6">
+    <h2 class="text-2xl font-bold">Frequently asked questions</h2>
+
+    <div class="flex flex-col gap-1">
+      <div class="border-t border-zinc-200">
+        <details>
+          <summary class="flex cursor-pointer justify-between py-4">
+            <span class="text-base font-medium">What counts as a user?</span>
+            <span class="text-sm text-zinc-400">Show</span>
+          </summary>
+          <p class="text-sm text-zinc-600 pb-4">Anyone who can be paged. Teammates who only read incident reports, such as support or leadership, are free on every plan and do not count toward your seat total.</p>
+        </details>
+      </div>
+
+      <div class="border-t border-zinc-200">
+        <details>
+          <summary class="flex cursor-pointer justify-between py-4">
+            <span class="text-base font-medium">Can I change plans later?</span>
+            <span class="text-sm text-zinc-400">Show</span>
+          </summary>
+          <p class="text-sm text-zinc-600 pb-4">Yes. Upgrades apply immediately and we prorate the difference. Downgrades take effect at the end of the billing period, so you keep what you paid for.</p>
+        </details>
+      </div>
+
+      <div class="border-t border-zinc-200">
+        <details>
+          <summary class="flex cursor-pointer justify-between py-4">
+            <span class="text-base font-medium">Which tools does Relay connect to?</span>
+            <span class="text-sm text-zinc-400">Show</span>
+          </summary>
+          <p class="text-sm text-zinc-600 pb-4">Datadog, Grafana, Prometheus, Sentry, CloudWatch, Slack, Microsoft Teams, Jira and GitHub ship as first party integrations. Anything else can send a signed webhook to our alerts endpoint.</p>
+        </details>
+      </div>
+
+      <div class="border-t border-zinc-200">
+        <details>
+          <summary class="flex cursor-pointer justify-between py-4">
+            <span class="text-base font-medium">What happens when the trial ends?</span>
+            <span class="text-sm text-zinc-400">Show</span>
+          </summary>
+          <p class="text-sm text-zinc-600 pb-4">Your account drops to the Starter plan. Nothing is deleted, alerts keep arriving, and you can add a card whenever you are ready to bring the rest of your rotation back.</p>
+        </details>
+      </div>
+      <div class="border-t border-zinc-200"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-zinc-200">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="grid grid-cols-3 gap-8">
+
+      <nav class="flex flex-col gap-2">
+        <span class="text-sm font-medium text-zinc-600">Product</span>
+        <a href="#alerting" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Alerting</a>
+        <a href="#on-call" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">On-call schedules</a>
+        <a href="#postmortems" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Postmortems</a>
+        <a href="#integrations" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Integrations</a>
+      </nav>
+
+      <nav class="flex flex-col gap-2">
+        <span class="text-sm font-medium text-zinc-600">Company</span>
+        <a href="#about" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">About</a>
+        <a href="#customers" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Customers</a>
+        <a href="#careers" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Careers</a>
+        <a href="#contact" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Contact</a>
+      </nav>
+
+      <nav class="flex flex-col gap-2">
+        <span class="text-sm font-medium text-zinc-600">Resources</span>
+        <a href="#docs" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Documentation</a>
+        <a href="#status" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Status page</a>
+        <a href="#security" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Security</a>
+        <a href="#changelog" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Changelog</a>
+      </nav>
+
+    </div>
+    <p class="text-xs text-zinc-400 mt-8">Relay Systems Inc. 2026. Made by people who have been paged on a Sunday.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -67,6 +67,61 @@ function pct(n) {
   return `${Math.round(n * 100)}%`;
 }
 
+// ── Framework-neutral comparison ────────────────────────────────────────────
+// Canon cannot be compared to Tailwind with the metric above: it counts
+// data-* values against class lists, and Tailwind emits far more tokens per
+// element, so a sequence ratio would punish it for verbosity alone. That would
+// be rigging the control.
+//
+// These two measures do not depend on the styling system:
+//   tags   the sequence of elements. Does the page skeleton come out the same?
+//   style  the SET of distinct styling decisions, compared by Jaccard.
+//          Set overlap is normalised by vocabulary size, not by how many
+//          tokens each system needs to say the same thing.
+
+const IGNORED_TAGS = new Set(['html', 'head', 'meta', 'link', 'title', 'script', 'style', 'body', 'br']);
+
+export function neutral(source) {
+  const tags = [];
+  for (const m of source.matchAll(/<([a-z][a-z0-9]*)\b/g)) {
+    if (!IGNORED_TAGS.has(m[1])) tags.push(m[1]);
+  }
+
+  const style = new Set();
+  for (const m of source.matchAll(/\bdata-([a-z]+)="([^"]*)"/g)) {
+    if (m[1] !== 'theme') style.add(`${m[1]}=${m[2]}`);
+  }
+  for (const m of source.matchAll(/\bclass="([^"]*)"/g)) {
+    for (const cls of m[1].split(/\s+/)) if (cls) style.add(cls);
+  }
+  return { tags, style };
+}
+
+export function jaccard(a, b) {
+  if (a.size === 0 && b.size === 0) return 1;
+  let shared = 0;
+  for (const v of a) if (b.has(v)) shared++;
+  return shared / (a.size + b.size - shared);
+}
+
+function runNeutral(files) {
+  const parsed = files.map((f) => ({ name: f, ...neutral(readFileSync(f, 'utf-8')) }));
+  const tagScores = [];
+  const styleScores = [];
+  for (let i = 0; i < parsed.length; i++) {
+    for (let j = i + 1; j < parsed.length; j++) {
+      tagScores.push(similarity(parsed[i].tags, parsed[j].tags));
+      styleScores.push(jaccard(parsed[i].style, parsed[j].style));
+    }
+  }
+  const avg = (xs) => xs.reduce((s, x) => s + x, 0) / xs.length;
+  const vocab = parsed.map((p) => p.style.size);
+  console.log(`${files.length} files, ${tagScores.length} pairs`);
+  console.log(`  element sequence   ${pct(avg(tagScores))}`);
+  console.log(`  styling vocabulary ${pct(avg(styleScores))}  (Jaccard over distinct decisions)`);
+  console.log(`  distinct decisions per file: ${vocab.join(', ')}`);
+}
+
 /** Which modifiers actually disagree, ranked. Sequence similarity punishes a
  *  generation for writing more copy than another: eight subtle spans against
  *  thirteen scores as drift when it is really verbosity. This separates the
@@ -135,14 +190,29 @@ function selftest() {
   const b = extract('<b data-variant={y}>');
   eq(similarity(a.modifiers, b.modifiers) === 1, true, 'expressions compare as equal tokens');
 
+  const n = neutral('<header class="flex gap-4"><a data-tone="subtle">x</a></header>');
+  eq(n.tags, ['header', 'a'], 'neutral tag extraction');
+  eq([...n.style].sort(), ['flex', 'gap-4', 'tone=subtle'], 'neutral style extraction');
+  eq(jaccard(new Set(['a', 'b']), new Set(['a', 'b'])), 1, 'jaccard identical');
+  eq(jaccard(new Set(['a']), new Set(['b'])), 0, 'jaccard disjoint');
+  eq(jaccard(new Set(['a', 'b']), new Set(['b', 'c'])), 1 / 3, 'jaccard partial');
+  eq(jaccard(new Set(), new Set()), 1, 'jaccard both empty');
+
   console.log('repro selftest: ok');
 }
 
 const args = process.argv.slice(2);
 if (args[0] === '--selftest') {
   selftest();
+} else if (args[0] === '--neutral') {
+  const files = args.slice(1);
+  if (files.length < 2) {
+    console.error('Usage: repro.mjs --neutral <fileA> <fileB> [...]');
+    process.exit(2);
+  }
+  runNeutral(files);
 } else if (args.length < 2) {
-  console.error('Usage: repro.mjs <fileA> <fileB> [fileC ...]  |  repro.mjs --selftest');
+  console.error('Usage: repro.mjs <fileA> <fileB> [...]  |  repro.mjs --neutral <files>  |  repro.mjs --selftest');
   process.exit(2);
 } else {
   const parsed = args.map((f) => ({ name: f, ...extract(readFileSync(f, 'utf-8')) }));

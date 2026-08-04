@@ -65,15 +65,75 @@ that four of five had already built identically.
 That observation is why `CONTRIBUTING.md` admits a component on divergence
 rather than on request. Two of four candidates from these runs were rejected.
 
+## The control group
+
+The obvious objection to everything above: those numbers show Canon is
+consistent, not that the *closed vocabulary* is why. A strict prompt might do
+the same work with any styling system.
+
+So the same pricing spec was generated five more times with Tailwind, given a
+house-style prompt written to be as strict as Canon's and at comparable length:
+a fixed spacing scale, a fixed palette, and verbatim class strings for each
+component pattern. A weak control proves nothing, so this one was steelmanned.
+
+Comparing the two needs a framework-neutral metric, because counting Canon's
+`data-*` values against Tailwind's class lists would punish Tailwind for
+verbosity alone. `npm run repro -- --neutral` uses two measures that do not
+depend on the styling system: the **element sequence**, and the **set** of
+distinct styling decisions compared by Jaccard, which normalises by vocabulary
+size rather than token count.
+
+| | Canon | Tailwind, strict prompt |
+|---|---|---|
+| Element sequence | 90% | 88% |
+| Styling vocabulary | 90% | **92%** |
+| Distinct decisions per file | 42-43 | 60-67 |
+| Violations of its own rules | 0 | 0 |
+
+**Tailwind matched Canon on every dimension measured here**, and beat it
+slightly on styling agreement. Compliance was tied at zero, over 1763 class
+uses.
+
+### What that means
+
+The honest reading is that **the strictness of the specification is doing the
+work, not the CSS architecture.** Canon's founding claim, that too many degrees
+of freedom is the problem, survives. The claim that a new framework is the
+answer does not: a constrained prompt over an existing one reached the same
+place.
+
+Two real differences remain, and they are smaller than the original pitch:
+
+1. **Canon carries about 30% fewer styling decisions per file** for the same
+   page, 42 against 63. Equal reproducibility, less surface to review. That is
+   the diff-review argument, and it is the one that survives.
+2. **Canon ships the specification and the linter.** The Tailwind condition
+   needed both written by hand: the house style is in
+   `prompts/experiments/tailwind-control.txt` and its checker in
+   `scripts/check-tailwind-control.mjs`. The checker took sixty lines, so this
+   is a distribution advantage, not a technical one.
+
+### Where the control was unfair, in both directions
+
+Against Tailwind: the allowed set was improvised, and the agents said so. It
+had no text-alignment utilities, no responsive variants, and a `dark:` variant
+for backgrounds with no matching text colour, so several generations dropped
+dark mode rather than ship unreadable contrast. Canon's vocabulary is closed
+but was designed to be complete enough to finish a page. That gap is a fault of
+the control, not evidence for Canon.
+
+In Canon's favour: the reproduction figures still came out equal despite that,
+so the conclusion is not sensitive to it.
+
 ## Limitations
 
 - Five generations per round is a small sample. A four point move is inside
   the noise, and no causal claim is made about one.
 - One model, one operator. This measures Canon under the conditions it was run
   in, not Canon in general.
-- No control group. The same specs built with Tailwind, a strict system prompt
-  and a custom linter would separate "the closed vocabulary worked" from "the
-  prompt worked". That has not been attempted.
+- The control group is a single spec and five generations per side. It is
+  enough to refute "only a closed vocabulary can do this" and not enough to
+  rank the two systems.
 - Values written as JSX expressions cannot be compared, so a score on a React
   codebase covers less than one on HTML. `canon-lint` reports that coverage;
   `repro` reports it too.
