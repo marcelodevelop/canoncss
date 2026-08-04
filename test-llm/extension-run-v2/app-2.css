@@ -1,0 +1,88 @@
+/* Aperture booking page - patterns Canon does not ship yet.
+   Everything here is built from Canon tokens only. */
+
+@layer canon.app {
+
+  /* Calendar ---------------------------------------------------------- */
+
+  [data-x-component="calendar"] {
+    padding: var(--space-md);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  [data-x-component="calendar"] > [data-x-slot="header"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-block-end: var(--space-md);
+    font-weight: var(--weight-medium);
+  }
+
+  [data-x-component="calendar"] > [data-x-slot="weekdays"],
+  [data-x-component="calendar"] > [data-x-slot="days"] {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--space-xs);
+  }
+
+  [data-x-component="calendar"] > [data-x-slot="weekdays"] {
+    margin-block-end: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--color-content-subtle);
+    text-align: center;
+  }
+
+  [data-x-slot="day"] {
+    padding: var(--space-xs);
+    font: inherit;
+    font-size: var(--text-sm);
+    color: var(--color-content);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  [data-x-slot="day"]:hover {
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-sunken);
+  }
+
+  [data-x-slot="day"][data-x-state="selected"] {
+    color: var(--color-content-inverse);
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+    font-weight: var(--weight-bold);
+  }
+
+  [data-x-slot="day"][data-x-state="unavailable"] {
+    color: var(--color-content-subtle);
+    background: var(--color-surface-sunken);
+    border-color: var(--color-border);
+    text-decoration: line-through;
+    cursor: not-allowed;
+  }
+
+  /* Drag-and-drop upload area ----------------------------------------- */
+
+  [data-x-component="dropzone"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    text-align: center;
+    background: var(--color-surface-sunken);
+    border: 2px dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+  }
+
+  [data-x-component="dropzone"][data-x-state="dragging"] {
+    background: var(--color-brand-subtle);
+    border-color: var(--color-brand);
+  }
+
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a session - Aperture</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="app-1.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Aperture</a>
+  <nav data-slot="nav">
+    <a href="/work">Work</a>
+    <a href="/studio">The studio</a>
+    <a href="/book" aria-current="page">Book</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/sign-in">Sign in</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/work">Work</a>
+      <a href="/studio">The studio</a>
+      <a href="/book" aria-current="page">Book</a>
+      <a href="/sign-in">Sign in</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="content">
+  <div data-layout="stack" data-gap="xl">
+
+    <section data-layout="stack" data-gap="sm">
+      <h1>Book a session at Aperture</h1>
+      <p>Pick a date, send us the references you have in mind, and choose the package that fits.
+        We shoot Tuesday through Saturday out of the daylight studio on Vermont Street.
+        You will get a confirmation with parking details within one working day.</p>
+    </section>
+
+    <form data-layout="stack" data-gap="xl" action="/book" method="post">
+
+      <section data-layout="stack" data-gap="md">
+        <h2>1. Choose a date</h2>
+        <p data-tone="subtle">Struck-through days are already booked or fall on a studio closing day.</p>
+
+        <div data-layout="row" data-justify="between" data-align="center">
+          <p><strong>September 2026</strong></p>
+          <div data-layout="row" data-gap="sm">
+            <button type="button" data-component="button" data-variant="ghost" data-size="sm">Previous month</button>
+            <button type="button" data-component="button" data-variant="ghost" data-size="sm">Next month</button>
+          </div>
+        </div>
+
+        <div data-x-component="calendar-grid">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          <span></span><span></span>
+          <button type="button" disabled>1</button>
+          <button type="button" disabled>2</button>
+          <button type="button" disabled>3</button>
+          <button type="button" disabled>4</button>
+          <button type="button" disabled>5</button>
+          <button type="button" disabled>6</button>
+          <button type="button" disabled>7</button>
+          <button type="button" aria-pressed="false">8</button>
+          <button type="button" aria-pressed="false">9</button>
+          <button type="button" aria-pressed="false">10</button>
+          <button type="button" disabled>11</button>
+          <button type="button" aria-pressed="false">12</button>
+          <button type="button" disabled>13</button>
+          <button type="button" disabled>14</button>
+          <button type="button" aria-pressed="false">15</button>
+          <button type="button" aria-pressed="false">16</button>
+          <button type="button" aria-pressed="true">17</button>
+          <button type="button" disabled>18</button>
+          <button type="button" aria-pressed="false">19</button>
+          <button type="button" disabled>20</button>
+          <button type="button" disabled>21</button>
+          <button type="button" aria-pressed="false">22</button>
+          <button type="button" aria-pressed="false">23</button>
+          <button type="button" aria-pressed="false">24</button>
+          <button type="button" aria-pressed="false">25</button>
+          <button type="button" aria-pressed="false">26</button>
+          <button type="button" disabled>27</button>
+          <button type="button" disabled>28</button>
+          <button type="button" aria-pressed="false">29</button>
+          <button type="button" aria-pressed="false">30</button>
+        </div>
+
+        <p data-tone="subtle">Selected: Thursday 17 September, 2026</p>
+      </section>
+
+      <hr data-component="divider">
+
+      <section data-layout="stack" data-gap="md">
+        <h2>2. Add reference images</h2>
+        <p data-tone="subtle">Mood boards, lighting you liked, a pose you saved. Optional, but it makes the shoot faster.</p>
+
+        <div data-x-component="dropzone" data-padding="xl">
+          <div data-layout="stack" data-gap="sm" data-align="center">
+            <p><strong>Drag your reference images here</strong></p>
+            <p data-tone="subtle">JPG, PNG or HEIC, up to 20 MB each</p>
+            <label>
+              <span class="sr-only">Choose reference images from your computer</span>
+              <input type="file" name="references" multiple accept="image/*">
+            </label>
+          </div>
+        </div>
+
+        <p data-tone="subtle">3 files added</p>
+        <ul data-x-component="file-list">
+          <li data-layout="row" data-gap="sm" data-align="center" data-justify="between" data-padding="sm">
+            <span data-truncate>backlit-window-portrait.jpg</span>
+            <span data-layout="row" data-gap="sm" data-align="center">
+              <span data-tone="subtle">2.4 MB</span>
+              <button type="button" data-component="button" data-variant="ghost" data-size="sm">Remove</button>
+            </span>
+          </li>
+          <li data-layout="row" data-gap="sm" data-align="center" data-justify="between" data-padding="sm">
+            <span data-truncate>warm-tone-colour-grade-reference.png</span>
+            <span data-layout="row" data-gap="sm" data-align="center">
+              <span data-tone="subtle">5.1 MB</span>
+              <button type="button" data-component="button" data-variant="ghost" data-size="sm">Remove</button>
+            </span>
+          </li>
+          <li data-layout="row" data-gap="sm" data-align="center" data-justify="between" data-padding="sm">
+            <span data-truncate>studio-seated-pose.heic</span>
+            <span data-layout="row" data-gap="sm" data-align="center">
+              <span data-tone="subtle">3.8 MB</span>
+              <button type="button" data-component="button" data-variant="ghost" data-size="sm">Remove</button>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <hr data-component="divider">
+
+      <section data-layout="stack" data-gap="md" role="radiogroup" aria-labelledby="packages-heading">
+        <h2 id="packages-heading">3. Pick a package</h2>
+        <p data-tone="subtle">Every package includes the studio, a lighting tech and retouched delivery.</p>
+
+        <div data-layout="grid" data-cols="3" data-gap="md" data-align="stretch">
+
+          <article data-component="card">
+            <div data-slot="header">Headshot</div>
+            <div data-slot="body" data-gap="md">
+              <p>
+                <span data-component="stat">$180</span>
+                <span data-tone="subtle">/session</span>
+              </p>
+              <ul>
+                <li>45 minutes in studio</li>
+                <li>One backdrop, one outfit</li>
+                <li>8 retouched images</li>
+                <li>Delivered in 3 days</li>
+              </ul>
+            </div>
+            <div data-slot="footer">
+              <label>
+                <input type="radio" name="package" value="headshot">
+                Choose Headshot
+              </label>
+            </div>
+          </article>
+
+          <article data-component="card" data-variant="featured">
+            <div data-slot="header">
+              <span data-component="badge" data-variant="brand">Most booked</span>
+              Golden Hour
+            </div>
+            <div data-slot="body" data-gap="md">
+              <p>
+                <span data-component="stat">$420</span>
+                <span data-tone="subtle">/session</span>
+              </p>
+              <ul>
+                <li>2 hours, studio and rooftop</li>
+                <li>Three outfit changes</li>
+                <li>30 retouched images</li>
+                <li>Delivered in 5 days</li>
+              </ul>
+            </div>
+            <div data-slot="footer">
+              <label>
+                <input type="radio" name="package" value="golden-hour" checked>
+                Choose Golden Hour
+              </label>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">Full Day</div>
+            <div data-slot="body" data-gap="md">
+              <p>
+                <span data-component="stat">$1,150</span>
+                <span data-tone="subtle">/session</span>
+              </p>
+              <ul>
+                <li>8 hours, two locations</li>
+                <li>Second photographer included</li>
+                <li>90 retouched images</li>
+                <li>Delivered in 10 days</li>
+              </ul>
+            </div>
+            <div data-slot="footer">
+              <label>
+                <input type="radio" name="package" value="full-day">
+                Choose Full Day
+              </label>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <hr data-component="divider">
+
+      <div data-layout="row" data-gap="sm" data-align="center" data-justify="between" data-wrap>
+        <p data-tone="subtle">No payment now. We hold the date for 48 hours.</p>
+        <button type="submit" data-component="button" data-variant="primary" data-size="lg">Request this booking</button>
+      </div>
+
+    </form>
+  </div>
+</main>
+
+</body>
+</html>

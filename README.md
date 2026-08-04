@@ -164,16 +164,30 @@ you:
 }
 ```
 
-Two rules, both checked. Build it from tokens: `canon-lint` fails on a hardcoded
-colour or spacing inside that layer, because those are what the theme system
-controls. And **reuse Canon's modifiers instead of inventing your own**, which
-is what decides whether your component reads like Canon or like a guest.
-`data-gap`, `data-padding`, `data-size`, `data-variant` already work on your
-element because they are token-driven.
+Build it from tokens: `canon-lint` fails on a hardcoded colour or spacing
+inside that layer, because those are what the theme system controls.
+
+**Reuse Canon's modifiers where Canon has the value you need.** `data-gap`,
+`data-padding` and `data-size` already work on your element because they are
+token-driven, and that is what decides whether your component reads like Canon
+or like a guest. When Canon does not have the value, because a calendar day is
+`unavailable` and no closed set was going to predict that, use `data-x-variant`
+and `data-x-state`, which take anything kebab-case. Regions are `data-x-slot`.
 
 The linter also catches the three ways this goes wrong: a name that is not
 kebab-case, a name that shadows a real Canon component, and an extension used in
 markup that nothing styles, which would otherwise render bare with no warning.
+
+One reference extension ships with the package:
+
+```bash
+npx -p canoncss canon-init --extension date-field
+```
+
+A compact date picker as a zero-JS `<details>` popover, because Canon has no
+datepicker and the ones models write unprompted come out as a month-sized block
+sitting inline in the page. It is not vocabulary, it lands in your repo, and it
+is yours to change.
 
 The full guide is [EXTENDING.md](EXTENDING.md).
 

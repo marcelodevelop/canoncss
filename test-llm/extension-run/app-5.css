@@ -1,0 +1,124 @@
+/* Aperture booking page.
+   Three patterns Canon has no vocabulary for: the month calendar, the
+   drag-and-drop upload area, and the list of files already attached.
+   Everything below is built from Canon tokens only. */
+
+@layer canon.app {
+
+  /* ---- calendar -------------------------------------------------------
+     A seven-column month grid. Canon's grid layout tops out at four
+     columns, so the day grid cannot be expressed with data-cols.
+     Selection and availability ride on real radio inputs: :checked is the
+     selected date, :disabled is an unavailable one, so the whole thing
+     submits with the form and needs no JavaScript. */
+
+  [data-x-component="calendar"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    background-color: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  [data-x-component="calendar"] > [data-slot="header"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    font-weight: var(--weight-medium);
+  }
+
+  [data-x-component="calendar"] > [data-slot="weekdays"],
+  [data-x-component="calendar"] > [data-slot="days"] {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-xs);
+  }
+
+  [data-x-component="calendar"] > [data-slot="weekdays"] {
+    text-align: center;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  [data-x-component="calendar-day"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-content);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  [data-x-component="calendar-day"]:hover:not(:has(:disabled)) {
+    background-color: var(--color-brand-subtle);
+    border-color: var(--color-brand);
+  }
+
+  [data-x-component="calendar-day"]:has(:focus-visible) {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  [data-x-component="calendar-day"]:has(:checked) {
+    background-color: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-content-inverse);
+    box-shadow: var(--shadow-sm);
+  }
+
+  [data-x-component="calendar-day"]:has(:disabled) {
+    cursor: not-allowed;
+    background-color: var(--color-surface-sunken);
+    border-color: var(--color-surface-sunken);
+    color: var(--color-content-subtle);
+    text-decoration: line-through;
+  }
+
+  /* ---- dropzone -------------------------------------------------------
+     The dashed drop target. The file input stays a real, bare control so
+     keyboard and screen-reader users get the same upload the mouse does. */
+
+  [data-x-component="dropzone"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    text-align: center;
+    background-color: var(--color-surface-sunken);
+    border: 2px dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+  }
+
+  [data-x-component="dropzone"] > p {
+    margin: 0;
+  }
+
+  /* ---- file list ------------------------------------------------------
+     Attached files, one row each, hairline-separated. */
+
+  [data-x-component="file-list"] {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  [data-x-component="file-list"] > li {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  [data-x-component="file-list"] > li + li {
+    border-top: 1px solid var(--color-border);
+  }
+
+}

@@ -5,11 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 
 ## [0.2.0] - 2026-08-04
 
-Two new components, three new lint rules, a second binary and the first
-themes. The larger change is that Canon's claims are now measured rather than
+Two new components, four new lint rules, a second binary, the first themes
+and a supported way to build what Canon does not have. The larger change is that Canon's claims are now measured rather than
 argued, including the one it loses.
 
 ### Added
+- **An extension namespace.** A component Canon does not have takes
+  `data-x-component` and `data-x-slot`, so the closed vocabulary stays closed
+  and the page is still written in one grammar instead of falling back to
+  classes. R8 checks kebab-case, refuses names that shadow a real component,
+  and fails an extension that nothing styles in any `@layer canon.app`, which
+  would otherwise render bare with no warning. `EXTENDING.md` is the written
+  guidance, including the rule no linter can check: reuse Canon's modifiers
+  rather than inventing parallel ones.
 - **Two starter themes**, `institutional` and `soft`, and `canon-init --theme`.
   Deliberately as far apart as two brands get, so the pair shows the range
   rather than two tastes of the same thing.

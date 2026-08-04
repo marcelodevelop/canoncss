@@ -58,12 +58,19 @@ guest. Canon's modifiers are token-driven, so they already work on your element:
 
 Use `data-gap`, `data-padding`, `data-align`, `data-justify`, `data-tone`,
 `data-hide` and `data-motion` as they are. If your component has sizes, take
-`data-size` with the same `sm|md|lg` values. If it has variants, take
-`data-variant`. A reader who knows Canon should be able to read your component
-without learning a second system.
+`data-size` with the same `sm|md|lg` values. A reader who knows Canon should be
+able to read your component without learning a second system.
 
-Do not invent `data-x-spacing` or `data-x-padding-large`. That is a second
-vocabulary, and two vocabularies is the problem Canon exists to avoid.
+When Canon does not have the value you need, use `data-x-variant` and
+`data-x-state`, which take any kebab-case value. A calendar day is
+`unavailable` and no closed set was ever going to predict that. Do not reach
+for `data-variant="unavailable"`: Canon's modifiers keep Canon's values, and
+the linter will tell you so.
+
+Its regions are `data-x-slot`, not `data-slot`, for the same reason.
+
+Do not invent `data-x-spacing` or `data-x-padding-large`. Spacing already has a
+vocabulary. A second one is the problem Canon exists to avoid.
 
 ## Tokens, never values
 
@@ -111,6 +118,34 @@ That number is meant to be read. A small app layer means Canon fits your
 product. A large one means it does not, and that is a bug report rather than
 your problem to live with.
 
+## A worked one you can take
+
+```bash
+npx -p canoncss canon-init --extension date-field
+```
+
+`date-field` is a reference build of the thing this document keeps using as its
+example. Not vocabulary: it lands in your repo and is yours to change, the same
+deal as a theme.
+
+It is worth reading before you write your own, because it is the shape the
+generated versions kept missing. Four agents asked to build a calendar all
+produced a month-sized block sitting inline in the page. That is not what a
+date picker is: it reflows the form every time it opens, and it dominates a
+layout it should be a control inside. `date-field` is a `<details>` popover in
+the shape of an input, floating over the page, with the month grid inside.
+Still zero JavaScript, still the same mechanism as the topbar burger.
+
+Two small decisions in it are worth stealing. Unavailable days are muted rather
+than struck through, because a line through a number reads as an error and an
+unavailable day is simply not on offer. And the radio input is moved offscreen
+rather than hidden with `display: none`, which would have dropped it out of the
+tab order and taken the keyboard with it.
+
+Writing it also caught the author: `gap: 2px` between the day cells failed R6,
+correctly. Cell spacing is spacing, a roomier brand should get more of it, and
+`var(--space-xs)` is what it should have been.
+
 ## Getting it into Canon
 
 If a pattern shows up in several independent app layers, propose it. The bar is
@@ -128,3 +163,28 @@ what you tried first, and what the alternatives were.
 
 The closed vocabulary is about having one right way to say the things Canon
 covers, not about pretending it covers everything.
+
+## How this was arrived at
+
+Everything above was measured, not reasoned. The namespace was designed first
+and tested an hour later: four clean-context agents were given a booking page
+needing a calendar and a drag-and-drop uploader, neither of which Canon has.
+
+The first run produced **24 violations**, and 22 of them were the same mistake:
+agents wrote `data-variant="unavailable"` on a calendar day. They were doing
+exactly what this document told them to do, reuse Canon's modifiers, and the
+linter punished them for it because `data-variant` holds Canon's closed value
+set. The guidance and the rule contradicted each other, and only a real
+generation surfaced it.
+
+None of them used `data-x-slot` either, because the short prompt described the
+namespace without mentioning it. So they fragmented one calendar into
+`calendar`, `calendar-grid`, `calendar-day` and `calendar-weekday` as siblings,
+purely to have somewhere to hang the names.
+
+With `data-x-variant`, `data-x-state` and `data-x-slot` in the prompt, the same
+spec produced **zero violations**, and the extension names converged: `calendar`
+and `dropzone` in every generation, against six competing names before.
+
+The missing slot vocabulary was causing component fragmentation. That is not
+something you find by thinking about it.
