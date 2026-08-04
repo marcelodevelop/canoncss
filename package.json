@@ -4,7 +4,7 @@
   "description": "A CSS framework designed for LLMs. One right way to do each thing.",
   "main": "dist/canon.css",
   "style": "dist/canon.css",
-  "bin": { "canon-lint": "bin/canon-lint.mjs" },
+  "bin": { "canon-lint": "bin/canon-lint.mjs", "canon-init": "bin/canon-init.mjs" },
   "files": ["dist", "prompts", "src", "bin", "vscode"],
   "scripts": {
     "build": "bash scripts/build.sh",
