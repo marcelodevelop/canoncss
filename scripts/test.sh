@@ -32,6 +32,19 @@ if [ "$CODE2" -ne 1 ] || [ "$COUNT2" -ne 2 ]; then
 fi
 echo "✓ app-layer fixture caught ($COUNT2 violations, exit $CODE2)"
 
+echo "- theme fixture must fail with exactly 2 violations:"
+set +e
+OUT3=$(node bin/canon-lint.mjs test-llm/theme-fixture.css)
+CODE3=$?
+set -e
+COUNT3=$(echo "$OUT3" | grep -cE '  R7  ')
+if [ "$CODE3" -ne 1 ] || [ "$COUNT3" -ne 2 ]; then
+  echo "FAIL: expected exit 1 with 2 violations, got exit $CODE3 with $COUNT3:"
+  echo "$OUT3"
+  exit 1
+fi
+echo "✓ theme fixture caught ($COUNT3 violations, exit $CODE3)"
+
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs
 

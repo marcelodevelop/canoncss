@@ -1,0 +1,16 @@
+/* Fixture for canon-lint: a theme file, right and wrong.
+   npm test asserts this file produces exactly 2 R7 violations. */
+
+:root {
+  /* Right: real tokens. */
+  --color-brand: #0f766e;
+  --radius-md: 0.375rem;
+
+  /* Wrong: two silent typos. Valid CSS, overrides nothing, page looks
+     almost right and the cause is invisible. */
+  --color-brnd: #ff0000;
+  --space-mdd: 2rem;
+
+  /* Not Canon's business: the project's own variable. */
+  --my-own-thing: 12px;
+}
