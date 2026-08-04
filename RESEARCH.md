@@ -1,15 +1,15 @@
 # How reproducible is LLM-generated UI?
 
-**A measurement across three styling conditions, three page specs and 74
+**A measurement across three styling conditions, three page specs and 96
 generations. August 2026.**
 
 Ask a language model to build the same page twice and you get two different
 pages. Everyone building with these tools knows this. Almost nobody has put a
 number on it, which means nobody can tell whether an intervention helped.
 
-This is an attempt at that number, the method for producing it, and five
-findings that came out of it. One of them contradicts the project that ran the
-study.
+This is an attempt at that number, the method for producing it, and six findings
+that came out of it. One of them contradicts the project that ran the study, and
+the last one is about the half of the work the first five never touched.
 
 The tooling is open source and the whole corpus is in this repository. Every
 figure below can be recomputed with one command.
@@ -175,6 +175,67 @@ utility-class system cannot reproduce by construction, because there the brand
 and the markup are the same artefact: change the look and every element has been
 rewritten.
 
+### Finding 6: the gap is not in writing a page, it is in changing one
+
+Finding 2 gave the reproducibility argument away: a strict prompt over Tailwind
+generates as consistently as a closed vocabulary does. That result is about
+writing a page from nothing, which is the rarer half of the work. The other half
+is changing a page that already exists, and nothing above measures it.
+
+So: take one generated page per condition, hand it to three clean-context agents
+with the same change request, and measure how much of the file comes back
+rewritten. Two requests, chosen so that one of them is a control the closed
+vocabulary has no reason to win.
+
+`npm run repro -- --churn` reports styling decisions rewritten and lines changed,
+each normalised by the base file so a verbose system is not charged for being
+verbose.
+
+| Change requested | Condition | Decisions rewritten | Lines changed |
+|---|---|---|---|
+| Tighten the vertical rhythm one step | Closed vocabulary | **8%** (5-6 of 142) | **16%** |
+| Tighten the vertical rhythm one step | Tailwind, strict house style | **16%** (21-29 of 295) | **32%** |
+| Add a testimonials section | Closed vocabulary | 20% (28-30 added) | 18% |
+| Add a testimonials section | Tailwind, strict house style | 20% (57-64 added) | 22% |
+
+**The control comes out level, and that is what makes the first row worth
+reading.** Adding a section is new markup either way; both conditions land on
+20% and neither touched a single decision outside the request. There is no
+general editing advantage.
+
+The cross-cutting change is a factor of two, on both measures and in the same
+direction on all three runs. In absolute terms it is five or six edits against
+twenty-one to twenty-nine, for an identical intent.
+
+#### Why, and it is not the part we expected
+
+The mechanism turned up in the control's own output. Two of the three Tailwind
+runs reported, unprompted, that they could not make the change without breaking
+the house style, because its spacing is baked into verbatim class strings that
+rule 3 says to copy exactly. They were right, and the files show it:
+
+| Verbatim pattern | Uses before | After the density edit |
+|---|---|---|
+| `py-12` (Centered page) | 4 | 0, 0, 0 |
+| `p-6` (Card) | 7 | 1, 1, 1 |
+
+A routine density request deleted the style guide's own patterns from the page.
+The third run avoided that by declining to tighten the FAQ block at all, leaving
+the request half done. Both outcomes are failures, and there was no third option
+available.
+
+This sharpens Finding 2 rather than overturning it. A strict prompt buys
+reproducibility by freezing literal strings, and a frozen literal string cannot
+be reparameterised later: the property that makes generation consistent is the
+same property that makes the next change destructive. A closed vocabulary
+freezes the *names* and leaves the values enumerated, so the same request moves
+values inside a vocabulary that survives it. The Canon runs came out lint-clean
+with the vocabulary intact.
+
+The honest scope of the claim: no advantage when adding, half the diff when
+changing something that crosses the page, and a style guide that is still there
+afterwards.
+
 ---
 
 ## Limitations
@@ -196,6 +257,14 @@ Stated plainly, because the findings are only as good as these.
   is a fault of the control. The figures came out level anyway, so the
   conclusion does not rest on it.
 - **The operator knew what was being measured.** Read the numbers as a floor.
+- **Finding 6 is one base page per condition, two requests, n=3.** The base is
+  `gen-1` of each reproduction run, not an average of five. A different base
+  could move the percentages; it is harder to see how it would move the
+  verbatim-pattern count, which is a property of the house style rather than of
+  the page.
+- **Finding 6's edits were told not to reformat.** Without that instruction line
+  churn measures tidying as much as editing. It applied equally to both
+  conditions, but it does mean the line figures are a floor on a real diff.
 
 ## Reproducing this
 
@@ -204,6 +273,10 @@ git clone https://github.com/marcelodevelop/canoncss
 cd canoncss && npm test          # validates the whole corpus
 npm run repro -- test-llm/repro-pricing-v4/gen-*.html            # within one system
 npm run repro -- --neutral test-llm/control-tailwind/gen-*.html  # across systems
+
+# Finding 6: how much of the page an edit rewrites
+npm run repro -- --churn test-llm/repro-pricing-v4/gen-1.html test-llm/edit-density/canon-*.html
+npm run repro -- --churn test-llm/control-tailwind/gen-1.html test-llm/edit-density/tailwind-*.html
 ```
 
 Every generation is in [`test-llm/`](test-llm/), with
@@ -223,6 +296,12 @@ longer claims to fix LLM inconsistency, because Finding 2 says a strict prompt
 over an existing framework does that too. It claims to be that specification
 already written, mechanically checked, and about a third the size, which is what
 the numbers actually support.
+
+Finding 6 added the one thing to that list that a prompt cannot supply. A
+specification you write in a prompt is enforced only while the model is reading
+it; the first cross-cutting change edits the specification out of the page. A
+specification written as a vocabulary survives its own edits, and there is a
+linter to prove it did.
 
 Publishing the result that contradicts you is the only reason to trust the ones
 that do not.

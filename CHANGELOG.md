@@ -13,6 +13,10 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   the markup carries no index to fall out of order. On a narrow screen only the
   current label survives, which is what makes every hand-built version of this
   overflow.
+- **`npm run repro -- --churn <base> <edited...>`**: measures how much of a page
+  an edit rewrites, in styling decisions and in lines, each normalised by the
+  base file. Reproduction measures writing a page twice; this measures the other
+  half of the work.
 
 ### Measured
 - The stepper **did not do what was predicted**. All five generations adopted
@@ -32,6 +36,22 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 - `data-cols` capping at 4 turned out not to be a gap. Across 108 real uses in
   the corpus nobody ever wanted 5 or 6. The only case above 4 is a 7-column
   calendar, ten times, always inside an app layer that a calendar needs anyway.
+- **Finding 6, and it is the first answer to Finding 2.** Same base page, same
+  change request, three clean-context agents per styling system. Tightening the
+  vertical rhythm one step rewrote **8% of Canon's styling decisions against 16%
+  of strict Tailwind's**, five or six edits against twenty-one to twenty-nine,
+  same factor of two on lines.
+- **The control came out level, which is what makes that readable.** Adding a
+  testimonials section landed on 20% in both, with zero decisions touched
+  outside the request either way. There is no general editing advantage, only a
+  cross-cutting one.
+- **The mechanism is that a strict prompt cannot survive its own edits.** Two of
+  three Tailwind runs reported unprompted that the change was impossible without
+  breaking rule 3, and the files agree: `py-12` went from four uses to zero and
+  `p-6` from seven to one, so a routine density request deleted the house
+  style's verbatim patterns from the page. The third declined to tighten the FAQ
+  and left the request half done. Canon's runs came out lint-clean with the
+  vocabulary intact.
 
 ## [0.2.1] - 2026-08-04
 
