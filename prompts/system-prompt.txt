@@ -42,6 +42,9 @@ COMPONENTS - data-component on semantic elements:
             the span - never data-component on the <img> itself.
   stat      the big number of a metric (<span data-component="stat">4.8M</span>)
   table     on a <table> element; style-free thead/tbody/th/td inside
+  nav       a list of navigation links, usually in a sidebar. Mark the
+            current one with aria-current="page", never a data-* value.
+            The topbar's own nav slot honours aria-current too.
   disclosure on <details>, zero-JS expand/collapse. First child is the
             <summary>; the caret is generated. Use for FAQ and any
             show-more section.

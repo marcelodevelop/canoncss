@@ -68,6 +68,8 @@ COMPONENTS - `data-component` on semantic elements:
     modal     > data-slot=panel > data-slot={header|body|footer}
     avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
               the span - never data-component on the <img> itself.
+    nav       a list of navigation links, usually in a sidebar. Mark the
+              current one with `aria-current="page"`, never a data-* value.
     disclosure on `<details>`, zero-JS expand/collapse. First child is the
               `<summary>`; the caret is generated. Use for FAQ and any
               show-more section.

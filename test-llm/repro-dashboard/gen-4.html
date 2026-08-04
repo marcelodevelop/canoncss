@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwind Logistics - Admin Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Northwind</a>
+
+    <nav data-slot="nav">
+      <a data-component="button" data-variant="ghost" href="/overview">Overview</a>
+      <a data-component="button" data-variant="ghost" href="/shipments">Shipments</a>
+      <a data-component="button" data-variant="ghost" href="/invoices">Invoices</a>
+    </nav>
+
+    <div data-slot="actions">
+      <span data-component="avatar" data-size="sm">DA</span>
+    </div>
+
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/overview">Overview</a>
+        <a href="/shipments">Shipments</a>
+        <a href="/carriers">Carriers</a>
+        <a href="/invoices">Invoices</a>
+        <a href="/settings">Settings</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl" data-padding="lg">
+
+    <nav data-slot="sidebar">
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Operations</p>
+        <a data-component="button" data-variant="ghost" href="/overview">Overview</a>
+        <a data-component="button" data-variant="ghost" href="/shipments">Shipments</a>
+        <a data-component="button" data-variant="ghost" href="/carriers">Carriers</a>
+        <a data-component="button" data-variant="ghost" href="/invoices">Invoices</a>
+        <a data-component="button" data-variant="ghost" href="/settings">Settings</a>
+      </div>
+    </nav>
+
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="row" data-justify="between" data-align="center" data-wrap data-gap="md">
+          <h1>Overview</h1>
+          <a data-component="button" data-variant="primary" data-size="md" href="/shipments/new">Book a shipment</a>
+        </div>
+
+        <div data-layout="grid" data-cols="4" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="body">
+              <span data-component="stat">1,284</span>
+              <p data-tone="subtle">Shipments in transit</p>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <span data-component="stat">96.4%</span>
+              <p data-tone="subtle">On-time delivery, last 30 days</p>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <span data-component="stat">37</span>
+              <p data-tone="subtle">Exceptions needing review</p>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <span data-component="stat">$482K</span>
+              <p data-tone="subtle">Freight billed this month</p>
+            </div>
+          </article>
+
+        </div>
+
+        <hr data-component="divider">
+
+        <div data-layout="row" data-gap="sm" data-wrap data-align="end">
+          <label class="sr-only" for="shipment-search">Search shipments</label>
+          <input data-component="input" data-size="md" id="shipment-search" type="search" name="q" placeholder="Search tracking code or destination">
+
+          <label class="sr-only" for="carrier-filter">Filter by carrier</label>
+          <select data-component="select" data-size="md" id="carrier-filter" name="carrier">
+            <option value="">All carriers</option>
+            <option value="baltic">Baltic Freight Group</option>
+            <option value="meridian">Meridian Haulage</option>
+            <option value="cascade">Cascade Air Cargo</option>
+            <option value="ironwood">Ironwood Rail</option>
+          </select>
+
+          <label class="sr-only" for="status-filter">Filter by status</label>
+          <select data-component="select" data-size="md" id="status-filter" name="status">
+            <option value="">Any status</option>
+            <option value="delivered">Delivered</option>
+            <option value="in-transit">In transit</option>
+            <option value="delayed">Delayed</option>
+            <option value="exception">Exception</option>
+            <option value="booked">Booked</option>
+          </select>
+        </div>
+
+        <div data-layout="stack" data-gap="md">
+          <h2>Ten most recent shipments</h2>
+
+          <table data-component="table">
+            <thead>
+              <tr>
+                <th>Tracking code</th>
+                <th>Destination</th>
+                <th>Carrier</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-mono>NW-4471023</td>
+                <td>Rotterdam, NL</td>
+                <td>Baltic Freight Group</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>2 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470988</td>
+                <td>Hamburg, DE</td>
+                <td>Ironwood Rail</td>
+                <td><span data-component="badge" data-variant="info">In transit</span></td>
+                <td>2 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470931</td>
+                <td>Gothenburg, SE</td>
+                <td>Meridian Haulage</td>
+                <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                <td>1 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470877</td>
+                <td>Chicago, US</td>
+                <td>Cascade Air Cargo</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>1 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470812</td>
+                <td>Lyon, FR</td>
+                <td>Meridian Haulage</td>
+                <td><span data-component="badge" data-variant="error">Exception</span></td>
+                <td>31 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470765</td>
+                <td>Bilbao, ES</td>
+                <td>Baltic Freight Group</td>
+                <td><span data-component="badge" data-variant="info">In transit</span></td>
+                <td>31 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470702</td>
+                <td>Gdansk, PL</td>
+                <td>Ironwood Rail</td>
+                <td><span data-component="badge" data-variant="neutral">Booked</span></td>
+                <td>30 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470644</td>
+                <td>Dublin, IE</td>
+                <td>Cascade Air Cargo</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>30 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470590</td>
+                <td>Trieste, IT</td>
+                <td>Meridian Haulage</td>
+                <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                <td>29 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-4470533</td>
+                <td>Antwerp, BE</td>
+                <td>Baltic Freight Group</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>29 Jul 2026</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p data-tone="subtle">Showing the ten most recent shipments. Older records live in the Shipments archive.</p>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
