@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay Pricing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-zinc-900 dark:bg-zinc-900">
+
+<header class="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
+  <span class="text-lg font-bold text-zinc-900">Relay</span>
+  <nav class="flex items-center gap-2">
+    <a href="#product" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Product</a>
+    <a href="#pricing" class="block rounded-md bg-teal-50 px-3 py-2 text-teal-700 font-medium">Pricing</a>
+    <a href="#docs" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Docs</a>
+  </nav>
+  <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Sign up</button>
+</header>
+
+<section class="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center gap-6 px-6">
+  <h1 class="text-3xl font-bold text-zinc-900">Ship every release note, incident and status update from one place</h1>
+  <p class="max-w-prose mx-auto text-lg text-zinc-600">Relay turns your deploys, alerts and changelogs into clear messages your customers actually read. Connect a repository, pick the channels, and let the updates write themselves.</p>
+  <div class="flex items-center gap-4">
+    <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Start free trial</button>
+    <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Book a demo</button>
+  </div>
+  <p class="text-sm text-zinc-400">No credit card required. Cancel any time.</p>
+</section>
+
+<section id="pricing" class="mx-auto max-w-6xl px-6 py-12">
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold text-zinc-900">Pricing</h2>
+    <p class="max-w-prose text-base text-zinc-600">Every plan includes unlimited channels, the full API and email support. Pay monthly, switch or leave whenever you want.</p>
+  </div>
+
+  <div class="grid grid-cols-3 gap-8 mt-12">
+
+    <div class="rounded-lg border border-zinc-200 bg-white p-6">
+      <div class="flex flex-col gap-4">
+        <h3 class="text-xl font-medium text-zinc-900">Starter</h3>
+        <p class="text-3xl font-bold text-zinc-900">$19</p>
+        <p class="text-sm text-zinc-600">per month, billed monthly</p>
+        <ul class="flex flex-col gap-2 text-sm text-zinc-600">
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> Up to 3 connected repositories</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> 5,000 updates delivered per month</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> Slack and email destinations</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> 30 days of message history</li>
+        </ul>
+        <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Choose Starter</button>
+      </div>
+    </div>
+
+    <div class="rounded-lg border-2 border-teal-700 bg-white p-6 shadow-lg">
+      <div class="flex flex-col gap-4">
+        <span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs">Recommended</span>
+        <h3 class="text-xl font-medium text-zinc-900">Team</h3>
+        <p class="text-3xl font-bold text-zinc-900">$79</p>
+        <p class="text-sm text-zinc-600">per month, billed monthly</p>
+        <ul class="flex flex-col gap-2 text-sm text-zinc-600">
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> Up to 25 connected repositories</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> 100,000 updates delivered per month</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> Status page and in-app widget</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> Approval workflow with two reviewers</li>
+        </ul>
+        <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Choose Team</button>
+      </div>
+    </div>
+
+    <div class="rounded-lg border border-zinc-200 bg-white p-6">
+      <div class="flex flex-col gap-4">
+        <h3 class="text-xl font-medium text-zinc-900">Enterprise</h3>
+        <p class="text-3xl font-bold text-zinc-900">$299</p>
+        <p class="text-sm text-zinc-600">per month, billed annually</p>
+        <ul class="flex flex-col gap-2 text-sm text-zinc-600">
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> Unlimited repositories and workspaces</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> Unlimited updates with priority delivery</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> SAML single sign-on and audit log</li>
+          <li class="flex items-center gap-2"><span class="text-emerald-600">Included</span> 99.9% uptime agreement and named contact</li>
+        </ul>
+        <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Talk to sales</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="mx-auto max-w-prose px-6 py-12">
+  <h2 class="text-2xl font-bold text-zinc-900">Frequently asked questions</h2>
+
+  <div class="flex flex-col mt-8">
+    <details class="border-t border-zinc-200">
+      <summary class="flex cursor-pointer justify-between py-4"><span class="text-base font-medium text-zinc-900">Can I change plans in the middle of a billing period?</span><span class="text-zinc-400">Open</span></summary>
+      <p class="text-sm text-zinc-600 pb-4">Yes. Upgrades take effect the moment you confirm them, and we charge the difference for the days left in the period. Downgrades apply on your next renewal date, so you keep the higher limits until then.</p>
+    </details>
+
+    <details class="border-t border-zinc-200">
+      <summary class="flex cursor-pointer justify-between py-4"><span class="text-base font-medium text-zinc-900">What counts as a delivered update?</span><span class="text-zinc-400">Open</span></summary>
+      <p class="text-sm text-zinc-600 pb-4">One update is one message sent to one destination. A release note posted to Slack and emailed to 400 subscribers counts as 401 updates. Drafts, previews and failed deliveries are never counted.</p>
+    </details>
+
+    <details class="border-t border-zinc-200">
+      <summary class="flex cursor-pointer justify-between py-4"><span class="text-base font-medium text-zinc-900">Do you offer a discount for annual billing?</span><span class="text-zinc-400">Open</span></summary>
+      <p class="text-sm text-zinc-600 pb-4">Paying for a year up front takes two months off the Starter and Team plans. Enterprise is annual by default and the listed price already reflects that. Nonprofits and student projects get an additional 50% off on request.</p>
+    </details>
+
+    <details class="border-t border-zinc-200">
+      <summary class="flex cursor-pointer justify-between py-4"><span class="text-base font-medium text-zinc-900">What happens to my data if I cancel?</span><span class="text-zinc-400">Open</span></summary>
+      <p class="text-sm text-zinc-600 pb-4">Your workspace stays readable for 60 days after cancellation so you can export message history, subscriber lists and templates as JSON or CSV. After 60 days we delete everything, and we send a reminder one week before that happens.</p>
+    </details>
+
+    <div class="border-t border-zinc-200"></div>
+  </div>
+</section>
+
+<footer class="border-t border-zinc-200 bg-zinc-50">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="grid grid-cols-3 gap-8">
+
+      <nav class="flex flex-col gap-1">
+        <h3 class="text-xl font-medium text-zinc-900">Product</h3>
+        <a href="#changelog" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Changelog</a>
+        <a href="#status" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Status pages</a>
+        <a href="#integrations" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Integrations</a>
+        <a href="#changes" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">What is new</a>
+      </nav>
+
+      <nav class="flex flex-col gap-1">
+        <h3 class="text-xl font-medium text-zinc-900">Developers</h3>
+        <a href="#docs" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Documentation</a>
+        <a href="#api" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">API reference</a>
+        <a href="#webhooks" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Webhooks</a>
+        <a href="#uptime" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Service status</a>
+      </nav>
+
+      <nav class="flex flex-col gap-1">
+        <h3 class="text-xl font-medium text-zinc-900">Company</h3>
+        <a href="#about" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">About Relay</a>
+        <a href="#careers" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Careers</a>
+        <a href="#privacy" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Privacy</a>
+        <a href="#contact" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Contact us</a>
+      </nav>
+
+    </div>
+
+    <div class="border-t border-zinc-200 mt-8"></div>
+    <p class="text-sm text-zinc-400 mt-8">Relay Software, 44 Bridge Street, Dublin. Copyright 2026.</p>
+  </div>
+</footer>
+
+</body>
+</html>

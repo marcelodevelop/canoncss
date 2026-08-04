@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay - Pricing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-zinc-900">
+
+<header class="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
+  <span class="text-xl font-bold text-teal-700">Relay</span>
+  <nav class="flex items-center gap-2">
+    <a href="#product" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Product</a>
+    <a href="#pricing" class="block rounded-md bg-teal-50 px-3 py-2 text-teal-700 font-medium">Pricing</a>
+    <a href="#docs" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Docs</a>
+    <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Sign up</button>
+  </nav>
+</header>
+
+<section class="flex min-h-screen flex-col items-center justify-center gap-6">
+  <h1 class="text-3xl font-bold">Every message reaches someone.</h1>
+  <p class="max-w-prose mx-auto text-lg text-zinc-600">Relay routes transactional email, SMS and push through one API, retries what fails and tells you exactly where a message stopped. Pick a plan and send your first batch in under ten minutes.</p>
+  <div class="flex items-center gap-4">
+    <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Start free trial</button>
+    <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Talk to sales</button>
+  </div>
+  <p class="text-sm text-zinc-400">No credit card required. 10,000 messages included in the trial.</p>
+</section>
+
+<section id="pricing" class="mx-auto max-w-6xl px-6 py-12">
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-2xl font-bold">Plans that scale with your volume</h2>
+      <p class="text-base text-zinc-600">Every plan includes the full API, all three channels and unlimited teammates. You only pay for what you send.</p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+
+      <div class="rounded-lg border border-zinc-200 bg-white p-6">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-xl font-medium">Starter</h3>
+            <p class="text-sm text-zinc-600">For a first product sending its first notifications.</p>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-3xl font-bold">$19</span>
+            <span class="text-sm text-zinc-400">per month, 50,000 messages</span>
+          </div>
+          <ul class="flex flex-col gap-3">
+            <li class="text-sm text-zinc-600">Email, SMS and push from one endpoint</li>
+            <li class="text-sm text-zinc-600">Automatic retries for 24 hours</li>
+            <li class="text-sm text-zinc-600">7 days of delivery logs</li>
+            <li class="text-sm text-zinc-600">Community support</li>
+          </ul>
+          <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Choose Starter</button>
+        </div>
+      </div>
+
+      <div class="rounded-lg border-2 border-teal-700 bg-white p-6 shadow-lg">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs">Recommended</span>
+            <h3 class="text-xl font-medium">Team</h3>
+            <p class="text-sm text-zinc-600">For products with real traffic and an on-call rotation.</p>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-3xl font-bold">$49</span>
+            <span class="text-sm text-zinc-400">per month, 500,000 messages</span>
+          </div>
+          <ul class="flex flex-col gap-3">
+            <li class="text-sm text-zinc-600">Everything in Starter</li>
+            <li class="text-sm text-zinc-600">Webhooks for every delivery event</li>
+            <li class="text-sm text-zinc-600">90 days of searchable logs</li>
+            <li class="text-sm text-zinc-600">Email support with a 4 hour response</li>
+          </ul>
+          <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Choose Team</button>
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 bg-white p-6">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-xl font-medium">Scale</h3>
+            <p class="text-sm text-zinc-600">For teams where a dropped message costs money.</p>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-3xl font-bold">$149</span>
+            <span class="text-sm text-zinc-400">per month, 5 million messages</span>
+          </div>
+          <ul class="flex flex-col gap-3">
+            <li class="text-sm text-zinc-600">Everything in Team</li>
+            <li class="text-sm text-zinc-600">Dedicated sending IPs and custom domains</li>
+            <li class="text-sm text-zinc-600">99.95% uptime commitment in writing</li>
+            <li class="text-sm text-zinc-600">Shared Slack channel with an engineer</li>
+          </ul>
+          <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Choose Scale</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-4xl px-6 py-12">
+  <div class="flex flex-col gap-6">
+    <h2 class="text-2xl font-bold">Frequently asked questions</h2>
+
+    <div class="flex flex-col gap-1">
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">What counts as a message?</span>
+          <span class="text-sm text-zinc-400">Open</span>
+        </summary>
+        <p class="max-w-prose mx-auto pb-4 text-sm text-zinc-600">One message is one delivery attempt to one recipient on one channel. A retry after a temporary failure is not billed again, and a single API call that fans out to email and SMS counts as two messages.</p>
+      </details>
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">What happens if I go over my monthly limit?</span>
+          <span class="text-sm text-zinc-400">Open</span>
+        </summary>
+        <p class="max-w-prose mx-auto pb-4 text-sm text-zinc-600">Nothing stops sending. Overage is billed at the plan rate on your next invoice and we email you at 80% and 100% of the included volume so the bill is never a surprise. You can also set a hard cap in the dashboard.</p>
+      </details>
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">Can I change plans in the middle of a month?</span>
+          <span class="text-sm text-zinc-400">Open</span>
+        </summary>
+        <p class="max-w-prose mx-auto pb-4 text-sm text-zinc-600">Yes, in one click and with no call to sales. Upgrades take effect immediately and we prorate the difference. Downgrades take effect at the start of your next billing period so you keep the volume you already paid for.</p>
+      </details>
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">Do you offer a discount for annual billing?</span>
+          <span class="text-sm text-zinc-400">Open</span>
+        </summary>
+        <p class="max-w-prose mx-auto pb-4 text-sm text-zinc-600">Paying yearly takes two months off every plan, and the included volume becomes an annual pool instead of a monthly one, which helps if your sending is seasonal. Nonprofits and pre-revenue startups can write to us for more.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-zinc-200">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="grid grid-cols-3 gap-8">
+
+      <div class="flex flex-col gap-3">
+        <h3 class="text-xl font-medium">Product</h3>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Email API</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">SMS and push</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Delivery logs</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Status page</a>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h3 class="text-xl font-medium">Company</h3>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">About Relay</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Careers</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Changelog</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Contact sales</a>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h3 class="text-xl font-medium">Resources</h3>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Documentation</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">API reference</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Client libraries</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Privacy and terms</a>
+      </div>
+
+    </div>
+    <p class="mt-8 text-sm text-zinc-400">Relay Messaging, Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

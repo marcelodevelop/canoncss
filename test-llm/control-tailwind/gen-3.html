@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay Pricing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-zinc-900">
+
+<header class="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
+  <div class="flex items-center gap-2">
+    <span class="text-xl font-bold text-teal-700">Relay</span>
+    <span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs">Beta</span>
+  </div>
+  <div class="flex items-center gap-6">
+    <nav>
+      <div class="flex items-center gap-2">
+        <a href="#product" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Product</a>
+        <a href="#pricing" class="block rounded-md bg-teal-50 px-3 py-2 text-teal-700 font-medium">Pricing</a>
+        <a href="#docs" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Docs</a>
+      </div>
+    </nav>
+    <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Sign up</button>
+  </div>
+</header>
+
+<section class="flex min-h-screen flex-col items-center justify-center">
+  <div class="mx-auto max-w-prose px-6 py-12">
+    <div class="flex flex-col gap-6">
+      <h1 class="text-3xl font-bold">Pricing that scales with your message volume, not your headcount</h1>
+      <p class="text-lg text-zinc-600">Relay routes webhooks, retries failed deliveries and keeps a searchable log of every event your systems send. Start free, upgrade when your traffic does.</p>
+      <div class="flex items-center gap-4">
+        <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Start free trial</button>
+        <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Talk to sales</button>
+      </div>
+      <p class="text-sm text-zinc-400">No credit card required. Cancel any time from the dashboard.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="mx-auto max-w-6xl px-6 py-12">
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-2xl font-bold">Three plans, one billing page</h2>
+      <p class="text-base text-zinc-600">Every plan includes the full delivery engine. The difference is throughput, retention and how much of our team you get.</p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-8">
+
+      <div class="rounded-lg border border-zinc-200 bg-white p-6">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-xl font-medium">Starter</h3>
+            <p class="text-3xl font-bold">$0</p>
+            <p class="text-sm text-zinc-600">For side projects and the first integration you ship.</p>
+          </div>
+          <div class="border-t border-zinc-200"></div>
+          <ul class="flex flex-col gap-3">
+            <li class="text-sm text-zinc-600">10,000 events per month</li>
+            <li class="text-sm text-zinc-600">3 day event log retention</li>
+            <li class="text-sm text-zinc-600">Automatic retries with backoff</li>
+            <li class="text-sm text-zinc-600">Community support on Discord</li>
+          </ul>
+          <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Create free account</button>
+        </div>
+      </div>
+
+      <div class="rounded-lg border-2 border-teal-700 bg-white p-6 shadow-lg">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs">Recommended</span>
+            <h3 class="text-xl font-medium">Growth</h3>
+            <p class="text-3xl font-bold">$49</p>
+            <p class="text-sm text-zinc-600">For teams running Relay in production every day.</p>
+          </div>
+          <div class="border-t border-zinc-200"></div>
+          <ul class="flex flex-col gap-3">
+            <li class="text-sm text-zinc-600">2,000,000 events per month</li>
+            <li class="text-sm text-zinc-600">30 day event log retention</li>
+            <li class="text-sm text-zinc-600">Replay any delivery from the dashboard</li>
+            <li class="text-sm text-zinc-600">Email support with a one day response</li>
+          </ul>
+          <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">Start 14 day trial</button>
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 bg-white p-6">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-xl font-medium">Scale</h3>
+            <p class="text-3xl font-bold">$199</p>
+            <p class="text-sm text-zinc-600">For platforms where a dropped webhook is an incident.</p>
+          </div>
+          <div class="border-t border-zinc-200"></div>
+          <ul class="flex flex-col gap-3">
+            <li class="text-sm text-zinc-600">Unlimited events, fair use applies</li>
+            <li class="text-sm text-zinc-600">1 year event log retention</li>
+            <li class="text-sm text-zinc-600">Dedicated delivery regions and static IPs</li>
+            <li class="text-sm text-zinc-600">99.99% uptime SLA and a shared Slack channel</li>
+          </ul>
+          <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Contact sales</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-4xl px-6 py-12">
+  <div class="flex flex-col gap-6">
+    <h2 class="text-2xl font-bold">Frequently asked questions</h2>
+
+    <div class="flex flex-col gap-1">
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">What counts as an event?</span>
+          <span class="text-zinc-400">+</span>
+        </summary>
+        <p class="pb-4 text-base text-zinc-600">One event is one payload accepted by Relay, no matter how many endpoints it fans out to. If a single order confirmation goes to your warehouse, your CRM and your analytics pipeline, that is one event and three deliveries. Retries are never billed.</p>
+      </details>
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">What happens if I go over my monthly limit?</span>
+          <span class="text-zinc-400">+</span>
+        </summary>
+        <p class="pb-4 text-base text-zinc-600">Nothing breaks. We keep delivering and send you a notice at 80% and 100% of your allowance. Overage on Growth is billed at $2 per 100,000 events, and you can set a hard spending cap in billing settings if you would rather queue than pay.</p>
+      </details>
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">Can I change plans in the middle of a billing cycle?</span>
+          <span class="text-zinc-400">+</span>
+        </summary>
+        <p class="pb-4 text-base text-zinc-600">Yes. Upgrades take effect immediately and we prorate the remainder of the month. Downgrades take effect at the start of your next cycle so you keep the higher retention window until it ends.</p>
+      </details>
+
+      <details class="border-t border-zinc-200">
+        <summary class="flex cursor-pointer justify-between py-4">
+          <span class="text-base font-medium">Do you offer discounts for startups or nonprofits?</span>
+          <span class="text-zinc-400">+</span>
+        </summary>
+        <p class="pb-4 text-base text-zinc-600">We take 50% off the first year for registered nonprofits and for companies under two years old with fewer than ten people. Write to sales@relay.dev from your work address and we will apply it to your account the same week.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-zinc-200">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="grid grid-cols-3 gap-8">
+
+      <nav>
+        <div class="flex flex-col gap-3">
+          <h3 class="text-xl font-medium">Product</h3>
+          <a href="#features" class="text-sm text-zinc-600">Features</a>
+          <a href="#pricing" class="text-sm text-zinc-600">Pricing</a>
+          <a href="#changelog" class="text-sm text-zinc-600">Changelog</a>
+          <a href="#status" class="text-sm text-zinc-600">Status page</a>
+        </div>
+      </nav>
+
+      <nav>
+        <div class="flex flex-col gap-3">
+          <h3 class="text-xl font-medium">Developers</h3>
+          <a href="#docs" class="text-sm text-zinc-600">Documentation</a>
+          <a href="#api" class="text-sm text-zinc-600">API reference</a>
+          <a href="#sdks" class="text-sm text-zinc-600">Client libraries</a>
+          <a href="#guides" class="text-sm text-zinc-600">Integration guides</a>
+        </div>
+      </nav>
+
+      <nav>
+        <div class="flex flex-col gap-3">
+          <h3 class="text-xl font-medium">Company</h3>
+          <a href="#about" class="text-sm text-zinc-600">About Relay</a>
+          <a href="#careers" class="text-sm text-zinc-600">Careers</a>
+          <a href="#security" class="text-sm text-zinc-600">Security</a>
+          <a href="#contact" class="text-sm text-zinc-600">Contact</a>
+        </div>
+      </nav>
+
+    </div>
+    <div class="border-t border-zinc-200 mt-8"></div>
+    <p class="mt-6 text-sm text-zinc-400">Relay is built in Rotterdam. Copyright 2026 Relay Systems BV.</p>
+  </div>
+</footer>
+
+</body>
+</html>

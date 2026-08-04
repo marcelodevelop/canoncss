@@ -1,0 +1,64 @@
+TAILWIND HOUSE STYLE - write HTML using only this system.
+
+This is the control condition for Canon's reproducibility experiment. It is
+written to be as strict as Canon's own prompt, at comparable length, using the
+approach a real team would take: a constrained design system expressed as
+allowed utility classes. A weak control proves nothing.
+
+SPACING - only these steps, never any other number:
+  1 (0.25rem)  2  3  4  6  8  12  16  24
+  Applies to p-*, px-*, py-*, m-*, mt-*, mb-*, gap-*, space-y-*.
+
+TYPE - only these:
+  text-xs  text-sm  text-base  text-lg  text-xl  text-2xl  text-3xl
+  font-normal  font-medium  font-bold
+  Headings: h1 text-3xl font-bold, h2 text-2xl font-bold, h3 text-xl font-medium
+
+COLOR - only these, never any other palette or shade:
+  Surfaces:  bg-white  bg-zinc-50  bg-zinc-100  dark:bg-zinc-900
+  Text:      text-zinc-900  text-zinc-600  text-zinc-400  text-white
+  Brand:     bg-teal-700  text-teal-700  hover:bg-teal-800
+  Status:    text-emerald-600  text-amber-600  text-red-600  text-blue-600
+  Borders:   border-zinc-200  border-zinc-300
+
+RADIUS AND SHADOW - only these:
+  rounded  rounded-md  rounded-lg  rounded-full
+  shadow-sm  shadow  shadow-lg
+
+WIDTH - only these:
+  max-w-prose  max-w-4xl  max-w-6xl   always with mx-auto
+
+LAYOUT PATTERNS - use exactly these, do not invent alternatives:
+  Vertical stack:    flex flex-col gap-{step}
+  Horizontal row:    flex items-center gap-{step}
+  Grid:              grid grid-cols-{1|2|3|4} gap-{step}
+  Sidebar:           grid grid-cols-[16rem_1fr] gap-8
+  Centered page:     mx-auto max-w-{width} px-6 py-12
+  Hero:              flex min-h-screen flex-col items-center justify-center
+
+COMPONENT PATTERNS - use exactly these class strings:
+  Button primary:    rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800
+  Button secondary:  rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50
+  Button ghost:      rounded-md px-4 py-2 hover:bg-zinc-100
+  Card:              rounded-lg border border-zinc-200 bg-white p-6
+  Card featured:     rounded-lg border-2 border-teal-700 bg-white p-6 shadow-lg
+  Badge:             inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs
+  Input:             w-full rounded-md border border-zinc-300 px-3 py-2
+  Select:            w-full rounded-md border border-zinc-300 px-3 py-2
+  Topbar:            flex items-center justify-between border-b border-zinc-200 px-6 py-4
+  Table:             w-full text-sm  (th: text-left font-medium text-zinc-600 p-3)
+  Nav link:          block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100
+  Nav link current:  block rounded-md bg-teal-50 px-3 py-2 text-teal-700 font-medium
+  Divider:           border-t border-zinc-200
+  Stat:              text-3xl font-bold
+  Disclosure:        <details> with summary: flex cursor-pointer justify-between py-4
+
+RULES - enforce strictly:
+  1. Only the classes listed above. If a utility is not listed, it does not
+     exist. No arbitrary values in square brackets except the sidebar template.
+  2. No inline styles, no <style> blocks, no custom CSS.
+  3. Use the component patterns verbatim. Do not reorder or vary them.
+  4. Semantic elements: <button> for buttons, <header> for the topbar,
+     <table> for tables, <nav> for navigation, <details> for disclosures.
+  5. Dark mode: the dark: variants listed above only.
+  6. Load Tailwind via <script src="https://cdn.tailwindcss.com"></script>.

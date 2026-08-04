@@ -180,9 +180,20 @@ Zero violations only proves the model followed the rules. The thesis is that it
 produces the *same thing*, which needs a different measurement: generate one
 spec five times and compare the outputs to each other. Canon scores **91%
 structural reproduction** on two unrelated specs, a pricing page and an admin
-dashboard, measured with `npm run repro`. [`test-llm/README.md`](test-llm/README.md)
-has the full table, including the round where a gain turned out to be
-overfitted to one spec and did not generalise.
+dashboard, measured with `npm run repro`.
+
+**And a control group says that is not unique to Canon.** The same spec built
+with Tailwind under an equally strict house-style prompt reproduced just as
+well: 88% element sequence against Canon's 90%, and 92% styling agreement
+against Canon's 90%. Both scored zero violations of their own rules.
+
+So the honest claim is narrower than "Canon fixes LLM inconsistency". What
+fixes it is a specified vocabulary with a linter behind it. Canon's argument is
+that it *is* that, already written, and that it reaches the same consistency
+carrying **about 30% fewer styling decisions per page** (42 against 63), which
+is what makes the diffs smaller to review. The full comparison, including where
+the control was unfair in both directions, is in
+[`test-llm/README.md`](test-llm/README.md).
 
 ## Explore
 
