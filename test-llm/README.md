@@ -99,13 +99,44 @@ one spec is the exact overfitting mistake this corpus already caught once.
 both measures.** Compliance was tied at zero across 3811 class uses. The second
 run did not rescue the thesis; it made the result firmer and slightly worse.
 
+### The third condition, and what it restores
+
+The strict control handed the model verbatim class strings per component, which
+is Canon's own approach wearing a Tailwind costume. Almost nobody works that
+way. So a third condition was run: a competent brief with no closed vocabulary,
+the kind a good team actually writes. It asks for consistent spacing, one
+palette, a type scale, semantics, accessibility and responsiveness. It just
+does not enumerate the allowed values, which is the single variable under test.
+
+| Condition | Pricing | Dashboard | Decisions per file |
+|---|---|---|---|
+| Canon | 90% / 90% | 90% / 91% | 41-43 |
+| Tailwind, strict house style | 88% / 92% | 93% / 94% | 60-68 |
+| **Tailwind, realistic brief** | **84% / 67%** | **87% / 58%** | **90-159** |
+
+Element sequence first, styling vocabulary second.
+
+Against Tailwind as it is actually briefed, Canon agrees on **90% of its
+styling vocabulary where Tailwind manages 58 to 67**, and does it in **41 to 43
+decisions per page against 90 to 159**. Three times the surface, a third of the
+agreement, and the spread between generations is enormous: one page used 90
+distinct utilities and another 141 for the same spec.
+
+So the founding diagnosis is not just plausible, it is now demonstrated. Too
+many degrees of freedom does produce inconsistency, and the effect is large.
+
+What the strict control adds is the honest limit on the remedy: **a closed
+vocabulary is not the only fix.** Writing down the vocabulary works too. Canon's
+case is that it is that written vocabulary, already done, mechanically checked,
+and about a third the size.
+
 ### What that means
 
 The honest reading is that **the strictness of the specification is doing the
-work, not the CSS architecture.** Canon's founding claim, that too many degrees
-of freedom is the problem, survives. The claim that a new framework is the
-answer does not: a constrained prompt over an existing one reached the same
-place.
+work, not the CSS architecture.** A constrained prompt over Tailwind reaches
+the same place as a closed vocabulary. What it does not do is get there for
+free: that prompt has to be written, agreed, and kept from rotting, and the
+realistic condition above shows what happens when it is not.
 
 Two real differences remain, and they are smaller than the original pitch:
 
