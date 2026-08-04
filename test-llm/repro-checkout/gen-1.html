@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout - Delivery - Margin</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Margin</a>
+  <nav data-slot="nav">
+    <a href="/books">Books</a>
+    <a href="/lists">Reading lists</a>
+    <a href="/checkout" aria-current="page">Checkout</a>
+  </nav>
+  <div data-slot="actions">
+    <span data-component="badge" data-variant="brand">5 books</span>
+    <span data-component="stat">&pound;55.90</span>
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/cart">View cart</a>
+  </div>
+  <details data-slot="menu">
+    <summary>&#9776;</summary>
+    <nav>
+      <a href="/books">Books</a>
+      <a href="/lists">Reading lists</a>
+      <a href="/cart">Cart</a>
+      <a href="/checkout" aria-current="page">Checkout</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="wide" data-gap="xl" data-padding="lg">
+
+  <div data-layout="stack" data-gap="sm">
+    <h1>Checkout</h1>
+    <p data-tone="subtle">Step 2 of 4. Tell us where the books should go.</p>
+  </div>
+
+  <ol data-x-component="stepper" aria-label="Checkout progress">
+    <li data-x-slot="step" data-x-state="complete">
+      <span data-component="badge" data-variant="success">1</span>
+      <a href="/cart">Cart</a>
+      <span data-tone="subtle">5 books, &pound;51.95</span>
+    </li>
+    <li data-x-slot="step" data-x-state="current" aria-current="step">
+      <span data-component="badge" data-variant="brand">2</span>
+      <span>Delivery</span>
+      <span data-tone="subtle">Address and speed</span>
+    </li>
+    <li data-x-slot="step" data-x-state="upcoming">
+      <span data-component="badge" data-variant="neutral">3</span>
+      <span>Payment</span>
+      <span data-tone="subtle">Card or gift credit</span>
+    </li>
+    <li data-x-slot="step" data-x-state="upcoming">
+      <span data-component="badge" data-variant="neutral">4</span>
+      <span>Review</span>
+      <span data-tone="subtle">Confirm and place order</span>
+    </li>
+  </ol>
+
+  <hr data-component="divider">
+
+  <div data-layout="sidebar" data-gap="xl" data-align="start">
+
+    <div data-slot="main" data-layout="stack" data-gap="xl">
+
+      <form data-layout="stack" data-gap="xl" action="/checkout/payment" method="post">
+
+        <section data-layout="stack" data-gap="md">
+          <h2>Delivery address</h2>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="full-name">Full name</label>
+            <input data-component="input" data-size="md" id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Elena Marsh" required>
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="street">Street address</label>
+            <input data-component="input" data-size="md" id="street" name="street" type="text" autocomplete="street-address" placeholder="14 Kiln Lane, Flat 2" required>
+          </div>
+
+          <div data-layout="grid" data-cols="2" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <label for="city">City</label>
+              <input data-component="input" data-size="md" id="city" name="city" type="text" autocomplete="address-level2" placeholder="Bristol" required>
+            </div>
+            <div data-layout="stack" data-gap="xs">
+              <label for="postcode">Postcode</label>
+              <input data-component="input" data-size="md" id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="BS1 4QA" required>
+            </div>
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="country">Country</label>
+            <select data-component="select" data-size="md" id="country" name="country" autocomplete="country-name">
+              <option selected>United Kingdom</option>
+              <option>Ireland</option>
+              <option>France</option>
+              <option>Germany</option>
+              <option>Spain</option>
+              <option>Netherlands</option>
+            </select>
+          </div>
+
+          <label>
+            <input type="checkbox" name="same-billing" checked>
+            Billing address is the same
+          </label>
+        </section>
+
+        <hr data-component="divider">
+
+        <section data-layout="stack" data-gap="md">
+          <h2>Delivery speed</h2>
+          <p data-tone="subtle">Every order leaves our Bristol shop wrapped in recycled paper.</p>
+
+          <div data-layout="stack" data-gap="sm">
+
+            <label>
+              <input type="radio" name="speed" value="standard" checked>
+              <span data-layout="stack" data-gap="xs">
+                <span>Standard post</span>
+                <span data-tone="subtle">Arrives Mon 10 Aug &ndash; Wed 12 Aug</span>
+              </span>
+              <span data-component="stat">&pound;3.95</span>
+            </label>
+
+            <label>
+              <input type="radio" name="speed" value="express">
+              <span data-layout="stack" data-gap="xs">
+                <span>Express courier</span>
+                <span data-tone="subtle">Arrives Thu 6 Aug</span>
+              </span>
+              <span data-component="stat">&pound;6.95</span>
+            </label>
+
+            <label>
+              <input type="radio" name="speed" value="next-day">
+              <span data-layout="stack" data-gap="xs">
+                <span>Next day, before noon</span>
+                <span data-tone="subtle">Arrives Wed 5 Aug if you order before 6pm today</span>
+              </span>
+              <span data-component="stat">&pound;9.95</span>
+            </label>
+
+          </div>
+        </section>
+
+        <details data-component="disclosure">
+          <summary>Add a gift message</summary>
+          <div data-layout="stack" data-gap="xs" data-padding="sm">
+            <label for="gift-message">We will hand-write your message on a Margin card and tuck it inside the parcel.</label>
+            <textarea data-component="textarea" data-size="md" id="gift-message" name="gift-message" rows="4" placeholder="For Anna, who reads faster than anyone I know. Happy birthday."></textarea>
+            <p data-tone="subtle">Up to 240 characters. The price is never shown on a gift order.</p>
+          </div>
+        </details>
+
+        <hr data-component="divider">
+
+        <div data-layout="row" data-gap="sm" data-justify="between" data-wrap>
+          <a data-component="button" data-variant="secondary" data-size="md" href="/cart">Back to cart</a>
+          <button data-component="button" data-variant="primary" data-size="md" type="submit">Continue to payment</button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div data-slot="sidebar" data-layout="stack" data-gap="md">
+
+      <div data-component="card">
+        <div data-slot="header">Order summary</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+
+          <table data-component="table">
+            <caption class="sr-only">Books in your order</caption>
+            <thead>
+              <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">The Overstory <span data-tone="subtle">Richard Powers</span></th>
+                <td data-mono>1</td>
+                <td data-mono>&pound;10.99</td>
+              </tr>
+              <tr>
+                <th scope="row">A Field Guide to Getting Lost <span data-tone="subtle">Rebecca Solnit</span></th>
+                <td data-mono>2</td>
+                <td data-mono>&pound;17.98</td>
+              </tr>
+              <tr>
+                <th scope="row">Piranesi <span data-tone="subtle">Susanna Clarke</span></th>
+                <td data-mono>1</td>
+                <td data-mono>&pound;9.99</td>
+              </tr>
+              <tr>
+                <th scope="row">The Book of Trespass <span data-tone="subtle">Nick Hayes</span></th>
+                <td data-mono>1</td>
+                <td data-mono>&pound;12.99</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <hr data-component="divider">
+
+          <div data-layout="row" data-justify="between" data-gap="sm">
+            <span data-tone="subtle">Subtotal</span>
+            <span data-mono>&pound;51.95</span>
+          </div>
+          <div data-layout="row" data-justify="between" data-gap="sm">
+            <span data-tone="subtle">Delivery, standard post</span>
+            <span data-mono>&pound;3.95</span>
+          </div>
+
+          <hr data-component="divider" data-variant="strong">
+
+          <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+            <span>Total to pay</span>
+            <span data-component="stat">&pound;55.90</span>
+          </div>
+
+        </div>
+        <div data-slot="footer" data-layout="stack" data-gap="xs">
+          <span data-component="badge" data-variant="info">VAT included</span>
+          <p data-tone="subtle">Nothing is charged until you confirm at the review step.</p>
+        </div>
+      </div>
+
+      <div data-component="card" data-tone="subtle">
+        <div data-slot="header">Reading the small print</div>
+        <div data-slot="body" data-layout="stack" data-gap="sm">
+          <ul>
+            <li>Free returns within 30 days, unread or read.</li>
+            <li>Signed copies ship from the shop floor and may take a day longer.</li>
+            <li>Questions? Email hello@margin.books or call 0117 496 0155.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>

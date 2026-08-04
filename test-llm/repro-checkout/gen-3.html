@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout - Margin</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a href="/" data-slot="brand">Margin</a>
+  <div data-slot="actions">
+    <div data-layout="row" data-gap="sm" data-align="center">
+      <a href="/cart" data-component="button" data-variant="ghost" data-size="sm">
+        Cart
+      </a>
+      <span data-component="badge" data-variant="brand">5 books</span>
+      <span data-component="stat">£47.46</span>
+    </div>
+  </div>
+</header>
+
+<main data-layout="centered" data-width="wide" data-gap="xl">
+
+  <div data-layout="stack" data-gap="md">
+    <h1>Checkout</h1>
+    <p data-tone="subtle">Step 2 of 4 - tell us where your books should go.</p>
+  </div>
+
+  <nav aria-label="Checkout progress">
+    <ol data-x-component="stepper">
+      <li data-x-slot="step" data-x-state="complete">Cart</li>
+      <li data-x-slot="step" data-x-state="current" aria-current="step">Delivery</li>
+      <li data-x-slot="step" data-x-state="upcoming">Payment</li>
+      <li data-x-slot="step" data-x-state="upcoming">Review</li>
+    </ol>
+  </nav>
+
+  <hr data-component="divider">
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <div data-slot="main">
+      <form data-layout="stack" data-gap="xl" action="/checkout/payment" method="post">
+
+        <section data-layout="stack" data-gap="md">
+          <h2>Delivery address</h2>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="full-name">Full name</label>
+            <input data-component="input" id="full-name" name="full-name" type="text" autocomplete="name" data-full>
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="street">Street address</label>
+            <input data-component="input" id="street" name="street" type="text" autocomplete="street-address" data-full>
+          </div>
+
+          <div data-layout="grid" data-cols="2" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <label for="city">City</label>
+              <input data-component="input" id="city" name="city" type="text" autocomplete="address-level2" data-full>
+            </div>
+            <div data-layout="stack" data-gap="xs">
+              <label for="postcode">Postcode</label>
+              <input data-component="input" id="postcode" name="postcode" type="text" autocomplete="postal-code" data-full>
+            </div>
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="country">Country</label>
+            <select data-component="select" id="country" name="country" data-full>
+              <option value="gb" selected>United Kingdom</option>
+              <option value="ie">Ireland</option>
+              <option value="fr">France</option>
+              <option value="de">Germany</option>
+              <option value="es">Spain</option>
+              <option value="us">United States</option>
+            </select>
+          </div>
+
+          <label>
+            <input type="checkbox" name="same-billing" checked>
+            My billing address is the same as this one
+          </label>
+        </section>
+
+        <hr data-component="divider">
+
+        <section data-layout="stack" data-gap="md">
+          <h2>Delivery speed</h2>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="row" data-gap="md" data-justify="between" data-align="center" data-wrap>
+                <label>
+                  <input type="radio" name="speed" value="standard" checked>
+                  <span data-layout="stack" data-gap="xs">
+                    <span>Standard delivery</span>
+                    <span data-tone="subtle">Arrives Mon 10 - Wed 12 August</span>
+                  </span>
+                </label>
+                <span data-component="stat">£2.95</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="row" data-gap="md" data-justify="between" data-align="center" data-wrap>
+                <label>
+                  <input type="radio" name="speed" value="express">
+                  <span data-layout="stack" data-gap="xs">
+                    <span>Express delivery</span>
+                    <span data-tone="subtle">Arrives Thu 6 August</span>
+                  </span>
+                </label>
+                <span data-component="stat">£5.95</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card" data-variant="featured">
+            <div data-slot="header">
+              <span data-component="badge" data-variant="info">Fastest</span>
+              Next day delivery
+            </div>
+            <div data-slot="body">
+              <div data-layout="row" data-gap="md" data-justify="between" data-align="center" data-wrap>
+                <label>
+                  <input type="radio" name="speed" value="next-day">
+                  <span data-layout="stack" data-gap="xs">
+                    <span>Next day delivery</span>
+                    <span data-tone="subtle">Arrives Wed 5 August if you order before 6pm</span>
+                  </span>
+                </label>
+                <span data-component="stat">£8.95</span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <hr data-component="divider">
+
+        <details data-component="disclosure">
+          <summary>Add a gift message</summary>
+          <div data-layout="stack" data-gap="xs" data-padding="md">
+            <label for="gift-message">We will print this on a card and tuck it inside the parcel. No prices are shown on gift orders.</label>
+            <textarea data-component="textarea" id="gift-message" name="gift-message" rows="4" data-full>Happy birthday, Nora. Something to read on the train.</textarea>
+          </div>
+        </details>
+
+        <hr data-component="divider">
+
+        <div data-layout="row" data-gap="sm" data-justify="between" data-align="center" data-wrap>
+          <a href="/cart" data-component="button" data-variant="secondary" data-size="md">Back to cart</a>
+          <button data-component="button" data-variant="primary" data-size="lg" type="submit">Continue to payment</button>
+        </div>
+
+      </form>
+    </div>
+
+    <aside data-slot="sidebar">
+      <article data-component="card">
+        <div data-slot="header">Order summary</div>
+
+        <div data-slot="body">
+          <div data-layout="stack" data-gap="md">
+
+            <table data-component="table">
+              <caption class="sr-only">Books in your order</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">The Overstory<br><span data-tone="subtle">Richard Powers</span></th>
+                  <td data-mono>1</td>
+                  <td data-mono>£9.99</td>
+                </tr>
+                <tr>
+                  <th scope="row">Piranesi<br><span data-tone="subtle">Susanna Clarke</span></th>
+                  <td data-mono>2</td>
+                  <td data-mono>£17.98</td>
+                </tr>
+                <tr>
+                  <th scope="row">A Room of One's Own<br><span data-tone="subtle">Virginia Woolf</span></th>
+                  <td data-mono>1</td>
+                  <td data-mono>£6.50</td>
+                </tr>
+                <tr>
+                  <th scope="row">The Emperor of All Maladies<br><span data-tone="subtle">Siddhartha Mukherjee</span></th>
+                  <td data-mono>1</td>
+                  <td data-mono>£12.99</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr data-component="divider">
+
+            <div data-layout="row" data-gap="sm" data-justify="between">
+              <span data-tone="subtle">Subtotal</span>
+              <span data-mono>£47.46</span>
+            </div>
+
+            <div data-layout="row" data-gap="sm" data-justify="between">
+              <span data-tone="subtle">Delivery (standard)</span>
+              <span data-mono>£2.95</span>
+            </div>
+
+            <hr data-component="divider" data-variant="strong">
+
+            <div data-layout="row" data-gap="sm" data-justify="between" data-align="center">
+              <span>Total to pay</span>
+              <span data-component="stat">£50.41</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div data-slot="footer">
+          <p data-tone="subtle">Free returns within 30 days. Every order is wrapped in recycled paper.</p>
+        </div>
+      </article>
+    </aside>
+
+  </div>
+
+</main>
+
+</body>
+</html>

@@ -203,6 +203,40 @@ artefact. It is also the argument for a themes product: a theme is correct when
 it changes the tokens and leaves the structure alone, and that is now a number
 rather than an opinion.
 
+## A third spec, and what it found
+
+Everything above was measured on a pricing page and an admin dashboard. Both
+are the same shape underneath: sections stacked down a page. A checkout was run
+as a third, deliberately different: a multi-step flow, form-heavy, with a
+progress indicator, radio options, a collapsible section and a summary ledger.
+
+| Spec | Structure | Modifiers |
+|---|---|---|
+| Pricing | 90% | 90% |
+| Dashboard | 90% | 91% |
+| **Checkout** | **82%** | **67%** |
+
+Meaningfully worse, and with a single obvious cause. Five of five reported the
+same missing thing, a step or progress indicator, and they built it three
+different ways: three chose `data-x-component="stepper"`, one chose
+`progress-steps`, and one gave up and faked it with a row of four badges.
+
+That is the same signature as the FAQ gap, which cost eleven points of
+structure until `disclosure` closed it. By the admission test in
+`CONTRIBUTING.md` a stepper qualifies: asked for by everyone, and built
+differently by everyone.
+
+Two weaker candidates showed up alongside it, each named by three of five: a
+selectable option card, for the delivery-speed choices where a radio needs to
+style its whole row when checked, and a key-value row for a price ledger. Both
+were built more consistently than the stepper, so neither clears the bar on
+this evidence alone.
+
+The wider lesson is about the corpus rather than the vocabulary. Two specs of
+the same shape agreed with each other and hid a gap that a third shape found
+immediately. Reproduction figures are only as broad as the shapes they were
+measured on.
+
 ## Limitations
 
 - Five generations per round is a small sample. A four point move is inside
