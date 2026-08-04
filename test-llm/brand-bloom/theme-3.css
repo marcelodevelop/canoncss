@@ -1,0 +1,97 @@
+/* Bloom theme for Canon CSS.
+   Warm, airy, encouraging: soft coral on cream, a rounded typeface,
+   very round corners, big soft shadows and generous whitespace.
+   Everything brand lives here. The markup stays pure Canon. */
+
+:root {
+  /* Typeface: rounded and friendly, never corporate. */
+  --font-sans: "Nunito", "Quicksand", "Varela Round", ui-rounded, "SF Pro Rounded",
+    "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Quicksand", "Nunito", ui-rounded, "SF Pro Rounded",
+    "Segoe UI Variable Display", system-ui, sans-serif;
+  --font-mono: "Cascadia Code", "SFMono-Regular", ui-monospace, monospace;
+
+  /* Rounded faces read friendlier a little heavier. */
+  --weight-normal: 400;
+  --weight-medium: 600;
+  --weight-bold: 800;
+
+  /* Colour: coral, cream and a soft leaf green. */
+  --color-surface: #fff7f1;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #fdeade;
+
+  --color-content: #40312b;
+  --color-content-subtle: #8b7268;
+  --color-content-inverse: #fff8f4;
+
+  --color-brand: #d9614a;
+  --color-brand-subtle: #ffe3d8;
+  --color-accent: #4f8f6d;
+  --color-accent-subtle: #dff0e4;
+
+  --color-border: #f4ded1;
+  --color-border-strong: #e6c6b5;
+
+  --color-success: #4f8f6d;
+  --color-success-subtle: #dff0e4;
+  --color-warning: #c07a1e;
+  --color-warning-subtle: #fdeccd;
+  --color-error: #c1453c;
+  --color-error-subtle: #fbdedb;
+  --color-info: #4a7d99;
+  --color-info-subtle: #ddeef5;
+
+  /* Airy: every step of the scale is roomier than the default. */
+  --space-xs: 0.5rem;
+  --space-sm: 0.875rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4.5rem;
+  --space-2xl: 7.5rem;
+
+  /* Type: soft, open, a touch larger at the top end. */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 3.375rem;
+
+  /* Wider measures so nothing feels dense. */
+  --width-prose: 40rem;
+  --width-content: 60rem;
+  --width-wide: 78rem;
+
+  /* Very rounded corners. */
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
+  --radius-full: 999rem;
+
+  /* Big, soft, warm-tinted shadows. Nothing hard edged. */
+  --shadow-sm: 0 2px 10px rgba(168, 96, 72, 0.08);
+  --shadow-md: 0 12px 30px rgba(168, 96, 72, 0.12);
+  --shadow-lg: 0 28px 64px rgba(168, 96, 72, 0.18);
+}
+
+@layer canon.theme {
+  /* Warmth tokens cannot carry: a soft coral glow behind the hero,
+     and slightly looser letterforms in display type. */
+  body {
+    background-image:
+      radial-gradient(60rem 34rem at 50% -12rem, var(--color-brand-subtle), transparent 70%);
+    background-repeat: no-repeat;
+  }
+
+  h1, h2 {
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  /* The recommended plan lifts off the page instead of drawing a hard border. */
+  [data-component="card"][data-variant="featured"] {
+    box-shadow: var(--shadow-lg);
+  }
+}

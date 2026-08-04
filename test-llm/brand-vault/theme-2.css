@@ -1,0 +1,93 @@
+/* Vault — institutional compliance platform.
+   Deep navy, cold slate greys, sharp corners, neutral grotesque.
+   Everything brand-specific lives here. The markup stays plain Canon. */
+
+:root {
+  /* Typeface: neutral grotesque, no personality, no warmth. */
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  --font-display: "Inter", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Type scale: dense and close together, no display drama. */
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.3125rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.375rem;
+
+  /* Weight: restrained. Bold stops at semibold. */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+
+  /* Spacing: tight throughout, the ratio held constant. */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.875rem;
+  --space-lg: 1.375rem;
+  --space-xl: 2.25rem;
+  --space-2xl: 3.5rem;
+
+  /* Colour: deep navy against cold slate. */
+  --color-brand: #12294a;
+  --color-brand-subtle: #e3e8ef;
+  --color-accent: #35506f;
+  --color-accent-subtle: #e7ecf2;
+
+  --color-surface: #ffffff;
+  --color-surface-raised: #f4f6f8;
+  --color-surface-sunken: #e8ebef;
+
+  --color-content: #0f141b;
+  --color-content-subtle: #5a6573;
+  --color-content-inverse: #ffffff;
+
+  --color-border: #d2d7de;
+  --color-border-strong: #949daa;
+
+  --color-success: #1d5a3c;
+  --color-success-subtle: #e2ebe6;
+  --color-warning: #6a4912;
+  --color-warning-subtle: #efe9da;
+  --color-error: #7a2022;
+  --color-error-subtle: #efe0e0;
+  --color-info: #1b3e66;
+  --color-info-subtle: #e1e8f0;
+
+  /* Nothing rounded. */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-full: 0;
+
+  /* Elevation is nearly flat; structure comes from rules, not lift. */
+  --shadow-sm: 0 1px 0 0 rgb(15 20 27 / 0.06);
+  --shadow-md: 0 1px 2px 0 rgb(15 20 27 / 0.10);
+  --shadow-lg: 0 2px 6px 0 rgb(15 20 27 / 0.12);
+
+  /* Measure: narrow columns, documents rather than posters. */
+  --width-prose: 60ch;
+  --width-content: 58rem;
+  --width-wide: 78rem;
+}
+
+@layer canon.theme {
+  /* Tight optical tracking on headings — a scale token cannot carry this. */
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+  }
+
+  /* Badges read as filing labels: small, uppercase, widely tracked. */
+  [data-component="badge"] {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Figures align in columns the way a statement does. */
+  [data-component="stat"] {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+}

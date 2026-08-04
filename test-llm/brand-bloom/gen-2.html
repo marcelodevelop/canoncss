@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloom Pricing</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="theme-2.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="#top">Bloom</a>
+  <nav data-slot="nav">
+    <a href="#product">Product</a>
+    <a href="#pricing" aria-current="page">Pricing</a>
+    <a href="#docs">Docs</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" href="#signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="#product">Product</a>
+      <a href="#pricing" aria-current="page">Pricing</a>
+      <a href="#docs">Docs</a>
+      <a href="#signup">Sign up</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="stack" data-gap="2xl">
+
+  <section id="top" data-layout="hero" data-align="center" data-justify="center" data-gap="lg">
+    <div data-layout="stack" data-gap="md" data-align="center">
+      <h1>Keep every plant alive</h1>
+      <p>Bloom tells you exactly when to water, feed and repot, in plain language, one plant at a time. No green thumb required.</p>
+    </div>
+    <div data-layout="row" data-gap="sm" data-wrap data-justify="center">
+      <a data-component="button" data-variant="primary" data-size="lg" href="#signup">Start free</a>
+      <a data-component="button" data-variant="secondary" data-size="lg" href="#pricing">See the plans</a>
+    </div>
+  </section>
+
+  <section id="pricing" data-layout="centered" data-width="wide">
+    <div data-layout="stack" data-gap="xl">
+
+      <div data-layout="stack" data-gap="xs" data-align="center">
+        <h2>Plans that grow with your shelf</h2>
+        <p data-tone="subtle">Start with one plant. Move up when the windowsill fills.</p>
+      </div>
+
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Sprout</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$0</span>
+                <span data-tone="subtle">/month</span>
+              </div>
+              <p data-tone="subtle">For your very first plant.</p>
+            </div>
+            <ul>
+              <li>Care plan for 1 plant</li>
+              <li>Watering reminders</li>
+              <li>Plant identification by photo</li>
+              <li>Beginner care guides</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-size="lg" data-full href="#signup">Start free</a>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="brand">Recommended</span>
+            Bloom
+          </div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$6</span>
+                <span data-tone="subtle">/month</span>
+              </div>
+              <p data-tone="subtle">For a home that is filling up.</p>
+            </div>
+            <ul>
+              <li>Care plans for up to 25 plants</li>
+              <li>Light and humidity checks per room</li>
+              <li>Ask a question, get an answer in a day</li>
+              <li>Repotting and feeding schedule</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="primary" data-size="lg" data-full href="#signup">Try Bloom free for 14 days</a>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Greenhouse</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$14</span>
+                <span data-tone="subtle">/month</span>
+              </div>
+              <p data-tone="subtle">For collections that outgrew the shelf.</p>
+            </div>
+            <ul>
+              <li>Unlimited plants and rooms</li>
+              <li>Shared care with up to 5 people</li>
+              <li>Pest and disease diagnosis</li>
+              <li>Seasonal reports on every plant</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-size="lg" data-full href="#signup">Start free</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" data-layout="centered" data-width="content">
+    <div data-layout="stack" data-gap="xl">
+      <h2>Questions people ask before signing up</h2>
+      <div data-layout="stack" data-gap="md">
+
+        <details data-component="disclosure">
+          <summary>Do I need to know anything about plants?</summary>
+          <p>No. Tell Bloom what you have, or take a photo and let Bloom name it. From there every step arrives as a single small task on the day it matters.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>What happens when the free trial ends?</summary>
+          <p>Nothing disappears. Your plants and their history stay in place, and the account drops back to the Sprout plan until you choose to upgrade.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>Can I change or cancel my plan later?</summary>
+          <p>Any time, from your account settings. Upgrades apply straight away and downgrades take effect at the end of the month you already paid for.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>Does Bloom work if my plants live in different rooms?</summary>
+          <p>Yes. Group plants by room and Bloom adjusts each care plan for the light and humidity that room actually gets, rather than one rule for the whole home.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<hr data-component="divider">
+
+<footer data-layout="centered" data-width="wide" data-padding="xl">
+  <div data-layout="grid" data-cols="3" data-gap="lg">
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Product</p>
+      <nav data-component="nav">
+        <a href="#product">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#signup">Download the app</a>
+        <a href="#changelog">What is new</a>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Learn</p>
+      <nav data-component="nav">
+        <a href="#docs">Care guides</a>
+        <a href="#docs">Plant library</a>
+        <a href="#docs">Beginner course</a>
+        <a href="#docs">Help centre</a>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <nav data-component="nav">
+        <a href="#about">About Bloom</a>
+        <a href="#contact">Contact us</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+      </nav>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

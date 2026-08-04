@@ -163,6 +163,46 @@ the control, not evidence for Canon.
 In Canon's favour: the reproduction figures still came out equal despite that,
 so the conclusion is not sensitive to it.
 
+## Does the brand leak into the markup?
+
+Canon's founding vision is that the structure is closed and the aesthetic is
+retargeted per brand through a theme file. That had never been measured. The
+risk it implies is specific: told that a brand is austere and dense, does a
+model start reaching for tighter gaps and different layouts? If so the closed
+vocabulary is not actually closed, it just moved the variation somewhere the
+linter cannot see.
+
+Two brands as far apart as they could be made, three generations each, same
+pricing spec. Each agent wrote the markup **and** its own theme file.
+
+- **Vault**, a compliance platform sold to banks. Institutional, dense, navy
+  and slate, sharp corners, grotesque type.
+- **Bloom**, a plant care app for beginners. Warm, airy, coral and cream, very
+  rounded, soft type, big shadows.
+
+| Comparison | Structure |
+|---|---|
+| Within Vault | 96% |
+| Within Bloom | 97% |
+| **Vault against Bloom, all nine crossings** | **93-97%, mean 96%** |
+
+Structure across two opposite brands is as stable as structure within one
+brand. Both are also **above** the unbranded baseline of 90%, which suggests a
+concrete brand brief makes the markup decision easier rather than harder.
+
+The aesthetic really did move. Each theme overrode 49 tokens and **only two of
+those 49 landed on the same value**: `--color-brand` is `#10233f` against
+`#ff8a75`, `--radius-md` is `0` against `1.25rem`, `--space-md` is `0.875rem`
+against `1.5rem`, the sans stack is Inter against a rounded system face. The
+two pages look like different companies.
+
+So the founding claim holds where it matters: **maximum aesthetic divergence,
+unchanged skeleton.** This is the one result in this corpus that a utility
+framework cannot reproduce, because there the brand and the markup are the same
+artefact. It is also the argument for a themes product: a theme is correct when
+it changes the tokens and leaves the structure alone, and that is now a number
+rather than an opinion.
+
 ## Limitations
 
 - Five generations per round is a small sample. A four point move is inside

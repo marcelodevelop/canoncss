@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing | Vault</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="theme-3.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Vault</a>
+  <nav data-slot="nav">
+    <a href="/product">Product</a>
+    <a href="/pricing" aria-current="page">Pricing</a>
+    <a href="/docs">Docs</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/product">Product</a>
+      <a href="/pricing" aria-current="page">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="stack" data-gap="xl">
+
+  <section data-layout="hero" data-align="center" data-justify="center">
+    <div data-layout="stack" data-gap="md" data-align="center">
+      <h1>Compliance evidence your examiners can follow</h1>
+      <p>Vault records every control, approval and exception across your institution, then produces the audit trail regulators ask for. Pricing scales with the number of entities you supervise, not with seats.</p>
+      <div data-layout="row" data-gap="sm">
+        <a data-component="button" data-variant="primary" data-size="lg" href="#plans">Compare plans</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a walkthrough</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans" data-layout="centered" data-width="wide" data-gap="lg">
+    <h2>Plans</h2>
+    <p>Every plan includes immutable audit logging, SOC 2 Type II reporting and data residency in your chosen region. Annual billing, invoiced.</p>
+
+    <div data-layout="grid" data-cols="3" data-gap="md">
+
+      <article data-component="card">
+        <div data-slot="header">Baseline</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="end">
+              <span data-component="stat">$1,200</span>
+              <span data-tone="subtle">/month</span>
+            </div>
+            <span data-tone="subtle">For a single regulated entity.</span>
+          </div>
+          <ul>
+            <li>Control register with versioned policy mapping</li>
+            <li>Quarterly attestation workflows</li>
+            <li>Immutable evidence archive, seven year retention</li>
+            <li>Standard support, next business day</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/signup?plan=baseline">Start with Baseline</a>
+        </div>
+      </article>
+
+      <article data-component="card" data-variant="featured">
+        <div data-slot="header">
+          <span data-component="badge" data-variant="brand">Recommended</span>
+          Supervisory
+        </div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="end">
+              <span data-component="stat">$3,400</span>
+              <span data-tone="subtle">/month</span>
+            </div>
+            <span data-tone="subtle">For groups running up to ten entities.</span>
+          </div>
+          <ul>
+            <li>Everything in Baseline, applied group wide</li>
+            <li>Continuous control monitoring with break alerts</li>
+            <li>Examiner workspace with scoped read only access</li>
+            <li>Named compliance engineer, four hour response</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="primary" data-full href="/signup?plan=supervisory">Start with Supervisory</a>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">Institutional</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="end">
+              <span data-component="stat">Custom</span>
+              <span data-tone="subtle">/annual</span>
+            </div>
+            <span data-tone="subtle">For multi jurisdiction banking groups.</span>
+          </div>
+          <ul>
+            <li>Unlimited entities and reporting jurisdictions</li>
+            <li>Private deployment with customer managed keys</li>
+            <li>Regulatory change feed mapped to your controls</li>
+            <li>Contractual uptime and remediation commitments</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/contact">Contact sales</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="prose" data-gap="lg">
+    <h2>Frequently asked questions</h2>
+    <div data-layout="stack" data-gap="sm">
+
+      <details data-component="disclosure">
+        <summary>How is an entity counted?</summary>
+        <p>An entity is any legal body that files under its own licence. Branches and representative offices roll up to their parent at no additional cost. If a subsidiary reports to a separate regulator, it counts as its own entity.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Where is our data held?</summary>
+        <p>You select the region at provisioning time: Frankfurt, London, Singapore or Northern Virginia. Evidence never leaves the region you choose, including backups. Institutional customers can run Vault inside their own cloud tenancy.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Can examiners access Vault directly?</summary>
+        <p>Yes, on the Supervisory and Institutional plans. You grant a scoped, time limited read only workspace covering a defined period and control set. Every examiner action is logged and visible to your compliance team.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What happens to our records if we leave?</summary>
+        <p>You keep them. Vault exports the full evidence archive as signed files with the original hashes and timestamps intact, in a documented open format. Export is available on demand throughout the contract and for ninety days after it ends.</p>
+      </details>
+
+    </div>
+  </section>
+
+</main>
+
+<hr data-component="divider">
+
+<footer data-layout="centered" data-width="wide">
+  <div data-layout="grid" data-cols="3" data-gap="xl">
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Platform</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/product/controls">Control register</a></li>
+          <li><a href="/product/monitoring">Continuous monitoring</a></li>
+          <li><a href="/product/evidence">Evidence archive</a></li>
+          <li><a href="/product/examiners">Examiner workspace</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Resources</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/docs">Documentation</a></li>
+          <li><a href="/docs/api">API reference</a></li>
+          <li><a href="/trust">Trust centre</a></li>
+          <li><a href="/status">System status</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/about">About Vault</a></li>
+          <li><a href="/contact">Contact sales</a></li>
+          <li><a href="/legal/terms">Terms of service</a></li>
+          <li><a href="/legal/privacy">Privacy notice</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
