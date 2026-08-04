@@ -20,13 +20,25 @@ deployed at [canoncss.com](https://www.canoncss.com). It vendors a snapshot of
 layout, token, modifier or slot must land in the same PR across:
 
 1. `src/*.css` - the implementation
-2. `prompts/system-prompt.txt` - the short prompt (keep it under ~800 tokens)
+2. `prompts/system-prompt.txt` - the short prompt (see the budget note below)
 3. `prompts/system-prompt-full.txt` - patterns/anti-patterns if relevant
 4. `plugins/canon-css/skills/canon-css/SKILL.md` - the Claude Code skill
 5. `bin/vocab.mjs` - the `VOCAB` and `ELEMENTS` tables
 
 `prompts/AGENTS.md` and `vscode/canon.html-data.json` regenerate at build time
 (from the short prompt and from `bin/vocab.mjs`) - never edit them by hand.
+
+## The prompt budget
+
+The short prompt used to carry a "keep it under ~800 tokens" rule. That number
+was never measured and the file had already drifted past it. It is now about
+1.25k tokens, and the growth is justified by measurement rather than allowed by
+neglect.
+
+Adding ~250 tokens of canonical defaults moved structural reproduction from 92%
+to 95% and modifier reproduction from 79% to 84%. Length is not the thing to
+optimise: reproduction is. Grow the prompt when `npm run repro` says the
+addition paid for itself, and cut anything that cannot show the same.
 
 ## Measuring a prompt change
 

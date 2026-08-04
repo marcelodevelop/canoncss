@@ -17,6 +17,16 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 - `npm run repro`: measures how much two or more generations of the same spec
   share, reporting structure and modifiers separately.
 
+- **Canonical defaults** in both prompts: which gap to reach for at each level,
+  how to write a number with a unit, and how to highlight one card in a group.
+  Prompt-only, no CSS. Structure went 92% to 95% and modifiers 79% to 84%, with
+  every one of the ten pairs at or above 90%.
+- `npm run repro` now names the modifiers that disagree. Sequence similarity
+  punishes a file for carrying more copy than another, so a low score needed a
+  way to be read rather than guessed at. That reading is what identified
+  `data-gap="md"` as the one real modifier disagreement, and stating a default
+  for it cut its spread from 3 to 1.
+
 ### Why disclosure was added
 Five clean-context agents were given the same page spec. All five reached for a
 collapsible FAQ, found nothing in the vocabulary, and each invented a different

@@ -67,6 +67,35 @@ function pct(n) {
   return `${Math.round(n * 100)}%`;
 }
 
+/** Which modifiers actually disagree, ranked. Sequence similarity punishes a
+ *  generation for writing more copy than another: eight subtle spans against
+ *  thirteen scores as drift when it is really verbosity. This separates the
+ *  two, so a low modifier score can be read rather than guessed at. */
+function why(parsed) {
+  const tally = parsed.map((p) => {
+    const m = new Map();
+    for (const v of p.modifiers) m.set(v, (m.get(v) ?? 0) + 1);
+    return m;
+  });
+  const keys = [...new Set(tally.flatMap((m) => [...m.keys()]))];
+  const rows = keys
+    .map((k) => {
+      const counts = tally.map((m) => m.get(k) ?? 0);
+      return { k, counts, spread: Math.max(...counts) - Math.min(...counts) };
+    })
+    .filter((r) => r.spread > 0)
+    .sort((a, b) => b.spread - a.spread);
+
+  if (rows.length === 0) {
+    console.log('\nEvery modifier is used the same number of times in every file.');
+    return;
+  }
+  console.log('\nModifiers that disagree, worst first:');
+  for (const r of rows.slice(0, 10)) {
+    console.log(`  ${r.k.padEnd(24)} [${r.counts.join(', ')}]  spread ${r.spread}`);
+  }
+}
+
 function compare(nameA, a, nameB, b) {
   const s = similarity(a.structure, b.structure);
   const m = similarity(a.modifiers, b.modifiers);
@@ -130,6 +159,7 @@ if (args[0] === '--selftest') {
   if (scores.length > 1) {
     const mean = (k) => scores.reduce((sum, s) => sum + s[k], 0) / scores.length;
     console.log(`\nmean over ${scores.length} pairs:  structure ${pct(mean('s'))}  modifiers ${pct(mean('m'))}`);
+    why(parsed);
   }
 
   if (totalOpaque > 0) {

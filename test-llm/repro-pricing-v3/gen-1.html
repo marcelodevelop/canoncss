@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relay — Pricing</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Relay</a>
+    <nav data-slot="nav">
+      <a href="/product">Product</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/product">Product</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/signup">Sign up</a>
+      </nav>
+    </details>
+  </header>
+
+  <main data-layout="stack" data-gap="2xl">
+
+    <section data-layout="hero" data-align="center" data-justify="center" data-gap="md">
+      <h1>Every message your product sends, in one place</h1>
+      <p>Relay routes transactional email, SMS and push through a single API,
+        retries what fails and tells you exactly why. Ship a notification in an
+        afternoon, not a sprint.</p>
+      <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a demo</a>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="wide" data-gap="xl">
+      <h2>Pricing that follows your volume</h2>
+      <p data-tone="subtle">Every plan includes the full API, unlimited teammates
+        and no charge for retries. Cancel whenever you like.</p>
+
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Starter</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <p>
+              <span data-component="stat">$0</span>
+              <span data-tone="subtle">/month</span>
+            </p>
+            <p data-tone="subtle">For side projects and the first prototype.</p>
+            <ul>
+              <li>10,000 messages per month</li>
+              <li>Email and push channels</li>
+              <li>7 days of delivery logs</li>
+              <li>Community support on Discord</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Create free account</a>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured" data-motion="lift">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="brand">Recommended</span>
+            Growth
+          </div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <p>
+              <span data-component="stat">$79</span>
+              <span data-tone="subtle">/month</span>
+            </p>
+            <p data-tone="subtle">For teams shipping to real customers every week.</p>
+            <ul>
+              <li>500,000 messages per month</li>
+              <li>Email, SMS and push channels</li>
+              <li>90 days of searchable delivery logs</li>
+              <li>Webhooks, templates and A/B routing</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="primary" data-full href="/signup?plan=growth">Start 14-day trial</a>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Enterprise</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <p>
+              <span data-component="stat">$450</span>
+              <span data-tone="subtle">/month</span>
+            </p>
+            <p data-tone="subtle">For regulated teams with volume commitments.</p>
+            <ul>
+              <li>Unlimited messages, committed rate</li>
+              <li>Dedicated sending IPs and regions</li>
+              <li>Two years of logs with audit export</li>
+              <li>SSO, SLA and a named support engineer</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/contact-sales">Talk to sales</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="prose" data-gap="lg">
+      <h2>Frequently asked questions</h2>
+
+      <details data-component="disclosure">
+        <summary>What counts as a message?</summary>
+        <p>One message is one delivery attempt that reaches a provider: a single
+          email, a single SMS segment or a single push notification. Retries after
+          a temporary failure are never billed twice, and messages we reject before
+          sending do not count at all.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What happens if I go over my plan limit?</summary>
+        <p>Nothing breaks. We keep delivering and bill the overage at the rate for
+          your plan, listed on your invoice line by line. You can set a hard ceiling
+          in the dashboard if you would rather have sending pause than be charged.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Can I switch plans later?</summary>
+        <p>Yes, in one click, in either direction. Upgrades take effect immediately
+          and we prorate the difference. Downgrades take effect at the end of the
+          current billing period so you keep what you already paid for.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Do you offer discounts for startups or nonprofits?</summary>
+        <p>We do. Registered nonprofits and companies under two years old with less
+          than $2M raised get 50% off the Growth plan for the first year. Write to
+          our sales team with a link to your product and we will apply it.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <hr data-component="divider">
+
+  <footer data-layout="centered" data-width="wide" data-gap="lg">
+    <div data-layout="grid" data-cols="3" data-gap="xl">
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Product</p>
+        <ul>
+          <li><a href="/product">Overview</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/changelog">Changelog</a></li>
+          <li><a href="/status">Status</a></li>
+        </ul>
+      </div>
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Developers</p>
+        <ul>
+          <li><a href="/docs">Documentation</a></li>
+          <li><a href="/docs/api">API reference</a></li>
+          <li><a href="/docs/sdks">SDKs</a></li>
+          <li><a href="/docs/quickstart">Quickstart</a></li>
+        </ul>
+      </div>
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Company</p>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/contact-sales">Contact sales</a></li>
+        </ul>
+      </div>
+    </div>
+    <p data-tone="subtle">© 2026 Relay Systems, Inc. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

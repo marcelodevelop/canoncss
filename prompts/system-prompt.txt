@@ -60,6 +60,14 @@ PROSE - styled automatically, no attributes needed:
   ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
   labels are <p data-tone="subtle">, never a heading element.
 
+CANONICAL DEFAULTS - use these unless something forces another choice:
+  Spacing: page sections data-gap="xl"; card bodies and field groups
+    data-gap="md"; buttons sitting side by side data-gap="sm".
+  A number with a unit: <span data-component="stat">$79</span> then
+    <span data-tone="subtle">/month</span>. There is no price component.
+  Highlighting one card in a group: data-variant="featured" on the card
+    plus a badge as the first child of its header slot.
+
 RULES - enforce strictly:
   1. Only defined tokens. Never hardcode colors, sizes, spacing.
   2. No inline styles, no <style> blocks, no extra CSS.
