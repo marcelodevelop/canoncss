@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing | Relay</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Relay</a>
+    <nav data-slot="nav">
+      <a href="/product">Product</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/product">Product</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/signup">Sign up</a>
+      </nav>
+    </details>
+  </header>
+
+  <main>
+
+    <section data-layout="hero" data-gap="lg" data-align="center" data-justify="center" data-padding="2xl">
+      <span data-component="badge" data-variant="brand">New: usage-based billing</span>
+      <h1>Pricing that follows your team, not your headcount spreadsheet</h1>
+      <p>Relay routes every message, webhook and background job your product depends on. Start free, pay only when your traffic actually grows, and change plans the same day you outgrow one.</p>
+      <div data-layout="row" data-gap="sm" data-wrap data-justify="center">
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a demo</a>
+      </div>
+      <p data-tone="subtle">No credit card for the first 14 days. Cancel from the dashboard in one click.</p>
+    </section>
+
+    <section data-layout="centered" data-width="wide" data-gap="xl" data-padding="xl">
+      <h2>Three plans, one predictable bill</h2>
+      <p data-tone="subtle">Every plan includes the full Relay API, unlimited environments and end-to-end delivery logs.</p>
+
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Starter</div>
+          <div data-slot="body">
+            <p><span data-component="stat">$0</span> <span data-tone="subtle">forever</span></p>
+            <p data-tone="subtle">For side projects and the first prototype you show your team.</p>
+            <ul>
+              <li>50,000 messages per month</li>
+              <li>Two projects and two environments</li>
+              <li>Seven days of delivery history</li>
+              <li>Community support on Discord</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Create free account</a>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured" data-motion="lift">
+          <div data-slot="header">Growth</div>
+          <div data-slot="body">
+            <p><span data-component="badge" data-variant="brand">Recommended</span></p>
+            <p><span data-component="stat">$49</span> <span data-tone="subtle">per month</span></p>
+            <p data-tone="subtle">For product teams shipping to real customers every week.</p>
+            <ul>
+              <li>Five million messages per month</li>
+              <li>Unlimited projects and environments</li>
+              <li>Ninety days of searchable delivery history</li>
+              <li>Automatic retries with dead-letter queues</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="primary" data-full href="/signup?plan=growth">Start 14-day trial</a>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Scale</div>
+          <div data-slot="body">
+            <p><span data-component="stat">$199</span> <span data-tone="subtle">per month</span></p>
+            <p data-tone="subtle">For platforms with compliance reviews and traffic spikes.</p>
+            <ul>
+              <li>Fifty million messages per month</li>
+              <li>Dedicated delivery regions and static IPs</li>
+              <li>One year of history with audit export</li>
+              <li>SAML single sign-on and a 99.99% uptime SLA</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/contact?plan=scale">Talk to sales</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <hr data-component="divider">
+
+    <section data-layout="centered" data-width="content" data-gap="md" data-padding="xl">
+      <h2>Frequently asked questions</h2>
+      <p data-tone="subtle">Still unsure? Write to support@relay.dev and a real engineer answers.</p>
+
+      <details data-component="disclosure">
+        <summary>What counts as a message?</summary>
+        <p>One message is a single payload accepted by the Relay API and delivered to one destination. Fan-out to three destinations counts as three messages. Retries after a failed delivery are free and never billed twice.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What happens if I go over my monthly limit?</summary>
+        <p>Nothing breaks. Relay keeps delivering and bills the overage at three cents per thousand extra messages. You can set a hard spending cap in the dashboard if you would rather be throttled than charged.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Can I change plans in the middle of a billing cycle?</summary>
+        <p>Yes. Upgrades take effect immediately and we prorate the difference for the days left in the cycle. Downgrades apply on your next renewal date, so you keep what you already paid for.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Do you offer discounts for startups and nonprofits?</summary>
+        <p>We do. Registered nonprofits and companies under two years old with less than one million dollars raised get 50% off the Growth plan for a full year. Send us your details and we apply the credit within two business days.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <footer data-layout="grid" data-cols="3" data-gap="lg" data-padding="xl" data-tone="subtle">
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Product</p>
+      <a href="/product">Overview</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/changelog">Changelog</a>
+      <a href="/status">Status</a>
+    </div>
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Developers</p>
+      <a href="/docs">Documentation</a>
+      <a href="/docs/api">API reference</a>
+      <a href="/docs/sdks">Client libraries</a>
+      <a href="/guides">Guides</a>
+    </div>
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <a href="/about">About Relay</a>
+      <a href="/careers">Careers</a>
+      <a href="/blog">Blog</a>
+      <a href="/legal/privacy">Privacy</a>
+    </div>
+  </footer>
+
+</body>
+</html>

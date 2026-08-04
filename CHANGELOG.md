@@ -3,6 +3,41 @@
 All notable changes to Canon CSS are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](https://semver.org).
 
+## [Unreleased]
+
+### Added
+- **`data-component="disclosure"`** on `<details>`: zero-JS expand and collapse,
+  the mechanism the topbar burger menu already used, generalised. The caret is
+  generated so the markup carries no icon to get wrong.
+- Checkbox and radio inputs now render correctly bare, along with a `<label>`
+  that wraps its own control. Deliberately no `data-component`: `type="checkbox"`
+  already declares the role, and a second spelling would break "one right way".
+- `canon-lint` reports its own coverage, so a clean run on a codebase full of
+  JSX expression values states how much it could actually read.
+- `npm run repro`: measures how much two or more generations of the same spec
+  share, reporting structure and modifiers separately.
+
+- **Canonical defaults** in both prompts: which gap to reach for at each level,
+  how to write a number with a unit, and how to highlight one card in a group.
+  Prompt-only, no CSS. Structure went 92% to 95% and modifiers 79% to 84%, with
+  every one of the ten pairs at or above 90%.
+- `npm run repro` now names the modifiers that disagree. Sequence similarity
+  punishes a file for carrying more copy than another, so a low score needed a
+  way to be read rather than guessed at. That reading is what identified
+  `data-gap="md"` as the one real modifier disagreement, and stating a default
+  for it cut its spread from 3 to 1.
+
+### Why disclosure was added
+Five clean-context agents were given the same page spec. All five reached for a
+collapsible FAQ, found nothing in the vocabulary, and each invented a different
+substitute: cards for some, bare heading and paragraph stacks for others. That
+single gap was the largest source of structural divergence between their
+outputs, measured at 81% mean structural similarity before the addition.
+
+### Fixed
+- The documented lint command. `npx canon-lint` resolves by package name and
+  404s; the package is `canoncss`.
+
 ## [0.1.0] - 2026-08-02
 
 Initial release.

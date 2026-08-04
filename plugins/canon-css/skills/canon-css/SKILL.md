@@ -68,6 +68,9 @@ COMPONENTS - `data-component` on semantic elements:
     modal     > data-slot=panel > data-slot={header|body|footer}
     avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
               the span - never data-component on the <img> itself.
+    disclosure on `<details>`, zero-JS expand/collapse. First child is the
+              `<summary>`; the caret is generated. Use for FAQ and any
+              show-more section.
     divider   + data-variant={strong}
 
 UTILITIES - complete list; nothing else exists:
@@ -82,6 +85,10 @@ UTILITIES - complete list; nothing else exists:
 
 ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
 labels are `<p data-tone="subtle">`, never a heading element.
+
+Checkbox and radio inputs also render bare: never give them a
+`data-component`, since `type="checkbox"` already declares the role. A
+`<label>` wrapping its own control lays itself out.
 
 ## Rules - enforce strictly
 
