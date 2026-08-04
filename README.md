@@ -120,6 +120,15 @@ system prompt - dashboards, landings, blogs, e-commerce, and a complete
 never saw each other's output. Every page: zero rule violations, one coherent
 visual identity. `npm test` re-validates the whole corpus on every change.
 
+That corpus was generated in short sessions, so it does not test the case Canon
+is actually for. [The August 2026 drift report](docs/drift-report-2026-08.md)
+does: a six-screen React app built in one long session, linted at every step.
+Violations stayed at zero through 175k tokens of context, and regenerating a
+screen at the end of the session reproduced **96% of its structure** and 76% of
+its modifiers. It also reports what went wrong: three places the vocabulary ran
+out, and the fact that `canon-lint` cannot verify a JSX expression value, which
+caps how much the zero is worth.
+
 ## Explore
 
 - [Docs](https://www.canoncss.com) - tokens, layouts, components, live playground

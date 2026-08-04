@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "canon-site",
+      "name": "canon-stock",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "site"],
-      "port": 3000
+      "runtimeArgs": ["run", "dev", "--prefix", "C:/Users/acees/OneDrive/Escritorio/proyectos/canon-stock"],
+      "port": 5173
     },
     {
       "name": "portfolio",
