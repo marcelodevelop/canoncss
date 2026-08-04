@@ -34,3 +34,4 @@ echo "✓ Built $OUTPUT ($(wc -c < $OUTPUT) bytes)"
 echo "✓ Built prompts/AGENTS.md"
 
 node scripts/gen-vscode-data.mjs
+node scripts/gen-tokens.mjs

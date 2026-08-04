@@ -6,6 +6,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { VOCAB, ELEMENTS } from './vocab.mjs';
+import { TOKENS } from './tokens.mjs';
 
 const EXTS = new Set(['.html', '.htm', '.jsx', '.tsx', '.css']);
 const SKIP_DIRS = new Set(['node_modules', 'dist', '.next', '.git']);
@@ -57,6 +58,69 @@ function appLayers(src) {
   return out;
 }
 
+/** Levenshtein distance, iterative and small. Only used to turn a typo into a
+ *  useful suggestion, so a bad guess is worse than none and the caller drops
+ *  anything that is not close. */
+function distance(a, b) {
+  const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let corner = prev[0];
+    prev[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const above = prev[j];
+      prev[j] = Math.min(prev[j] + 1, prev[j - 1] + 1, corner + (a[i - 1] === b[j - 1] ? 0 : 1));
+      corner = above;
+    }
+  }
+  return prev[b.length];
+}
+
+function closest(name) {
+  let best = null;
+  let bestDistance = Infinity;
+  for (const token of TOKENS) {
+    const d = distance(name, token);
+    if (d < bestDistance) {
+      bestDistance = d;
+      best = token;
+    }
+  }
+  // Three edits away is not a typo, it is a different idea.
+  return bestDistance <= 3 ? best : null;
+}
+
+/** R7 - a custom property that overrides nothing.
+ *  A misspelled token is valid CSS and silently does nothing, so the page
+ *  comes out almost right and the cause is invisible. Only definitions that
+ *  look like Canon tokens are judged: a project's own --my-* properties are
+ *  its business. */
+function lintTokens(src) {
+  const violations = [];
+  let overrides = 0;
+  for (const m of src.matchAll(/^\s*(--[a-z0-9-]+)\s*:/gm)) {
+    const name = m[1];
+    if (TOKENS.has(name)) {
+      overrides++;
+      continue;
+    }
+    // Only flag names that sit in Canon's namespaces. Anything else is the
+    // consumer's own variable and none of this tool's business.
+    const prefix = name.split('-')[2];
+    if (!prefix) continue;
+    const family = `--${name.split('-')[2]}`;
+    const looksCanon = [...TOKENS].some((t) => t.startsWith(family + '-') || t === family);
+    if (looksCanon) {
+      const best = closest(name);
+      violations.push([
+        lineOf(src, m.index),
+        'R7',
+        `${name} is not a Canon token and overrides nothing${best ? `. Did you mean ${best}?` : ''}`,
+      ]);
+    }
+  }
+  return { violations, overrides };
+}
+
 function lintCss(file, src) {
   const violations = [];
   let rules = 0;
@@ -74,7 +138,9 @@ function lintCss(file, src) {
       }
     }
   }
-  return { violations, rules };
+  const tokens = lintTokens(src);
+  violations.push(...tokens.violations);
+  return { violations, rules, overrides: tokens.overrides };
 }
 
 function lintFile(file) {
@@ -88,7 +154,7 @@ function lintFile(file) {
   let opaque = 0;
   if (extname(file) === '.css') {
     const css = lintCss(file, raw);
-    return { violations: css.violations, checked: 0, opaque: 0, appRules: css.rules };
+    return { violations: css.violations, checked: 0, opaque: 0, appRules: css.rules, overrides: css.overrides };
   }
   // Ignore code-sample carriers: template literals (JSX docs), comments.
   let src = raw;
@@ -147,7 +213,7 @@ function lintFile(file) {
     }
   }
 
-  return { violations, checked, opaque, appRules: 0 };
+  return { violations, checked, opaque, appRules: 0, overrides: 0 };
 }
 
 const args = process.argv.slice(2);
@@ -168,11 +234,13 @@ let total = 0;
 let checked = 0;
 let opaque = 0;
 let appRules = 0;
+let overrides = 0;
 for (const file of files) {
   const result = lintFile(file);
   checked += result.checked;
   opaque += result.opaque;
   appRules += result.appRules ?? 0;
+  overrides += result.overrides ?? 0;
   for (const [line, rule, msg] of result.violations) {
     console.log(`${file}:${line}  ${rule}  ${msg}`);
     total++;
@@ -181,6 +249,12 @@ for (const file of files) {
 
 // Always print coverage, not just on success: a run that found 2 violations
 // while unable to read a third of the values has not found all of them.
+function themeReport() {
+  if (overrides === 0) return '';
+  return `
+  ${overrides} token override${overrides === 1 ? '' : 's'}. That is the brand surface.`;
+}
+
 function escapeHatch() {
   if (appRules === 0) return '';
   // Reported, never failed on its own. The app layer is a supported door, and
@@ -200,7 +274,7 @@ function coverage() {
 }
 
 if (total > 0) {
-  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}${coverage()}${escapeHatch()}`);
+  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}${coverage()}${escapeHatch()}${themeReport()}`);
   process.exit(1);
 }
-console.log(`✓ ${files.length} file${files.length === 1 ? '' : 's'} clean${coverage()}${escapeHatch()}`);
+console.log(`✓ ${files.length} file${files.length === 1 ? '' : 's'} clean${coverage()}${escapeHatch()}${themeReport()}`);

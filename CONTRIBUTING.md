@@ -28,8 +28,12 @@ layout, token, modifier or slot must land in the same PR across:
 `npm test` fails if the README counts or the prompt fall out of sync with
 `bin/vocab.mjs`, so step 5 cannot silently be the only one done.
 
-`prompts/AGENTS.md` and `vscode/canon.html-data.json` regenerate at build time
-(from the short prompt and from `bin/vocab.mjs`) - never edit them by hand.
+`prompts/AGENTS.md`, `vscode/canon.html-data.json` and `bin/tokens.mjs`
+regenerate at build time (from the short prompt, from `bin/vocab.mjs` and from
+`src/tokens.css`) - never edit them by hand.
+
+A new token therefore needs nothing beyond `src/tokens.css`: the linter picks
+it up on the next build.
 
 ## The prompt budget
 

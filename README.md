@@ -124,6 +124,11 @@ It also reports its own coverage. A value written as a JSX expression
 states how much of the markup it actually checked rather than implying all of
 it.
 
+Point it at a theme file and it checks that too. A misspelled custom property
+is valid CSS that overrides nothing, so `--color-brnd` produces a page that
+looks almost right with no visible cause. R7 catches it and suggests the token
+you meant. Your own variables are left alone.
+
 ## When Canon does not have it
 
 The vocabulary is closed, not a cage. Design will ask for a datepicker, a
@@ -260,9 +265,11 @@ Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.compone
 4. `data-slot` only as a direct child of its parent layout/component.
 5. If a pattern has no vocabulary, it goes in `@layer canon.app`, built only
    from tokens. The layer is counted, not hidden.
-6. Every component role sits on its canonical element. A role is a promise
+6. A theme overrides real tokens. A name that overrides nothing is an error,
+   not a no-op.
+7. Every component role sits on its canonical element. A role is a promise
    about behaviour, not just looks.
-7. Theming: adapt Canon to the brand, never bend the markup. A theme file
+8. Theming: adapt Canon to the brand, never bend the markup. A theme file
    overrides any token on `:root` (colors, fonts, type scale, radii, shadows)
    plus a small `@layer canon.theme` block for details tokens cannot express.
    This is how an LLM ports an existing site to Canon while keeping its exact
