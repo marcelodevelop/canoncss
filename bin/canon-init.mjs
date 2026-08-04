@@ -6,10 +6,10 @@
 // runs you can delete canoncss from package.json and nothing breaks. That is
 // the point: a closed vocabulary should not also be a lock-in.
 //
-// Usage: canon-init [target-dir]
+// Usage: canon-init [target-dir] [--theme <name>]
 // Exit 0 = done, 1 = nothing written, 2 = usage error.
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -72,9 +72,29 @@ function write(to, contents, label) {
 }
 
 const args = process.argv.slice(2);
+const THEME_DIR = join(PKG, 'themes');
+const available = () =>
+  readdirSync(THEME_DIR)
+    .filter((f) => f.endsWith('.css'))
+    .map((f) => f.replace('.css', ''));
+
 if (args[0] === '-h' || args[0] === '--help') {
-  console.log('Usage: canon-init [target-dir]\n\nCopies canon.css, a starter theme.css and AGENTS.md into your project.');
+  console.log(
+    `Usage: canon-init [target-dir] [--theme <name>]\n\n` +
+      `Copies canon.css, a theme.css and AGENTS.md into your project.\n` +
+      `Themes: ${available().join(', ')}, or omit for a blank one to fill in.`,
+  );
   process.exit(0);
+}
+
+// A named theme is a starting point that lands as your theme.css, not a
+// dependency. Nothing later reads it back.
+const themeFlag = args.indexOf('--theme');
+const themeName = themeFlag === -1 ? null : args[themeFlag + 1];
+if (themeFlag !== -1) args.splice(themeFlag, themeName ? 2 : 1);
+if (themeName && !available().includes(themeName)) {
+  console.error(`canon-init: no theme called "${themeName}". Available: ${available().join(', ')}`);
+  process.exit(2);
 }
 
 const target = pickTarget(args);
@@ -82,7 +102,9 @@ console.log(`Canon into ${resolve(target)}\n`);
 
 let written = 0;
 written += copy(join(PKG, 'dist/canon.css'), join(target, 'canon.css'), '(the framework, yours now)');
-written += write(join(target, 'theme.css'), THEME, '(your brand, start here)');
+written += themeName
+  ? copy(join(THEME_DIR, `${themeName}.css`), join(target, 'theme.css'), `(the ${themeName} theme, yours to edit)`)
+  : write(join(target, 'theme.css'), THEME, '(your brand, start here)');
 written += copy(join(PKG, 'prompts/AGENTS.md'), 'AGENTS.md', '(so coding agents speak Canon)');
 
 if (written === 0) {
@@ -93,8 +115,9 @@ if (written === 0) {
 console.log(`
 Next:
   1. Import both, in this order:  canon.css then theme.css
-  2. Uncomment the tokens you want to change in theme.css
-  3. Validate what your agent writes:  npx -p canoncss canon-lint src/
+  2. Edit theme.css. It is the only file that should differ between brands
+  3. Check it:  npx -p canoncss canon-lint <path>/theme.css
+  4. Validate what your agent writes:  npx -p canoncss canon-lint src/
 
 canoncss is no longer required at runtime. You can uninstall it and keep the
 CSS: it is a plain file with no build step. Keep it installed only if you want
