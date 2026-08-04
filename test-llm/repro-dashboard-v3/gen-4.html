@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwind Logistics - Admin Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Northwind</a>
+
+    <nav data-slot="nav">
+      <a href="/overview" aria-current="page">Overview</a>
+      <a href="/shipments">Shipments</a>
+      <a href="/carriers">Carriers</a>
+      <a href="/invoices">Invoices</a>
+      <a href="/settings">Settings</a>
+    </nav>
+
+    <div data-slot="actions">
+      <a data-component="button" data-variant="ghost" data-size="sm" href="/shipments/new">New shipment</a>
+      <span data-component="avatar" data-size="sm">RA</span>
+    </div>
+
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/overview" aria-current="page">Overview</a>
+        <a href="/shipments">Shipments</a>
+        <a href="/carriers">Carriers</a>
+        <a href="/invoices">Invoices</a>
+        <a href="/settings">Settings</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <aside data-slot="sidebar" data-layout="stack" data-gap="md" data-padding="lg">
+      <p data-tone="subtle">Operations</p>
+      <nav data-component="nav" aria-label="Dashboard sections">
+        <ul>
+          <li><a href="/overview" aria-current="page">Overview</a></li>
+          <li><a href="/shipments">Shipments</a></li>
+          <li><a href="/carriers">Carriers</a></li>
+          <li><a href="/invoices">Invoices</a></li>
+          <li><a href="/settings">Settings</a></li>
+        </ul>
+      </nav>
+      <hr data-component="divider">
+      <p data-tone="subtle">Signed in as Rita Alvarado, Operations Lead, Rotterdam hub.</p>
+    </aside>
+
+    <main data-slot="main" data-layout="stack" data-gap="xl" data-padding="lg">
+
+      <div data-layout="stack" data-gap="xs">
+        <h1>Overview</h1>
+        <p data-tone="subtle">Network activity for the last 24 hours, updated 09:15 CET.</p>
+      </div>
+
+      <section data-layout="grid" data-cols="4" data-gap="md">
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">1,284</span>
+            <span data-tone="subtle">Shipments in transit</span>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">96.4%</span>
+            <span data-tone="subtle">On-time delivery rate</span>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">37</span>
+            <span data-tone="subtle">Exceptions awaiting review</span>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">€412K</span>
+            <span data-tone="subtle">Freight billed this week</span>
+          </div>
+        </article>
+
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+
+        <h2>Recent shipments</h2>
+
+        <div data-layout="row" data-gap="md" data-wrap data-align="end">
+
+          <div data-layout="stack" data-gap="xs" data-full>
+            <label for="filter-search">Search tracking code or destination</label>
+            <input data-component="input" data-size="md" data-full id="filter-search" type="search" name="search" placeholder="NW-8842190 or Hamburg">
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="filter-carrier">Carrier</label>
+            <select data-component="select" data-size="md" id="filter-carrier" name="carrier">
+              <option>All carriers</option>
+              <option>Baltic Freight</option>
+              <option>Meridian Air Cargo</option>
+              <option>Rhine Overland</option>
+              <option>Southbound Haulage</option>
+            </select>
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="filter-status">Status</label>
+            <select data-component="select" data-size="md" id="filter-status" name="status">
+              <option>Any status</option>
+              <option>In transit</option>
+              <option>Delivered</option>
+              <option>Delayed</option>
+              <option>Customs hold</option>
+              <option>Pending pickup</option>
+            </select>
+          </div>
+
+        </div>
+
+        <table data-component="table">
+          <caption class="sr-only">Ten most recent shipments</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tracking code</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Carrier</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-mono>NW-8842190</td>
+              <td>Hamburg, Germany</td>
+              <td>Baltic Freight</td>
+              <td><span data-component="badge" data-variant="info">In transit</span></td>
+              <td>3 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842177</td>
+              <td>Lyon, France</td>
+              <td>Rhine Overland</td>
+              <td><span data-component="badge" data-variant="success">Delivered</span></td>
+              <td>3 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842164</td>
+              <td>Gdansk, Poland</td>
+              <td>Baltic Freight</td>
+              <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+              <td>3 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842151</td>
+              <td>Casablanca, Morocco</td>
+              <td>Meridian Air Cargo</td>
+              <td><span data-component="badge" data-variant="warning">Customs hold</span></td>
+              <td>2 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842148</td>
+              <td>Bilbao, Spain</td>
+              <td>Southbound Haulage</td>
+              <td><span data-component="badge" data-variant="success">Delivered</span></td>
+              <td>2 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842133</td>
+              <td>Manchester, United Kingdom</td>
+              <td>Meridian Air Cargo</td>
+              <td><span data-component="badge" data-variant="error">Exception</span></td>
+              <td>2 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842120</td>
+              <td>Milan, Italy</td>
+              <td>Rhine Overland</td>
+              <td><span data-component="badge" data-variant="info">In transit</span></td>
+              <td>1 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842118</td>
+              <td>Gothenburg, Sweden</td>
+              <td>Baltic Freight</td>
+              <td><span data-component="badge" data-variant="neutral">Pending pickup</span></td>
+              <td>1 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842104</td>
+              <td>Porto, Portugal</td>
+              <td>Southbound Haulage</td>
+              <td><span data-component="badge" data-variant="success">Delivered</span></td>
+              <td>1 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-8842097</td>
+              <td>Antwerp, Belgium</td>
+              <td>Rhine Overland</td>
+              <td><span data-component="badge" data-variant="info">In transit</span></td>
+              <td>31 Jul 2026</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div data-layout="row" data-gap="sm" data-justify="end">
+          <a data-component="button" data-variant="secondary" data-size="sm" href="/shipments">View all shipments</a>
+          <a data-component="button" data-variant="primary" data-size="sm" href="/shipments/export">Export CSV</a>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

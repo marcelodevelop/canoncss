@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwind Logistics - Admin Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <div data-slot="brand">Northwind Logistics</div>
+    <div data-slot="actions">
+      <div data-layout="row" data-gap="sm" data-align="center">
+        <span data-tone="subtle" data-hide="mobile">Dana Whitfield</span>
+        <span data-component="avatar" data-size="sm">DW</span>
+      </div>
+    </div>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <aside data-slot="sidebar">
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Operations</p>
+        <nav data-component="nav">
+          <ul>
+            <li><a href="#overview" aria-current="page">Overview</a></li>
+            <li><a href="#shipments">Shipments</a></li>
+            <li><a href="#carriers">Carriers</a></li>
+            <li><a href="#invoices">Invoices</a></li>
+            <li><a href="#settings">Settings</a></li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="stack" data-gap="xs">
+          <h1 id="overview">Overview</h1>
+          <p data-tone="subtle">Network activity for the last 30 days, updated 12 minutes ago.</p>
+        </div>
+
+        <div data-layout="grid" data-cols="4" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">1,284</span>
+                <span data-tone="subtle">Shipments in transit</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">96.4%</span>
+                <span data-tone="subtle">On-time delivery rate</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">37</span>
+                <span data-tone="subtle">Exceptions to review</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">$412K</span>
+                <span data-tone="subtle">Freight spend this month</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <hr data-component="divider">
+
+        <section>
+          <div data-layout="stack" data-gap="md">
+
+            <h2 id="shipments">Recent shipments</h2>
+
+            <div data-layout="row" data-gap="md" data-wrap data-align="end">
+
+              <div data-layout="stack" data-gap="xs">
+                <label for="search">Search tracking code or destination</label>
+                <input data-component="input" data-size="md" id="search" type="search" name="search" placeholder="NW-4820-QT">
+              </div>
+
+              <div data-layout="stack" data-gap="xs">
+                <label for="carrier">Carrier</label>
+                <select data-component="select" data-size="md" id="carrier" name="carrier">
+                  <option>All carriers</option>
+                  <option>Baltic Freight</option>
+                  <option>Meridian Haulage</option>
+                  <option>Cascade Air Cargo</option>
+                  <option>Halloran Trucking</option>
+                  <option>Southport Lines</option>
+                </select>
+              </div>
+
+              <div data-layout="stack" data-gap="xs">
+                <label for="status">Status</label>
+                <select data-component="select" data-size="md" id="status" name="status">
+                  <option>Any status</option>
+                  <option>Delivered</option>
+                  <option>In transit</option>
+                  <option>Delayed</option>
+                  <option>Exception</option>
+                  <option>Pending pickup</option>
+                </select>
+              </div>
+
+              <button data-component="button" data-variant="primary" data-size="md" type="button">Apply filters</button>
+              <button data-component="button" data-variant="ghost" data-size="md" type="button">Reset</button>
+
+            </div>
+
+            <table data-component="table">
+              <caption class="sr-only">The ten most recent shipments in the Northwind network</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Tracking code</th>
+                  <th scope="col">Destination</th>
+                  <th scope="col">Carrier</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-mono>NW-4820-QT</td>
+                  <td>Rotterdam, Netherlands</td>
+                  <td>Baltic Freight</td>
+                  <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                  <td>3 Aug 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4819-HB</td>
+                  <td>Gothenburg, Sweden</td>
+                  <td>Southport Lines</td>
+                  <td><span data-component="badge" data-variant="info">In transit</span></td>
+                  <td>3 Aug 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4817-LM</td>
+                  <td>Chicago, United States</td>
+                  <td>Halloran Trucking</td>
+                  <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                  <td>2 Aug 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4815-ZR</td>
+                  <td>Bilbao, Spain</td>
+                  <td>Meridian Haulage</td>
+                  <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                  <td>2 Aug 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4814-KD</td>
+                  <td>Singapore</td>
+                  <td>Cascade Air Cargo</td>
+                  <td><span data-component="badge" data-variant="error">Exception</span></td>
+                  <td>1 Aug 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4812-PN</td>
+                  <td>Hamburg, Germany</td>
+                  <td>Baltic Freight</td>
+                  <td><span data-component="badge" data-variant="info">In transit</span></td>
+                  <td>1 Aug 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4810-VC</td>
+                  <td>Lyon, France</td>
+                  <td>Meridian Haulage</td>
+                  <td><span data-component="badge" data-variant="neutral">Pending pickup</span></td>
+                  <td>31 Jul 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4808-JF</td>
+                  <td>Manchester, United Kingdom</td>
+                  <td>Halloran Trucking</td>
+                  <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                  <td>31 Jul 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4806-TA</td>
+                  <td>Casablanca, Morocco</td>
+                  <td>Southport Lines</td>
+                  <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                  <td>30 Jul 2026</td>
+                </tr>
+                <tr>
+                  <td data-mono>NW-4803-EY</td>
+                  <td>Montreal, Canada</td>
+                  <td>Cascade Air Cargo</td>
+                  <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                  <td>30 Jul 2026</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div data-layout="row" data-gap="sm" data-justify="between" data-align="center">
+              <span data-tone="subtle">Showing 10 of 1,284 shipments</span>
+              <div data-layout="row" data-gap="sm">
+                <button data-component="button" data-variant="secondary" data-size="sm" type="button">Previous</button>
+                <button data-component="button" data-variant="secondary" data-size="sm" type="button">Next</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
