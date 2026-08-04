@@ -12,7 +12,7 @@ mkdir -p dist
 {
   V=$(node -p "require('./package.json').version" 2>/dev/null || echo 0.0.0)
   echo "/* Canon CSS v$V | MIT License | https://canoncss.com */"
-  echo "@layer canon.reset, canon.tokens, canon.layouts, canon.components, canon.utilities;"
+  echo "@layer canon.reset, canon.tokens, canon.layouts, canon.components, canon.utilities, canon.theme, canon.app;"
   cat $SOURCES \
     | sed -e ':a' -e 'N' -e '$!ba' -e 's|/\*[^*]*\*\+\([^/*][^*]*\*\+\)*/||g' \
     | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e '/^$/d'

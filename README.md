@@ -106,6 +106,36 @@ It also reports its own coverage. A value written as a JSX expression
 states how much of the markup it actually checked rather than implying all of
 it.
 
+## When Canon does not have it
+
+The vocabulary is closed, not a cage. Design will ask for a datepicker, a
+kanban board, a file uploader with drag and drop. None of those are in Canon
+and some never will be.
+
+They go in `@layer canon.app`, a layer Canon declares and leaves empty for you:
+
+```css
+@layer canon.app {
+  .datepicker-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-xs);              /* tokens, not values */
+    background: var(--color-surface-raised);
+    border-radius: var(--radius-md);
+  }
+}
+```
+
+One rule: build it from tokens. `canon-lint` reads the layer and fails on a
+hardcoded colour or spacing value, because those are what the theme system
+exists to control. Everything else is yours.
+
+It also **counts** the rules you put there and prints the number. That is the
+point: the size of your app layer is a measurement of what Canon is missing for
+your product. It is meant to be looked at, not hidden. A big one is a bug
+report; the vocabulary is supposed to grow toward it, on the evidence rule in
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Editor autocomplete
 
 Canon ships a VS Code [custom data](https://code.visualstudio.com/api/extension-guides/custom-data-extension)
@@ -171,9 +201,11 @@ Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.compone
 2. No inline styles, no extra CSS.
 3. An element gets `data-layout` **or** `data-component`, never both.
 4. `data-slot` only as a direct child of its parent layout/component.
-5. Every component role sits on its canonical element. A role is a promise
+5. If a pattern has no vocabulary, it goes in `@layer canon.app`, built only
+   from tokens. The layer is counted, not hidden.
+6. Every component role sits on its canonical element. A role is a promise
    about behaviour, not just looks.
-6. Theming: adapt Canon to the brand, never bend the markup. A theme file
+7. Theming: adapt Canon to the brand, never bend the markup. A theme file
    overrides any token on `:root` (colors, fonts, type scale, radii, shadows)
    plus a small `@layer canon.theme` block for details tokens cannot express.
    This is how an LLM ports an existing site to Canon while keeping its exact

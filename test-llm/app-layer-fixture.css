@@ -1,0 +1,22 @@
+/* Fixture for canon-lint: the escape hatch, used right and used wrong.
+   npm test asserts this file produces exactly 2 violations. */
+
+@layer canon.app {
+  /* Right: a component Canon does not have, built entirely from tokens. */
+  .datepicker-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-xs);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0;
+  }
+
+  /* Wrong: two hardcoded values that tokens already cover. */
+  .kanban-column {
+    background: #f4f4f5;
+    padding: 12px;
+    border: 1px solid var(--color-border);
+  }
+}
