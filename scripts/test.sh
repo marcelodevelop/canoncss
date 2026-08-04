@@ -18,4 +18,8 @@ if [ "$CODE" -ne 1 ] || [ "$COUNT" -ne 6 ]; then
   exit 1
 fi
 echo "✓ fixture caught ($COUNT violations, exit $CODE)"
+
+echo "- repro metric self-check:"
+node scripts/repro.mjs --selftest
+
 echo "✓ all tests passed"

@@ -28,6 +28,30 @@ layout, token, modifier or slot must land in the same PR across:
 `prompts/AGENTS.md` and `vscode/canon.html-data.json` regenerate at build time
 (from the short prompt and from `bin/vocab.mjs`) - never edit them by hand.
 
+## Measuring a prompt change
+
+Prompt edits are the highest-leverage and least verifiable change in this repo.
+`npm run repro` gives them a number:
+
+```bash
+npm run repro -- gen-a.html gen-b.html gen-c.html
+```
+
+Generate the same spec two or more times, then compare. It reports two figures,
+deliberately not blended:
+
+- **structure** (`data-layout`, `data-component`, `data-slot`) is the skeleton,
+  and it is what the closed-vocabulary claim is actually about.
+- **modifiers** (`data-gap`, `data-align`, `data-variant`, ...) are cosmetics.
+  Movement here changes how a page looks, not what it is.
+
+A prompt change that raises structure is a win. One that only moves modifiers is
+noise. Values written as JSX expressions cannot be compared, so the tool reports
+what share of the markup its score actually covers.
+
+Do not compare generations made with different prompt versions and call the
+result drift: it conflates the prompt change with generation variance.
+
 ## Design principles (non-negotiable)
 
 - **One right way.** If a pattern can already be expressed, do not add a
