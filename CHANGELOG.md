@@ -6,50 +6,67 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Added
-- **`canon-init`**: copies `canon.css`, a starter `theme.css` and `AGENTS.md`
-  into a project, then tells you the package is no longer required. Vendoring
-  a single build-step-free CSS file costs nothing, and a closed vocabulary
-  should not also be a lock-in.
-- **`@layer canon.app`**: the supported escape hatch for patterns the
-  vocabulary does not cover. Declared and left empty. `canon-lint` reads `.css`
-  now, fails on a hardcoded colour or spacing value inside that layer, and
-  counts the rules it finds. The count never fails a build: it measures what
-  Canon is missing for that codebase.
+- **Two starter themes**, `institutional` and `soft`, and `canon-init --theme`.
+  Deliberately as far apart as two brands get, so the pair shows the range
+  rather than two tastes of the same thing.
+- **R7**: a theme token that overrides nothing is an error. A misspelled custom
+  property is valid CSS that does nothing, so the page comes out almost right
+  with no visible cause. Suggests the token you meant, by edit distance, and
+  says nothing when the guess would be a bad one. `bin/tokens.mjs` generates
+  from `src/tokens.css`, so a new token needs no other file.
+- `canon-lint` reports the number of real token overrides it found. That figure
+  is the size of the brand surface.
 - **`data-component="nav"`**: a list of navigation links. The current item is
   `aria-current="page"`, not a `data-*` state, so marking it correctly also
   makes the page accessible.
 - **An admission test in CONTRIBUTING.** A gap qualifies when generations
   diverge, not when they complain. It has already rejected two of four
   candidates.
-- `canon.theme` is now declared in the layer order. It worked before only
-  because an undeclared layer sorts last.
+- **`canon-init`**: copies `canon.css`, a `theme.css` and `AGENTS.md` into a
+  project, then says the package is no longer required. Vendoring a single
+  build-step-free file costs nothing, and a closed vocabulary should not also
+  be a lock-in.
+- **`@layer canon.app`**: the supported escape hatch for patterns the
+  vocabulary does not cover. Declared and left empty. `canon-lint` reads `.css`
+  now, fails on a hardcoded colour or spacing inside that layer, and counts the
+  rules it finds. The count never fails a build: it measures what Canon is
+  missing for that codebase.
 - **`data-component="disclosure"`** on `<details>`: zero-JS expand and collapse,
-  the mechanism the topbar burger menu already used, generalised. The caret is
+  the mechanism the topbar burger already used, generalised. The caret is
   generated so the markup carries no icon to get wrong.
-- Checkbox and radio inputs now render correctly bare, along with a `<label>`
-  that wraps its own control. Deliberately no `data-component`: `type="checkbox"`
-  already declares the role, and a second spelling would break "one right way".
+- Checkbox and radio inputs render correctly bare, along with a `<label>` that
+  wraps its own control. Deliberately no `data-component`: `type="checkbox"`
+  already declares the role.
 - `canon-lint` reports its own coverage, so a clean run on a codebase full of
   JSX expression values states how much it could actually read.
-- `npm run repro`: measures how much two or more generations of the same spec
-  share, reporting structure and modifiers separately.
-
+- **`npm run repro`**: measures how much two or more generations of one spec
+  share, reporting structure and modifiers separately, plus a
+  framework-neutral `--neutral` mode for comparing against other systems.
 - **Canonical defaults** in both prompts: which gap to reach for at each level,
-  how to write a number with a unit, and how to highlight one card in a group.
-  Prompt-only, no CSS. Structure went 92% to 95% and modifiers 79% to 84%, with
-  every one of the ten pairs at or above 90%.
-- `npm run repro` now names the modifiers that disagree. Sequence similarity
-  punishes a file for carrying more copy than another, so a low score needed a
-  way to be read rather than guessed at. That reading is what identified
-  `data-gap="md"` as the one real modifier disagreement, and stating a default
-  for it cut its spread from 3 to 1.
+  how to write a number with a unit, how to highlight one card, and that a
+  control and its label are a stack.
+- A list inside `<nav>` no longer gets bullets.
+- `canon.theme` is now declared in the layer order. It worked before only
+  because an undeclared layer sorts last.
+- `scripts/check-docs.mjs` fails the build when the README counts or the prompt
+  fall out of sync with `bin/vocab.mjs`.
 
-### Why disclosure was added
-Five clean-context agents were given the same page spec. All five reached for a
-collapsible FAQ, found nothing in the vocabulary, and each invented a different
-substitute: cards for some, bare heading and paragraph stacks for others. That
-single gap was the largest source of structural divergence between their
-outputs, measured at 81% mean structural similarity before the addition.
+### Measured
+Three conditions, two specs, forty generations. Full tables in
+[`test-llm/README.md`](test-llm/README.md).
+
+- Canon reproduces **91% of its structure** across generations of one spec, on
+  both a pricing page and an admin dashboard.
+- Against Tailwind under an equally strict house-style prompt, Canon does
+  **not** win: 88/92 against 90/90 on pricing, 93/94 against 90/91 on the
+  dashboard. Strictness of the specification is what does the work.
+- Against Tailwind as teams actually brief it, the gap is large: **58% to 67%**
+  styling agreement against Canon's 90%, in **90 to 159 styling decisions per
+  page against 41 to 43**.
+- **The brand does not leak into the markup.** Two opposite brands, each with
+  its own theme overriding 49 tokens of which only two matched, produced markup
+  that was **96% structurally identical**. That is the one result a utility
+  framework cannot reproduce.
 
 ### Fixed
 - The documented lint command. `npx canon-lint` resolves by package name and

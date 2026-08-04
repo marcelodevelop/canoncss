@@ -237,7 +237,8 @@ every element.
 
 - [Docs](https://www.canoncss.com) - tokens, layouts, components, live playground
 - [Examples](examples/) - [landing](examples/landing/), [dashboard](examples/dashboard/),
-  [app-shell](examples/app-shell/) (dark mode), [blog](examples/blog/)
+  [app-shell](examples/app-shell/) (dark mode), [blog](examples/blog/),
+  [settings](examples/settings/) (nav, disclosure, checkboxes, tables)
 
 ## Live in production
 
@@ -254,7 +255,7 @@ src/        Modular source (reset, tokens, layouts, components, utilities)
 dist/       canon.css - single-file build
 prompts/    System prompts for LLMs
 bin/        canon-lint + the vocabulary tables it validates against
-examples/   Four pages built with zero extra CSS
+examples/   Five pages built with zero extra CSS
 test-llm/   LLM regression corpus
 scripts/    build.sh (cat + comment-strip)
 vscode/     generated html.customData for editor autocomplete
