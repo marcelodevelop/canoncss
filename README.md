@@ -47,11 +47,16 @@ npm run build
 ## Or take the code and keep it
 
 ```bash
-npx -p canoncss canon-init
+npx -p canoncss canon-init --theme institutional
 ```
 
-Copies `canon.css`, a starter `theme.css` and `AGENTS.md` into your project and
-tells you what to do next. It never overwrites a file that already exists.
+Copies `canon.css`, a `theme.css` and `AGENTS.md` into your project and tells
+you what to do next. It never overwrites a file that already exists.
+
+Two starter themes ship with the package, `institutional` and `soft`, and they
+are as far apart as two brands get: navy and square against coral and round.
+Omit `--theme` for a blank one to fill in yourself. Whichever you pick, the
+file lands in your repo as ordinary CSS and nothing reads it back.
 
 After that **you can uninstall canoncss and nothing breaks.** It is one plain
 CSS file with no build step, so vendoring it costs nothing and takes the
