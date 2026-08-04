@@ -89,14 +89,22 @@ Three ways, pick one:
 LLM generated the markup? Verify it mechanically:
 
 ```bash
-npx canon-lint src/
+npx -p canoncss canon-lint src/
 ```
+
+(`npx canon-lint` alone fails: npx resolves by package name, and the package is
+`canoncss`. Once it is a dependency, plain `npx canon-lint src/` works.)
 
 Zero-dependency linter that enforces the rules: closed-vocabulary values (R1),
 no inline styles (R2), no `<style>` blocks (R3), never `data-layout` +
 `data-component` on one element (R4), and every component role on its canonical
 element (R5, so `<div data-component="button">` fails). Exit 1 on violations -
 CI-ready. This closes the loop: *the LLM generates, Canon validates.*
+
+It also reports its own coverage. A value written as a JSX expression
+(`data-variant={x}`) cannot be read, so a clean result on a React codebase
+states how much of the markup it actually checked rather than implying all of
+it.
 
 ## Editor autocomplete
 
