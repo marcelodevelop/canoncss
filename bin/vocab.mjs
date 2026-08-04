@@ -2,7 +2,7 @@
 // the generated VS Code html.customData file.
 
 export const LAYOUTS = new Set(['stack', 'row', 'grid', 'sidebar', 'centered', 'hero', 'split']);
-export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider', 'disclosure', 'nav']);
+export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider', 'disclosure', 'nav', 'stepper']);
 const SCALE = new Set(['xs', 'sm', 'md', 'lg', 'xl', '2xl']);
 
 export const VOCAB = {
@@ -17,7 +17,7 @@ export const VOCAB = {
   'data-size': new Set(['sm', 'md', 'lg']),
   // ponytail: unión de variants de todos los componentes; per-component si hace falta
   'data-variant': new Set(['primary', 'secondary', 'ghost', 'danger', 'link', 'neutral', 'brand', 'success', 'warning', 'error', 'info', 'strong', 'featured']),
-  'data-state': new Set(['error', 'success']),
+  'data-state': new Set(['error', 'success', 'complete']),
   'data-tone': new Set(['subtle', 'brand', 'accent', 'success', 'error']),
   'data-hide': new Set(['mobile', 'desktop']),
   'data-motion': new Set(['rise', 'float', 'pulse', 'lift']),
@@ -43,6 +43,7 @@ export const ELEMENTS = {
   divider: new Set(['hr', 'div']),
   disclosure: new Set(['details']),
   nav: new Set(['nav']),
+  stepper: new Set(['ol']),
 };
 
 export const DESC = {

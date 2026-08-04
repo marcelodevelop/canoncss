@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout | Margin</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Margin</a>
+  <nav data-slot="nav">
+    <a href="/fiction">Fiction</a>
+    <a href="/nonfiction">Non-fiction</a>
+    <a href="/poetry">Poetry</a>
+    <a href="/cart" aria-current="page">Cart</a>
+  </nav>
+  <div data-slot="actions">
+    <span data-component="badge" data-variant="brand">5 books</span>
+    <span>&pound;52.96</span>
+  </div>
+  <details data-slot="menu">
+    <summary>&#9776;</summary>
+    <nav>
+      <a href="/fiction">Fiction</a>
+      <a href="/nonfiction">Non-fiction</a>
+      <a href="/poetry">Poetry</a>
+      <a href="/cart" aria-current="page">Cart</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="wide" data-padding="lg">
+  <div data-layout="stack" data-gap="xl">
+
+    <div data-layout="stack" data-gap="md">
+      <h1>Checkout</h1>
+      <ol data-component="stepper">
+        <li data-state="complete">Cart</li>
+        <li aria-current="step">Delivery</li>
+        <li>Payment</li>
+        <li>Review</li>
+      </ol>
+    </div>
+
+    <div data-layout="sidebar" data-gap="xl">
+
+      <div data-slot="main">
+        <form data-layout="stack" data-gap="xl">
+
+          <div data-layout="stack" data-gap="md">
+            <h2>Delivery address</h2>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="full-name">Full name</label>
+              <input data-component="input" id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Eleanor Whitfield">
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="street">Street address</label>
+              <input data-component="input" id="street" name="street" type="text" autocomplete="street-address" placeholder="14 Ashgrove Terrace">
+            </div>
+
+            <div data-layout="grid" data-cols="2" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <label for="city">City</label>
+                <input data-component="input" id="city" name="city" type="text" autocomplete="address-level2" placeholder="Bristol">
+              </div>
+              <div data-layout="stack" data-gap="xs">
+                <label for="postcode">Postcode</label>
+                <input data-component="input" id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="BS8 1TH">
+              </div>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="country">Country</label>
+              <select data-component="select" id="country" name="country" autocomplete="country-name">
+                <option selected>United Kingdom</option>
+                <option>Ireland</option>
+                <option>France</option>
+                <option>Germany</option>
+                <option>Spain</option>
+                <option>Netherlands</option>
+              </select>
+            </div>
+
+            <label>
+              <input type="checkbox" name="billing-same" checked>
+              Billing address is the same
+            </label>
+          </div>
+
+          <hr data-component="divider">
+
+          <div data-layout="stack" data-gap="md">
+            <h2>Delivery speed</h2>
+            <p data-tone="subtle">Every order leaves our Bristol warehouse in recycled packaging.</p>
+
+            <div data-layout="stack" data-gap="sm">
+
+              <label>
+                <input type="radio" name="delivery-speed" value="standard">
+                <span data-layout="stack" data-gap="xs">
+                  <span>Standard</span>
+                  <span data-tone="subtle">Arrives Tuesday 11 August</span>
+                  <span>Free</span>
+                </span>
+              </label>
+
+              <label>
+                <input type="radio" name="delivery-speed" value="tracked" checked>
+                <span data-layout="stack" data-gap="xs">
+                  <span>Tracked</span>
+                  <span data-tone="subtle">Arrives Friday 7 August</span>
+                  <span>&pound;3.95</span>
+                </span>
+              </label>
+
+              <label>
+                <input type="radio" name="delivery-speed" value="next-day">
+                <span data-layout="stack" data-gap="xs">
+                  <span>Next day</span>
+                  <span data-tone="subtle">Arrives Wednesday 5 August, order before 6pm</span>
+                  <span>&pound;7.50</span>
+                </span>
+              </label>
+
+            </div>
+          </div>
+
+          <details data-component="disclosure">
+            <summary>Add a gift message</summary>
+            <div data-layout="stack" data-gap="xs">
+              <label for="gift-message">We will print this on a card and tuck it inside the parcel</label>
+              <textarea data-component="textarea" id="gift-message" name="gift-message" rows="4" placeholder="Happy birthday, Nora. Start with Piranesi and read it slowly."></textarea>
+            </div>
+          </details>
+
+          <div data-layout="row" data-gap="sm" data-justify="between" data-wrap>
+            <a data-component="button" data-variant="secondary" href="/cart">Back to cart</a>
+            <button data-component="button" data-variant="primary" type="submit">Continue to payment</button>
+          </div>
+
+        </form>
+      </div>
+
+      <aside data-slot="sidebar">
+        <div data-layout="stack" data-gap="md" data-padding="lg" data-tone="subtle">
+          <h2>Order summary</h2>
+
+          <table data-component="table">
+            <thead>
+              <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span data-layout="stack" data-gap="xs">
+                    <span>The Waves</span>
+                    <span data-tone="subtle">Virginia Woolf</span>
+                  </span>
+                </td>
+                <td>1</td>
+                <td>&pound;9.99</td>
+              </tr>
+              <tr>
+                <td>
+                  <span data-layout="stack" data-gap="xs">
+                    <span>Piranesi</span>
+                    <span data-tone="subtle">Susanna Clarke</span>
+                  </span>
+                </td>
+                <td>2</td>
+                <td>&pound;17.98</td>
+              </tr>
+              <tr>
+                <td>
+                  <span data-layout="stack" data-gap="xs">
+                    <span>The Dawn of Everything</span>
+                    <span data-tone="subtle">David Graeber and David Wengrow</span>
+                  </span>
+                </td>
+                <td>1</td>
+                <td>&pound;14.99</td>
+              </tr>
+              <tr>
+                <td>
+                  <span data-layout="stack" data-gap="xs">
+                    <span>Winter Recipes from the Collective</span>
+                    <span data-tone="subtle">Louise Gl&uuml;ck</span>
+                  </span>
+                </td>
+                <td>1</td>
+                <td>&pound;10.00</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div data-layout="stack" data-gap="sm">
+            <div data-layout="row" data-justify="between" data-gap="sm">
+              <span>Subtotal</span>
+              <span>&pound;52.96</span>
+            </div>
+            <div data-layout="row" data-justify="between" data-gap="sm">
+              <span>Delivery (Tracked)</span>
+              <span>&pound;3.95</span>
+            </div>
+            <hr data-component="divider">
+            <div data-layout="row" data-justify="between" data-gap="sm">
+              <span>Total</span>
+              <span>&pound;56.91</span>
+            </div>
+          </div>
+
+          <p data-tone="subtle">Free returns within 30 days. Orders over &pound;60 ship tracked at no cost.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

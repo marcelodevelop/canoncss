@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout · Margin Bookshop</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Margin</a>
+    <div data-slot="actions">
+      <span data-component="badge" data-variant="brand">5 books</span>
+      <a data-component="button" data-variant="ghost" href="/cart">View cart · £48.97</a>
+    </div>
+  </header>
+
+  <main data-layout="centered" data-width="wide" data-padding="lg">
+    <div data-layout="stack" data-gap="xl">
+
+      <div data-layout="stack" data-gap="md">
+        <h1>Checkout</h1>
+        <ol data-component="stepper">
+          <li data-state="complete">Cart</li>
+          <li aria-current="step">Delivery</li>
+          <li>Payment</li>
+          <li>Review</li>
+        </ol>
+      </div>
+
+      <div data-layout="sidebar" data-gap="xl">
+
+        <div data-slot="main">
+          <div data-layout="stack" data-gap="xl">
+
+            <section data-layout="stack" data-gap="md">
+              <h2>Delivery address</h2>
+              <p data-tone="subtle">We post every order in recycled board, never plastic.</p>
+
+              <div data-layout="stack" data-gap="xs">
+                <label for="full-name">Full name</label>
+                <input data-component="input" id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Eleanor Whitfield">
+              </div>
+
+              <div data-layout="stack" data-gap="xs">
+                <label for="street">Street address</label>
+                <input data-component="input" id="street" name="street" type="text" autocomplete="street-address" placeholder="42 Bellwether Lane, Flat 3">
+              </div>
+
+              <div data-layout="row" data-gap="md" data-wrap>
+                <div data-layout="stack" data-gap="xs">
+                  <label for="city">City</label>
+                  <input data-component="input" id="city" name="city" type="text" autocomplete="address-level2" placeholder="Bristol">
+                </div>
+                <div data-layout="stack" data-gap="xs">
+                  <label for="postcode">Postcode</label>
+                  <input data-component="input" id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="BS1 5TR">
+                </div>
+              </div>
+
+              <div data-layout="stack" data-gap="xs">
+                <label for="country">Country</label>
+                <select data-component="select" id="country" name="country" autocomplete="country-name">
+                  <option selected>United Kingdom</option>
+                  <option>Ireland</option>
+                  <option>France</option>
+                  <option>Germany</option>
+                  <option>Spain</option>
+                  <option>Netherlands</option>
+                </select>
+              </div>
+
+              <label>
+                <input type="checkbox" name="same-billing" checked>
+                Billing address is the same
+              </label>
+            </section>
+
+            <hr data-component="divider">
+
+            <section data-layout="stack" data-gap="md">
+              <h2>Delivery speed</h2>
+
+              <div data-layout="row" data-gap="md" data-align="center" data-justify="between">
+                <div data-layout="stack" data-gap="xs">
+                  <label>
+                    <input type="radio" name="delivery-speed" value="standard" checked>
+                    Standard post
+                  </label>
+                  <p data-tone="subtle">Arrives Thursday 13 August</p>
+                </div>
+                <span>£2.95</span>
+              </div>
+
+              <div data-layout="row" data-gap="md" data-align="center" data-justify="between">
+                <div data-layout="stack" data-gap="xs">
+                  <label>
+                    <input type="radio" name="delivery-speed" value="tracked">
+                    Tracked 48 hour
+                  </label>
+                  <p data-tone="subtle">Arrives Tuesday 11 August</p>
+                </div>
+                <span>£4.50</span>
+              </div>
+
+              <div data-layout="row" data-gap="md" data-align="center" data-justify="between">
+                <div data-layout="stack" data-gap="xs">
+                  <label>
+                    <input type="radio" name="delivery-speed" value="next-day">
+                    Next day by 1pm
+                  </label>
+                  <p data-tone="subtle">Arrives Wednesday 5 August</p>
+                </div>
+                <span>£7.95</span>
+              </div>
+            </section>
+
+            <details data-component="disclosure">
+              <summary>Add a gift message</summary>
+              <div data-layout="stack" data-gap="xs">
+                <label for="gift-message">Your message</label>
+                <textarea data-component="textarea" id="gift-message" name="gift-message" rows="4" placeholder="For Nadia, who reads faster than anyone should. Happy birthday."></textarea>
+                <p data-tone="subtle">We write it on a card by hand and leave the prices off the invoice.</p>
+              </div>
+            </details>
+
+          </div>
+        </div>
+
+        <aside data-slot="sidebar">
+          <div data-layout="stack" data-gap="md" data-padding="lg" data-tone="subtle">
+            <h2>Order summary</h2>
+
+            <table data-component="table">
+              <thead>
+                <tr>
+                  <th scope="col">Book</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>The Overstory · Richard Powers</td>
+                  <td>1</td>
+                  <td>£9.99</td>
+                </tr>
+                <tr>
+                  <td>A Room of One's Own · Virginia Woolf</td>
+                  <td>2</td>
+                  <td>£15.00</td>
+                </tr>
+                <tr>
+                  <td>Wolf Hall · Hilary Mantel</td>
+                  <td>1</td>
+                  <td>£10.99</td>
+                </tr>
+                <tr>
+                  <td>The Wager · David Grann</td>
+                  <td>1</td>
+                  <td>£12.99</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr data-component="divider">
+
+            <div data-layout="stack" data-gap="sm">
+              <div data-layout="row" data-justify="between" data-gap="md">
+                <span data-tone="subtle">Subtotal</span>
+                <span>£48.97</span>
+              </div>
+              <div data-layout="row" data-justify="between" data-gap="md">
+                <span data-tone="subtle">Delivery · Standard post</span>
+                <span>£2.95</span>
+              </div>
+            </div>
+
+            <hr data-component="divider" data-variant="strong">
+
+            <div data-layout="row" data-justify="between" data-align="center" data-gap="md">
+              <span>Total</span>
+              <span>£51.92</span>
+            </div>
+
+            <p data-tone="subtle">Free delivery on orders over £60. You are £11.03 away.</p>
+          </div>
+        </aside>
+
+      </div>
+
+      <hr data-component="divider">
+
+      <div data-layout="row" data-gap="sm" data-justify="between" data-align="center" data-wrap>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/cart">Back to cart</a>
+        <button data-component="button" data-variant="primary" data-size="lg" type="submit">Continue to payment</button>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

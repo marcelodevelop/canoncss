@@ -277,6 +277,101 @@
   }
 
   /* ════════════════════════════════
+     STEPPER
+     ════════════════════════════════
+     A checkout or onboarding progress indicator. Added on evidence: five
+     clean-context agents building the same checkout all named this as the one
+     thing the vocabulary could not express, and built it three different ways.
+     That spec scored 82% structural reproduction against 91% for two others.
+
+     The current step is aria-current="step", the same standard-attribute
+     pattern nav uses, so marking it correctly also announces it. Completed
+     steps take data-state="complete". Upcoming is the absence of both, because
+     a default should not need a name.
+
+     <ol data-component="stepper">
+       <li data-state="complete">Cart</li>
+       <li aria-current="step">Delivery</li>
+       <li>Payment</li>
+     </ol> */
+  [data-component="stepper"] {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    list-style: none;
+    padding-inline-start: 0;
+    counter-reset: step;
+  }
+
+  [data-component="stepper"] > li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-content-subtle);
+    font-size: var(--text-sm);
+    counter-increment: step;
+  }
+
+  /* The number is generated, so the markup carries no index to get out of
+     order when a step is inserted. */
+  [data-component="stepper"] > li::before {
+    content: counter(step);
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+  }
+
+  /* The rail between steps, generated too. Not after the last one. */
+  [data-component="stepper"] > li:not(:last-child)::after {
+    content: '';
+    width: var(--space-lg);
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  [data-component="stepper"] > li[aria-current] {
+    color: var(--color-content);
+    font-weight: var(--weight-medium);
+  }
+
+  [data-component="stepper"] > li[aria-current]::before {
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-content-inverse);
+  }
+
+  [data-component="stepper"] > li[data-state="complete"] {
+    color: var(--color-content);
+  }
+
+  /* A tick replaces the number once the step is done: the index stops being
+     the useful information. */
+  [data-component="stepper"] > li[data-state="complete"]::before {
+    content: '¹3';
+    background: var(--color-brand-subtle);
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+  }
+
+  /* On a narrow screen only the current step keeps its label. Four labels in a
+     row is what makes every hand-built version of this overflow. */
+  @media (max-width: 40rem) {
+    [data-component="stepper"] > li:not([aria-current]) {
+      font-size: 0;
+      gap: 0;
+    }
+
+    [data-component="stepper"] > li:not([aria-current])::before {
+      font-size: var(--text-xs);
+    }
+  }
+
+  /* ════════════════════════════════
      NAV
      ════════════════════════════════
      A list of navigation links, typically in a sidebar. Added on evidence:

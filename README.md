@@ -86,7 +86,7 @@ The API is `data-*` attributes, not classes:
 | Attribute | Purpose |
 |-----------|---------|
 | `data-layout` | 7 layout patterns: `stack` `row` `grid` `sidebar` `centered` `hero` `split` |
-| `data-component` | 14 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` `disclosure` `nav` |
+| `data-component` | 15 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` `disclosure` `nav` `stepper` |
 | `data-slot` | Named children (`header`, `body`, `footer`, `sidebar`, `main`, …) |
 | `data-gap` / `data-align` / `data-justify` | Layout modifiers |
 | `data-variant` / `data-size` / `data-state` | Component modifiers |

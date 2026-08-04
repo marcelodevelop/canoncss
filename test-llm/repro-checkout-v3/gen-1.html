@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout · Margin</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Margin</a>
+  <div data-slot="actions" data-layout="row" data-gap="sm" data-align="center">
+    <span data-tone="subtle">5 items</span>
+    <span data-component="badge" data-variant="brand">$90.50</span>
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/cart">View cart</a>
+  </div>
+</header>
+
+<main data-layout="centered" data-width="wide" data-padding="lg">
+  <div data-layout="stack" data-gap="xl">
+
+    <div data-layout="stack" data-gap="md">
+      <h1>Checkout</h1>
+      <ol data-component="stepper">
+        <li data-state="complete">Cart</li>
+        <li aria-current="step">Delivery</li>
+        <li>Payment</li>
+        <li>Review</li>
+      </ol>
+    </div>
+
+    <div data-layout="sidebar" data-gap="xl">
+
+      <div data-slot="main" data-layout="stack" data-gap="xl">
+
+        <section data-layout="stack" data-gap="md">
+          <h2>Delivery address</h2>
+          <p data-tone="subtle">Where should we send your books?</p>
+
+          <label data-layout="stack" data-gap="xs">
+            Full name
+            <input data-component="input" type="text" name="name" autocomplete="name" placeholder="Elena Marsh">
+          </label>
+
+          <label data-layout="stack" data-gap="xs">
+            Street address
+            <input data-component="input" type="text" name="street" autocomplete="street-address" placeholder="14 Halyard Lane, Flat 3">
+          </label>
+
+          <div data-layout="grid" data-cols="2" data-gap="md">
+            <label data-layout="stack" data-gap="xs">
+              City
+              <input data-component="input" type="text" name="city" autocomplete="address-level2" placeholder="Bristol">
+            </label>
+            <label data-layout="stack" data-gap="xs">
+              Postcode
+              <input data-component="input" type="text" name="postcode" autocomplete="postal-code" placeholder="BS1 4TR">
+            </label>
+          </div>
+
+          <label data-layout="stack" data-gap="xs">
+            Country
+            <select data-component="select" name="country" autocomplete="country-name">
+              <option>United Kingdom</option>
+              <option>Ireland</option>
+              <option>France</option>
+              <option>Germany</option>
+              <option>Spain</option>
+              <option>Netherlands</option>
+            </select>
+          </label>
+
+          <label>
+            <input type="checkbox" name="same-billing" checked>
+            Billing address is the same
+          </label>
+        </section>
+
+        <hr data-component="divider">
+
+        <section data-layout="stack" data-gap="md">
+          <h2>Delivery speed</h2>
+
+          <div data-layout="stack" data-gap="sm">
+
+            <article data-component="card">
+              <div data-slot="body" data-layout="stack" data-gap="xs">
+                <label>
+                  <input type="radio" name="speed" value="standard">
+                  Standard
+                </label>
+                <p data-tone="subtle">Arrives 11 to 13 August</p>
+                <p>Free</p>
+              </div>
+            </article>
+
+            <article data-component="card" data-variant="featured">
+              <div data-slot="header">
+                <span data-component="badge" data-variant="brand">Most chosen</span>
+              </div>
+              <div data-slot="body" data-layout="stack" data-gap="xs">
+                <label>
+                  <input type="radio" name="speed" value="express" checked>
+                  Express
+                </label>
+                <p data-tone="subtle">Arrives Friday 7 August</p>
+                <p>$4.90</p>
+              </div>
+            </article>
+
+            <article data-component="card">
+              <div data-slot="body" data-layout="stack" data-gap="xs">
+                <label>
+                  <input type="radio" name="speed" value="next-day">
+                  Next day
+                </label>
+                <p data-tone="subtle">Arrives tomorrow, 5 August, if you order before 6pm</p>
+                <p>$9.90</p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <details data-component="disclosure">
+          <summary>Add a gift message</summary>
+          <div data-layout="stack" data-gap="xs" data-padding="sm">
+            <p data-tone="subtle">We print it on a card and tuck it inside the parcel. No prices appear on a gift order.</p>
+            <label data-layout="stack" data-gap="xs">
+              Message
+              <textarea data-component="textarea" name="gift-message" rows="4" placeholder="For Nadia, who reads faster than anyone I know. Happy birthday."></textarea>
+            </label>
+          </div>
+        </details>
+
+      </div>
+
+      <aside data-slot="sidebar" data-layout="stack" data-gap="md">
+        <h2>Order summary</h2>
+
+        <table data-component="table">
+          <thead>
+            <tr>
+              <th>Book</th>
+              <th>Qty</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The Overstory</td>
+              <td>1</td>
+              <td>$18.00</td>
+            </tr>
+            <tr>
+              <td>Braiding Sweetgrass</td>
+              <td>2</td>
+              <td>$34.00</td>
+            </tr>
+            <tr>
+              <td>Piranesi</td>
+              <td>1</td>
+              <td>$16.50</td>
+            </tr>
+            <tr>
+              <td>The Dawn of Everything</td>
+              <td>1</td>
+              <td>$22.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div data-layout="stack" data-gap="xs">
+          <div data-layout="row" data-justify="between" data-gap="md">
+            <span data-tone="subtle">Subtotal</span>
+            <span>$90.50</span>
+          </div>
+          <div data-layout="row" data-justify="between" data-gap="md">
+            <span data-tone="subtle">Delivery (Express)</span>
+            <span>$4.90</span>
+          </div>
+        </div>
+
+        <hr data-component="divider" data-variant="strong">
+
+        <div data-layout="row" data-justify="between" data-gap="md">
+          <span>Total</span>
+          <span>$95.40</span>
+        </div>
+
+        <p data-tone="subtle">Taxes included. Returns accepted within 30 days, unread or read.</p>
+      </aside>
+
+    </div>
+
+    <div data-layout="row" data-gap="sm" data-justify="between" data-wrap>
+      <a data-component="button" data-variant="secondary" data-size="lg" href="/cart">Back to cart</a>
+      <button data-component="button" data-variant="primary" data-size="lg" type="submit">Continue to payment</button>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

@@ -536,6 +536,66 @@ border-color: var(--color-error);
 [data-component="textarea"][data-state="error"]:focus {
 box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-error) 15%, transparent);
 }
+[data-component="stepper"] {
+display: flex;
+align-items: center;
+gap: var(--space-sm);
+list-style: none;
+padding-inline-start: 0;
+counter-reset: step;
+}
+[data-component="stepper"] > li {
+display: flex;
+align-items: center;
+gap: var(--space-sm);
+color: var(--color-content-subtle);
+font-size: var(--text-sm);
+counter-increment: step;
+}
+[data-component="stepper"] > li::before {
+content: counter(step);
+display: grid;
+place-items: center;
+width: 1.75rem;
+height: 1.75rem;
+flex-shrink: 0;
+border: 1px solid var(--color-border-strong);
+border-radius: var(--radius-full);
+font-size: var(--text-xs);
+}
+[data-component="stepper"] > li:not(:last-child)::after {
+content: '';
+width: var(--space-lg);
+height: 1px;
+background: var(--color-border);
+}
+[data-component="stepper"] > li[aria-current] {
+color: var(--color-content);
+font-weight: var(--weight-medium);
+}
+[data-component="stepper"] > li[aria-current]::before {
+background: var(--color-brand);
+border-color: var(--color-brand);
+color: var(--color-content-inverse);
+}
+[data-component="stepper"] > li[data-state="complete"] {
+color: var(--color-content);
+}
+[data-component="stepper"] > li[data-state="complete"]::before {
+content: '¹3';
+background: var(--color-brand-subtle);
+border-color: var(--color-brand);
+color: var(--color-brand);
+}
+@media (max-width: 40rem) {
+[data-component="stepper"] > li:not([aria-current]) {
+font-size: 0;
+gap: 0;
+}
+[data-component="stepper"] > li:not([aria-current])::before {
+font-size: var(--text-xs);
+}
+}
 [data-component="nav"] {
 display: flex;
 flex-direction: column;

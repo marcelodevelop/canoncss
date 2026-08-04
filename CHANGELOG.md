@@ -3,6 +3,36 @@
 All notable changes to Canon CSS are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](https://semver.org).
 
+## [Unreleased]
+
+### Added
+- **`data-component="stepper"`**: an `<ol>` of checkout or onboarding steps.
+  Current step is `aria-current="step"`, the same standard-attribute pattern
+  `nav` uses; completed steps are `data-state="complete"`; upcoming is neither,
+  because a default should not need a name. Numbers and rails are generated, so
+  the markup carries no index to fall out of order. On a narrow screen only the
+  current label survives, which is what makes every hand-built version of this
+  overflow.
+
+### Measured
+- The stepper **did not do what was predicted**. All five generations adopted
+  it and stopped writing their own extension, which removes an app layer from
+  every checkout page. But structure stayed flat at 81% and only modifiers
+  moved, 67% to 72%. The double-digit structural gain `disclosure` produced did
+  not repeat.
+- That refines the admission test. The divergence measured was in **what an
+  extension was called**, three names for one thing. Naming divergence is
+  cosmetic; only structural divergence costs points.
+- A convention written to settle the real divergence, whether a price is a
+  `stat` and whether a form section is a `card`, **made it worse**: 78%
+  structure and 65% modifiers. `card` usage went from 1-4 across generations to
+  0-3, more polarised rather than less, because "a thing in a set" is a
+  judgement call. Reverted. A canonical default that requires judgement is
+  worse than no default.
+- `data-cols` capping at 4 turned out not to be a gap. Across 108 real uses in
+  the corpus nobody ever wanted 5 or 6. The only case above 4 is a 7-column
+  calendar, ten times, always inside an app layer that a calendar needs anyway.
+
 ## [0.2.1] - 2026-08-04
 
 Fixes a contradiction shipped in 0.2.0.

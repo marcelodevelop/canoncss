@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delivery — Checkout — Margin</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Margin</a>
+    <nav data-slot="nav">
+      <a href="/fiction">Fiction</a>
+      <a href="/nonfiction">Non-fiction</a>
+      <a href="/secondhand">Secondhand</a>
+      <a href="/checkout" aria-current="page">Checkout</a>
+    </nav>
+    <div data-slot="actions">
+      <div data-layout="row" data-gap="sm" data-align="center">
+        <span>Cart</span>
+        <span data-component="badge" data-variant="brand">4 books</span>
+        <span>£58.46</span>
+      </div>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/fiction">Fiction</a>
+        <a href="/nonfiction">Non-fiction</a>
+        <a href="/secondhand">Secondhand</a>
+        <a href="/checkout" aria-current="page">Checkout</a>
+      </nav>
+    </details>
+  </header>
+
+  <main data-layout="centered" data-width="wide" data-gap="xl">
+
+    <div data-layout="stack" data-gap="md">
+      <h1>Checkout</h1>
+      <ol data-component="stepper">
+        <li data-state="complete"><a href="/cart">Cart</a></li>
+        <li aria-current="step">Delivery</li>
+        <li>Payment</li>
+        <li>Review</li>
+      </ol>
+    </div>
+
+    <div data-layout="sidebar" data-gap="xl">
+
+      <div data-slot="main">
+        <form data-layout="stack" data-gap="xl" action="/checkout/payment" method="post">
+
+          <section data-layout="stack" data-gap="md">
+            <h2>Delivery address</h2>
+            <p data-tone="subtle">We post every order in a rigid board mailer, and we never print the price on the packing note.</p>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="full-name">Full name</label>
+              <input data-component="input" id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Ada Whitfield">
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="street">Street address</label>
+              <input data-component="input" id="street" name="street" type="text" autocomplete="street-address" placeholder="14 Ossulston Street, Flat 3">
+            </div>
+
+            <div data-layout="grid" data-cols="2" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <label for="city">City</label>
+                <input data-component="input" id="city" name="city" type="text" autocomplete="address-level2" placeholder="London">
+              </div>
+              <div data-layout="stack" data-gap="xs">
+                <label for="postcode">Postcode</label>
+                <input data-component="input" id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="NW1 1DF">
+              </div>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="country">Country</label>
+              <select data-component="select" id="country" name="country" autocomplete="country">
+                <option value="gb" selected>United Kingdom</option>
+                <option value="ie">Ireland</option>
+                <option value="fr">France</option>
+                <option value="de">Germany</option>
+                <option value="es">Spain</option>
+                <option value="nl">Netherlands</option>
+              </select>
+            </div>
+
+            <label>
+              <input type="checkbox" name="billing-same" checked>
+              Billing address is the same
+            </label>
+          </section>
+
+          <hr data-component="divider">
+
+          <section data-layout="stack" data-gap="md">
+            <h2>Delivery speed</h2>
+            <p data-tone="subtle">Estimates are counted from the moment the shop floor picks your order, usually the same afternoon.</p>
+
+            <div data-layout="grid" data-cols="3" data-gap="md">
+
+              <article data-component="card" data-variant="featured">
+                <div data-slot="header">
+                  <span data-component="badge" data-variant="brand">Most chosen</span>
+                  <label>
+                    <input type="radio" name="delivery-speed" value="standard" checked>
+                    Standard
+                  </label>
+                </div>
+                <div data-slot="body">
+                  <div data-layout="stack" data-gap="xs">
+                    <span>Arrives Tue 11 to Thu 13 August</span>
+                    <span data-tone="subtle">Royal Mail, tracked to the door</span>
+                  </div>
+                </div>
+                <div data-slot="footer">
+                  <span>£2.95</span>
+                </div>
+              </article>
+
+              <article data-component="card">
+                <div data-slot="header">
+                  <label>
+                    <input type="radio" name="delivery-speed" value="express">
+                    Express
+                  </label>
+                </div>
+                <div data-slot="body">
+                  <div data-layout="stack" data-gap="xs">
+                    <span>Arrives Fri 7 August</span>
+                    <span data-tone="subtle">Ordered before 2pm, sent the same day</span>
+                  </div>
+                </div>
+                <div data-slot="footer">
+                  <span>£5.50</span>
+                </div>
+              </article>
+
+              <article data-component="card">
+                <div data-slot="header">
+                  <label>
+                    <input type="radio" name="delivery-speed" value="collect">
+                    Collect in shop
+                  </label>
+                </div>
+                <div data-slot="body">
+                  <div data-layout="stack" data-gap="xs">
+                    <span>Ready Thu 6 August</span>
+                    <span data-tone="subtle">Held at the counter on Ossulston Street for ten days</span>
+                  </div>
+                </div>
+                <div data-slot="footer">
+                  <span>Free</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <details data-component="disclosure">
+            <summary>Add a gift message</summary>
+            <div data-layout="stack" data-gap="xs" data-padding="md">
+              <label for="gift-message">Message</label>
+              <textarea data-component="textarea" id="gift-message" name="gift-message" rows="4" placeholder="Handwritten onto a Margin card and tucked inside the parcel."></textarea>
+              <p data-tone="subtle">Up to 200 characters. We leave the invoice out of any parcel carrying a gift message.</p>
+            </div>
+          </details>
+
+          <div data-layout="row" data-gap="sm" data-justify="between" data-wrap>
+            <a data-component="button" data-variant="secondary" href="/cart">Back to cart</a>
+            <button data-component="button" data-variant="primary" type="submit">Continue to payment</button>
+          </div>
+
+        </form>
+      </div>
+
+      <aside data-slot="sidebar">
+        <div data-layout="stack" data-gap="md">
+          <h2>Order summary</h2>
+
+          <table data-component="table">
+            <thead>
+              <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Piranesi — Susanna Clarke</th>
+                <td>1</td>
+                <td>£9.99</td>
+              </tr>
+              <tr>
+                <th scope="row">The Bee Sting — Paul Murray</th>
+                <td>1</td>
+                <td>£18.99</td>
+              </tr>
+              <tr>
+                <th scope="row">A Month in the Country — J. L. Carr</th>
+                <td>2</td>
+                <td>£17.98</td>
+              </tr>
+              <tr>
+                <th scope="row">Wintering — Katherine May</th>
+                <td>1</td>
+                <td>£11.50</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <hr data-component="divider">
+
+          <div data-layout="stack" data-gap="sm">
+            <div data-layout="row" data-justify="between" data-gap="sm">
+              <span>Subtotal</span>
+              <span>£58.46</span>
+            </div>
+            <div data-layout="row" data-justify="between" data-gap="sm">
+              <span>Delivery (Standard)</span>
+              <span>£2.95</span>
+            </div>
+          </div>
+
+          <hr data-component="divider" data-variant="strong">
+
+          <div data-layout="row" data-justify="between" data-gap="sm">
+            <span>Total</span>
+            <span>£61.41</span>
+          </div>
+
+          <p data-tone="subtle">VAT is not charged on printed books in the United Kingdom. Returns are accepted for thirty days, unread or read.</p>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
