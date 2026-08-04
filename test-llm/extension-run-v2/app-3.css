@@ -1,0 +1,123 @@
+/* Aperture booking page - patterns Canon has no vocabulary for.
+   Extension components only, built from Canon tokens. */
+
+@layer canon.app {
+
+  /* --- calendar ------------------------------------------------------- */
+
+  [data-x-component="calendar"] {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  [data-x-component="calendar"] > [data-x-slot="header"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  [data-x-component="calendar"] > [data-x-slot="weekdays"],
+  [data-x-component="calendar"] > [data-x-slot="grid"] {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-xs);
+  }
+
+  [data-x-component="calendar"] > [data-x-slot="weekdays"] > * {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-content-subtle);
+    text-align: center;
+  }
+
+  /* --- calendar day --------------------------------------------------- */
+
+  [data-x-component="calendar-day"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    font: inherit;
+    font-size: var(--text-sm);
+    color: var(--color-content);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  [data-x-component="calendar-day"]:hover {
+    background: var(--color-brand-subtle);
+    border-color: var(--color-brand);
+  }
+
+  [data-x-component="calendar-day"][data-x-state="selected"] {
+    font-weight: var(--weight-bold);
+    color: var(--color-content-inverse);
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+  }
+
+  [data-x-component="calendar-day"][data-x-state="unavailable"] {
+    color: var(--color-content-subtle);
+    background: var(--color-surface-sunken);
+    border-color: transparent;
+    text-decoration: line-through;
+    cursor: not-allowed;
+  }
+
+  [data-x-component="calendar-day"][data-x-variant="filler"] {
+    background: none;
+    border-color: transparent;
+    cursor: default;
+  }
+
+  /* --- dropzone ------------------------------------------------------- */
+
+  [data-x-component="dropzone"] {
+    display: grid;
+    place-items: center;
+    padding: var(--space-xl);
+    text-align: center;
+    background: var(--color-surface-sunken);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+  }
+
+  [data-x-component="dropzone"] > [data-x-slot="target"] {
+    display: grid;
+    gap: var(--space-sm);
+    justify-items: center;
+  }
+
+  /* --- file list ------------------------------------------------------ */
+
+  [data-x-component="file-list"] {
+    display: grid;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  [data-x-component="file-list"] > [data-x-slot="item"] {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    font-size: var(--text-sm);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  [data-x-component="file-list"] > [data-x-slot="item"] > :first-child {
+    flex: 1;
+  }
+
+}

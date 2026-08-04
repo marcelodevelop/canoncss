@@ -99,7 +99,10 @@ RULES - enforce strictly:
       never a <style> block, never a hardcoded colour or spacing value.
       canon-lint counts those rules: the number is what Canon is missing.
   11. A component Canon does not have takes data-x-component, kebab-case,
-      styled in @layer canon.app from tokens. It reuses Canon modifiers
-      (data-gap, data-padding, data-size, data-variant) rather than
-      inventing its own. Never data-component for something not listed.
+      styled in @layer canon.app from tokens. Its regions are data-x-slot.
+      Reuse Canon modifiers when Canon has the value you need
+      (data-gap, data-padding, data-size). When it does not, because a
+      calendar day is "unavailable" and no closed set predicted that, use
+      data-x-variant and data-x-state, which take any kebab-case value.
+      Never data-component or data-slot for something not listed above.
 ```

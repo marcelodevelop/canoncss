@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a session — Aperture</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="app-5.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Aperture</a>
+  <nav data-slot="nav">
+    <a href="/work">Work</a>
+    <a href="/studio">The studio</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/book" aria-current="page">Book</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/sign-in">Sign in</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/work">Work</a>
+      <a href="/studio">The studio</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/book" aria-current="page">Book</a>
+      <a href="/sign-in">Sign in</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="content" data-padding="xl">
+  <form data-layout="stack" data-gap="xl" action="/bookings" method="post" enctype="multipart/form-data">
+
+    <div data-layout="stack" data-gap="sm">
+      <h1>Book a session at Aperture</h1>
+      <p>Pick the day you want the camera pointed at you, send us the images that
+        made you call, and choose how long we shoot for. We confirm every booking
+        by email within one working day, and nothing is charged until we do.</p>
+    </div>
+
+    <hr data-component="divider">
+
+    <div data-layout="stack" data-gap="md">
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">Session date</p>
+        <p>The studio is closed Sundays and Mondays. Struck-through days are
+          already booked.</p>
+      </div>
+
+      <div data-x-component="calendar" data-padding="md" role="group" aria-label="Choose a session date in September 2026">
+        <div data-slot="header">
+          <span>September 2026</span>
+          <span data-tone="subtle">4 dates left</span>
+        </div>
+
+        <div data-slot="weekdays" aria-hidden="true">
+          <span data-tone="subtle">Sun</span>
+          <span data-tone="subtle">Mon</span>
+          <span data-tone="subtle">Tue</span>
+          <span data-tone="subtle">Wed</span>
+          <span data-tone="subtle">Thu</span>
+          <span data-tone="subtle">Fri</span>
+          <span data-tone="subtle">Sat</span>
+        </div>
+
+        <div data-slot="days">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-01" class="sr-only"><span>1</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-02" class="sr-only"><span>2</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-03" class="sr-only" disabled><span>3</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-04" class="sr-only"><span>4</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-05" class="sr-only"><span>5</span></label>
+
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-06" class="sr-only" disabled><span>6</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-07" class="sr-only" disabled><span>7</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-08" class="sr-only" disabled><span>8</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-09" class="sr-only"><span>9</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-10" class="sr-only"><span>10</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-11" class="sr-only" disabled><span>11</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-12" class="sr-only" checked><span>12</span></label>
+
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-13" class="sr-only" disabled><span>13</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-14" class="sr-only" disabled><span>14</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-15" class="sr-only"><span>15</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-16" class="sr-only"><span>16</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-17" class="sr-only" disabled><span>17</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-18" class="sr-only" disabled><span>18</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-19" class="sr-only"><span>19</span></label>
+
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-20" class="sr-only" disabled><span>20</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-21" class="sr-only" disabled><span>21</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-22" class="sr-only" disabled><span>22</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-23" class="sr-only"><span>23</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-24" class="sr-only" disabled><span>24</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-25" class="sr-only"><span>25</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-26" class="sr-only" disabled><span>26</span></label>
+
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-27" class="sr-only" disabled><span>27</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-28" class="sr-only" disabled><span>28</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-29" class="sr-only"><span>29</span></label>
+          <label data-x-component="calendar-day"><input type="radio" name="session-date" value="2026-09-30" class="sr-only" disabled><span>30</span></label>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <hr data-component="divider">
+
+    <div data-layout="stack" data-gap="md">
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">Reference images</p>
+        <p>Mood boards, lighting you liked, a photo of the dress. Anything that
+          tells us what you are picturing.</p>
+      </div>
+
+      <div data-x-component="dropzone" data-padding="xl">
+        <p>Drag your reference images here</p>
+        <p data-tone="subtle">JPG, PNG or HEIC, up to 25 MB each. Ten files maximum.</p>
+        <input type="file" id="reference-images" name="reference-images" multiple accept="image/*">
+      </div>
+
+      <ul data-x-component="file-list">
+        <li data-layout="row" data-gap="sm" data-align="center" data-justify="between">
+          <span data-truncate>rooftop-backlight.jpg</span>
+          <span data-layout="row" data-gap="sm" data-align="center">
+            <span data-tone="subtle" data-mono>2.4 MB</span>
+            <button type="button" data-component="button" data-variant="ghost" data-size="sm">Remove</button>
+          </span>
+        </li>
+        <li data-layout="row" data-gap="sm" data-align="center" data-justify="between">
+          <span data-truncate>studio-hard-shadow-ref.png</span>
+          <span data-layout="row" data-gap="sm" data-align="center">
+            <span data-tone="subtle" data-mono>5.1 MB</span>
+            <button type="button" data-component="button" data-variant="ghost" data-size="sm">Remove</button>
+          </span>
+        </li>
+        <li data-layout="row" data-gap="sm" data-align="center" data-justify="between">
+          <span data-truncate>grandmothers-linen-suit.heic</span>
+          <span data-layout="row" data-gap="sm" data-align="center">
+            <span data-tone="subtle" data-mono>3.8 MB</span>
+            <button type="button" data-component="button" data-variant="ghost" data-size="sm">Remove</button>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <hr data-component="divider">
+
+    <div data-layout="stack" data-gap="md">
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">Session package</p>
+        <p>Every package includes the shoot, the edit, and a private gallery your
+          family can download from for a year.</p>
+      </div>
+
+      <div data-layout="grid" data-cols="3" data-gap="md">
+
+        <article data-component="card">
+          <div data-slot="header">Golden Hour Portrait</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="row" data-gap="xs" data-align="center">
+              <span data-component="stat">$180</span>
+              <span data-tone="subtle">/ 60 minutes</span>
+            </div>
+            <ul>
+              <li>One outdoor location, natural light</li>
+              <li>25 retouched images</li>
+              <li>Gallery ready in five days</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <label>
+              <input type="radio" name="package" value="golden-hour">
+              Choose Golden Hour Portrait
+            </label>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="brand">Most booked</span>
+            Studio Editorial
+          </div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="row" data-gap="xs" data-align="center">
+              <span data-component="stat">$340</span>
+              <span data-tone="subtle">/ 2 hours</span>
+            </div>
+            <ul>
+              <li>Our Bay Street studio, three lighting setups</li>
+              <li>Two wardrobe changes</li>
+              <li>60 retouched images</li>
+              <li>Gallery ready in three days</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <label>
+              <input type="radio" name="package" value="studio-editorial" checked>
+              Choose Studio Editorial
+            </label>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Full Day Documentary</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="row" data-gap="xs" data-align="center">
+              <span data-component="stat">$1,250</span>
+              <span data-tone="subtle">/ 8 hours</span>
+            </div>
+            <ul>
+              <li>Second shooter for the whole day</li>
+              <li>Unlimited locations across the city</li>
+              <li>400 plus images, 80 retouched</li>
+              <li>Gallery ready in two weeks</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <label>
+              <input type="radio" name="package" value="full-day">
+              Choose Full Day Documentary
+            </label>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div data-layout="stack" data-gap="xs">
+      <button type="submit" data-component="button" data-variant="primary" data-size="lg">
+        Request this session
+      </button>
+      <p data-tone="subtle">No card needed now. We hold the date for 48 hours while
+        you confirm.</p>
+    </div>
+
+  </form>
+</main>
+
+</body>
+</html>

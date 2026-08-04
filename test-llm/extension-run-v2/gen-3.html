@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a session - Aperture</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="app-3.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Aperture</a>
+  <nav data-slot="nav">
+    <a href="/portfolio">Portfolio</a>
+    <a href="/studio">The studio</a>
+    <a href="/journal">Journal</a>
+    <a href="/book" aria-current="page">Book</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/sign-in">Sign in</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/studio">The studio</a>
+      <a href="/journal">Journal</a>
+      <a href="/book" aria-current="page">Book</a>
+      <a href="/sign-in">Sign in</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="content" data-padding="lg">
+  <div data-layout="stack" data-gap="xl">
+
+    <section data-layout="stack" data-gap="sm">
+      <h1>Book a session at Aperture</h1>
+      <p>Aperture is a daylight studio on Bell Street, built around a north-facing
+      window and a small crew that shoots portraits, lookbooks and product stills.
+      Pick the date you want the room, show us the pictures living in your head,
+      and choose the length of the shoot. We answer every request within one
+      working day with a call sheet and an invoice.</p>
+    </section>
+
+    <hr data-component="divider">
+
+    <form data-layout="stack" data-gap="xl" action="/book" method="post">
+
+      <section data-layout="stack" data-gap="md">
+        <h2>1. Choose a session date</h2>
+        <p data-tone="subtle">The studio is closed Sundays and Mondays. Struck-out
+        days are already booked.</p>
+
+        <div data-x-component="calendar">
+          <div data-x-slot="header">
+            <button data-component="button" data-variant="ghost" data-size="sm" type="button" aria-label="Previous month">&#8592;</button>
+            <strong>September 2026</strong>
+            <button data-component="button" data-variant="ghost" data-size="sm" type="button" aria-label="Next month">&#8594;</button>
+          </div>
+          <div data-x-slot="weekdays" aria-hidden="true">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+          </div>
+          <div data-x-slot="grid">
+            <span data-x-component="calendar-day" data-x-variant="filler" aria-hidden="true"></span>
+            <button data-x-component="calendar-day" type="button">1</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 2, fully booked">2</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 3, fully booked">3</button>
+            <button data-x-component="calendar-day" type="button">4</button>
+            <button data-x-component="calendar-day" type="button">5</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 6, studio closed">6</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 7, studio closed">7</button>
+            <button data-x-component="calendar-day" type="button">8</button>
+            <button data-x-component="calendar-day" type="button">9</button>
+            <button data-x-component="calendar-day" type="button">10</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 11, fully booked">11</button>
+            <button data-x-component="calendar-day" type="button">12</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 13, studio closed">13</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 14, studio closed">14</button>
+            <button data-x-component="calendar-day" type="button">15</button>
+            <button data-x-component="calendar-day" type="button">16</button>
+            <button data-x-component="calendar-day" data-x-state="selected" type="button" aria-pressed="true" aria-label="September 17, selected">17</button>
+            <button data-x-component="calendar-day" type="button">18</button>
+            <button data-x-component="calendar-day" type="button">19</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 20, studio closed">20</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 21, studio closed">21</button>
+            <button data-x-component="calendar-day" type="button">22</button>
+            <button data-x-component="calendar-day" type="button">23</button>
+            <button data-x-component="calendar-day" type="button">24</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 25, fully booked">25</button>
+            <button data-x-component="calendar-day" type="button">26</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 27, studio closed">27</button>
+            <button data-x-component="calendar-day" data-x-state="unavailable" type="button" disabled aria-label="September 28, studio closed">28</button>
+            <button data-x-component="calendar-day" type="button">29</button>
+            <button data-x-component="calendar-day" type="button">30</button>
+          </div>
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">Your date</p>
+          <p>Thursday, September 17, 2026 <span data-component="badge" data-variant="success">Available</span></p>
+        </div>
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>2. Add reference images</h2>
+        <p data-tone="subtle">JPG, PNG or HEIC, up to 20 MB each. Mood boards,
+        old shots you liked, a colour you cannot describe in words.</p>
+
+        <div data-x-component="dropzone">
+          <div data-x-slot="target">
+            <p>Drag reference images here</p>
+            <p data-tone="subtle">or pick them from your computer</p>
+            <label>
+              <span class="sr-only">Reference images</span>
+              <input type="file" name="references" multiple accept="image/*">
+            </label>
+          </div>
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">4 files added</p>
+          <ul data-x-component="file-list">
+            <li data-x-slot="item">
+              <span data-truncate>north-window-portrait.jpg</span>
+              <span data-mono data-tone="subtle">1.8 MB</span>
+              <button data-component="button" data-variant="ghost" data-size="sm" type="button">Remove</button>
+            </li>
+            <li data-x-slot="item">
+              <span data-truncate>warm-grain-filmstock.png</span>
+              <span data-mono data-tone="subtle">3.2 MB</span>
+              <button data-component="button" data-variant="ghost" data-size="sm" type="button">Remove</button>
+            </li>
+            <li data-x-slot="item">
+              <span data-truncate>studio-lighting-diagram.png</span>
+              <span data-mono data-tone="subtle">640 KB</span>
+              <button data-component="button" data-variant="ghost" data-size="sm" type="button">Remove</button>
+            </li>
+            <li data-x-slot="item">
+              <span data-truncate>green-linen-backdrop-swatch.jpg</span>
+              <span data-mono data-tone="subtle">2.1 MB</span>
+              <button data-component="button" data-variant="ghost" data-size="sm" type="button">Remove</button>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>3. Pick a package</h2>
+        <p data-tone="subtle">Every package includes the room, the crew, and
+        colour-graded finals delivered in a private gallery.</p>
+
+        <div data-layout="grid" data-cols="3" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="header">Golden Hour</div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <div data-layout="stack" data-gap="xs">
+                  <p><span data-component="stat">$280</span> <span data-tone="subtle">/ 90 minutes</span></p>
+                  <p data-tone="subtle">One look, one setup</p>
+                </div>
+                <ul>
+                  <li>90 minutes in the studio</li>
+                  <li>15 retouched images</li>
+                  <li>Delivery in 5 days</li>
+                </ul>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <label>
+                <input type="radio" name="package" value="golden-hour">
+                Choose Golden Hour
+              </label>
+            </div>
+          </article>
+
+          <article data-component="card" data-variant="featured">
+            <div data-slot="header">
+              <span data-component="badge" data-variant="brand">Most booked</span>
+              Half Day
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <div data-layout="stack" data-gap="xs">
+                  <p><span data-component="stat">$540</span> <span data-tone="subtle">/ 4 hours</span></p>
+                  <p data-tone="subtle">Three looks, hair and make-up chair</p>
+                </div>
+                <ul>
+                  <li>4 hours in the studio</li>
+                  <li>40 retouched images</li>
+                  <li>Backdrop and prop wall included</li>
+                  <li>Delivery in 5 days</li>
+                </ul>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <label>
+                <input type="radio" name="package" value="half-day" checked>
+                Choose Half Day
+              </label>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">Full Campaign</div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <div data-layout="stack" data-gap="xs">
+                  <p><span data-component="stat">$980</span> <span data-tone="subtle">/ full day</span></p>
+                  <p data-tone="subtle">Unlimited looks, second shooter</p>
+                </div>
+                <ul>
+                  <li>8 hours in the studio</li>
+                  <li>90 retouched images</li>
+                  <li>Second shooter and digital tech</li>
+                  <li>Delivery in 10 days</li>
+                </ul>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <label>
+                <input type="radio" name="package" value="full-campaign">
+                Choose Full Campaign
+              </label>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <hr data-component="divider">
+
+      <div data-layout="stack" data-gap="sm">
+        <button data-component="button" data-variant="primary" data-size="lg" type="submit">Request September 17</button>
+        <p data-tone="subtle">Requesting a date holds it for 48 hours. Nothing is
+        charged until we confirm the call sheet with you.</p>
+      </div>
+
+    </form>
+  </div>
+</main>
+
+</body>
+</html>

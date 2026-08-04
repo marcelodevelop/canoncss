@@ -206,6 +206,17 @@ function lintFile(file) {
       }
     }
 
+    // Extension modifiers carry values Canon does not have, which is the
+    // whole reason they exist: a calendar day is "unavailable" and no closed
+    // set could have predicted that. Only the shape is checked.
+    for (const attr of ['data-x-variant', 'data-x-state', 'data-x-slot']) {
+      if (!attrs.has(attr)) continue;
+      const value = attrs.get(attr);
+      if (value !== '{expr}' && !/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/.test(value)) {
+        violations.push([line, 'R8', `${attr}="${value}" should be kebab-case`]);
+      }
+    }
+
     // R8 - extension components. The closed vocabulary stays closed, so
     // anything Canon does not have takes the data-x- namespace instead of
     // squatting on data-component. Kebab-case, and it has to be styled

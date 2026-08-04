@@ -1,0 +1,128 @@
+/* Aperture booking page.
+   Everything Canon already has is used as-is. What follows is only the three
+   patterns Canon has no vocabulary for, built from tokens, in canon.app. */
+
+@layer canon.app {
+
+  /* ---------------------------------------------------------------------
+     calendar-grid
+     Canon's grid layout stops at data-cols="4", and a month needs seven
+     equal columns. Honours data-gap like a Canon layout does.
+     --------------------------------------------------------------------- */
+  [data-x-component="calendar-grid"] {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--space-xs);
+  }
+  [data-x-component="calendar-grid"][data-gap="xs"] { gap: var(--space-xs); }
+  [data-x-component="calendar-grid"][data-gap="sm"] { gap: var(--space-sm); }
+  [data-x-component="calendar-grid"][data-gap="md"] { gap: var(--space-md); }
+
+  [data-x-component="calendar-weekday"] {
+    display: block;
+    padding-block: var(--space-xs);
+    text-align: center;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-content-subtle);
+  }
+
+  /* ---------------------------------------------------------------------
+     calendar-day
+     A square, selectable cell. Not a Canon button: a button's padding sets
+     its own size, and a day cell has to be sized by the column it sits in.
+     Availability is the native disabled state, selection is aria-pressed.
+     --------------------------------------------------------------------- */
+  [data-x-component="calendar-day"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-content);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  button[data-x-component="calendar-day"] {
+    cursor: pointer;
+  }
+
+  button[data-x-component="calendar-day"]:hover:not(:disabled) {
+    background: var(--color-surface-raised);
+    border-color: var(--color-border-strong);
+  }
+
+  button[data-x-component="calendar-day"]:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  button[data-x-component="calendar-day"][aria-pressed="true"] {
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-content-inverse);
+  }
+
+  button[data-x-component="calendar-day"]:disabled {
+    background: var(--color-surface-sunken);
+    border-color: var(--color-border);
+    color: var(--color-content-subtle);
+    text-decoration: line-through;
+    cursor: not-allowed;
+  }
+
+  /* Padding cells before the 1st and after the last of the month. */
+  [data-x-component="calendar-day"][data-variant="empty"] {
+    background: none;
+    border-color: transparent;
+  }
+
+  /* ---------------------------------------------------------------------
+     dropzone
+     A drop target reads as one because of the dashed edge; Canon has no
+     border utility and a card is the wrong signal here. Takes Canon's
+     data-padding utility rather than declaring its own padding.
+     --------------------------------------------------------------------- */
+  [data-x-component="dropzone"] {
+    text-align: center;
+    background: var(--color-surface-sunken);
+    border: 2px dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+  }
+
+  [data-x-component="dropzone"]:focus-within {
+    border-color: var(--color-brand);
+  }
+
+  /* ---------------------------------------------------------------------
+     file-list
+     A list of already-added files: rows separated by rules, no bullets.
+     Canon styles ul/ol as prose, which is the wrong shape for a queue.
+     --------------------------------------------------------------------- */
+  [data-x-component="file-list"] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  [data-x-component="file-list"] > li {
+    padding-block: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  [data-x-component="file-list"] > li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  [data-x-component="file-list"] > li:last-child {
+    padding-bottom: 0;
+  }
+
+}

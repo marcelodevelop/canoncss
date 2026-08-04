@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a session — Aperture Studio</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="app-2.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Aperture</a>
+  <nav data-slot="nav">
+    <a href="/work">Work</a>
+    <a href="/studio">The studio</a>
+    <a href="/book" aria-current="page">Book</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/sign-in">Sign in</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/work">Work</a>
+      <a href="/studio">The studio</a>
+      <a href="/book" aria-current="page">Book</a>
+      <a href="/sign-in">Sign in</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="content" data-padding="xl">
+  <form data-layout="stack" data-gap="xl" action="/book" method="post">
+
+    <div data-layout="stack" data-gap="sm">
+      <h1>Book a session at Aperture</h1>
+      <p>We shoot in a north-facing daylight studio on Calle Bolívar, two blocks from the river. Pick the date you want, send us the images you have in mind, and choose the package that fits. We confirm every booking by email within one working day.</p>
+    </div>
+
+    <div data-layout="stack" data-gap="md">
+      <div data-layout="stack" data-gap="xs">
+        <h2>Pick a date</h2>
+        <p data-tone="subtle">Greyed-out days are already booked or the studio is closed.</p>
+      </div>
+
+      <div data-x-component="calendar">
+        <div data-x-slot="header">
+          <button type="button" data-component="button" data-variant="ghost" data-size="sm">Previous</button>
+          <span>September 2026</span>
+          <button type="button" data-component="button" data-variant="ghost" data-size="sm">Next</button>
+        </div>
+
+        <div data-x-slot="weekdays" aria-hidden="true">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
+          <span>Fri</span><span>Sat</span><span>Sun</span>
+        </div>
+
+        <div data-x-slot="days">
+          <span data-x-slot="day-blank" aria-hidden="true"></span>
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>1</button>
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>2</button>
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>3</button>
+          <button type="button" data-x-slot="day">4</button>
+          <button type="button" data-x-slot="day">5</button>
+          <button type="button" data-x-slot="day">6</button>
+
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>7</button>
+          <button type="button" data-x-slot="day">8</button>
+          <button type="button" data-x-slot="day">9</button>
+          <button type="button" data-x-slot="day">10</button>
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>11</button>
+          <button type="button" data-x-slot="day">12</button>
+          <button type="button" data-x-slot="day">13</button>
+
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>14</button>
+          <button type="button" data-x-slot="day">15</button>
+          <button type="button" data-x-slot="day">16</button>
+          <button type="button" data-x-slot="day" data-x-state="selected" aria-pressed="true">17</button>
+          <button type="button" data-x-slot="day">18</button>
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>19</button>
+          <button type="button" data-x-slot="day">20</button>
+
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>21</button>
+          <button type="button" data-x-slot="day">22</button>
+          <button type="button" data-x-slot="day">23</button>
+          <button type="button" data-x-slot="day">24</button>
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>25</button>
+          <button type="button" data-x-slot="day">26</button>
+          <button type="button" data-x-slot="day">27</button>
+
+          <button type="button" data-x-slot="day" data-x-state="unavailable" disabled>28</button>
+          <button type="button" data-x-slot="day">29</button>
+          <button type="button" data-x-slot="day">30</button>
+          <span data-x-slot="day-blank" aria-hidden="true"></span>
+          <span data-x-slot="day-blank" aria-hidden="true"></span>
+          <span data-x-slot="day-blank" aria-hidden="true"></span>
+          <span data-x-slot="day-blank" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <p>Selected: <strong>Thursday 17 September 2026</strong>, 10:00.</p>
+    </div>
+
+    <hr data-component="divider">
+
+    <div data-layout="stack" data-gap="md">
+      <div data-layout="stack" data-gap="xs">
+        <h2>Reference images</h2>
+        <p data-tone="subtle">Anything that shows us the light, the mood or the poses you like.</p>
+      </div>
+
+      <div data-x-component="dropzone" data-x-state="idle">
+        <div data-layout="stack" data-gap="xs" data-align="center">
+          <p>Drag your reference images here</p>
+          <p data-tone="subtle">JPG, PNG or HEIC. Up to 20 MB per file, ten files per booking.</p>
+        </div>
+        <div data-layout="stack" data-gap="xs">
+          <label for="refs">Or choose them from your computer</label>
+          <input id="refs" name="refs" type="file" multiple accept="image/*" data-component="input" data-size="sm">
+        </div>
+      </div>
+
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">Added so far</p>
+        <ul>
+          <li data-layout="row" data-justify="between" data-gap="sm">
+            <span data-truncate>window-light-portrait.jpg</span>
+            <span data-tone="subtle" data-mono>2.4 MB</span>
+          </li>
+          <li data-layout="row" data-justify="between" data-gap="sm">
+            <span data-truncate>studio-backdrop-grey.png</span>
+            <span data-tone="subtle" data-mono>1.1 MB</span>
+          </li>
+          <li data-layout="row" data-justify="between" data-gap="sm">
+            <span data-truncate>pose-reference-seated.jpg</span>
+            <span data-tone="subtle" data-mono>3.8 MB</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr data-component="divider">
+
+    <div data-layout="stack" data-gap="md">
+      <div data-layout="stack" data-gap="xs">
+        <h2>Choose a package</h2>
+        <p data-tone="subtle">Every package includes the studio, the lighting kit and a private gallery.</p>
+      </div>
+
+      <div data-layout="grid" data-cols="3" data-gap="md" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Headshot</div>
+          <div data-slot="body" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">$180</span>
+              <span data-tone="subtle">45 minutes</span>
+            </div>
+            <ul>
+              <li>One backdrop, one outfit</li>
+              <li>Eight retouched images</li>
+              <li>Files delivered in three days</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <label><input type="radio" name="package" value="headshot"> Choose Headshot</label>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="brand">Most booked</span>
+            Portrait
+          </div>
+          <div data-slot="body" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">$340</span>
+              <span data-tone="subtle">90 minutes</span>
+            </div>
+            <ul>
+              <li>Two backdrops, three outfits</li>
+              <li>Twenty retouched images</li>
+              <li>Hair and make-up touch-ups on set</li>
+              <li>Files delivered in two days</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <label><input type="radio" name="package" value="portrait" checked> Choose Portrait</label>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Editorial</div>
+          <div data-slot="body" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">$620</span>
+              <span data-tone="subtle">Half a day</span>
+            </div>
+            <ul>
+              <li>Full studio, unlimited setups</li>
+              <li>Forty retouched images</li>
+              <li>Assistant and stylist included</li>
+              <li>Same-day contact sheet</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <label><input type="radio" name="package" value="editorial"> Choose Editorial</label>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <button type="submit" data-component="button" data-variant="primary" data-size="lg">Request this booking</button>
+      <p data-tone="subtle">Nothing is charged now. We hold the date for 48 hours while you confirm.</p>
+    </div>
+
+  </form>
+</main>
+
+</body>
+</html>
