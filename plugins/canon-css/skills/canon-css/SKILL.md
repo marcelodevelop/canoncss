@@ -106,7 +106,11 @@ Checkbox and radio inputs also render bare: never give them a
    details tokens cannot express. This is how you port an existing site to
    Canon while keeping its exact look.
 8. Canon ships zero JavaScript. Interactivity is the consumer's job.
-9. Component roles sit on their canonical element: `button` = `<button>` or
+9. A component Canon does not have takes `data-x-component`, kebab-case,
+   styled in `@layer canon.app` from tokens, reusing Canon's own modifiers
+   rather than inventing new ones. Never `data-component` for something that is
+   not in the list above. See EXTENDING.md.
+10. Component roles sit on their canonical element: `button` = `<button>` or
    `<a>`, `badge`/`avatar`/`stat` = `<span>`, `topbar` = `<header>`,
    `divider` = `<hr>`, `modal` = `<dialog>`, `card` = `<article>`/`<div>`/`<a>`.
    Form controls and `table` use their own tag. A role is a promise about

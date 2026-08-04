@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- Fixture for canon-lint: the extension namespace, right and wrong.
+     npm test asserts this pair produces exactly 3 R8 violations. -->
+<html lang="en">
+<body>
+  <!-- Right: kebab-case, styled in the app layer, reusing Canon modifiers. -->
+  <div data-x-component="datepicker" data-padding="md" data-gap="sm">
+    <div data-x-slot="month">March 2026</div>
+  </div>
+
+  <!-- Wrong: not kebab-case. -->
+  <div data-x-component="FileUploader"></div>
+
+  <!-- Wrong: shadows a real Canon component. -->
+  <div data-x-component="badge"></div>
+
+  <!-- Wrong: nothing styles it, so it renders bare. -->
+  <div data-x-component="kanban-board"></div>
+</body>
+</html>

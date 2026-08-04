@@ -45,6 +45,19 @@ if [ "$CODE3" -ne 1 ] || [ "$COUNT3" -ne 2 ]; then
 fi
 echo "✓ theme fixture caught ($COUNT3 violations, exit $CODE3)"
 
+echo "- extension fixture must fail with exactly 3 violations:"
+set +e
+OUT4=$(node bin/canon-lint.mjs test-llm/extension-fixture)
+CODE4=$?
+set -e
+COUNT4=$(echo "$OUT4" | grep -cE '  R8  ')
+if [ "$CODE4" -ne 1 ] || [ "$COUNT4" -ne 3 ]; then
+  echo "FAIL: expected exit 1 with 3 violations, got exit $CODE4 with $COUNT4:"
+  echo "$OUT4"
+  exit 1
+fi
+echo "✓ extension fixture caught ($COUNT4 violations, exit $CODE4)"
+
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs
 

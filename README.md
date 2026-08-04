@@ -140,11 +140,21 @@ The vocabulary is closed, not a cage. Design will ask for a datepicker, a
 kanban board, a file uploader with drag and drop. None of those are in Canon
 and some never will be.
 
-They go in `@layer canon.app`, a layer Canon declares and leaves empty for you:
+Your component takes `data-x-component`, not `data-component`. The vocabulary
+stays closed and yours stays visibly yours, in the same grammar:
+
+```html
+<div data-x-component="datepicker" data-padding="md" data-gap="sm">
+  <div data-x-slot="grid">…</div>
+</div>
+```
+
+Its CSS goes in `@layer canon.app`, a layer Canon declares and leaves empty for
+you:
 
 ```css
 @layer canon.app {
-  .datepicker-grid {
+  [data-x-component='datepicker'] {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: var(--space-xs);              /* tokens, not values */
@@ -154,14 +164,23 @@ They go in `@layer canon.app`, a layer Canon declares and leaves empty for you:
 }
 ```
 
-One rule: build it from tokens. `canon-lint` reads the layer and fails on a
-hardcoded colour or spacing value, because those are what the theme system
-exists to control. Everything else is yours.
+Two rules, both checked. Build it from tokens: `canon-lint` fails on a hardcoded
+colour or spacing inside that layer, because those are what the theme system
+controls. And **reuse Canon's modifiers instead of inventing your own**, which
+is what decides whether your component reads like Canon or like a guest.
+`data-gap`, `data-padding`, `data-size`, `data-variant` already work on your
+element because they are token-driven.
 
-It also **counts** the rules you put there and prints the number. That is the
-point: the size of your app layer is a measurement of what Canon is missing for
-your product. It is meant to be looked at, not hidden. A big one is a bug
-report; the vocabulary is supposed to grow toward it, on the evidence rule in
+The linter also catches the three ways this goes wrong: a name that is not
+kebab-case, a name that shadows a real Canon component, and an extension used in
+markup that nothing styles, which would otherwise render bare with no warning.
+
+The full guide is [EXTENDING.md](EXTENDING.md).
+
+It also **counts** the rules and lists your extensions on every run. That is the
+point: the size of your app layer measures what Canon is missing for your
+product. It is meant to be looked at, not hidden. A big one is a bug report, and
+the vocabulary is supposed to grow toward it on the evidence rule in
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Editor autocomplete

@@ -1,0 +1,21 @@
+@layer canon.app {
+  /* Tokens only, and it borrows Canon's modifiers rather than inventing any. */
+  [data-x-component='datepicker'] {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-xs);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  [data-x-component='datepicker'] > [data-x-slot='month'] {
+    grid-column: 1 / -1;
+    font-weight: var(--weight-medium);
+  }
+
+  /* Declared and never used: reported, not failed. */
+  [data-x-component='timeline'] {
+    display: flex;
+  }
+}

@@ -5,7 +5,7 @@
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
-import { VOCAB, ELEMENTS } from './vocab.mjs';
+import { VOCAB, ELEMENTS, COMPONENTS } from './vocab.mjs';
 import { TOKENS } from './tokens.mjs';
 
 const EXTS = new Set(['.html', '.htm', '.jsx', '.tsx', '.css']);
@@ -121,11 +121,20 @@ function lintTokens(src) {
   return { violations, overrides };
 }
 
+/** Extension components declared in an app layer, as `[data-x-component="x"]`
+ *  selectors. Collected across every file so markup can be checked against
+ *  what the CSS actually defines. */
+const declaredExtensions = new Set();
+const usedExtensions = new Map();
+
 function lintCss(file, src) {
   const violations = [];
   let rules = 0;
   for (const layer of appLayers(src)) {
     rules += (layer.body.match(/\{/g) ?? []).length;
+    for (const m of layer.body.matchAll(/\[data-x-component=["']([a-z0-9-]+)["']\]/g)) {
+      declaredExtensions.add(m[1]);
+    }
     for (const line of layer.body.split('\n')) {
       const at = layer.offset + layer.body.indexOf(line);
       if (RAW_COLOUR.test(line)) {
@@ -197,6 +206,23 @@ function lintFile(file) {
       }
     }
 
+    // R8 - extension components. The closed vocabulary stays closed, so
+    // anything Canon does not have takes the data-x- namespace instead of
+    // squatting on data-component. Kebab-case, and it has to be styled
+    // somewhere or the element renders bare.
+    if (attrs.has('data-x-component')) {
+      const value = attrs.get('data-x-component');
+      if (value !== '{expr}') {
+        if (!/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/.test(value)) {
+          violations.push([line, 'R8', `data-x-component="${value}" should be kebab-case`]);
+        } else if (COMPONENTS.has(value)) {
+          violations.push([line, 'R8', `data-x-component="${value}" shadows a Canon component - use data-component="${value}"`]);
+        } else {
+          usedExtensions.set(value, file);
+        }
+      }
+    }
+
     // R1 - closed vocabulary values
     for (const [name, allowed] of Object.entries(VOCAB)) {
       if (attrs.has(name)) {
@@ -249,6 +275,28 @@ for (const file of files) {
 
 // Always print coverage, not just on success: a run that found 2 violations
 // while unable to read a third of the values has not found all of them.
+// Cross-file check, so it runs after every file is read. An extension used in
+// markup with no rule anywhere renders bare, which is the failure this whole
+// namespace exists to make visible. Only checked when at least one app layer
+// was actually seen: linting markup alone cannot know what the CSS defines.
+function extensionReport() {
+  if (usedExtensions.size === 0 && declaredExtensions.size === 0) return '';
+  const lines = [];
+  if (appRules > 0) {
+    for (const [name, file] of usedExtensions) {
+      if (!declaredExtensions.has(name)) {
+        console.log(`${file}  R8  data-x-component="${name}" has no rule in any @layer canon.app - it will render bare`);
+        total++;
+      }
+    }
+    const unused = [...declaredExtensions].filter((n) => !usedExtensions.has(n));
+    if (unused.length) lines.push(`  declared but unused: ${unused.join(', ')}`);
+  }
+  const names = [...usedExtensions.keys()].sort();
+  if (names.length) lines.push(`  ${names.length} extension component${names.length === 1 ? '' : 's'}: ${names.join(', ')}`);
+  return lines.length ? '\n' + lines.join('\n') : '';
+}
+
 function themeReport() {
   if (overrides === 0) return '';
   return `
@@ -273,8 +321,10 @@ function coverage() {
   );
 }
 
+const extensions = extensionReport();
+
 if (total > 0) {
-  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}${coverage()}${escapeHatch()}${themeReport()}`);
+  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}${coverage()}${escapeHatch()}${themeReport()}${extensions}`);
   process.exit(1);
 }
-console.log(`✓ ${files.length} file${files.length === 1 ? '' : 's'} clean${coverage()}${escapeHatch()}${themeReport()}`);
+console.log(`✓ ${files.length} file${files.length === 1 ? '' : 's'} clean${coverage()}${escapeHatch()}${themeReport()}${extensions}`);

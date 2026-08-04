@@ -98,4 +98,8 @@ RULES - enforce strictly:
       consumer's own CSS, built only from tokens. Never inline styles,
       never a <style> block, never a hardcoded colour or spacing value.
       canon-lint counts those rules: the number is what Canon is missing.
+  11. A component Canon does not have takes data-x-component, kebab-case,
+      styled in @layer canon.app from tokens. It reuses Canon modifiers
+      (data-gap, data-padding, data-size, data-variant) rather than
+      inventing its own. Never data-component for something not listed.
 ```
