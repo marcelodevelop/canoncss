@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout - Margin</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Margin</a>
+  <nav data-slot="nav">
+    <a href="/books">Books</a>
+    <a href="/staff-picks">Staff picks</a>
+    <a href="/events">Events</a>
+  </nav>
+  <div data-slot="actions">
+    <span data-component="badge" data-variant="brand">5 books</span>
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/cart">Cart &middot; &pound;91.94</a>
+  </div>
+  <details data-slot="menu">
+    <summary>&#9776;</summary>
+    <nav>
+      <a href="/books">Books</a>
+      <a href="/staff-picks">Staff picks</a>
+      <a href="/events">Events</a>
+      <a href="/cart">Cart</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="wide" data-padding="xl">
+  <div data-layout="stack" data-gap="xl">
+
+    <div data-layout="stack" data-gap="md">
+      <h1>Checkout</h1>
+      <ol data-component="stepper">
+        <li data-state="complete">Cart</li>
+        <li aria-current="step">Delivery</li>
+        <li>Payment</li>
+        <li>Review</li>
+      </ol>
+    </div>
+
+    <div data-layout="sidebar" data-gap="xl">
+
+      <div data-slot="main">
+        <form data-layout="stack" data-gap="xl" action="/checkout/payment" method="post">
+
+          <div data-layout="stack" data-gap="md">
+            <h2>Delivery address</h2>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="full-name">Full name</label>
+              <input data-component="input" id="full-name" name="full-name" type="text" autocomplete="name" value="Helena Whitmore">
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="street">Street address</label>
+              <input data-component="input" id="street" name="street" type="text" autocomplete="street-address" value="14 Belmont Terrace">
+            </div>
+
+            <div data-layout="grid" data-cols="2" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <label for="city">City</label>
+                <input data-component="input" id="city" name="city" type="text" autocomplete="address-level2" value="Bristol">
+              </div>
+              <div data-layout="stack" data-gap="xs">
+                <label for="postcode">Postcode</label>
+                <input data-component="input" id="postcode" name="postcode" type="text" autocomplete="postal-code" value="BS8 2QT">
+              </div>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="country">Country</label>
+              <select data-component="select" id="country" name="country" autocomplete="country-name">
+                <option selected>United Kingdom</option>
+                <option>Ireland</option>
+                <option>France</option>
+                <option>Germany</option>
+                <option>Netherlands</option>
+                <option>Spain</option>
+              </select>
+            </div>
+
+            <label>
+              <input type="checkbox" name="billing-same" checked>
+              Billing address is the same as the delivery address
+            </label>
+          </div>
+
+          <hr data-component="divider">
+
+          <div data-layout="stack" data-gap="md">
+            <h2>Delivery speed</h2>
+            <div data-layout="grid" data-cols="3" data-gap="md">
+
+              <article data-component="card">
+                <div data-slot="header">
+                  <label>
+                    <input type="radio" name="delivery-speed" value="standard" checked>
+                    Standard
+                  </label>
+                </div>
+                <div data-slot="body">
+                  <p data-tone="subtle">Arrives Monday 10 to Wednesday 12 August</p>
+                  <p><span data-component="stat">&pound;4.95</span> <span data-tone="subtle">delivery</span></p>
+                </div>
+              </article>
+
+              <article data-component="card" data-variant="featured">
+                <div data-slot="header">
+                  <span data-component="badge" data-variant="brand">Most chosen</span>
+                  <label>
+                    <input type="radio" name="delivery-speed" value="express">
+                    Express
+                  </label>
+                </div>
+                <div data-slot="body">
+                  <p data-tone="subtle">Arrives Thursday 6 August</p>
+                  <p><span data-component="stat">&pound;9.95</span> <span data-tone="subtle">delivery</span></p>
+                </div>
+              </article>
+
+              <article data-component="card">
+                <div data-slot="header">
+                  <label>
+                    <input type="radio" name="delivery-speed" value="same-day">
+                    Same day
+                  </label>
+                </div>
+                <div data-slot="body">
+                  <p data-tone="subtle">Arrives today before 9pm, Bristol only</p>
+                  <p><span data-component="stat">&pound;18.00</span> <span data-tone="subtle">delivery</span></p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <hr data-component="divider">
+
+          <details data-component="disclosure">
+            <summary>Add a gift message</summary>
+            <div data-layout="stack" data-gap="xs">
+              <label for="gift-message">Your message</label>
+              <textarea data-component="textarea" id="gift-message" name="gift-message" rows="4" placeholder="We print this on a card and tuck it inside the parcel. No prices appear on a gift order."></textarea>
+              <p data-tone="subtle">Up to 300 characters, handwritten in our Bristol shop.</p>
+            </div>
+          </details>
+
+          <div data-layout="row" data-gap="sm" data-justify="between">
+            <a data-component="button" data-variant="secondary" href="/cart">Back to cart</a>
+            <button data-component="button" data-variant="primary" type="submit">Continue to payment</button>
+          </div>
+
+        </form>
+      </div>
+
+      <aside data-slot="sidebar">
+        <article data-component="card">
+          <div data-slot="header">Order summary</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+
+              <table data-component="table">
+                <thead>
+                  <tr>
+                    <th>Book</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>The Overstory, Richard Powers</td>
+                    <td>1</td>
+                    <td data-mono>&pound;18.00</td>
+                  </tr>
+                  <tr>
+                    <td>Piranesi, Susanna Clarke</td>
+                    <td>2</td>
+                    <td data-mono>&pound;32.00</td>
+                  </tr>
+                  <tr>
+                    <td>A Field Guide to Getting Lost, Rebecca Solnit</td>
+                    <td>1</td>
+                    <td data-mono>&pound;16.95</td>
+                  </tr>
+                  <tr>
+                    <td>The Dawn of Everything, David Graeber and David Wengrow</td>
+                    <td>1</td>
+                    <td data-mono>&pound;24.99</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <hr data-component="divider">
+
+              <div data-layout="stack" data-gap="sm">
+                <div data-layout="row" data-justify="between" data-gap="sm">
+                  <span>Subtotal</span>
+                  <span data-mono>&pound;91.94</span>
+                </div>
+                <div data-layout="row" data-justify="between" data-gap="sm">
+                  <span>Delivery, standard</span>
+                  <span data-mono>&pound;4.95</span>
+                </div>
+              </div>
+
+              <hr data-component="divider" data-variant="strong">
+
+              <div data-layout="row" data-justify="between" data-align="center" data-gap="sm">
+                <div data-layout="stack" data-gap="xs">
+                  <span data-component="stat">&pound;96.89</span>
+                  <span data-tone="subtle">Total, VAT included</span>
+                </div>
+                <span data-component="badge" data-variant="success">Free returns</span>
+              </div>
+
+            </div>
+          </div>
+          <div data-slot="footer">
+            <p data-tone="subtle">Every order is packed by hand at our shop on Park Street and posted the same afternoon.</p>
+          </div>
+        </article>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

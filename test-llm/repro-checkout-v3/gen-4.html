@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout - Margin</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Margin</a>
+  <nav data-slot="nav">
+    <a href="/fiction">Fiction</a>
+    <a href="/nonfiction">Non-fiction</a>
+    <a href="/secondhand">Secondhand</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="ghost" href="/cart">Cart &middot; 4 books &middot; &pound;58.46</a>
+  </div>
+  <details data-slot="menu">
+    <summary>&#9776;</summary>
+    <nav>
+      <a href="/fiction">Fiction</a>
+      <a href="/nonfiction">Non-fiction</a>
+      <a href="/secondhand">Secondhand</a>
+      <a href="/cart">Cart &middot; 4 books</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="centered" data-width="wide" data-padding="xl">
+  <div data-layout="stack" data-gap="xl">
+
+    <div data-layout="stack" data-gap="md">
+      <h1>Checkout</h1>
+      <ol data-component="stepper">
+        <li data-state="complete">Cart</li>
+        <li aria-current="step">Delivery</li>
+        <li>Payment</li>
+        <li>Review</li>
+      </ol>
+    </div>
+
+    <div data-layout="sidebar" data-gap="xl">
+
+      <form data-slot="main" action="/checkout/payment" method="post">
+        <div data-layout="stack" data-gap="xl">
+
+          <div data-layout="stack" data-gap="md">
+            <h2>Delivery address</h2>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="full-name">Full name</label>
+              <input data-component="input" id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Eleanor Whitfield">
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="street">Street address</label>
+              <input data-component="input" id="street" name="street" type="text" autocomplete="street-address" placeholder="14 Fennel Row, Flat 2">
+            </div>
+
+            <div data-layout="grid" data-cols="2" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <label for="city">City</label>
+                <input data-component="input" id="city" name="city" type="text" autocomplete="address-level2" placeholder="Bristol">
+              </div>
+              <div data-layout="stack" data-gap="xs">
+                <label for="postcode">Postcode</label>
+                <input data-component="input" id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="BS1 4TR">
+              </div>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label for="country">Country</label>
+              <select data-component="select" id="country" name="country" autocomplete="country-name">
+                <option selected>United Kingdom</option>
+                <option>Ireland</option>
+                <option>France</option>
+                <option>Germany</option>
+                <option>Spain</option>
+                <option>Netherlands</option>
+              </select>
+            </div>
+
+            <label>
+              <input type="checkbox" name="billing-same" checked>
+              Billing address is the same
+            </label>
+          </div>
+
+          <hr data-component="divider">
+
+          <div data-layout="stack" data-gap="md">
+            <h2>Delivery speed</h2>
+
+            <div data-layout="row" data-gap="md" data-align="center" data-justify="between" data-padding="sm">
+              <label>
+                <input type="radio" name="delivery-speed" value="standard" checked>
+                Standard post
+              </label>
+              <div data-layout="stack" data-gap="xs" data-align="end">
+                <span>&pound;2.95</span>
+                <span data-tone="subtle">Arrives Thu 13 August</span>
+              </div>
+            </div>
+
+            <div data-layout="row" data-gap="md" data-align="center" data-justify="between" data-padding="sm">
+              <label>
+                <input type="radio" name="delivery-speed" value="tracked">
+                Tracked 48 hour
+              </label>
+              <div data-layout="stack" data-gap="xs" data-align="end">
+                <span>&pound;4.50</span>
+                <span data-tone="subtle">Arrives Wed 6 August</span>
+              </div>
+            </div>
+
+            <div data-layout="row" data-gap="md" data-align="center" data-justify="between" data-padding="sm">
+              <label>
+                <input type="radio" name="delivery-speed" value="next-day">
+                Next day courier
+              </label>
+              <div data-layout="stack" data-gap="xs" data-align="end">
+                <span>&pound;7.95</span>
+                <span data-tone="subtle">Arrives Tue 5 August, order before 4pm</span>
+              </div>
+            </div>
+          </div>
+
+          <details data-component="disclosure">
+            <summary>Add a gift message</summary>
+            <div data-layout="stack" data-gap="xs" data-padding="sm">
+              <label for="gift-message">We will print this on a card and tuck it inside the parcel. No prices appear on a gift order.</label>
+              <textarea data-component="textarea" id="gift-message" name="gift-message" rows="4" placeholder="Happy birthday, Nell. Start with the Powers, it is the one I kept talking about all summer."></textarea>
+            </div>
+          </details>
+
+          <hr data-component="divider">
+
+          <div data-layout="row" data-gap="sm" data-justify="between" data-align="center" data-wrap>
+            <a data-component="button" data-variant="secondary" href="/cart">Back to cart</a>
+            <button data-component="button" data-variant="primary" data-size="lg" type="submit">Continue to payment</button>
+          </div>
+
+        </div>
+      </form>
+
+      <aside data-slot="sidebar">
+        <div data-layout="stack" data-gap="md" data-tone="subtle" data-padding="lg">
+          <h2>Order summary</h2>
+
+          <div data-layout="stack" data-gap="md">
+
+            <div data-layout="row" data-gap="md" data-justify="between">
+              <div data-layout="stack" data-gap="xs">
+                <span>The Overstory</span>
+                <span data-tone="subtle">Richard Powers &middot; Qty 1</span>
+              </div>
+              <span>&pound;9.99</span>
+            </div>
+
+            <div data-layout="row" data-gap="md" data-justify="between">
+              <div data-layout="stack" data-gap="xs">
+                <span>A Month in the Country</span>
+                <span data-tone="subtle">J. L. Carr &middot; Qty 1</span>
+              </div>
+              <span>&pound;8.50</span>
+            </div>
+
+            <div data-layout="row" data-gap="md" data-justify="between">
+              <div data-layout="stack" data-gap="xs">
+                <span>The Draughtsman's Handbook</span>
+                <span data-tone="subtle">Ines Marek &middot; Qty 2</span>
+              </div>
+              <span>&pound;24.00</span>
+            </div>
+
+            <div data-layout="row" data-gap="md" data-justify="between">
+              <div data-layout="stack" data-gap="xs">
+                <span>Marginalia: Notes in Borrowed Books</span>
+                <span data-tone="subtle">Hannah Fyfe &middot; Qty 1</span>
+              </div>
+              <span>&pound;12.99</span>
+            </div>
+
+          </div>
+
+          <hr data-component="divider">
+
+          <div data-layout="stack" data-gap="sm">
+            <div data-layout="row" data-gap="md" data-justify="between">
+              <span data-tone="subtle">Subtotal</span>
+              <span>&pound;55.48</span>
+            </div>
+            <div data-layout="row" data-gap="md" data-justify="between">
+              <span data-tone="subtle">Delivery, standard post</span>
+              <span>&pound;2.95</span>
+            </div>
+          </div>
+
+          <hr data-component="divider" data-variant="strong">
+
+          <div data-layout="row" data-gap="md" data-justify="between" data-align="center">
+            <span>Total</span>
+            <span>&pound;58.43</span>
+          </div>
+
+          <p data-tone="subtle">Every order is wrapped in recycled paper and posted from our shop on Fennel Row. Returns are free for 30 days.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

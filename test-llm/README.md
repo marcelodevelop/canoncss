@@ -237,6 +237,45 @@ the same shape agreed with each other and hid a gap that a third shape found
 immediately. Reproduction figures are only as broad as the shapes they were
 measured on.
 
+## Two interventions, one partial and one that hurt
+
+The checkout spec scored 82%/67% against 91% for the other two. Five of five
+named the same missing thing, a step indicator, and built it three different
+ways. By the admission test that qualifies, so `stepper` was added and the
+identical run repeated.
+
+| Round | Structure | Modifiers |
+|---|---|---|
+| Baseline | 82% | 67% |
+| + `stepper` component | 81% | **72%** |
+| + a stat and card convention | **78%** | **65%** |
+
+**The stepper did not do what was predicted.** All five adopted it and stopped
+writing their own extension, which is a real win: no checkout page needs an app
+layer for this now. But structure stayed flat and only modifiers moved. The
+double-digit structural gain that `disclosure` produced did not repeat.
+
+That refines the admission test rather than breaking it. The divergence
+measured was in **what an extension was called**, three names for one thing.
+Naming divergence is cosmetic. It is not the same as divergence in page
+structure, and only the second kind costs points.
+
+Measuring what actually diverged found something else: `stat` used between one
+and seven times for the same page, and `card` between one and four. Not a
+missing component. An unstated convention about whether a price is a metric and
+whether a form section is a card.
+
+**The convention written to settle it made things worse.** Structure fell to
+78% and modifiers to 65%. The reason is visible in the numbers: `card` usage
+went from 1-4 across generations to 0-3, which is more polarised, not less. The
+rule said a card is "for a thing in a set", and whether a delivery option is a
+thing in a set is a judgement call. It was reverted.
+
+The pairing rule that worked earlier said a control and its label are a stack.
+Mechanical, no interpretation. **A canonical default that requires judgement is
+worse than no default**, because every generation draws the line somewhere else
+and now they are all drawing it deliberately.
+
 ## Limitations
 
 - Five generations per round is a small sample. A four point move is inside
