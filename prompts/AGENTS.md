@@ -94,4 +94,8 @@ RULES - enforce strictly:
   9. Component roles sit on their canonical element: button=<button> or <a>,
      badge/avatar/stat=<span>, topbar=<header>, divider=<hr>, modal=<dialog>,
      card=<article>/<div>/<a>. Form controls and table use their own tag.
+  10. If a pattern has no vocabulary, it goes in @layer canon.app in the
+      consumer's own CSS, built only from tokens. Never inline styles,
+      never a <style> block, never a hardcoded colour or spacing value.
+      canon-lint counts those rules: the number is what Canon is missing.
 ```

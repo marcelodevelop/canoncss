@@ -64,6 +64,21 @@ what share of the markup its score actually covers.
 Do not compare generations made with different prompt versions and call the
 result drift: it conflates the prompt change with generation variance.
 
+## The escape hatch
+
+A closed vocabulary needs a supported door, or people cut their own. Canon
+declares `@layer canon.app` and leaves it empty. Anything the vocabulary does
+not cover goes there, built only from tokens.
+
+`canon-lint` reads `.css` files now. Inside that layer it fails on a hardcoded
+colour or spacing value, and it counts the rules it finds and prints the total.
+The count never fails a build on its own: it is a measurement, and the thing it
+measures is what Canon is missing for that codebase.
+
+That number is the input to the admission test above. A pattern showing up in
+several independent app layers is a candidate. One appearing once is somebody's
+edge case.
+
 ## When a component earns its place
 
 Every opinionated framework drifts. Users bring edge cases, each one sounds

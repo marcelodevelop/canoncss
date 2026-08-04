@@ -1,5 +1,5 @@
 /* Canon CSS v0.1.0 | MIT License | https://canoncss.com */
-@layer canon.reset, canon.tokens, canon.layouts, canon.components, canon.utilities;
+@layer canon.reset, canon.tokens, canon.layouts, canon.components, canon.utilities, canon.theme, canon.app;
 @layer canon.reset {
 *, *::before, *::after {
 box-sizing: border-box;
