@@ -1,6 +1,6 @@
 # How reproducible is LLM-generated UI?
 
-**A measurement across three styling conditions, three page specs and 96
+**A measurement across three styling conditions, three page specs and 108
 generations. August 2026.**
 
 Ask a language model to build the same page twice and you get two different
@@ -183,58 +183,90 @@ writing a page from nothing, which is the rarer half of the work. The other half
 is changing a page that already exists, and nothing above measures it.
 
 So: take one generated page per condition, hand it to three clean-context agents
-with the same change request, and measure how much of the file comes back
-rewritten. Two requests, chosen so that one of them is a control the closed
-vocabulary has no reason to win.
+with the same change request, and measure what comes back. Four requests across
+two specs, deliberately including kinds of change the closed vocabulary has no
+reason to win.
 
-`npm run repro -- --churn` reports styling decisions rewritten and lines changed,
-each normalised by the base file so a verbose system is not charged for being
-verbose.
+`npm run repro -- --churn` reports the count of styling decisions touched and the
+share of lines changed.
 
-| Change requested | Condition | Decisions rewritten | Lines changed |
+| Spec | Change requested | Closed vocabulary | Tailwind, strict |
 |---|---|---|---|
-| Tighten the vertical rhythm one step | Closed vocabulary | **8%** (5-6 of 142) | **16%** |
-| Tighten the vertical rhythm one step | Tailwind, strict house style | **16%** (21-29 of 295) | **32%** |
-| Add a testimonials section | Closed vocabulary | 20% (28-30 added) | 18% |
-| Add a testimonials section | Tailwind, strict house style | 20% (57-64 added) | 22% |
+| Pricing | Tighten the vertical rhythm | **5-6** changed, 16% lines | **21-29** changed, 32% lines |
+| Dashboard | Tighten the vertical rhythm | **3-4** changed, 3% lines | **8** changed, 11% lines |
+| Pricing | Add a testimonials section | 28-30 added, 18% lines | 57-64 added, 22% lines |
+| Pricing | Remove the middle plan | 21 removed, 13% lines | 42 removed, 12% lines |
 
-**The control comes out level, and that is what makes the first row worth
-reading.** Adding a section is new markup either way; both conditions land on
-20% and neither touched a single decision outside the request. There is no
-general editing advantage.
+The decision figure counts values, not diff hunks: a value that moved from `lg`
+to `md` is one changed decision, an inserted one is one addition. The tool prints
+additions and removals separately for that reason, because summing them would
+count every modification twice.
 
-The cross-cutting change is a factor of two, on both measures and in the same
-direction on all three runs. In absolute terms it is five or six edits against
-twenty-one to twenty-nine, for an identical intent.
+Two of the four rows are controls and both come out level. Adding a section and
+removing a plan are the same work in either system: on the removal, all six runs
+produced byte-identical decisions and every one of them touched exactly one thing
+outside the deleted block, the grid column count going from three to two. **There
+is no general editing advantage.** The cross-cutting change is where the systems
+separate, and it separates on both specs.
 
-#### Why, and it is not the part we expected
+#### The number that did not replicate, and why
 
-The mechanism turned up in the control's own output. Two of the three Tailwind
-runs reported, unprompted, that they could not make the change without breaking
-the house style, because its spacing is baked into verbatim class strings that
-rule 3 says to copy exactly. They were right, and the files show it:
+The first version of this section reported the density result as a percentage of
+each file's styling decisions: 8% against 16%. That number inverts on the
+dashboard, where the same comparison reads 6% against 4% and appears to say the
+closed vocabulary lost.
 
-| Verbatim pattern | Uses before | After the density edit |
+It is the metric that is wrong. Dividing by the base file's own token count
+divides by a number that differs about fourfold between the two systems, so the
+more verbose system scores better for being verbose. Eight edits out of 391 is
+4%; three edits out of 104 is 6%. The count and the line figure both say the
+same thing on both specs, and the percentage says the opposite on one of them.
+
+`--churn` now prints the count first and says in its own output not to compare
+the percentage across systems. This is the second time in this corpus that
+running a second spec has caught a conclusion drawn from one.
+
+#### The mechanism, which did replicate
+
+Two of the three Tailwind runs on the pricing spec reported, unprompted, that
+they could not make the change without breaking the house style, because its
+spacing is baked into verbatim class strings that rule 3 says to copy exactly.
+They were right, and both specs show it:
+
+| Verbatim pattern | Pricing: before, after | Dashboard: before, after |
 |---|---|---|
-| `py-12` (Centered page) | 4 | 0, 0, 0 |
-| `p-6` (Card) | 7 | 1, 1, 1 |
+| `py-12` (Centered page) | 4 → 0, 0, 0 | 1 → 0, 0, 0 |
+| `p-6` (Card) | 7 → 1, 1, 1 | 6 → 1, 1, 2 |
 
-A routine density request deleted the style guide's own patterns from the page.
-The third run avoided that by declining to tighten the FAQ block at all, leaving
-the request half done. Both outcomes are failures, and there was no third option
-available.
+A routine density request deleted the style guide's own patterns from the page,
+in six runs out of six across two specs.
 
-This sharpens Finding 2 rather than overturning it. A strict prompt buys
-reproducibility by freezing literal strings, and a frozen literal string cannot
-be reparameterised later: the property that makes generation consistent is the
-same property that makes the next change destructive. A closed vocabulary
-freezes the *names* and leaves the values enumerated, so the same request moves
-values inside a vocabulary that survives it. The Canon runs came out lint-clean
-with the vocabulary intact.
+**And the compliance checker cannot see it.** `scripts/check-tailwind-control.mjs`
+is the enforcement written for this study, the one that found zero violations
+across 3811 class uses at generation time. Run on the six edited files it reports
+`0 of 2058 class uses (0%) are not in the declared set`. The edit stayed inside
+the allowed utilities while dismantling the component patterns built out of them,
+which is a rule the checker was never able to express.
 
-The honest scope of the claim: no advantage when adding, half the diff when
-changing something that crosses the page, and a style guide that is still there
-afterwards.
+#### What the closed vocabulary actually buys, stated narrowly
+
+It is not that Canon can make the change and Tailwind cannot. **Both systems hit
+a floor.** On the dashboard the Canon runs said so explicitly: eight of that
+page's fifteen gaps were already at `xs`, and the base carried no `data-padding`
+at all, so two of three agents reported that "the space inside cards" could not
+be tightened without leaving the vocabulary. Part of Canon's low edit count on
+that spec is a request it declined to finish.
+
+The difference is what happens at the floor. Canon's runs stopped, said which
+part they could not do, and came out lint-clean. The Tailwind runs went through
+it, and nothing in the toolchain registered that anything had happened.
+
+So the claim is narrower than the first draft of this section made it: on
+cross-cutting change a closed vocabulary is roughly half the edits and a third to
+a half the diff, on two specs; on additive and subtractive change there is no
+difference at all; and the part that holds unanimously is that a specification
+written as a prompt is edited away by ordinary work while a specification written
+as a vocabulary is not, with a linter that can tell the difference.
 
 ---
 
@@ -257,11 +289,14 @@ Stated plainly, because the findings are only as good as these.
   is a fault of the control. The figures came out level anyway, so the
   conclusion does not rest on it.
 - **The operator knew what was being measured.** Read the numbers as a floor.
-- **Finding 6 is one base page per condition, two requests, n=3.** The base is
-  `gen-1` of each reproduction run, not an average of five. A different base
-  could move the percentages; it is harder to see how it would move the
-  verbatim-pattern count, which is a property of the house style rather than of
-  the page.
+- **Finding 6 is one base page per spec, four requests, n=3.** The base is
+  `gen-1` of each run, not an average of five. A different base could move the
+  edit counts; it is harder to see how it would move the verbatim-pattern count,
+  which is a property of the house style rather than of the page.
+- **Finding 6's density result is two specs, and they disagree on magnitude.**
+  The direction is the same on both, the size is not: pricing is a factor of
+  four on edits, the dashboard a factor of two. Read it as "roughly half or
+  better", not as a coefficient.
 - **Finding 6's edits were told not to reformat.** Without that instruction line
   churn measures tidying as much as editing. It applied equally to both
   conditions, but it does mean the line figures are a floor on a real diff.
@@ -275,8 +310,8 @@ npm run repro -- test-llm/repro-pricing-v4/gen-*.html            # within one sy
 npm run repro -- --neutral test-llm/control-tailwind/gen-*.html  # across systems
 
 # Finding 6: how much of the page an edit rewrites
-npm run repro -- --churn test-llm/repro-pricing-v4/gen-1.html test-llm/edit-density/canon-*.html
-npm run repro -- --churn test-llm/control-tailwind/gen-1.html test-llm/edit-density/tailwind-*.html
+npm run repro -- --churn test-llm/repro-dashboard-v3/gen-1.html test-llm/edit-density-dash/canon-*.html
+npm run repro -- --churn test-llm/control-tailwind-dashboard/gen-1.html test-llm/edit-density-dash/tailwind-*.html
 ```
 
 Every generation is in [`test-llm/`](test-llm/), with

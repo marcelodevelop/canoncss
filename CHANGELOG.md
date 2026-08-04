@@ -37,21 +37,37 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   the corpus nobody ever wanted 5 or 6. The only case above 4 is a 7-column
   calendar, ten times, always inside an app layer that a calendar needs anyway.
 - **Finding 6, and it is the first answer to Finding 2.** Same base page, same
-  change request, three clean-context agents per styling system. Tightening the
-  vertical rhythm one step rewrote **8% of Canon's styling decisions against 16%
-  of strict Tailwind's**, five or six edits against twenty-one to twenty-nine,
-  same factor of two on lines.
-- **The control came out level, which is what makes that readable.** Adding a
-  testimonials section landed on 20% in both, with zero decisions touched
-  outside the request either way. There is no general editing advantage, only a
+  change request, three clean-context agents per styling system, four requests
+  across two specs. Tightening the vertical rhythm changed **5-6 of Canon's
+  styling decisions against 21-29 of strict Tailwind's** on pricing, and **3-4
+  against 8** on the dashboard.
+- **Two of the four requests are controls and both came out level.** Adding a
+  section and removing a plan are the same work either way. On the removal all
+  six runs produced byte-identical decisions and every one touched exactly one
+  thing outside the deleted block. There is no general editing advantage, only a
   cross-cutting one.
-- **The mechanism is that a strict prompt cannot survive its own edits.** Two of
-  three Tailwind runs reported unprompted that the change was impossible without
-  breaking rule 3, and the files agree: `py-12` went from four uses to zero and
-  `p-6` from seven to one, so a routine density request deleted the house
-  style's verbatim patterns from the page. The third declined to tighten the FAQ
-  and left the request half done. Canon's runs came out lint-clean with the
-  vocabulary intact.
+- **The first version of this reported a percentage, and the second spec
+  killed it.** 8% against 16% inverts to 6% against 4% on the dashboard, because
+  dividing by each file's own token count divides by a base that differs
+  fourfold between the systems. The count and the line figure agree on both
+  specs; the percentage does not. `--churn` now prints the count first and says
+  so in its own output. Second time in this corpus that a second spec has caught
+  a conclusion drawn from one.
+- **The mechanism is that a strict prompt cannot survive its own edits, and it
+  replicated.** Six runs of six across both specs: `py-12` went to zero uses and
+  `p-6` from six or seven down to one, so a routine density request deleted the
+  house style's verbatim patterns from the page. **The compliance checker cannot
+  see it**: `check-tailwind-control.mjs`, which found zero violations at
+  generation time, reports 0 of 2058 class uses outside the declared set on the
+  edited files. The edit stayed inside the allowed utilities while dismantling
+  the patterns built from them.
+- **Canon has a floor too, and the dashboard found it.** Eight of that page's
+  fifteen gaps were already at `xs` and the base carried no `data-padding`, so
+  two of three runs reported that card interiors could not be tightened without
+  leaving the vocabulary. Part of the low edit count is a request declined. The
+  difference is not that Canon can and Tailwind cannot; it is that Canon's runs
+  stopped and said so and stayed lint-clean, and nothing registered when the
+  Tailwind runs went through the floor instead.
 
 ## [0.2.1] - 2026-08-04
 

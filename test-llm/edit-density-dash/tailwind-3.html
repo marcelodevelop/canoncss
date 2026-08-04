@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northwind Logistics — Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900">
+
+<header class="flex items-center justify-between border-b border-zinc-200 px-6 py-4 bg-white">
+  <div class="flex items-center gap-3">
+    <span class="inline-flex rounded-md bg-teal-700 px-2 py-1 text-xs text-white font-bold">NW</span>
+    <span class="text-lg font-bold text-zinc-900">Northwind Logistics</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <button class="rounded-md px-4 py-2 hover:bg-zinc-100 text-sm text-zinc-600">Support</button>
+    <span class="text-sm text-zinc-600">Dana Whitfield</span>
+    <span class="inline-flex rounded-full bg-teal-700 px-3 py-2 text-sm font-medium text-white">DW</span>
+  </div>
+</header>
+
+<div class="mx-auto max-w-6xl px-6 py-8">
+  <div class="grid grid-cols-[16rem_1fr] gap-8">
+
+    <nav class="flex flex-col gap-1">
+      <a href="#overview" class="block rounded-md bg-teal-50 px-3 py-2 text-teal-700 font-medium">Overview</a>
+      <a href="#shipments" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Shipments</a>
+      <a href="#carriers" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Carriers</a>
+      <a href="#invoices" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Invoices</a>
+      <a href="#settings" class="block rounded-md px-3 py-2 text-zinc-600 hover:bg-zinc-100">Settings</a>
+    </nav>
+
+    <main class="flex flex-col gap-6">
+
+      <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold">Overview</h1>
+        <button class="rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800">New shipment</button>
+      </div>
+
+      <section class="grid grid-cols-4 gap-6">
+        <div class="rounded-lg border border-zinc-200 bg-white p-4">
+          <p class="text-3xl font-bold">1,284</p>
+          <p class="text-sm text-zinc-600">Active shipments</p>
+        </div>
+        <div class="rounded-lg border border-zinc-200 bg-white p-4">
+          <p class="text-3xl font-bold">96.4%</p>
+          <p class="text-sm text-zinc-600">On-time delivery</p>
+        </div>
+        <div class="rounded-lg border border-zinc-200 bg-white p-4">
+          <p class="text-3xl font-bold">37</p>
+          <p class="text-sm text-zinc-600">Delayed this week</p>
+        </div>
+        <div class="rounded-lg border border-zinc-200 bg-white p-4">
+          <p class="text-3xl font-bold">$412K</p>
+          <p class="text-sm text-zinc-600">Freight spend, August</p>
+        </div>
+      </section>
+
+      <section class="flex flex-col gap-3">
+        <h2 class="text-2xl font-bold">Recent shipments</h2>
+
+        <div class="grid grid-cols-3 gap-4">
+          <input class="w-full rounded-md border border-zinc-300 px-3 py-2" type="search" placeholder="Search tracking code or destination">
+          <select class="w-full rounded-md border border-zinc-300 px-3 py-2">
+            <option>All carriers</option>
+            <option>Baltic Freight</option>
+            <option>Meridian Express</option>
+            <option>Halden Road</option>
+            <option>Costa Cargo</option>
+          </select>
+          <select class="w-full rounded-md border border-zinc-300 px-3 py-2">
+            <option>All statuses</option>
+            <option>Delivered</option>
+            <option>In transit</option>
+            <option>Delayed</option>
+            <option>Exception</option>
+          </select>
+        </div>
+
+        <div class="rounded-lg border border-zinc-200 bg-white p-4">
+          <table class="w-full text-sm">
+            <thead>
+              <tr>
+                <th class="text-left font-medium text-zinc-600 p-3">Tracking code</th>
+                <th class="text-left font-medium text-zinc-600 p-3">Destination</th>
+                <th class="text-left font-medium text-zinc-600 p-3">Carrier</th>
+                <th class="text-left font-medium text-zinc-600 p-3">Status</th>
+                <th class="text-left font-medium text-zinc-600 p-3">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48213-KD</td>
+                <td class="p-3 text-zinc-600">Rotterdam, NL</td>
+                <td class="p-3 text-zinc-600">Baltic Freight</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-emerald-600">Delivered</span></td>
+                <td class="p-3 text-zinc-600">3 Aug 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48209-QR</td>
+                <td class="p-3 text-zinc-600">Gothenburg, SE</td>
+                <td class="p-3 text-zinc-600">Meridian Express</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-blue-600">In transit</span></td>
+                <td class="p-3 text-zinc-600">3 Aug 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48196-BH</td>
+                <td class="p-3 text-zinc-600">Bilbao, ES</td>
+                <td class="p-3 text-zinc-600">Costa Cargo</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-amber-600">Delayed</span></td>
+                <td class="p-3 text-zinc-600">2 Aug 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48187-TM</td>
+                <td class="p-3 text-zinc-600">Hamburg, DE</td>
+                <td class="p-3 text-zinc-600">Halden Road</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-emerald-600">Delivered</span></td>
+                <td class="p-3 text-zinc-600">2 Aug 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48175-LF</td>
+                <td class="p-3 text-zinc-600">Antwerp, BE</td>
+                <td class="p-3 text-zinc-600">Baltic Freight</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-red-600">Exception</span></td>
+                <td class="p-3 text-zinc-600">1 Aug 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48168-CE</td>
+                <td class="p-3 text-zinc-600">Dublin, IE</td>
+                <td class="p-3 text-zinc-600">Meridian Express</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-blue-600">In transit</span></td>
+                <td class="p-3 text-zinc-600">1 Aug 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48154-PA</td>
+                <td class="p-3 text-zinc-600">Porto, PT</td>
+                <td class="p-3 text-zinc-600">Costa Cargo</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-emerald-600">Delivered</span></td>
+                <td class="p-3 text-zinc-600">31 Jul 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48142-VS</td>
+                <td class="p-3 text-zinc-600">Oslo, NO</td>
+                <td class="p-3 text-zinc-600">Halden Road</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-amber-600">Delayed</span></td>
+                <td class="p-3 text-zinc-600">31 Jul 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48130-RJ</td>
+                <td class="p-3 text-zinc-600">Gdansk, PL</td>
+                <td class="p-3 text-zinc-600">Baltic Freight</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-blue-600">In transit</span></td>
+                <td class="p-3 text-zinc-600">30 Jul 2026</td>
+              </tr>
+              <tr class="border-t border-zinc-200">
+                <td class="p-3 font-medium">NW-48127-WU</td>
+                <td class="p-3 text-zinc-600">Marseille, FR</td>
+                <td class="p-3 text-zinc-600">Meridian Express</td>
+                <td class="p-3"><span class="inline-flex rounded-full bg-zinc-100 px-2 py-1 text-xs text-emerald-600">Delivered</span></td>
+                <td class="p-3 text-zinc-600">30 Jul 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <p class="text-sm text-zinc-400">Showing 10 of 1,284 shipments</p>
+          <div class="flex items-center gap-2">
+            <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Previous</button>
+            <button class="rounded-md border border-zinc-300 px-4 py-2 hover:bg-zinc-50">Next</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>
