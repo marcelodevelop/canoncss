@@ -64,6 +64,40 @@ what share of the markup its score actually covers.
 Do not compare generations made with different prompt versions and call the
 result drift: it conflates the prompt change with generation variance.
 
+## When a component earns its place
+
+Every opinionated framework drifts. Users bring edge cases, each one sounds
+reasonable, and after fifty of them you have utility classes again with worse
+syntax. The defence is not taste, it is a test that can say no.
+
+**A gap qualifies when generations diverge, not when they complain.**
+
+Requests are cheap. Divergence is evidence. Run the same spec through several
+clean-context agents, then check both things:
+
+1. Did they ask for it?
+2. Did they build it differently from each other?
+
+Only the second answer decides. If they all reached the same construction
+without the component, the vocabulary already covers it and the request is for
+a name, not a capability.
+
+Two worked examples from August 2026, both from the same five generations:
+
+| Candidate | Asked for it | Built it differently | Verdict |
+|---|---|---|---|
+| Collapsible FAQ | 5 of 5 | Yes: split into two incompatible families, cards against bare prose stacks | **Added** as `disclosure` |
+| Footer construct | 3 of 5 | No: 4 of 5 wrote `<footer data-layout="grid" data-cols="3" data-gap="xl" data-padding="xl">` with three stacks inside | **Rejected** |
+
+The FAQ gap cost 11 points of structural reproduction. The footer costs
+nothing, because the vocabulary already produces one answer. Adding a `footer`
+component would have bought a nicer-sounding attribute and one more thing to
+maintain.
+
+When the answer is no, the request is often still real. It usually means the
+prompt should state the canonical construction, which is free, rather than the
+CSS growing a component, which is not.
+
 ## Design principles (non-negotiable)
 
 - **One right way.** If a pattern can already be expressed, do not add a

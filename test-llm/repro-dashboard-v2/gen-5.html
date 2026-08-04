@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwind Logistics - Admin Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Northwind</a>
+    <nav data-slot="nav">
+      <a href="/overview" aria-current="page">Overview</a>
+      <a href="/shipments">Shipments</a>
+      <a href="/support">Support</a>
+    </nav>
+    <div data-slot="actions">
+      <span data-component="avatar" data-size="sm">DR</span>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/overview" aria-current="page">Overview</a>
+        <a href="/shipments">Shipments</a>
+        <a href="/carriers">Carriers</a>
+        <a href="/invoices">Invoices</a>
+        <a href="/settings">Settings</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl" data-padding="lg">
+
+    <aside data-slot="sidebar">
+      <div data-layout="stack" data-gap="md">
+        <p data-tone="subtle">Operations</p>
+        <nav data-component="nav">
+          <ul>
+            <li><a href="/overview" aria-current="page">Overview</a></li>
+            <li><a href="/shipments">Shipments</a></li>
+            <li><a href="/carriers">Carriers</a></li>
+            <li><a href="/invoices">Invoices</a></li>
+            <li><a href="/settings">Settings</a></li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="stack" data-gap="xs">
+          <h1>Overview</h1>
+          <p data-tone="subtle">Network activity for the last 30 days, updated hourly.</p>
+        </div>
+
+        <div data-layout="grid" data-cols="4" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">12,480</span>
+                <span data-tone="subtle">Shipments in transit</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">96.4%</span>
+                <span data-tone="subtle">On-time delivery rate</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">318</span>
+                <span data-tone="subtle">Exceptions to review</span>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">$4.2M</span>
+                <span data-tone="subtle">Freight billed this month</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div data-layout="row" data-gap="sm" data-wrap data-align="end">
+          <label>
+            <span class="sr-only">Search shipments</span>
+            <input data-component="input" data-size="md" type="search" name="q" placeholder="Search tracking code or destination">
+          </label>
+          <label>
+            <span class="sr-only">Filter by carrier</span>
+            <select data-component="select" data-size="md" name="carrier">
+              <option>All carriers</option>
+              <option>Baltic Freight</option>
+              <option>Cascade Haulage</option>
+              <option>Meridian Air Cargo</option>
+              <option>Vantage Express</option>
+            </select>
+          </label>
+          <label>
+            <span class="sr-only">Filter by status</span>
+            <select data-component="select" data-size="md" name="status">
+              <option>Any status</option>
+              <option>Delivered</option>
+              <option>In transit</option>
+              <option>Delayed</option>
+              <option>Exception</option>
+              <option>Pending pickup</option>
+            </select>
+          </label>
+          <button data-component="button" data-variant="primary" data-size="md" type="submit">Apply filters</button>
+          <button data-component="button" data-variant="ghost" data-size="md" type="reset">Clear</button>
+        </div>
+
+        <hr data-component="divider">
+
+        <div data-layout="stack" data-gap="md">
+          <p data-tone="subtle">Ten most recent shipments</p>
+
+          <table data-component="table">
+            <caption class="sr-only">The ten most recently created Northwind shipments</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tracking code</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Carrier</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-mono>NW-8842-QL</td>
+                <td>Rotterdam, NL</td>
+                <td>Baltic Freight</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>03 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8841-TR</td>
+                <td>Hamburg, DE</td>
+                <td>Meridian Air Cargo</td>
+                <td><span data-component="badge" data-variant="info">In transit</span></td>
+                <td>03 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8839-KM</td>
+                <td>Seattle, US</td>
+                <td>Cascade Haulage</td>
+                <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                <td>02 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8838-PV</td>
+                <td>Gothenburg, SE</td>
+                <td>Baltic Freight</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>02 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8835-DX</td>
+                <td>Valencia, ES</td>
+                <td>Vantage Express</td>
+                <td><span data-component="badge" data-variant="error">Exception</span></td>
+                <td>02 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8834-BN</td>
+                <td>Dublin, IE</td>
+                <td>Vantage Express</td>
+                <td><span data-component="badge" data-variant="info">In transit</span></td>
+                <td>01 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8831-HC</td>
+                <td>Toronto, CA</td>
+                <td>Cascade Haulage</td>
+                <td><span data-component="badge" data-variant="neutral">Pending pickup</span></td>
+                <td>01 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8829-WF</td>
+                <td>Antwerp, BE</td>
+                <td>Baltic Freight</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>31 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8827-ZA</td>
+                <td>Singapore, SG</td>
+                <td>Meridian Air Cargo</td>
+                <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                <td>31 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-8824-LE</td>
+                <td>Lyon, FR</td>
+                <td>Vantage Express</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>30 Jul 2026</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div data-layout="row" data-gap="sm" data-justify="end">
+            <button data-component="button" data-variant="secondary" data-size="sm" type="button">Export CSV</button>
+            <a data-component="button" data-variant="link" data-size="sm" href="/shipments">View all shipments</a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

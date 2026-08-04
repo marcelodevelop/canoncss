@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwind Logistics - Admin Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Northwind</a>
+    <nav data-slot="nav">
+      <a href="/overview" aria-current="page">Overview</a>
+      <a href="/shipments">Shipments</a>
+      <a href="/carriers">Carriers</a>
+    </nav>
+    <div data-slot="actions">
+      <span data-component="avatar" data-size="sm">MA</span>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/overview" aria-current="page">Overview</a>
+        <a href="/shipments">Shipments</a>
+        <a href="/carriers">Carriers</a>
+        <a href="/invoices">Invoices</a>
+        <a href="/settings">Settings</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <aside data-slot="sidebar" data-layout="stack" data-gap="md" data-padding="md">
+      <p data-tone="subtle">Operations</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/overview" aria-current="page">Overview</a></li>
+          <li><a href="/shipments">Shipments</a></li>
+          <li><a href="/carriers">Carriers</a></li>
+          <li><a href="/invoices">Invoices</a></li>
+          <li><a href="/settings">Settings</a></li>
+        </ul>
+      </nav>
+      <hr data-component="divider">
+      <p data-tone="subtle">Signed in as Marta Aguirre, dispatch lead, Rotterdam hub.</p>
+    </aside>
+
+    <main data-slot="main" data-layout="stack" data-gap="xl" data-padding="lg">
+
+      <h1>Overview</h1>
+      <p data-tone="subtle">Network activity for the last 24 hours across all Northwind hubs.</p>
+
+      <section data-layout="grid" data-cols="4" data-gap="md">
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">1,284</span>
+            <p data-tone="subtle">Shipments in transit</p>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">96.4</span>
+            <span data-tone="subtle">%</span>
+            <p data-tone="subtle">On-time delivery rate</p>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">37</span>
+            <p data-tone="subtle">Exceptions needing review</p>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">$412K</span>
+            <p data-tone="subtle">Freight billed this week</p>
+          </div>
+        </article>
+
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+
+        <h2>Recent shipments</h2>
+
+        <div data-layout="row" data-gap="sm" data-wrap data-align="end">
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="search">Search shipments</label>
+            <input data-component="input" data-size="md" id="search" type="search"
+                   name="search" placeholder="Tracking code, city or client">
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="carrier">Carrier</label>
+            <select data-component="select" data-size="md" id="carrier" name="carrier">
+              <option value="all">All carriers</option>
+              <option value="baltic">Baltic Freight</option>
+              <option value="meridian">Meridian Cargo</option>
+              <option value="orwell">Orwell Haulage</option>
+              <option value="sunward">Sunward Air</option>
+            </select>
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="status">Status</label>
+            <select data-component="select" data-size="md" id="status" name="status">
+              <option value="all">Any status</option>
+              <option value="delivered">Delivered</option>
+              <option value="in-transit">In transit</option>
+              <option value="delayed">Delayed</option>
+              <option value="held">Held at customs</option>
+            </select>
+          </div>
+
+          <button data-component="button" data-variant="primary" data-size="md" type="submit">
+            Apply filters
+          </button>
+
+          <button data-component="button" data-variant="ghost" data-size="md" type="reset">
+            Clear
+          </button>
+
+        </div>
+
+        <table data-component="table">
+          <caption class="sr-only">The ten most recent shipments</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tracking code</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Carrier</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-mono>NW-88214-RT</td>
+              <td>Rotterdam, NL</td>
+              <td>Baltic Freight</td>
+              <td><span data-component="badge" data-variant="success">Delivered</span></td>
+              <td>3 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88213-HH</td>
+              <td>Hamburg, DE</td>
+              <td>Meridian Cargo</td>
+              <td><span data-component="badge" data-variant="info">In transit</span></td>
+              <td>3 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88209-LY</td>
+              <td>Lyon, FR</td>
+              <td>Orwell Haulage</td>
+              <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+              <td>3 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88204-BC</td>
+              <td>Barcelona, ES</td>
+              <td>Sunward Air</td>
+              <td><span data-component="badge" data-variant="success">Delivered</span></td>
+              <td>2 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88198-GD</td>
+              <td>Gdansk, PL</td>
+              <td>Baltic Freight</td>
+              <td><span data-component="badge" data-variant="error">Held at customs</span></td>
+              <td>2 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88191-DB</td>
+              <td>Dublin, IE</td>
+              <td>Meridian Cargo</td>
+              <td><span data-component="badge" data-variant="info">In transit</span></td>
+              <td>2 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88187-MI</td>
+              <td>Milan, IT</td>
+              <td>Orwell Haulage</td>
+              <td><span data-component="badge" data-variant="success">Delivered</span></td>
+              <td>1 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88180-OS</td>
+              <td>Oslo, NO</td>
+              <td>Sunward Air</td>
+              <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+              <td>1 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88176-PT</td>
+              <td>Porto, PT</td>
+              <td>Baltic Freight</td>
+              <td><span data-component="badge" data-variant="neutral">Awaiting pickup</span></td>
+              <td>1 Aug 2026</td>
+            </tr>
+            <tr>
+              <td data-mono>NW-88170-VN</td>
+              <td>Vienna, AT</td>
+              <td>Meridian Cargo</td>
+              <td><span data-component="badge" data-variant="success">Delivered</span></td>
+              <td>31 Jul 2026</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div data-layout="row" data-gap="sm" data-justify="between" data-align="center">
+          <p data-tone="subtle">Showing 10 of 1,284 active shipments.</p>
+          <a data-component="button" data-variant="secondary" data-size="sm" href="/shipments">
+            View all shipments
+          </a>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

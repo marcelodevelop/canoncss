@@ -277,6 +277,51 @@
   }
 
   /* ════════════════════════════════
+     NAV
+     ════════════════════════════════
+     A list of navigation links, typically in a sidebar. Added on evidence:
+     five clean-context agents building the same dashboard produced three
+     different constructions for it, bare links, links inside list items, and
+     ghost buttons, and none could mark which one was current.
+
+     The current item is aria-current="page", not a data-* value. Reusing the
+     standard attribute means marking it correctly also makes the page
+     accessible, and there is no second state to forget. */
+  [data-component="nav"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  [data-component="nav"] a {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    color: var(--color-content-subtle);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-default),
+                color var(--duration-fast) var(--ease-default);
+  }
+
+  [data-component="nav"] a:hover {
+    background-color: var(--color-surface-sunken);
+    color: var(--color-content);
+  }
+
+  [data-component="nav"] a[aria-current] {
+    background-color: var(--color-brand-subtle);
+    color: var(--color-brand);
+    font-weight: var(--weight-medium);
+  }
+
+  /* The topbar's own nav slot gets the current marker too, so one page does
+     not need two ways to say the same thing. */
+  [data-component="topbar"] > [data-slot="nav"] a[aria-current] {
+    color: var(--color-brand);
+    font-weight: var(--weight-medium);
+  }
+
+  /* ════════════════════════════════
      DISCLOSURE
      ════════════════════════════════
      Zero-JS expand/collapse on <details>, the same mechanism the topbar menu

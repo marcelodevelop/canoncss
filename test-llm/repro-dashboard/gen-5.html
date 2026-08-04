@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwind Logistics - Admin Dashboard</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Northwind</a>
+    <nav data-slot="nav">
+      <a href="/overview">Overview</a>
+      <a href="/shipments">Shipments</a>
+      <a href="/carriers">Carriers</a>
+    </nav>
+    <div data-slot="actions">
+      <span data-tone="subtle" data-hide="mobile">Dana Reyes</span>
+      <span data-component="avatar" data-size="sm">DR</span>
+    </div>
+    <details data-slot="menu">
+      <summary>&#9776;</summary>
+      <nav>
+        <a href="/overview">Overview</a>
+        <a href="/shipments">Shipments</a>
+        <a href="/carriers">Carriers</a>
+        <a href="/invoices">Invoices</a>
+        <a href="/settings">Settings</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <nav data-slot="sidebar">
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Operations</p>
+        <a data-component="button" data-variant="ghost" data-full href="/overview">Overview</a>
+        <a data-component="button" data-variant="ghost" data-full href="/shipments">Shipments</a>
+        <a data-component="button" data-variant="ghost" data-full href="/carriers">Carriers</a>
+        <hr data-component="divider">
+        <p data-tone="subtle">Administration</p>
+        <a data-component="button" data-variant="ghost" data-full href="/invoices">Invoices</a>
+        <a data-component="button" data-variant="ghost" data-full href="/settings">Settings</a>
+      </div>
+    </nav>
+
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="stack" data-gap="sm">
+          <h1>Overview</h1>
+          <p data-tone="subtle">Network activity for the last 30 days, updated 12 minutes ago.</p>
+        </div>
+
+        <div data-layout="grid" data-cols="4" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="header">Shipments in transit</div>
+            <div data-slot="body">
+              <span data-component="stat">1,284</span>
+              <p data-tone="subtle">Across 37 active carriers</p>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">On-time delivery</div>
+            <div data-slot="body">
+              <span data-component="stat">96.2</span>
+              <span data-tone="subtle">%</span>
+              <p data-tone="subtle">Up 1.8 points from last month</p>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">Open invoices</div>
+            <div data-slot="body">
+              <span data-component="stat">$412K</span>
+              <p data-tone="subtle">18 awaiting approval</p>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">Exceptions</div>
+            <div data-slot="body">
+              <span data-component="stat">23</span>
+              <p data-tone="subtle">9 opened in the last 24 hours</p>
+            </div>
+          </article>
+
+        </div>
+
+        <div data-layout="row" data-gap="sm" data-wrap data-align="end">
+          <label>
+            Search shipments
+            <input data-component="input" data-size="md" type="search" name="q" placeholder="Tracking code, city or reference">
+          </label>
+          <label>
+            Carrier
+            <select data-component="select" data-size="md" name="carrier">
+              <option>All carriers</option>
+              <option>Baltic Freight</option>
+              <option>Meridian Cargo</option>
+              <option>Redline Express</option>
+              <option>Harbour Point Logistics</option>
+            </select>
+          </label>
+          <label>
+            Status
+            <select data-component="select" data-size="md" name="status">
+              <option>Any status</option>
+              <option>In transit</option>
+              <option>Delivered</option>
+              <option>Delayed</option>
+              <option>Exception</option>
+              <option>Pending pickup</option>
+            </select>
+          </label>
+          <button data-component="button" data-variant="primary" data-size="md" type="submit">Apply filters</button>
+          <button data-component="button" data-variant="ghost" data-size="md" type="reset">Clear</button>
+        </div>
+
+        <div data-layout="stack" data-gap="md">
+          <h2>Recent shipments</h2>
+          <table data-component="table">
+            <caption class="sr-only">The ten most recent shipments in the Northwind network</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tracking code</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Carrier</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-mono>NW-88214-QR</td>
+                <td>Rotterdam, NL</td>
+                <td>Baltic Freight</td>
+                <td><span data-component="badge" data-variant="info">In transit</span></td>
+                <td>3 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88209-LT</td>
+                <td>Gothenburg, SE</td>
+                <td>Meridian Cargo</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>3 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88198-BC</td>
+                <td>Hamburg, DE</td>
+                <td>Redline Express</td>
+                <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                <td>2 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88187-KD</td>
+                <td>Bilbao, ES</td>
+                <td>Harbour Point Logistics</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>2 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88175-ZP</td>
+                <td>Marseille, FR</td>
+                <td>Baltic Freight</td>
+                <td><span data-component="badge" data-variant="error">Exception</span></td>
+                <td>2 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88166-MW</td>
+                <td>Dublin, IE</td>
+                <td>Meridian Cargo</td>
+                <td><span data-component="badge" data-variant="info">In transit</span></td>
+                <td>1 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88152-AH</td>
+                <td>Gdansk, PL</td>
+                <td>Redline Express</td>
+                <td><span data-component="badge" data-variant="neutral">Pending pickup</span></td>
+                <td>1 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88140-VJ</td>
+                <td>Antwerp, BE</td>
+                <td>Harbour Point Logistics</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>31 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88133-XN</td>
+                <td>Porto, PT</td>
+                <td>Baltic Freight</td>
+                <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+                <td>31 Jul 2026</td>
+              </tr>
+              <tr>
+                <td data-mono>NW-88121-RS</td>
+                <td>Trieste, IT</td>
+                <td>Meridian Cargo</td>
+                <td><span data-component="badge" data-variant="success">Delivered</span></td>
+                <td>30 Jul 2026</td>
+              </tr>
+            </tbody>
+          </table>
+          <p data-tone="subtle">Showing the 10 most recent shipments of 1,284 in transit.</p>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
