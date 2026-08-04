@@ -110,6 +110,13 @@
     padding-inline-start: 0;
   }
 
+  /* Una lista dentro de <nav> es navegacion, no prosa. Encontrado porque el
+     sitio de docs venia parcheando esto a mano sobre su copia vendorizada. */
+  nav ul, nav ol {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
   /* Listas dentro de nav son navegacion, no prosa: sin markers */
   nav ul, nav ol {
     list-style: none;
