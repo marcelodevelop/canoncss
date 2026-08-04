@@ -64,4 +64,7 @@ node scripts/check-docs.mjs
 echo "- repro metric self-check:"
 node scripts/repro.mjs --selftest
 
+echo "- rule 3 checker self-check:"
+node scripts/check-tailwind-patterns.mjs --selftest
+
 echo "✓ all tests passed"

@@ -17,6 +17,9 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   an edit rewrites, in styling decisions and in lines, each normalised by the
   base file. Reproduction measures writing a page twice; this measures the other
   half of the work.
+- **`scripts/check-tailwind-patterns.mjs`**: enforces rule 3 of the Tailwind
+  control, the verbatim component patterns, which `check-tailwind-control.mjs`
+  never covered. Written to refute a finding of this project's own, and it did.
 
 ### Measured
 - The stepper **did not do what was predicted**. All five generations adopted
@@ -56,11 +59,26 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 - **The mechanism is that a strict prompt cannot survive its own edits, and it
   replicated.** Six runs of six across both specs: `py-12` went to zero uses and
   `p-6` from six or seven down to one, so a routine density request deleted the
-  house style's verbatim patterns from the page. **The compliance checker cannot
-  see it**: `check-tailwind-control.mjs`, which found zero violations at
-  generation time, reports 0 of 2058 class uses outside the declared set on the
-  edited files. The edit stayed inside the allowed utilities while dismantling
-  the patterns built from them.
+  house style's verbatim patterns from the page. `check-tailwind-control.mjs`,
+  which found zero violations at generation time, reports 0 of 2058 class uses
+  outside the declared set on the edited files: the edit stayed inside the
+  allowed utilities while dismantling the patterns built from them.
+- **We then concluded that rule 3 was not mechanically enforceable, and that was
+  wrong.** `check-tailwind-patterns.mjs` was written to refute it and does: about
+  a hundred lines, **1 flag in 272 identified patterns** on unedited control
+  files and **39** on the edited ones, naming every `Card` that lost its `p-6`.
+  The structural argument failed because the density edit changed only spacing
+  classes and left the identifying ones intact, so the card was still
+  recognisable afterwards. Rule 3 is enforceable; it had just not been enforced.
+- **What survives is one sentence wide.** Rebrand the same page, `bg-teal-700` to
+  `bg-indigo-700`, which identifies the Button primary pattern rather than spaces
+  it. The three buttons are still in the file, the checker's identified count
+  drops 18 to 15, and it reports clean: a button it cannot recognise is
+  indistinguishable from a button that is not there. An enforcement built on
+  class strings goes blind exactly where an edit changes what identifies a
+  component. Naming the component apart from styling it is what closes that hole,
+  and it is the only part of this finding that is structural rather than a matter
+  of who wrote which script.
 - **Canon has a floor too, and the dashboard found it.** Eight of that page's
   fifteen gaps were already at `xs` and the base carried no `data-padding`, so
   two of three runs reported that card interiors could not be tightened without

@@ -241,12 +241,48 @@ They were right, and both specs show it:
 A routine density request deleted the style guide's own patterns from the page,
 in six runs out of six across two specs.
 
-**And the compliance checker cannot see it.** `scripts/check-tailwind-control.mjs`
-is the enforcement written for this study, the one that found zero violations
-across 3811 class uses at generation time. Run on the six edited files it reports
-`0 of 2058 class uses (0%) are not in the declared set`. The edit stayed inside
-the allowed utilities while dismantling the component patterns built out of them,
-which is a rule the checker was never able to express.
+The enforcement written for this study does not see it.
+`scripts/check-tailwind-control.mjs` found zero violations across 3811 class uses
+at generation time, and on the six edited files it reports `0 of 2058 class uses
+(0%) are not in the declared set`. The edit stayed inside the allowed utilities
+while dismantling the component patterns built out of them.
+
+#### The claim that was drawn from that, and was wrong
+
+The first version of this section concluded that a house style's component
+patterns are not mechanically enforceable, and that this is why the closed
+vocabulary is the enforceable one. That is a strong claim resting on a checker
+nobody had written, so the next step was to write it and try to refute the
+finding.
+
+It refutes it. [`check-tailwind-patterns.mjs`](scripts/check-tailwind-patterns.mjs)
+is about a hundred lines. It splits each pattern into the distinctive classes
+that identify it and the spacing it must carry, treats any element holding the
+whole signature as that component, and checks the spacing. On the ten unedited
+control files it flags **1 case in 272 identified patterns**, and that one looks
+real rather than spurious. On the six edited files it flags **39**, naming every
+`Card` that lost its `p-6` and every `Centered page` that lost its `py-12`.
+
+**Rule 3 is enforceable. It simply had not been enforced.** The reason the
+structural argument failed is worth stating: the density edit changed only the
+spacing classes and left the identifying ones alone, so the element was still
+recognisable as a card afterwards. Identity survived because the edit did not
+touch it.
+
+#### Where it does go blind, stated at its real size
+
+That last sentence is the whole of what survives. Take the same control page and
+rebrand it, `bg-teal-700` to `bg-indigo-700`, which is an identifying class of
+the Button primary pattern rather than a spacing one. The three primary buttons
+are still in the file. The checker's identified count falls from 18 to 15 and it
+reports **clean**, because a button it can no longer recognise is indistinguishable
+from a button that was never there.
+
+So the honest residual is narrow: an enforcement built on class strings catches
+edits to the parts of the pattern that do not identify it, and cannot see edits
+to the parts that do. Naming the component separately from styling it, which is
+what `data-component="card"` does, is what removes that hole. That is a real
+property and a much smaller one than "the patterns cannot be checked".
 
 #### What the closed vocabulary actually buys, stated narrowly
 
@@ -259,14 +295,27 @@ that spec is a request it declined to finish.
 
 The difference is what happens at the floor. Canon's runs stopped, said which
 part they could not do, and came out lint-clean. The Tailwind runs went through
-it, and nothing in the toolchain registered that anything had happened.
+it, and nothing in the toolchain registered that anything had happened, until
+this study wrote the checker that does.
 
-So the claim is narrower than the first draft of this section made it: on
-cross-cutting change a closed vocabulary is roughly half the edits and a third to
-a half the diff, on two specs; on additive and subtractive change there is no
-difference at all; and the part that holds unanimously is that a specification
-written as a prompt is edited away by ordinary work while a specification written
-as a vocabulary is not, with a linter that can tell the difference.
+So the claim is narrower than the first draft of this section made it, and
+narrower again after the refutation:
+
+- On cross-cutting change, roughly half the edits and a third to a half the diff,
+  on two specs, with the magnitude unstable between them.
+- On additive and subtractive change, no difference at all.
+- Ordinary editing does dismantle a prompt-written specification, unanimously,
+  six runs of six across two specs.
+- But that is **catchable**, by about a hundred lines nobody had written. The
+  advantage is that Canon ships the linter, not that Tailwind cannot have one.
+- The only part that is structural rather than a matter of who wrote what: an
+  enforcement built on class strings goes blind exactly where an edit changes the
+  classes that identify a component, and a vocabulary that names components apart
+  from styling them does not have that hole.
+
+That last point is the floor. It is a good deal smaller than the claim this
+project started with, and it is the one that has survived every attempt so far to
+knock it over, including this one.
 
 ---
 
