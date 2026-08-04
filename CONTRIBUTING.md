@@ -25,6 +25,9 @@ layout, token, modifier or slot must land in the same PR across:
 4. `plugins/canon-css/skills/canon-css/SKILL.md` - the Claude Code skill
 5. `bin/vocab.mjs` - the `VOCAB` and `ELEMENTS` tables
 
+`npm test` fails if the README counts or the prompt fall out of sync with
+`bin/vocab.mjs`, so step 5 cannot silently be the only one done.
+
 `prompts/AGENTS.md` and `vscode/canon.html-data.json` regenerate at build time
 (from the short prompt and from `bin/vocab.mjs`) - never edit them by hand.
 

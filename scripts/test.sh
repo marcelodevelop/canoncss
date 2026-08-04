@@ -32,6 +32,9 @@ if [ "$CODE2" -ne 1 ] || [ "$COUNT2" -ne 2 ]; then
 fi
 echo "✓ app-layer fixture caught ($COUNT2 violations, exit $CODE2)"
 
+echo "- docs must match the vocabulary:"
+node scripts/check-docs.mjs
+
 echo "- repro metric self-check:"
 node scripts/repro.mjs --selftest
 
