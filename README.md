@@ -44,6 +44,24 @@ Or build it yourself:
 npm run build
 ```
 
+## Or take the code and keep it
+
+```bash
+npx -p canoncss canon-init
+```
+
+Copies `canon.css`, a starter `theme.css` and `AGENTS.md` into your project and
+tells you what to do next. It never overwrites a file that already exists.
+
+After that **you can uninstall canoncss and nothing breaks.** It is one plain
+CSS file with no build step, so vendoring it costs nothing and takes the
+framework out of your dependency graph entirely. Keep the package installed
+only if you want `canon-lint` and the editor autocomplete.
+
+A closed vocabulary should not also be a lock-in. The author's own portfolio
+runs this way: a committed `canon.css` next to a 60-line `theme.css`, no
+install.
+
 ## Use
 
 ```html

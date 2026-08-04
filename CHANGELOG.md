@@ -6,6 +6,23 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Added
+- **`canon-init`**: copies `canon.css`, a starter `theme.css` and `AGENTS.md`
+  into a project, then tells you the package is no longer required. Vendoring
+  a single build-step-free CSS file costs nothing, and a closed vocabulary
+  should not also be a lock-in.
+- **`@layer canon.app`**: the supported escape hatch for patterns the
+  vocabulary does not cover. Declared and left empty. `canon-lint` reads `.css`
+  now, fails on a hardcoded colour or spacing value inside that layer, and
+  counts the rules it finds. The count never fails a build: it measures what
+  Canon is missing for that codebase.
+- **`data-component="nav"`**: a list of navigation links. The current item is
+  `aria-current="page"`, not a `data-*` state, so marking it correctly also
+  makes the page accessible.
+- **An admission test in CONTRIBUTING.** A gap qualifies when generations
+  diverge, not when they complain. It has already rejected two of four
+  candidates.
+- `canon.theme` is now declared in the layer order. It worked before only
+  because an undeclared layer sorts last.
 - **`data-component="disclosure"`** on `<details>`: zero-JS expand and collapse,
   the mechanism the topbar burger menu already used, generalised. The caret is
   generated so the markup carries no icon to get wrong.
