@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing - Relay</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Relay</a>
+    <nav data-slot="nav">
+      <a href="/product">Product</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="primary" data-size="sm" href="/signup">Sign up</a>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/product">Product</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+      </nav>
+    </details>
+  </header>
+
+  <section data-layout="hero" data-align="center" data-justify="center" data-padding="2xl">
+    <div data-layout="stack" data-gap="lg" data-align="center">
+      <span data-component="badge" data-variant="brand">Now with unlimited environments</span>
+      <h1>Pricing that scales with your pipeline, not your headcount</h1>
+      <p>Relay moves events between your services with one config file and no queue to babysit. Start free, upgrade when your traffic says so, and never pay for seats you are not using.</p>
+      <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a demo</a>
+      </div>
+      <p data-tone="subtle">No credit card required. Cancel any time from the dashboard.</p>
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="wide" data-padding="2xl">
+    <div data-layout="stack" data-gap="xl">
+      <div data-layout="stack" data-gap="sm" data-align="center">
+        <h2>Choose your plan</h2>
+        <p data-tone="subtle">Every plan includes the full event router, the CLI and the audit log.</p>
+      </div>
+
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Starter</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$19</span>
+                <span data-tone="subtle">per month</span>
+              </div>
+              <p>For a solo builder wiring up a first integration.</p>
+              <ul>
+                <li>250,000 events per month</li>
+                <li>3 connected services</li>
+                <li>7 day event replay window</li>
+                <li>Community support on Discord</li>
+              </ul>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Start with Starter</a>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured" data-motion="lift">
+          <div data-slot="header">Team</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+              <span data-component="badge" data-variant="brand">Recommended</span>
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$49</span>
+                <span data-tone="subtle">per month</span>
+              </div>
+              <p>For a product team running Relay in production every day.</p>
+              <ul>
+                <li>5 million events per month</li>
+                <li>Unlimited connected services</li>
+                <li>30 day event replay and one click retry</li>
+                <li>Email support with a 4 hour response target</li>
+              </ul>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="primary" data-full href="/signup?plan=team">Start with Team</a>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Enterprise</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$249</span>
+                <span data-tone="subtle">per month</span>
+              </div>
+              <p>For platform teams with compliance reviewers in the room.</p>
+              <ul>
+                <li>Unlimited events with volume pricing</li>
+                <li>Single sign on with SAML and SCIM</li>
+                <li>1 year replay window and data residency choice</li>
+                <li>Named engineer and a 99.99% uptime agreement</li>
+              </ul>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/contact-sales">Talk to sales</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <section data-layout="centered" data-width="content" data-padding="2xl">
+    <div data-layout="stack" data-gap="xl">
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Frequently asked questions</p>
+        <h2>Answers before you commit</h2>
+      </div>
+
+      <div data-layout="stack" data-gap="lg">
+
+        <div data-layout="stack" data-gap="xs">
+          <h3>What counts as an event?</h3>
+          <p>One event is one payload accepted by a Relay endpoint, no matter how many services it fans out to. A single order webhook that reaches billing, search and your warehouse still bills as one event.</p>
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <h3>What happens if I go over my monthly limit?</h3>
+          <p>Nothing breaks. Relay keeps delivering and we bill the overage at $0.40 per thousand extra events on your next invoice. You can set a hard cap in the dashboard if you would rather be throttled than charged.</p>
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <h3>Can I change plans in the middle of a billing cycle?</h3>
+          <p>Yes. Upgrades take effect immediately and we prorate the difference to the day. Downgrades take effect at the start of your next cycle so you keep the higher limits you already paid for.</p>
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <h3>Do you offer discounts for startups and nonprofits?</h3>
+          <p>We do. Registered nonprofits and companies under two years old with fewer than ten people get 50% off the Team plan for the first year. Write to billing@relay.dev with a link to your company and we will apply it.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <footer data-layout="centered" data-width="wide" data-padding="xl">
+    <div data-layout="grid" data-cols="3" data-gap="lg">
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Product</p>
+        <ul>
+          <li><a href="/product">Overview</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/changelog">Changelog</a></li>
+          <li><a href="/status">Status</a></li>
+        </ul>
+      </div>
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Developers</p>
+        <ul>
+          <li><a href="/docs">Documentation</a></li>
+          <li><a href="/docs/api">API reference</a></li>
+          <li><a href="/docs/cli">Command line tool</a></li>
+          <li><a href="/docs/examples">Example projects</a></li>
+        </ul>
+      </div>
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Company</p>
+        <ul>
+          <li><a href="/about">About Relay</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

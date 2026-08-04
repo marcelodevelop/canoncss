@@ -2,7 +2,7 @@
 // the generated VS Code html.customData file.
 
 export const LAYOUTS = new Set(['stack', 'row', 'grid', 'sidebar', 'centered', 'hero', 'split']);
-export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider']);
+export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider', 'disclosure']);
 const SCALE = new Set(['xs', 'sm', 'md', 'lg', 'xl', '2xl']);
 
 export const VOCAB = {
@@ -41,6 +41,7 @@ export const ELEMENTS = {
   stat: new Set(['span']),
   table: new Set(['table']),
   divider: new Set(['hr', 'div']),
+  disclosure: new Set(['details']),
 };
 
 export const DESC = {

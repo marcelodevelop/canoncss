@@ -48,6 +48,9 @@ COMPONENTS - data-component on semantic elements:
             the span - never data-component on the <img> itself.
   stat      the big number of a metric (<span data-component="stat">4.8M</span>)
   table     on a <table> element; style-free thead/tbody/th/td inside
+  disclosure on <details>, zero-JS expand/collapse. First child is the
+            <summary>; the caret is generated. Use for FAQ and any
+            show-more section.
   divider   + data-variant={strong}
 
 UTILITIES - complete list; nothing else exists:
@@ -58,6 +61,8 @@ UTILITIES - complete list; nothing else exists:
   class="sr-only"
 
 PROSE - styled automatically, no attributes needed:
+  checkbox and radio inputs render bare - never give them data-component,
+  and a <label> wrapping its own control lays itself out.
   ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
   labels are <p data-tone="subtle">, never a heading element.
 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing - Relay</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Relay</a>
+    <nav data-slot="nav">
+      <a href="/product">Product</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/product">Product</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/signup">Sign up</a>
+      </nav>
+    </details>
+  </header>
+
+  <main data-layout="stack" data-gap="2xl">
+
+    <section data-layout="hero" data-align="center" data-justify="center" data-gap="lg" data-padding="xl">
+      <p data-tone="subtle">Pricing</p>
+      <h1>Ship messages, not infrastructure</h1>
+      <p>Relay is the event delivery layer for teams that would rather build product than babysit webhook queues. Pick a plan, drop in the SDK, and start delivering in under ten minutes.</p>
+      <div data-layout="row" data-gap="md" data-justify="center" data-wrap>
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Talk to sales</a>
+      </div>
+      <p data-tone="subtle">No credit card required. Cancel any time.</p>
+    </section>
+
+    <section data-layout="centered" data-width="wide" data-gap="xl" data-padding="lg">
+      <h2>Plans that scale with your traffic</h2>
+      <p>Every plan includes the full API, unlimited endpoints and automatic retries. You only pay for the volume you actually deliver.</p>
+
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Starter</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <p><span data-component="stat">$0</span></p>
+            <p data-tone="subtle">Free forever, for side projects and prototypes.</p>
+            <ul>
+              <li>10,000 events per month</li>
+              <li>3 destination endpoints</li>
+              <li>24 hour event log retention</li>
+              <li>Community support on Discord</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Get started free</a>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured" data-motion="lift">
+          <div data-slot="header">Growth</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <p><span data-component="badge" data-variant="brand">Recommended</span></p>
+            <p><span data-component="stat">$79</span></p>
+            <p data-tone="subtle">Per month, billed annually. For teams in production.</p>
+            <ul>
+              <li>2 million events per month</li>
+              <li>Unlimited destination endpoints</li>
+              <li>30 day event log and replay</li>
+              <li>Email support with a 4 hour response</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="primary" data-full href="/signup?plan=growth">Start 14 day trial</a>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Enterprise</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <p><span data-component="stat">Custom</span></p>
+            <p data-tone="subtle">Volume pricing with a signed contract and SLA.</p>
+            <ul>
+              <li>Unlimited events, committed volume</li>
+              <li>Dedicated delivery regions</li>
+              <li>1 year event log and audit export</li>
+              <li>99.99% uptime SLA and a named engineer</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/contact">Contact sales</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <hr data-component="divider">
+
+    <section data-layout="centered" data-width="content" data-gap="lg" data-padding="lg">
+      <p data-tone="subtle">Frequently asked questions</p>
+      <h2>Everything else you were about to ask</h2>
+
+      <div data-layout="grid" data-cols="2" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">What counts as an event?</div>
+          <div data-slot="body">
+            <p>One event is a single payload accepted by the Relay API, no matter how many endpoints it fans out to. Retries, replays and health checks are never billed as separate events.</p>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">What happens if I go over my plan limit?</div>
+          <div data-slot="body">
+            <p>Delivery keeps running. We never drop traffic mid month. Overage on Growth is billed at $0.40 per thousand extra events, and we email you at 80% so nothing is a surprise.</p>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Can I switch plans later?</div>
+          <div data-slot="body">
+            <p>Yes, in one click from the dashboard. Upgrades apply immediately and are prorated to the day. Downgrades take effect at the start of your next billing period.</p>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Do you offer discounts?</div>
+          <div data-slot="body">
+            <p>Annual billing saves two months on every paid plan. Registered nonprofits and open source maintainers get Growth at no cost, just write to us from the project domain.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="prose" data-gap="md" data-align="center" data-padding="xl" data-tone="subtle">
+      <h2>Ready when you are</h2>
+      <p>Create an account, paste your first endpoint and watch the events land. Most teams are in production the same afternoon.</p>
+      <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Create your account</a>
+    </section>
+
+  </main>
+
+  <footer data-layout="grid" data-cols="3" data-gap="xl" data-padding="xl">
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Product</p>
+      <ul>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/changelog">Changelog</a></li>
+        <li><a href="/status">Status</a></li>
+      </ul>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Developers</p>
+      <ul>
+        <li><a href="/docs">Documentation</a></li>
+        <li><a href="/docs/api">API reference</a></li>
+        <li><a href="/docs/sdks">SDKs</a></li>
+        <li><a href="/docs/webhooks">Webhook guide</a></li>
+      </ul>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/careers">Careers</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay Pricing</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Relay</a>
+  <nav data-slot="nav" data-hide="mobile">
+    <a href="/product">Product</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/docs">Docs</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" data-size="sm" href="/signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/product">Product</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+  </details>
+</header>
+
+<main>
+
+  <section data-layout="hero" data-align="center" data-justify="center" data-gap="lg" data-padding="2xl">
+    <span data-component="badge" data-variant="brand">New: shared inboxes</span>
+    <h1>Pricing that grows with your support team</h1>
+    <p>Relay routes every customer message to the right person in seconds, so nothing sits unanswered over a weekend. Start free for 14 days, no card required.</p>
+    <div data-layout="row" data-gap="md" data-justify="center" data-wrap>
+      <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+      <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a demo</a>
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="wide" data-gap="xl" data-padding="2xl">
+    <h2>Plans</h2>
+    <p data-tone="subtle">Billed per seat, per month. Switch or cancel whenever you like.</p>
+
+    <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+      <article data-component="card">
+        <div data-slot="header">Starter</div>
+        <div data-slot="body">
+          <span data-component="stat">$19</span>
+          <p data-tone="subtle">per seat / month</p>
+          <p>For small teams handling their first few hundred conversations a month.</p>
+          <ul>
+            <li>Up to 3 seats</li>
+            <li>One shared inbox</li>
+            <li>Email and web chat channels</li>
+            <li>7 day conversation history</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Choose Starter</a>
+        </div>
+      </article>
+
+      <article data-component="card" data-variant="featured" data-motion="lift">
+        <div data-slot="header">
+          Team
+          <span data-component="badge" data-variant="brand">Recommended</span>
+        </div>
+        <div data-slot="body">
+          <span data-component="stat">$49</span>
+          <p data-tone="subtle">per seat / month</p>
+          <p>For growing support teams that need routing rules and real reporting.</p>
+          <ul>
+            <li>Up to 25 seats</li>
+            <li>Unlimited shared inboxes</li>
+            <li>Automatic routing and assignment rules</li>
+            <li>Response time and workload reports</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="primary" data-full href="/signup?plan=team">Choose Team</a>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">Scale</div>
+        <div data-slot="body">
+          <span data-component="stat">$99</span>
+          <p data-tone="subtle">per seat / month</p>
+          <p>For companies running support across several regions and products.</p>
+          <ul>
+            <li>Unlimited seats</li>
+            <li>SAML single sign on and audit logs</li>
+            <li>Sandbox environment and full API access</li>
+            <li>Named support engineer with a 1 hour response target</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/contact?plan=scale">Talk to sales</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <section data-layout="centered" data-width="content" data-gap="lg" data-padding="2xl">
+    <h2>Frequently asked questions</h2>
+
+    <div data-layout="stack" data-gap="md">
+
+      <article data-component="card">
+        <div data-slot="header">Can I change plans in the middle of a billing cycle?</div>
+        <div data-slot="body">
+          <p>Yes. Upgrades take effect immediately and we bill you the prorated difference for the days left in the cycle. Downgrades apply on your next renewal date, so you keep the features you paid for until then.</p>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">What counts as a seat?</div>
+        <div data-slot="body">
+          <p>A seat is any teammate who replies to conversations. People who only read conversations or view reports are free on every plan, so managers and stakeholders never add to your bill.</p>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">Do you offer a discount for annual billing?</div>
+        <div data-slot="body">
+          <p>Paying yearly takes two months off the total on Starter and Team. Scale customers get custom annual terms, and we can invoice in USD, EUR or GBP.</p>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">What happens when my trial ends?</div>
+        <div data-slot="body">
+          <p>Nothing is deleted. Your workspace moves to read only until you pick a plan, and every conversation, note and report is waiting for you the moment you subscribe.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer data-layout="grid" data-cols="3" data-gap="xl" data-padding="2xl">
+  <div data-layout="stack" data-gap="sm">
+    <p data-tone="subtle">Product</p>
+    <ul>
+      <li><a href="/product">Overview</a></li>
+      <li><a href="/product/inbox">Shared inbox</a></li>
+      <li><a href="/product/routing">Routing rules</a></li>
+      <li><a href="/changelog">Changelog</a></li>
+    </ul>
+  </div>
+  <div data-layout="stack" data-gap="sm">
+    <p data-tone="subtle">Developers</p>
+    <ul>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/docs/api">API reference</a></li>
+      <li><a href="/docs/webhooks">Webhooks</a></li>
+      <li><a href="/status">Status</a></li>
+    </ul>
+  </div>
+  <div data-layout="stack" data-gap="sm">
+    <p data-tone="subtle">Company</p>
+    <ul>
+      <li><a href="/about">About Relay</a></li>
+      <li><a href="/careers">Careers</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

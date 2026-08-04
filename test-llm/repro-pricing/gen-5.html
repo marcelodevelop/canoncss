@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing - Relay</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Relay</a>
+  <nav data-slot="nav">
+    <a href="/product">Product</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/docs">Docs</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/product">Product</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+      <a href="/signup">Sign up</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="stack" data-gap="2xl">
+
+  <section data-layout="hero" data-align="center" data-justify="center" data-gap="lg" data-padding="xl">
+    <span data-component="badge" data-variant="brand">Now with per-seat usage caps</span>
+    <h1>Pricing that scales with your message volume, not your headcount</h1>
+    <p>Relay routes, retries and audits every webhook and event your product sends. Start free, pay only when your traffic grows, and never rewrite an integration again.</p>
+    <div data-layout="row" data-gap="md" data-justify="center" data-wrap>
+      <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+      <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Talk to sales</a>
+    </div>
+    <p data-tone="subtle">No credit card required. 14 days of the Growth plan on us.</p>
+  </section>
+
+  <section data-layout="centered" data-width="wide" data-padding="lg">
+    <div data-layout="stack" data-gap="lg">
+      <div data-layout="stack" data-gap="sm" data-align="center">
+        <h2>Three plans, one delivery guarantee</h2>
+        <p data-tone="subtle">Every plan includes the same delivery engine. You pay for volume, retention and support.</p>
+      </div>
+
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Starter</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$0</span>
+                <span data-tone="subtle">/ month</span>
+              </div>
+              <p data-tone="subtle">For side projects and the first integration you ship.</p>
+              <ul>
+                <li>50,000 events per month</li>
+                <li>3 destinations</li>
+                <li>7 days of delivery logs</li>
+                <li>Community support</li>
+              </ul>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Start for free</a>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured" data-motion="lift">
+          <div data-slot="header">Growth</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+              <span data-component="badge" data-variant="brand">Recommended</span>
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$79</span>
+                <span data-tone="subtle">/ month</span>
+              </div>
+              <p data-tone="subtle">For teams running production traffic on a real SLA.</p>
+              <ul>
+                <li>2 million events per month</li>
+                <li>Unlimited destinations</li>
+                <li>90 days of searchable delivery logs</li>
+                <li>Automatic retries with dead-letter replay</li>
+              </ul>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="primary" data-full href="/signup?plan=growth">Start free trial</a>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Enterprise</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="md">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$499</span>
+                <span data-tone="subtle">/ month</span>
+              </div>
+              <p data-tone="subtle">For regulated teams that need proof of every delivery.</p>
+              <ul>
+                <li>Unlimited events with volume pricing</li>
+                <li>Private regions and static egress IPs</li>
+                <li>2 years of audit-grade retention</li>
+                <li>99.99% uptime SLA and a named engineer</li>
+              </ul>
+            </div>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/contact?plan=enterprise">Contact sales</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr data-component="divider">
+
+  <section data-layout="centered" data-width="content" data-padding="lg">
+    <div data-layout="stack" data-gap="lg">
+      <div data-layout="stack" data-gap="sm">
+        <h2>Frequently asked questions</h2>
+        <p data-tone="subtle">Still unsure? Write to support@relay.dev and a human answers within a day.</p>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h3>What counts as an event?</h3>
+        <p>One event is one payload accepted by Relay, no matter how many destinations it fans out to. A single order webhook delivered to your warehouse, your billing provider and your data lake still counts once.</p>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h3>What happens when I go over my monthly volume?</h3>
+        <p>Nothing breaks. Relay keeps delivering and bills overage at $0.30 per thousand extra events on Growth. You can also set a hard cap in project settings and we will queue anything past it until the next cycle.</p>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h3>Can I change plans in the middle of a billing cycle?</h3>
+        <p>Yes. Upgrades take effect immediately and we prorate the difference. Downgrades apply at the start of your next cycle so you keep the retention window you already paid for.</p>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h3>Do you offer discounts for startups and nonprofits?</h3>
+        <p>We do. Registered nonprofits and companies under two years old with less than $2M raised get 50% off Growth for the first year. Send us your incorporation documents and we will apply it to your account.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-layout="centered" data-width="wide" data-padding="xl" data-tone="subtle">
+  <div data-layout="stack" data-gap="lg">
+    <div data-layout="grid" data-cols="3" data-gap="lg">
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Product</p>
+        <a href="/product">Overview</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/changelog">Changelog</a>
+        <a href="/status">Status</a>
+      </div>
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Developers</p>
+        <a href="/docs">Documentation</a>
+        <a href="/docs/quickstart">Quickstart</a>
+        <a href="/docs/api">API reference</a>
+        <a href="/docs/sdks">Client SDKs</a>
+      </div>
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Company</p>
+        <a href="/about">About</a>
+        <a href="/careers">Careers</a>
+        <a href="/security">Security</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+    <hr data-component="divider">
+    <p data-tone="subtle">© 2026 Relay Systems, Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

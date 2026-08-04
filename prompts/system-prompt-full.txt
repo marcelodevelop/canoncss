@@ -50,6 +50,9 @@ COMPONENTS - data-component on semantic elements:
   modal     > data-slot=panel > data-slot={header|body|footer}
   avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
             the span - never data-component on the <img> itself.
+  disclosure on <details>, zero-JS expand/collapse. First child is the
+            <summary>; the caret is generated. Use for FAQ and any
+            show-more section.
   divider   + data-variant={strong}
 
 UTILITIES - complete list; nothing else exists:
@@ -58,6 +61,10 @@ UTILITIES - complete list; nothing else exists:
   data-motion={rise|float|pulse|lift}  (entrance | idle drift | attention |
     hover elevation; all auto-respect prefers-reduced-motion)
   class="sr-only"
+
+RENDER BARE - never give these a data-component:
+  checkbox and radio inputs, and a <label> wrapping its own control, which
+  lays itself out. ul/ol/li, blockquote and pre/code are styled too.
 
 RULES - enforce strictly:
   1. Only defined tokens. Never hardcode colors, sizes, spacing.
