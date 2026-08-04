@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview — Northwind Logistics Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full bg-slate-100 text-slate-800 antialiased">
+
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+      <a href="#main" class="sr-only focus:not-sr-only focus:rounded-md focus:bg-indigo-600 focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-white">Skip to main content</a>
+
+      <a href="#" class="flex items-center gap-3">
+        <span aria-hidden="true" class="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-600 text-sm font-bold text-white">N</span>
+        <span class="text-base font-semibold tracking-tight text-slate-900">Northwind <span class="font-normal text-slate-500">Logistics</span></span>
+      </a>
+
+      <div class="flex items-center gap-4">
+        <button type="button" class="hidden rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 sm:inline-flex">
+          New shipment
+        </button>
+        <button type="button" class="flex items-center gap-3 rounded-md p-1 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" aria-label="Account menu for Dana Whitfield">
+          <span aria-hidden="true" class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-700 text-sm font-semibold text-white">DW</span>
+          <span class="hidden text-left sm:block">
+            <span class="block text-sm font-medium leading-tight text-slate-900">Dana Whitfield</span>
+            <span class="block text-xs leading-tight text-slate-500">Operations lead</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <nav aria-label="Sections (mobile)" class="border-t border-slate-200 px-4 py-2 lg:hidden">
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between rounded-md px-2 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">
+          Browse sections
+          <span aria-hidden="true" class="text-slate-400 group-open:hidden">Show</span>
+          <span aria-hidden="true" class="hidden text-slate-400 group-open:inline">Hide</span>
+        </summary>
+        <ul class="mt-2 space-y-1 pb-2">
+          <li><a href="#main" aria-current="page" class="block rounded-md bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700">Overview</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Shipments</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Carriers</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Invoices</a></li>
+          <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Settings</a></li>
+        </ul>
+      </details>
+    </nav>
+  </header>
+
+  <div class="mx-auto flex max-w-7xl gap-6 px-4 py-6 sm:px-6">
+
+    <nav aria-label="Sections" class="hidden w-56 shrink-0 lg:block">
+      <ul class="sticky top-24 space-y-1">
+        <li><a href="#main" aria-current="page" class="block rounded-md bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700">Overview</a></li>
+        <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200">Shipments</a></li>
+        <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200">Carriers</a></li>
+        <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200">Invoices</a></li>
+        <li><a href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200">Settings</a></li>
+      </ul>
+    </nav>
+
+    <main id="main" class="min-w-0 flex-1 space-y-6">
+
+      <div>
+        <h1 class="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">Overview</h1>
+        <p class="mt-2 text-sm text-slate-600">Network activity for the last 30 days, updated 12 minutes ago.</p>
+      </div>
+
+      <section aria-label="Key metrics" class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="rounded-lg border border-slate-200 bg-white p-6">
+          <p class="text-3xl font-semibold tracking-tight text-slate-900">1,284</p>
+          <h2 class="mt-2 text-sm font-medium text-slate-600">Shipments in transit</h2>
+          <p class="mt-2 text-xs text-slate-500">Up 8% on last month</p>
+        </article>
+        <article class="rounded-lg border border-slate-200 bg-white p-6">
+          <p class="text-3xl font-semibold tracking-tight text-slate-900">96.4%</p>
+          <h2 class="mt-2 text-sm font-medium text-slate-600">On-time delivery rate</h2>
+          <p class="mt-2 text-xs text-slate-500">Target is 95%</p>
+        </article>
+        <article class="rounded-lg border border-slate-200 bg-white p-6">
+          <p class="text-3xl font-semibold tracking-tight text-slate-900">37</p>
+          <h2 class="mt-2 text-sm font-medium text-slate-600">Open exceptions</h2>
+          <p class="mt-2 text-xs text-slate-500">14 awaiting customs clearance</p>
+        </article>
+        <article class="rounded-lg border border-slate-200 bg-white p-6">
+          <p class="text-3xl font-semibold tracking-tight text-slate-900">€412k</p>
+          <h2 class="mt-2 text-sm font-medium text-slate-600">Freight spend this month</h2>
+          <p class="mt-2 text-xs text-slate-500">Across 9 active carriers</p>
+        </article>
+      </section>
+
+      <section aria-labelledby="recent-heading" class="rounded-lg border border-slate-200 bg-white">
+
+        <div class="border-b border-slate-200 p-6">
+          <h2 id="recent-heading" class="text-lg font-semibold tracking-tight text-slate-900">Recent shipments</h2>
+          <p class="mt-2 text-sm text-slate-600">The ten most recently updated consignments.</p>
+
+          <form class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="lg:col-span-2">
+              <label for="shipment-search" class="block text-sm font-medium text-slate-700">Search shipments</label>
+              <input id="shipment-search" name="q" type="search" placeholder="Tracking code, destination or reference"
+                     class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+            </div>
+
+            <div>
+              <label for="filter-carrier" class="block text-sm font-medium text-slate-700">Carrier</label>
+              <select id="filter-carrier" name="carrier"
+                      class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                <option selected>All carriers</option>
+                <option>DHL Express</option>
+                <option>Maersk Line</option>
+                <option>DB Schenker</option>
+                <option>Kuehne + Nagel</option>
+                <option>FedEx Freight</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="filter-status" class="block text-sm font-medium text-slate-700">Status</label>
+              <select id="filter-status" name="status"
+                      class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                <option selected>Any status</option>
+                <option>Delivered</option>
+                <option>In transit</option>
+                <option>Customs hold</option>
+                <option>Delayed</option>
+                <option>Booked</option>
+              </select>
+            </div>
+
+            <div class="sm:col-span-2 lg:col-span-4">
+              <button type="submit" class="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 sm:w-auto">
+                Apply filters
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[48rem] text-left text-sm">
+            <caption class="sr-only">Ten most recent Northwind shipments with tracking code, destination, carrier, status and date.</caption>
+            <thead class="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+              <tr>
+                <th scope="col" class="px-6 py-4 font-medium">Tracking code</th>
+                <th scope="col" class="px-6 py-4 font-medium">Destination</th>
+                <th scope="col" class="px-6 py-4 font-medium">Carrier</th>
+                <th scope="col" class="px-6 py-4 font-medium">Status</th>
+                <th scope="col" class="px-6 py-4 font-medium">Date</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8841-DE</a></th>
+                <td class="px-6 py-4 text-slate-600">Hamburg, Germany</td>
+                <td class="px-6 py-4 text-slate-600">DHL Express</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-800">Delivered</span></td>
+                <td class="px-6 py-4 text-slate-600">3 Aug 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8839-NL</a></th>
+                <td class="px-6 py-4 text-slate-600">Rotterdam, Netherlands</td>
+                <td class="px-6 py-4 text-slate-600">Maersk Line</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-sky-100 px-2 py-1 text-xs font-medium text-sky-800">In transit</span></td>
+                <td class="px-6 py-4 text-slate-600">3 Aug 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8836-ES</a></th>
+                <td class="px-6 py-4 text-slate-600">Valencia, Spain</td>
+                <td class="px-6 py-4 text-slate-600">DB Schenker</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">Customs hold</span></td>
+                <td class="px-6 py-4 text-slate-600">2 Aug 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8834-US</a></th>
+                <td class="px-6 py-4 text-slate-600">Memphis, United States</td>
+                <td class="px-6 py-4 text-slate-600">FedEx Freight</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-800">Delivered</span></td>
+                <td class="px-6 py-4 text-slate-600">2 Aug 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8831-PL</a></th>
+                <td class="px-6 py-4 text-slate-600">Gdansk, Poland</td>
+                <td class="px-6 py-4 text-slate-600">Kuehne + Nagel</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-rose-100 px-2 py-1 text-xs font-medium text-rose-800">Delayed</span></td>
+                <td class="px-6 py-4 text-slate-600">1 Aug 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8829-IT</a></th>
+                <td class="px-6 py-4 text-slate-600">Genoa, Italy</td>
+                <td class="px-6 py-4 text-slate-600">Maersk Line</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-sky-100 px-2 py-1 text-xs font-medium text-sky-800">In transit</span></td>
+                <td class="px-6 py-4 text-slate-600">1 Aug 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8825-SE</a></th>
+                <td class="px-6 py-4 text-slate-600">Gothenburg, Sweden</td>
+                <td class="px-6 py-4 text-slate-600">DB Schenker</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700">Booked</span></td>
+                <td class="px-6 py-4 text-slate-600">31 Jul 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8822-FR</a></th>
+                <td class="px-6 py-4 text-slate-600">Le Havre, France</td>
+                <td class="px-6 py-4 text-slate-600">DHL Express</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-800">Delivered</span></td>
+                <td class="px-6 py-4 text-slate-600">31 Jul 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8818-UK</a></th>
+                <td class="px-6 py-4 text-slate-600">Felixstowe, United Kingdom</td>
+                <td class="px-6 py-4 text-slate-600">Kuehne + Nagel</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">Customs hold</span></td>
+                <td class="px-6 py-4 text-slate-600">30 Jul 2026</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <th scope="row" class="px-6 py-4 font-medium text-slate-900"><a href="#" class="text-indigo-700 hover:underline">View shipment NW-8815-BE</a></th>
+                <td class="px-6 py-4 text-slate-600">Antwerp, Belgium</td>
+                <td class="px-6 py-4 text-slate-600">FedEx Freight</td>
+                <td class="px-6 py-4"><span class="inline-flex rounded-full bg-sky-100 px-2 py-1 text-xs font-medium text-sky-800">In transit</span></td>
+                <td class="px-6 py-4 text-slate-600">30 Jul 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex flex-col gap-4 border-t border-slate-200 p-6 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm text-slate-600">Showing 10 of 1,284 shipments</p>
+          <a href="#" class="text-sm font-medium text-indigo-700 hover:underline">See the full shipment register</a>
+        </div>
+      </section>
+
+      <footer class="pb-6 text-sm text-slate-500">
+        <p>Northwind Logistics BV, Amsterdam. Data refreshes every 15 minutes.</p>
+      </footer>
+
+    </main>
+  </div>
+
+</body>
+</html>

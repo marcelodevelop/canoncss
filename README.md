@@ -189,12 +189,18 @@ agreement to Canon's 90%) and beat it on the dashboard (93% and 94% against
 Canon's 90% and 91%). Both scored zero violations of their own rules, across
 3811 class uses.
 
-So the honest claim is narrower than "Canon fixes LLM inconsistency". What
-fixes it is a specified vocabulary with a linter behind it. Canon's argument is
-that it *is* that, already written, and that it reaches the same consistency
-carrying **about a third fewer styling decisions per page** (41-43 against
-60-68, on both specs), which is what makes the diffs smaller to review. The full comparison, including where
-the control was unfair in both directions, is in
+**Against Tailwind as teams actually brief it, the gap is large.** A third
+condition used a competent prompt with no closed vocabulary: consistent
+spacing, one palette, a type scale, accessible semantics. It agreed on only
+**58% to 67%** of its styling vocabulary against Canon's 90%, and needed **90
+to 159 styling decisions per page against Canon's 41 to 43**.
+
+So the diagnosis is demonstrated, not just asserted: too many degrees of
+freedom does produce inconsistency, and the effect is large. The honest limit
+is on the remedy. A closed vocabulary is not the only fix, because writing the
+vocabulary down works too. Canon's case is that it **is** that written
+vocabulary, already done, mechanically checked, and a third the size. The full
+comparison, including where each control was unfair, is in
 [`test-llm/README.md`](test-llm/README.md).
 
 ## Explore
