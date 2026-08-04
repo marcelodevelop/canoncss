@@ -74,6 +74,8 @@ CANONICAL DEFAULTS - use these unless something forces another choice:
     data-gap="md"; buttons sitting side by side data-gap="sm".
   A number with a unit: <span data-component="stat">$79</span> then
     <span data-tone="subtle">/month</span>. There is no price component.
+  A control and its label, or a number and its caption, are a stack with
+    data-gap="xs". Never leave the two as bare siblings.
   Highlighting one card in a group: data-variant="featured" on the card
     plus a badge as the first child of its header slot.
 

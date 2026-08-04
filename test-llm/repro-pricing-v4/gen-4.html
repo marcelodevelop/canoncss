@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing - Relay</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="#">Relay</a>
+    <nav data-slot="nav">
+      <a href="#product">Product</a>
+      <a href="#pricing" aria-current="page">Pricing</a>
+      <a href="#docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="primary" data-size="sm" href="#signup">Sign up</a>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="#product">Product</a>
+        <a href="#pricing" aria-current="page">Pricing</a>
+        <a href="#docs">Docs</a>
+      </nav>
+    </details>
+  </header>
+
+  <main data-layout="stack" data-gap="2xl">
+
+    <section data-layout="hero" data-align="center" data-justify="center" data-gap="lg">
+      <div data-layout="stack" data-gap="md" data-align="center">
+        <h1>Every message your product sends, in one place</h1>
+        <p>Relay turns email, SMS and push into a single API call. Write the message once, pick the channels, and let delivery, retries and analytics take care of themselves.</p>
+      </div>
+      <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+        <a data-component="button" data-variant="primary" data-size="lg" href="#signup">Start free trial</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="#docs">Read the docs</a>
+      </div>
+    </section>
+
+    <section id="pricing" data-layout="centered" data-width="wide">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="stack" data-gap="xs" data-align="center">
+          <h2>Simple pricing that scales with you</h2>
+          <p data-tone="subtle">No setup fees, no per-seat charges. Change or cancel your plan whenever you like.</p>
+        </div>
+
+        <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+          <article data-component="card">
+            <div data-slot="header">Starter</div>
+            <div data-slot="body" data-layout="stack" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <div data-layout="row" data-gap="xs" data-align="end">
+                  <span data-component="stat">$29</span>
+                  <span data-tone="subtle">/month</span>
+                </div>
+                <p data-tone="subtle">For side projects and first launches.</p>
+              </div>
+              <ul>
+                <li>Up to 25,000 messages a month</li>
+                <li>Email and SMS channels</li>
+                <li>Delivery logs kept for 7 days</li>
+                <li>Community support on Discord</li>
+              </ul>
+            </div>
+            <div data-slot="footer">
+              <a data-component="button" data-variant="secondary" data-full href="#signup">Choose Starter</a>
+            </div>
+          </article>
+
+          <article data-component="card" data-variant="featured" data-motion="lift">
+            <div data-slot="header">
+              <span data-component="badge" data-variant="brand">Recommended</span>
+              Growth
+            </div>
+            <div data-slot="body" data-layout="stack" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <div data-layout="row" data-gap="xs" data-align="end">
+                  <span data-component="stat">$79</span>
+                  <span data-tone="subtle">/month</span>
+                </div>
+                <p data-tone="subtle">For teams shipping to real customers every week.</p>
+              </div>
+              <ul>
+                <li>Up to 250,000 messages a month</li>
+                <li>Email, SMS and push channels</li>
+                <li>Delivery logs kept for 90 days</li>
+                <li>Email support with a 4 hour reply target</li>
+              </ul>
+            </div>
+            <div data-slot="footer">
+              <a data-component="button" data-variant="primary" data-full href="#signup">Choose Growth</a>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">Scale</div>
+            <div data-slot="body" data-layout="stack" data-gap="md">
+              <div data-layout="stack" data-gap="xs">
+                <div data-layout="row" data-gap="xs" data-align="end">
+                  <span data-component="stat">$249</span>
+                  <span data-tone="subtle">/month</span>
+                </div>
+                <p data-tone="subtle">For high volume senders who need guarantees.</p>
+              </div>
+              <ul>
+                <li>Up to 2 million messages a month</li>
+                <li>Dedicated sending IPs and custom domains</li>
+                <li>Delivery logs kept for 1 year</li>
+                <li>99.9% uptime agreement and a named engineer</li>
+              </ul>
+            </div>
+            <div data-slot="footer">
+              <a data-component="button" data-variant="secondary" data-full href="#contact">Talk to sales</a>
+            </div>
+          </article>
+
+        </div>
+
+        <p data-tone="subtle">Every plan includes the full API, unlimited teammates and a 14 day trial. Extra messages are billed at $0.40 per thousand.</p>
+
+      </div>
+    </section>
+
+    <hr data-component="divider">
+
+    <section id="faq" data-layout="centered" data-width="prose">
+      <div data-layout="stack" data-gap="lg">
+
+        <div data-layout="stack" data-gap="xs">
+          <h2>Frequently asked questions</h2>
+          <p data-tone="subtle">Still unsure about something? Write to support@relay.dev and a human will answer.</p>
+        </div>
+
+        <div data-layout="stack" data-gap="sm">
+
+          <details data-component="disclosure">
+            <summary>What counts as a message?</summary>
+            <p>One message is one delivery to one recipient on one channel. If a single notification goes out by email and by push, that counts as two messages. Retries after a temporary failure are free and never counted twice.</p>
+          </details>
+
+          <details data-component="disclosure">
+            <summary>Can I change plans in the middle of a month?</summary>
+            <p>Yes. Upgrades take effect immediately and you only pay the difference for the days left in the period. Downgrades take effect on your next renewal date, so you keep the higher limits until then.</p>
+          </details>
+
+          <details data-component="disclosure">
+            <summary>What happens if I go over my monthly limit?</summary>
+            <p>Nothing breaks. Relay keeps sending and bills the overage at $0.40 per thousand messages on your next invoice. You can set a hard spending cap in the dashboard if you would rather have sending pause instead.</p>
+          </details>
+
+          <details data-component="disclosure">
+            <summary>Do you offer discounts for non profits and startups?</summary>
+            <p>We do. Registered non profits get 50% off any plan, and companies less than two years old with under ten employees get their first year on Growth for the Starter price. Send us proof of status and we will apply it the same day.</p>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <hr data-component="divider" data-variant="strong">
+
+  <footer data-layout="centered" data-width="wide" data-padding="xl">
+    <div data-layout="grid" data-cols="3" data-gap="lg">
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Product</p>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#changelog">Changelog</a></li>
+          <li><a href="#status">Status page</a></li>
+        </ul>
+      </div>
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Developers</p>
+        <ul>
+          <li><a href="#docs">Documentation</a></li>
+          <li><a href="#reference">API reference</a></li>
+          <li><a href="#sdks">Client libraries</a></li>
+          <li><a href="#examples">Example projects</a></li>
+        </ul>
+      </div>
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Company</p>
+        <ul>
+          <li><a href="#about">About Relay</a></li>
+          <li><a href="#careers">Careers</a></li>
+          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#terms">Terms of service</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

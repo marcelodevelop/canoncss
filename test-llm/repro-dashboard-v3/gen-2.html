@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northwind Logistics - Admin Dashboard</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <div data-slot="brand">Northwind Logistics</div>
+  <div data-slot="actions">
+    <span data-component="avatar" data-size="sm">MA</span>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav data-component="nav">
+      <a href="#overview" aria-current="page">Overview</a>
+      <a href="#shipments">Shipments</a>
+      <a href="#carriers">Carriers</a>
+      <a href="#invoices">Invoices</a>
+      <a href="#settings">Settings</a>
+    </nav>
+  </details>
+</header>
+
+<div data-layout="sidebar" data-gap="xl">
+
+  <aside data-slot="sidebar" data-padding="lg">
+    <p data-tone="subtle">Operations</p>
+    <nav data-component="nav">
+      <a href="#overview" aria-current="page">Overview</a>
+      <a href="#shipments">Shipments</a>
+      <a href="#carriers">Carriers</a>
+      <a href="#invoices">Invoices</a>
+      <a href="#settings">Settings</a>
+    </nav>
+  </aside>
+
+  <main data-slot="main" data-layout="stack" data-gap="xl" data-padding="lg">
+
+    <div data-layout="row" data-justify="between" data-align="center" data-gap="md" data-wrap>
+      <h1 id="overview">Overview</h1>
+      <div data-layout="row" data-gap="sm">
+        <button data-component="button" data-variant="secondary" data-size="md">Export CSV</button>
+        <button data-component="button" data-variant="primary" data-size="md">New shipment</button>
+      </div>
+    </div>
+
+    <div data-layout="grid" data-cols="4" data-gap="md">
+
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">1,284</span>
+          <p data-tone="subtle">Shipments in transit</p>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">97.2%</span>
+          <p data-tone="subtle">On-time delivery rate</p>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">36</span>
+          <p data-tone="subtle">Active carrier contracts</p>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">$412K</span>
+          <p data-tone="subtle">Invoiced this month</p>
+        </div>
+      </article>
+
+    </div>
+
+    <hr data-component="divider">
+
+    <section data-layout="stack" data-gap="md">
+
+      <h2 id="shipments">Recent shipments</h2>
+
+      <div data-layout="row" data-gap="sm" data-align="end" data-wrap>
+
+        <div data-layout="stack" data-gap="xs">
+          <label for="filter-search">Search</label>
+          <input data-component="input" data-size="md" type="search" id="filter-search" name="search" placeholder="Tracking code or destination">
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <label for="filter-carrier">Carrier</label>
+          <select data-component="select" data-size="md" id="filter-carrier" name="carrier">
+            <option>All carriers</option>
+            <option>Baltic Freight</option>
+            <option>Cormorant Air</option>
+            <option>Delta Road Haulage</option>
+            <option>Fenwick Express</option>
+            <option>Harbourline Sea</option>
+          </select>
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <label for="filter-status">Status</label>
+          <select data-component="select" data-size="md" id="filter-status" name="status">
+            <option>Any status</option>
+            <option>Delivered</option>
+            <option>In transit</option>
+            <option>Delayed</option>
+            <option>Exception</option>
+            <option>Awaiting pickup</option>
+          </select>
+        </div>
+
+      </div>
+
+      <table data-component="table">
+        <caption class="sr-only">The ten most recent Northwind shipments</caption>
+        <thead>
+          <tr>
+            <th scope="col">Tracking code</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Carrier</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-mono>NW-8841-QR</td>
+            <td>Rotterdam, NL</td>
+            <td>Harbourline Sea</td>
+            <td><span data-component="badge" data-variant="success">Delivered</span></td>
+            <td>3 Aug 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8840-KD</td>
+            <td>Gothenburg, SE</td>
+            <td>Baltic Freight</td>
+            <td><span data-component="badge" data-variant="info">In transit</span></td>
+            <td>3 Aug 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8839-LM</td>
+            <td>Manchester, UK</td>
+            <td>Fenwick Express</td>
+            <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+            <td>2 Aug 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8838-PT</td>
+            <td>Lyon, FR</td>
+            <td>Delta Road Haulage</td>
+            <td><span data-component="badge" data-variant="success">Delivered</span></td>
+            <td>2 Aug 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8837-VC</td>
+            <td>Porto, PT</td>
+            <td>Harbourline Sea</td>
+            <td><span data-component="badge" data-variant="error">Exception</span></td>
+            <td>1 Aug 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8836-JB</td>
+            <td>Hamburg, DE</td>
+            <td>Baltic Freight</td>
+            <td><span data-component="badge" data-variant="info">In transit</span></td>
+            <td>1 Aug 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8835-XN</td>
+            <td>Dublin, IE</td>
+            <td>Cormorant Air</td>
+            <td><span data-component="badge" data-variant="neutral">Awaiting pickup</span></td>
+            <td>31 Jul 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8834-HF</td>
+            <td>Bilbao, ES</td>
+            <td>Delta Road Haulage</td>
+            <td><span data-component="badge" data-variant="success">Delivered</span></td>
+            <td>31 Jul 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8833-RS</td>
+            <td>Antwerp, BE</td>
+            <td>Fenwick Express</td>
+            <td><span data-component="badge" data-variant="warning">Delayed</span></td>
+            <td>30 Jul 2026</td>
+          </tr>
+          <tr>
+            <td data-mono>NW-8832-WY</td>
+            <td>Milan, IT</td>
+            <td>Cormorant Air</td>
+            <td><span data-component="badge" data-variant="success">Delivered</span></td>
+            <td>30 Jul 2026</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>

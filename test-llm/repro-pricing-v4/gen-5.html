@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay Pricing - Plans for every team</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Relay</a>
+  <nav data-slot="nav">
+    <a href="/product">Product</a>
+    <a href="/pricing" aria-current="page">Pricing</a>
+    <a href="/docs">Docs</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" data-size="sm" href="/signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/product">Product</a>
+      <a href="/pricing" aria-current="page">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="stack" data-gap="2xl">
+
+  <section data-layout="hero" data-gap="lg" data-align="center" data-justify="center">
+    <h1>Pricing that scales with your message volume</h1>
+    <p>Relay routes every webhook, event and notification your product sends, with delivery you can actually verify. Start free, pay only when your traffic grows.</p>
+    <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+      <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+      <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a demo</a>
+    </div>
+    <p data-tone="subtle">No credit card required. Cancel any time.</p>
+  </section>
+
+  <section data-layout="centered" data-width="wide">
+    <div data-layout="stack" data-gap="xl">
+
+      <div data-layout="stack" data-gap="xs" data-align="center">
+        <h2>Choose your plan</h2>
+        <p data-tone="subtle">Every plan includes the full delivery log, replay and the REST API.</p>
+      </div>
+
+      <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+        <article data-component="card">
+          <div data-slot="header">Starter</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$0</span>
+                <span data-tone="subtle">/month</span>
+              </div>
+              <p data-tone="subtle">For side projects and first integrations.</p>
+            </div>
+            <ul>
+              <li>50,000 messages per month</li>
+              <li>7 day delivery history</li>
+              <li>Automatic retries with backoff</li>
+              <li>Community support on Discord</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Get started free</a>
+          </div>
+        </article>
+
+        <article data-component="card" data-variant="featured" data-motion="lift">
+          <div data-slot="header">
+            <span data-component="badge" data-variant="brand">Recommended</span>
+            Growth
+          </div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$79</span>
+                <span data-tone="subtle">/month</span>
+              </div>
+              <p data-tone="subtle">For teams shipping to real customers.</p>
+            </div>
+            <ul>
+              <li>2 million messages per month</li>
+              <li>90 day delivery history and replay</li>
+              <li>Custom routing rules and filters</li>
+              <li>Email support with a 4 hour response</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="primary" data-full href="/signup?plan=growth">Start 14 day trial</a>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="header">Enterprise</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <div data-layout="row" data-gap="xs" data-align="end">
+                <span data-component="stat">$490</span>
+                <span data-tone="subtle">/month</span>
+              </div>
+              <p data-tone="subtle">For regulated and high volume workloads.</p>
+            </div>
+            <ul>
+              <li>Unlimited messages, volume pricing</li>
+              <li>Dedicated regions and static egress IPs</li>
+              <li>SSO, audit log and 99.99% uptime SLA</li>
+              <li>Named engineer and 24/7 phone support</li>
+            </ul>
+          </div>
+          <div data-slot="footer">
+            <a data-component="button" data-variant="secondary" data-full href="/contact">Talk to sales</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="content">
+    <div data-layout="stack" data-gap="lg">
+      <h2>Frequently asked questions</h2>
+
+      <details data-component="disclosure">
+        <summary>What counts as a message?</summary>
+        <p>A message is one outbound delivery attempt group: the first send plus every automatic retry for that same payload. Retries never eat into your quota twice, so a flaky endpoint on your customer's side does not inflate your bill.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What happens if I go over my monthly limit?</summary>
+        <p>Nothing breaks. Relay keeps delivering and bills the overage at $0.40 per thousand extra messages on Growth. We email you at 80% and 100% of the included volume so the invoice is never a surprise, and you can set a hard cap in the dashboard if you prefer.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Can I change plans later?</summary>
+        <p>Yes, upgrades take effect immediately and we prorate the difference for the rest of the billing period. Downgrades apply at the start of your next cycle so you keep the features you already paid for.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Do you offer discounts for startups or nonprofits?</summary>
+        <p>We take 50% off the Growth plan for the first year for companies under two years old, and registered nonprofits get the same rate with no time limit. Write to sales@relay.dev with a link to your organization and we will apply it within one business day.</p>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<hr data-component="divider">
+
+<footer data-layout="centered" data-width="wide" data-padding="xl">
+  <div data-layout="grid" data-cols="3" data-gap="lg">
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Product</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/product">Overview</a></li>
+          <li><a href="/pricing" aria-current="page">Pricing</a></li>
+          <li><a href="/changelog">Changelog</a></li>
+          <li><a href="/status">Status</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Developers</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/docs">Documentation</a></li>
+          <li><a href="/docs/api">API reference</a></li>
+          <li><a href="/docs/sdks">Client libraries</a></li>
+          <li><a href="/docs/webhooks">Webhook guide</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/about">About Relay</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/contact">Contact sales</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

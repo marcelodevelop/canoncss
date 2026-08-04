@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay Pricing</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Relay</a>
+  <nav data-slot="nav">
+    <ul>
+      <li><a href="/product">Product</a></li>
+      <li><a href="/pricing" aria-current="page">Pricing</a></li>
+      <li><a href="/docs">Docs</a></li>
+    </ul>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <ul>
+        <li><a href="/product">Product</a></li>
+        <li><a href="/pricing" aria-current="page">Pricing</a></li>
+        <li><a href="/docs">Docs</a></li>
+      </ul>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="stack" data-gap="2xl">
+
+  <section data-layout="hero" data-align="center" data-justify="center" data-gap="lg" data-padding="xl">
+    <div data-layout="centered" data-width="prose" data-gap="lg">
+      <div data-layout="stack" data-gap="md" data-align="center">
+        <h1>Every customer conversation, in one place</h1>
+        <p data-tone="subtle">Relay pulls email, chat and support tickets into a single shared inbox, routes each message to the right teammate and keeps your replies under two minutes. No plugins, no per-seat surprises.</p>
+      </div>
+      <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="wide" data-gap="xl">
+    <div data-layout="stack" data-gap="xs" data-align="center">
+      <h2>Simple pricing that scales with your team</h2>
+      <p data-tone="subtle">Every plan includes the shared inbox, unlimited contacts and a 14 day trial. Cancel whenever you like.</p>
+    </div>
+
+    <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+      <article data-component="card">
+        <div data-slot="header">Starter</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="end">
+              <span data-component="stat">$19</span>
+              <span data-tone="subtle">/user/month</span>
+            </div>
+            <span data-tone="subtle">For founders answering everything themselves</span>
+          </div>
+          <ul>
+            <li>Up to 3 teammates</li>
+            <li>One shared inbox with email and chat</li>
+            <li>1,000 conversations per month</li>
+            <li>Email support, next business day</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/signup?plan=starter">Choose Starter</a>
+        </div>
+      </article>
+
+      <article data-component="card" data-variant="featured" data-motion="lift">
+        <div data-slot="header">
+          <span data-component="badge" data-variant="brand">Recommended</span>
+          Growth
+        </div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="end">
+              <span data-component="stat">$49</span>
+              <span data-tone="subtle">/user/month</span>
+            </div>
+            <span data-tone="subtle">For support teams that outgrew a spreadsheet</span>
+          </div>
+          <ul>
+            <li>Up to 25 teammates</li>
+            <li>Unlimited inboxes and routing rules</li>
+            <li>25,000 conversations per month</li>
+            <li>Live chat support and a 4 hour response target</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="primary" data-full href="/signup?plan=growth">Choose Growth</a>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">Scale</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="end">
+              <span data-component="stat">$99</span>
+              <span data-tone="subtle">/user/month</span>
+            </div>
+            <span data-tone="subtle">For companies with audits, regions and SLAs</span>
+          </div>
+          <ul>
+            <li>Unlimited teammates and inboxes</li>
+            <li>SAML single sign on and audit logs</li>
+            <li>Unlimited conversations, no overage billing</li>
+            <li>Named account manager and a 99.9% uptime SLA</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/contact-sales">Talk to sales</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="content" data-gap="lg">
+    <div data-layout="stack" data-gap="xs">
+      <h2>Frequently asked questions</h2>
+      <p data-tone="subtle">Still unsure about something? Write to hello@relay.com and a real person will answer.</p>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <details data-component="disclosure">
+        <summary>Can I change plans later?</summary>
+        <p>Yes. Upgrades take effect immediately and we charge only the prorated difference for the days left in your billing period. Downgrades apply on your next renewal date, so you keep the features you already paid for.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What counts as a conversation?</summary>
+        <p>A conversation is one thread with one customer, no matter how many messages it contains. A ticket that goes back and forth twelve times still counts once, and internal notes between teammates are never counted.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Do you offer a discount for annual billing?</summary>
+        <p>Annual billing saves two months on every plan, which works out to roughly 17 percent. Registered nonprofits and teams of fewer than five people at pre seed startups get an additional 30 percent off. Ask us and we will apply it.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What happens when my trial ends?</summary>
+        <p>Nothing is deleted and nothing is charged automatically. Your inbox switches to read only until you pick a plan, and your full history stays available for 90 days. You can export everything to CSV or JSON at any point.</p>
+      </details>
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="content" data-gap="md" data-align="center" data-tone="subtle" data-padding="xl">
+    <h2>Ready to clear the queue?</h2>
+    <p data-tone="subtle">Set up your first shared inbox in about ten minutes. No credit card needed to start.</p>
+    <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+      <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free trial</a>
+      <a data-component="button" data-variant="ghost" data-size="lg" href="/docs">Read the docs</a>
+    </div>
+  </section>
+
+</main>
+
+<hr data-component="divider">
+
+<footer data-layout="centered" data-width="wide" data-gap="lg" data-padding="xl">
+  <div data-layout="grid" data-cols="3" data-gap="lg">
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Product</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/product">Shared inbox</a></li>
+          <li><a href="/routing">Routing rules</a></li>
+          <li><a href="/integrations">Integrations</a></li>
+          <li><a href="/changelog">Changelog</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/about">About Relay</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact-sales">Contact sales</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Resources</p>
+      <nav data-component="nav">
+        <ul>
+          <li><a href="/docs">Documentation</a></li>
+          <li><a href="/api">API reference</a></li>
+          <li><a href="/status">System status</a></li>
+          <li><a href="/security">Security and privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+
+  <p data-tone="subtle">Relay Software, 2026. All prices in US dollars, billed monthly unless stated otherwise.</p>
+</footer>
+
+</body>
+</html>
