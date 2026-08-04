@@ -36,6 +36,12 @@ function lineOf(src, index) {
 function lintFile(file) {
   const raw = readFileSync(file, 'utf-8');
   const violations = [];
+  // Coverage: how many vocabulary values this run actually read. A JSX
+  // expression is opaque, so "clean" on a React codebase is a narrower claim
+  // than "clean" on HTML, and the tool has to say so instead of implying it
+  // checked everything.
+  let checked = 0;
+  let opaque = 0;
   // Ignore code-sample carriers: template literals (JSX docs), comments.
   let src = raw;
   src = blank(src, /`[^`]*`/gs);
@@ -81,14 +87,19 @@ function lintFile(file) {
     for (const [name, allowed] of Object.entries(VOCAB)) {
       if (attrs.has(name)) {
         const value = attrs.get(name);
-        if (value !== '{expr}' && !allowed.has(value)) {
-          violations.push([line, 'R1', `${name}="${value}" is not in the vocabulary (${[...allowed].join('|')})`]);
+        if (value === '{expr}') {
+          opaque++;
+        } else {
+          checked++;
+          if (!allowed.has(value)) {
+            violations.push([line, 'R1', `${name}="${value}" is not in the vocabulary (${[...allowed].join('|')})`]);
+          }
         }
       }
     }
   }
 
-  return violations;
+  return { violations, checked, opaque };
 }
 
 const args = process.argv.slice(2);
@@ -106,15 +117,31 @@ try {
 }
 
 let total = 0;
+let checked = 0;
+let opaque = 0;
 for (const file of files) {
-  for (const [line, rule, msg] of lintFile(file)) {
+  const result = lintFile(file);
+  checked += result.checked;
+  opaque += result.opaque;
+  for (const [line, rule, msg] of result.violations) {
     console.log(`${file}:${line}  ${rule}  ${msg}`);
     total++;
   }
 }
 
+// Always print coverage, not just on success: a run that found 2 violations
+// while unable to read a third of the values has not found all of them.
+function coverage() {
+  if (opaque === 0) return '';
+  const pct = Math.round((checked / (checked + opaque)) * 100);
+  return (
+    `\n  ${opaque} value${opaque === 1 ? '' : 's'} written as JSX expressions could not be read.` +
+    `\n  Coverage: ${pct}% of ${checked + opaque} vocabulary values.`
+  );
+}
+
 if (total > 0) {
-  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}`);
+  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}${coverage()}`);
   process.exit(1);
 }
-console.log(`✓ ${files.length} file${files.length === 1 ? '' : 's'} clean`);
+console.log(`✓ ${files.length} file${files.length === 1 ? '' : 's'} clean${coverage()}`);
