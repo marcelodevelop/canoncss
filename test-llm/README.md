@@ -83,16 +83,21 @@ depend on the styling system: the **element sequence**, and the **set** of
 distinct styling decisions compared by Jaccard, which normalises by vocabulary
 size rather than token count.
 
+It was then run a second time on the dashboard spec, because concluding from
+one spec is the exact overfitting mistake this corpus already caught once.
+
 | | Canon | Tailwind, strict prompt |
 |---|---|---|
-| Element sequence | 90% | 88% |
-| Styling vocabulary | 90% | **92%** |
-| Distinct decisions per file | 42-43 | 60-67 |
+| Pricing, element sequence | 90% | 88% |
+| Pricing, styling vocabulary | 90% | **92%** |
+| Dashboard, element sequence | 90% | **93%** |
+| Dashboard, styling vocabulary | 91% | **94%** |
+| Distinct decisions per file | 41-43 | 60-68 |
 | Violations of its own rules | 0 | 0 |
 
-**Tailwind matched Canon on every dimension measured here**, and beat it
-slightly on styling agreement. Compliance was tied at zero, over 1763 class
-uses.
+**Tailwind matched Canon on the pricing spec and beat it on the dashboard, on
+both measures.** Compliance was tied at zero across 3811 class uses. The second
+run did not rescue the thesis; it made the result firmer and slightly worse.
 
 ### What that means
 
@@ -104,9 +109,11 @@ place.
 
 Two real differences remain, and they are smaller than the original pitch:
 
-1. **Canon carries about 30% fewer styling decisions per file** for the same
-   page, 42 against 63. Equal reproducibility, less surface to review. That is
-   the diff-review argument, and it is the one that survives.
+1. **Canon carries about a third fewer styling decisions per file** for the
+   same page: 41-43 against 60-68, and that ratio held on both specs. Equal or
+   slightly worse reproducibility, but a third less surface to review. This is
+   the one advantage that replicated, and it is a diff-review argument, not a
+   consistency one.
 2. **Canon ships the specification and the linter.** The Tailwind condition
    needed both written by hand: the house style is in
    `prompts/experiments/tailwind-control.txt` and its checker in
