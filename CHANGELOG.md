@@ -3,6 +3,36 @@
 All notable changes to Canon CSS are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](https://semver.org).
 
+## [0.2.1] - 2026-08-04
+
+Fixes a contradiction shipped in 0.2.0.
+
+### Fixed
+- **The extension rule contradicted the linter.** 0.2.0 told you to reuse
+  Canon's modifiers on an extension, then failed you for writing
+  `data-variant="unavailable"`, because `data-variant` holds Canon's closed
+  value set. Measured on four clean-context generations of a page needing a
+  calendar: 24 violations, 22 of them that one mistake. Extensions now have
+  `data-x-variant` and `data-x-state`, which take any kebab-case value.
+- **`data-x-slot` was missing from the prompt.** 0.2.0 described the namespace
+  without it, so generations shattered one calendar into `calendar`,
+  `calendar-grid`, `calendar-day` and `calendar-weekday` as siblings purely to
+  have somewhere to hang the names. With slots in the prompt the same spec
+  produced zero violations and the names converged to `calendar` and `dropzone`
+  in every generation.
+
+### Added
+- **`date-field`**, the first reference extension, and `canon-init --extension`.
+  A compact date picker as a zero-JS `<details>` popover. Canon has no
+  datepicker and by the admission test should not have one, since generations
+  converge on the shape without it. What they do not converge on is the look:
+  all four produced a month-sized block sitting inline in the page, which
+  reflows the form every time it opens.
+- The editor autocomplete knows the `data-x-*` namespace, so an extension
+  attribute is not flagged as unknown.
+- `EXTENDING.md` now ships in the package. It was written for consumers and
+  they could not read it.
+
 ## [0.2.0] - 2026-08-04
 
 Two new components, four new lint rules, a second binary, the first themes

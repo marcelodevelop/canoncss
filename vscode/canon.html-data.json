@@ -374,6 +374,22 @@
       ]
     },
     {
+      "name": "data-x-component",
+      "description": "An extension component Canon does not have. Kebab-case, styled in @layer canon.app from tokens."
+    },
+    {
+      "name": "data-x-slot",
+      "description": "A named region of an extension component."
+    },
+    {
+      "name": "data-x-variant",
+      "description": "A variant of an extension component. Any kebab-case value: this is where values Canon does not have go."
+    },
+    {
+      "name": "data-x-state",
+      "description": "A state of an extension component. Any kebab-case value."
+    },
+    {
       "name": "data-mono",
       "description": "Canon utility (no value).",
       "valueSet": "v"
