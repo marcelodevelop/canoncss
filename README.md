@@ -128,6 +128,14 @@ system prompt - dashboards, landings, blogs, e-commerce, and a complete
 never saw each other's output. Every page: zero rule violations, one coherent
 visual identity. `npm test` re-validates the whole corpus on every change.
 
+Zero violations only proves the model followed the rules. The thesis is that it
+produces the *same thing*, which needs a different measurement: generate one
+spec five times and compare the outputs to each other. Canon scores **91%
+structural reproduction** on two unrelated specs, a pricing page and an admin
+dashboard, measured with `npm run repro`. [`test-llm/README.md`](test-llm/README.md)
+has the full table, including the round where a gain turned out to be
+overfitted to one spec and did not generalise.
+
 ## Explore
 
 - [Docs](https://www.canoncss.com) - tokens, layouts, components, live playground
