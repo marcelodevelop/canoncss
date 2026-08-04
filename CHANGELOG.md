@@ -3,7 +3,11 @@
 All notable changes to Canon CSS are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](https://semver.org).
 
-## [Unreleased]
+## [0.2.0] - 2026-08-04
+
+Two new components, three new lint rules, a second binary and the first
+themes. The larger change is that Canon's claims are now measured rather than
+argued, including the one it loses.
 
 ### Added
 - **Two starter themes**, `institutional` and `soft`, and `canon-init --theme`.
