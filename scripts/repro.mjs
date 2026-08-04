@@ -136,12 +136,21 @@ function runNeutral(files) {
 // than by prompt strictness, because the styling lives in a few enumerated
 // values instead of on every element. Should. That is what this measures.
 //
-// Two numbers, both normalised by the base file so a verbose system is not
-// punished for verbosity:
-//   decisions  multiset difference over styling tokens. Changing forty `py-6`
-//              into forty `py-4` is forty edits, not one, so repeats are kept.
-//   lines      changed lines over base lines. Cruder, and the closest thing to
-//              what a reviewer actually reads in the diff.
+// Two numbers:
+//   decisions  multiset difference over styling tokens, reported as a COUNT.
+//              Changing forty `py-6` into forty `py-4` is forty edits, not one,
+//              so repeats are kept.
+//   lines      changed lines over base lines. The closest thing to what a
+//              reviewer actually reads in the diff.
+//
+// The decision count is deliberately not a percentage across systems, and an
+// earlier version of this tool got that wrong. Dividing by the base file's own
+// token count divides by a number that differs about fourfold between a closed
+// vocabulary and a utility system, so the more verbose system scores better for
+// being more verbose: 8 edits out of 391 reads as 4% while 3 edits out of 104
+// reads as 6%. The percentage is still printed, because within one system it
+// answers "how much of this page did the change disturb", but it is the count
+// and the line figure that are comparable across systems.
 
 function multisetDiff(a, b) {
   const count = (xs) => xs.reduce((m, x) => m.set(x, (m.get(x) ?? 0) + 1), new Map());
@@ -180,14 +189,18 @@ function runChurn(baseFile, editedFiles) {
 
   for (const r of rows) {
     console.log(`\n${r.f}`);
-    console.log(`  decisions rewritten  ${pct(r.touched / baseTokens.length)}  (+${r.added} / -${r.removed} of ${baseTokens.length})`);
+    // Added and removed stay separate. Summing them double-counts a
+    // modification, where one changed value shows up as both a removal and an
+    // addition, while an insertion or a deletion only lands on one side.
+    console.log(`  decisions            +${r.added} / -${r.removed}  (${pct(r.touched / baseTokens.length)} of this file)`);
     console.log(`  lines changed        ${pct(r.changed / r.baseLines)}  (${r.changed} of ${r.baseLines})`);
   }
 
   const avg = (k) => rows.reduce((s, r) => s + r[k], 0) / rows.length;
   console.log(
-    `\nmean over ${rows.length} edits:  decisions ${pct(avg('touched') / baseTokens.length)}  lines ${pct(avg('changed') / rows[0].baseLines)}`,
+    `\nmean over ${rows.length} edits:  +${avg('added').toFixed(1)} / -${avg('removed').toFixed(1)} decisions  ${pct(avg('changed') / rows[0].baseLines)} lines`,
   );
+  console.log('Compare the decision COUNT across systems, not the percentage: the percentage divides by a base that differs about fourfold between them.');
 }
 
 /** Which modifiers actually disagree, ranked. Sequence similarity punishes a

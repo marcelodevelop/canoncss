@@ -12,7 +12,7 @@ vocabulary edit that would break real generated markup fails CI.
 | `*.html` at the root, `v2/`, `v3/` | The original regression corpus. Different specs, generated during early prompt iterations. |
 | `site-relay/` | A seven-page product written by seven agents that never saw each other's output. Tests cross-page consistency. |
 | `repro-pricing*`, `repro-dashboard*` | Reproduction runs. Five clean-context agents given the **same** spec, so the outputs can be compared to each other. Numbered rounds correspond to prompt versions. |
-| `edit-density/`, `edit-section/` | Edit runs. One base page per styling system, three clean-context agents each given the **same change request**, so the diffs can be compared. Measures changing a page rather than writing one. |
+| `edit-density/`, `edit-density-dash/`, `edit-section/`, `edit-remove/` | Edit runs. One base page per styling system, three clean-context agents each given the **same change request**, so the diffs can be compared. Measures changing a page rather than writing one. `edit-density-dash` is the replication of `edit-density` on the second spec; `edit-section` and `edit-remove` are controls. |
 | `violations-fixture.html` | Deliberately broken. `npm test` fails if the linter stops catching all six violations. |
 
 ## Reproduction: the number that matters
