@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas workspace settings</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="#">Atlas</a>
+    <div data-slot="actions" data-layout="row" data-gap="sm" data-align="center">
+      <span data-tone="subtle" data-hide="mobile">Rita Nakamura</span>
+      <span data-component="avatar" data-size="sm">RN</span>
+    </div>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <div data-slot="sidebar" data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Workspace settings</p>
+      <nav data-component="nav" aria-label="Settings sections">
+        <ul>
+          <li><a href="#general">General</a></li>
+          <li><a href="#members">Members</a></li>
+          <li><a href="#notifications" aria-current="page">Notifications</a></li>
+          <li><a href="#billing">Billing</a></li>
+          <li><a href="#security">Security</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main data-slot="main" data-layout="stack" data-gap="xl">
+
+      <div data-layout="stack" data-gap="xs">
+        <h1>Notifications</h1>
+        <p data-tone="subtle">Settings apply to every project in the Atlas workspace. Only owners and admins can change them.</p>
+      </div>
+
+      <section id="general" data-layout="stack" data-gap="md">
+        <article data-component="card">
+          <div data-slot="header">General</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <div data-layout="stack" data-gap="xs">
+              <label for="workspace-name">Workspace name</label>
+              <input data-component="input" id="workspace-name" name="workspace-name" type="text" value="Atlas">
+              <p data-tone="subtle">Shown in the sidebar, in invitations and on every export.</p>
+            </div>
+            <div data-layout="stack" data-gap="xs">
+              <label for="support-email">Support email</label>
+              <input data-component="input" id="support-email" name="support-email" type="email" value="help@atlas.team">
+              <p data-tone="subtle">Replies from teammates and automated digests are sent from this address.</p>
+            </div>
+          </div>
+          <div data-slot="footer" data-layout="row" data-gap="sm" data-justify="end">
+            <button data-component="button" data-variant="ghost" type="button">Cancel</button>
+            <button data-component="button" data-variant="primary" type="button">Save changes</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="notifications" data-layout="stack" data-gap="md">
+        <article data-component="card">
+          <div data-slot="header">Notifications</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+
+            <div data-layout="stack" data-gap="xs">
+              <label><input type="checkbox" name="mentions" checked> Mentions and direct replies</label>
+              <p data-tone="subtle">Email me the moment someone writes @rita in a document, task or comment thread.</p>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label><input type="checkbox" name="assignments" checked> Task assignments</label>
+              <p data-tone="subtle">Tell me when a task is handed to me, reassigned away from me or its due date moves.</p>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label><input type="checkbox" name="digest"> Weekly workspace digest</label>
+              <p data-tone="subtle">One summary every Monday at 08:00 with what shipped, what slipped and what is waiting on me.</p>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label><input type="checkbox" name="invites" checked> New member activity</label>
+              <p data-tone="subtle">Notify me when someone joins the workspace, leaves it or has their role changed.</p>
+            </div>
+
+            <div data-layout="stack" data-gap="xs">
+              <label><input type="checkbox" name="product"> Product news from Atlas</label>
+              <p data-tone="subtle">Occasional release notes and beta invitations. Never more than once a month.</p>
+            </div>
+
+          </div>
+          <div data-slot="footer" data-layout="row" data-gap="sm" data-justify="end">
+            <button data-component="button" data-variant="ghost" type="button">Reset to defaults</button>
+            <button data-component="button" data-variant="primary" type="button">Save preferences</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="members" data-layout="stack" data-gap="md">
+        <article data-component="card">
+          <div data-slot="header">Members</div>
+          <div data-slot="body" data-layout="stack" data-gap="md">
+            <p data-tone="subtle">Six people have access to this workspace. Seats renew on 1 September.</p>
+            <table data-component="table">
+              <caption class="sr-only">People with access to the Atlas workspace</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rita Nakamura</td>
+                  <td data-mono>rita@atlas.team</td>
+                  <td>Owner</td>
+                  <td><span data-component="badge" data-variant="success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>Dan Oyelaran</td>
+                  <td data-mono>dan@atlas.team</td>
+                  <td>Admin</td>
+                  <td><span data-component="badge" data-variant="success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>Petra Lindqvist</td>
+                  <td data-mono>petra@atlas.team</td>
+                  <td>Editor</td>
+                  <td><span data-component="badge" data-variant="success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>Marcus Hale</td>
+                  <td data-mono>marcus@atlas.team</td>
+                  <td>Editor</td>
+                  <td><span data-component="badge" data-variant="warning">Invited</span></td>
+                </tr>
+                <tr>
+                  <td>Ines Cardoso</td>
+                  <td data-mono>ines@atlas.team</td>
+                  <td>Viewer</td>
+                  <td><span data-component="badge" data-variant="info">On leave</span></td>
+                </tr>
+                <tr>
+                  <td>Tobias Wren</td>
+                  <td data-mono>tobias@atlas.team</td>
+                  <td>Viewer</td>
+                  <td><span data-component="badge" data-variant="neutral">Suspended</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div data-slot="footer" data-layout="row" data-gap="sm" data-justify="end">
+            <button data-component="button" data-variant="secondary" type="button">Export list</button>
+            <button data-component="button" data-variant="primary" type="button">Invite people</button>
+          </div>
+        </article>
+      </section>
+
+      <hr data-component="divider">
+
+      <section id="help" data-layout="stack" data-gap="md">
+        <h2>Help</h2>
+
+        <details data-component="disclosure">
+          <summary>Who can change these settings?</summary>
+          <p>Owners and admins can edit every section. Editors can update their own notification preferences but cannot rename the workspace or manage billing. Viewers see the settings page in read only mode.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>Why am I still getting email after turning a preference off?</summary>
+          <p>Security alerts, password resets and billing failures are always delivered, because they protect the account. Everything else follows the switches above and takes effect within a few minutes.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>What happens to a member I suspend?</summary>
+          <p>They lose access immediately and stop counting towards your seat total at the next renewal. Their comments, tasks and documents stay exactly where they are, so nothing is lost if you restore them later.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>Can I move the workspace to another owner?</summary>
+          <p>Yes. Open the Members section, choose the person you want to promote and set their role to Owner. A workspace can have two owners at once, which makes handovers safe.</p>
+        </details>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
