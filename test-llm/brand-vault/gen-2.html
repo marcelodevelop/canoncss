@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Vault</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="theme-2.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Vault</a>
+  <nav data-slot="nav">
+    <a href="/product">Product</a>
+    <a href="/pricing" aria-current="page">Pricing</a>
+    <a href="/docs">Docs</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/product">Product</a>
+      <a href="/pricing" aria-current="page">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="stack" data-gap="xl">
+
+  <section data-layout="hero" data-gap="lg" data-align="center" data-justify="center">
+    <div data-layout="stack" data-gap="md" data-align="center">
+      <h1>Compliance evidence your regulator can follow</h1>
+      <p>Vault is the system of record for controls, policy and attestation at regulated banks. Every obligation mapped, every test dated, every exception owned by a named person.</p>
+      <div data-layout="row" data-gap="sm" data-justify="center">
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start an evaluation</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Request a walkthrough</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="wide" data-gap="lg">
+    <div data-layout="stack" data-gap="xs">
+      <h2>Plans</h2>
+      <p data-tone="subtle">Billed annually. Control counts are enforced at the tenant level, not per seat.</p>
+    </div>
+
+    <div data-layout="grid" data-cols="3" data-gap="md">
+
+      <article data-component="card">
+        <div data-slot="header">Baseline</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <p><span data-component="stat">$1,900</span> <span data-tone="subtle">/month</span></p>
+            <p data-tone="subtle">Up to 100 controls, one framework.</p>
+          </div>
+          <ul>
+            <li>Control register with versioned policy mapping</li>
+            <li>Quarterly evidence collection and review queue</li>
+            <li>Audit export in regulator-ready PDF and CSV</li>
+            <li>Single sign-on with SAML 2.0</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/signup?plan=baseline">Choose Baseline</a>
+        </div>
+      </article>
+
+      <article data-component="card" data-variant="featured">
+        <div data-slot="header">
+          <span data-component="badge" data-variant="brand">Recommended</span>
+          Assurance
+        </div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <p><span data-component="stat">$4,600</span> <span data-tone="subtle">/month</span></p>
+            <p data-tone="subtle">Up to 500 controls, five frameworks.</p>
+          </div>
+          <ul>
+            <li>Continuous control monitoring with drift alerts</li>
+            <li>Cross-framework mapping for SOC 2, DORA, PCI DSS and ISO 27001</li>
+            <li>Issue management with owner, due date and escalation path</li>
+            <li>Immutable audit trail retained for seven years</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="primary" data-full href="/signup?plan=assurance">Choose Assurance</a>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">Enterprise</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <p><span data-component="stat">Custom</span> <span data-tone="subtle">/annual</span></p>
+            <p data-tone="subtle">Unlimited controls across every entity.</p>
+          </div>
+          <ul>
+            <li>Multi-entity tenancy with jurisdictional data residency</li>
+            <li>Dedicated compliance engineer and named support line</li>
+            <li>Private deployment with customer-managed encryption keys</li>
+            <li>Contractual uptime of 99.95 percent with penalties</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/contact">Contact sales</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="content" data-gap="lg">
+    <h2>Frequently asked questions</h2>
+    <div data-layout="stack" data-gap="sm">
+
+      <details data-component="disclosure">
+        <summary>How is a control counted against my plan limit?</summary>
+        <p>A control is counted once, no matter how many frameworks it satisfies. A single access review mapped to SOC 2, DORA and ISO 27001 consumes one control, not three. Retired controls stop counting at the end of the billing period in which they were retired.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Where is our evidence stored?</summary>
+        <p>Evidence is stored in the region you select at tenant creation: Frankfurt, London, Toronto or Singapore. Data never leaves that region, including backups and support access. Enterprise tenants can supply their own encryption keys and revoke them at any time.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Can we hand an auditor direct access?</summary>
+        <p>Yes. Auditor accounts are read-only, scoped to a defined period and framework, and expire on a date you set. Every document an auditor opens is written to the audit trail, so you can show exactly what was reviewed and when.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What does implementation involve?</summary>
+        <p>A standard implementation runs six to eight weeks. We import your existing control register, map it to the frameworks in scope, connect your identity provider and ticketing system, then run one full evidence cycle alongside your team before handover.</p>
+      </details>
+
+    </div>
+  </section>
+
+</main>
+
+<hr data-component="divider">
+
+<footer data-layout="centered" data-width="wide" data-gap="lg">
+  <div data-layout="grid" data-cols="3" data-gap="md">
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Product</p>
+      <nav data-component="nav">
+        <a href="/product/controls">Control register</a>
+        <a href="/product/monitoring">Continuous monitoring</a>
+        <a href="/product/evidence">Evidence collection</a>
+        <a href="/product/reporting">Audit reporting</a>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <nav data-component="nav">
+        <a href="/about">About Vault</a>
+        <a href="/customers">Customers</a>
+        <a href="/careers">Careers</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Resources</p>
+      <nav data-component="nav">
+        <a href="/docs">Documentation</a>
+        <a href="/trust">Trust centre</a>
+        <a href="/status">System status</a>
+        <a href="/legal">Legal and terms</a>
+      </nav>
+    </div>
+
+  </div>
+  <p data-tone="subtle">Vault Systems Limited. Registered in England and Wales, number 09482173.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+/* Vault theme
+   Institutional compliance software for banks.
+   Deep navy, cold slate, sharp corners, dense spacing, neutral grotesque.
+   The entire brand lives in this file. The markup stays pure Canon. */
+
+:root {
+
+  /* Typeface: one neutral grotesque across the whole product.
+     No display face, no warmth, no personality in the letterforms. */
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  /* Type scale: tightened. Small text stays legible, large text stops
+     short of anything expressive. */
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.3125rem;
+  --text-2xl: 1.625rem;
+  --text-3xl: 2.125rem;
+
+  /* Weights: no light, no heavy. Medium carries emphasis. */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+
+  /* Spacing: compressed. A dense page reads as a working tool. */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.875rem;
+  --space-lg: 1.375rem;
+  --space-xl: 2.25rem;
+  --space-2xl: 3.5rem;
+
+  /* Colour: deep navy against cold slate greys. Nothing warm. */
+  --color-brand: #12294a;
+  --color-brand-subtle: #dfe5ee;
+  --color-accent: #38536f;
+  --color-accent-subtle: #e4e9f0;
+
+  --color-surface: #f4f6f8;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #e8ebef;
+
+  --color-content: #0d1929;
+  --color-content-subtle: #5d6a79;
+  --color-content-inverse: #ffffff;
+
+  --color-border: #ccd3db;
+  --color-border-strong: #8e9aa8;
+
+  --color-success: #1c5c46;
+  --color-success-subtle: #dfeae6;
+  --color-warning: #7a5610;
+  --color-warning-subtle: #efe9da;
+  --color-error: #8a2020;
+  --color-error-subtle: #f0e0e0;
+  --color-info: #1d456e;
+  --color-info-subtle: #dfe6ee;
+
+  /* Measure: narrow columns, close-set text. */
+  --width-prose: 58ch;
+  --width-content: 60rem;
+  --width-wide: 76rem;
+
+  /* Corners: none. */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-full: 0;
+
+  /* Elevation: hairlines rather than glow. */
+  --shadow-sm: 0 1px 0 rgba(13, 25, 41, 0.10);
+  --shadow-md: 0 1px 0 rgba(13, 25, 41, 0.14), 0 2px 4px rgba(13, 25, 41, 0.06);
+  --shadow-lg: 0 1px 0 rgba(13, 25, 41, 0.18), 0 6px 14px rgba(13, 25, 41, 0.08);
+}
+
+@layer canon.theme {
+
+  /* Grotesque headings sit tight. Optical tracking, not a spacing token. */
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.015em;
+  }
+
+  /* Labels read as record fields: small, spaced, upper case. */
+  [data-component="badge"] {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Figures align in columns the way a rate sheet does. */
+  [data-component="stat"] {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+}

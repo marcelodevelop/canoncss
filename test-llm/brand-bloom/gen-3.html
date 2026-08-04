@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloom Pricing</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+<link rel="stylesheet" href="theme-3.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Bloom</a>
+  <nav data-slot="nav">
+    <a href="/product">Product</a>
+    <a href="/pricing" aria-current="page">Pricing</a>
+    <a href="/docs">Docs</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/product">Product</a>
+      <a href="/pricing" aria-current="page">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+  </details>
+</header>
+
+<main data-layout="stack" data-gap="2xl">
+
+  <section data-layout="hero" data-align="center" data-justify="center" data-gap="lg" data-padding="xl">
+    <div data-layout="centered" data-width="prose" data-align="center" data-gap="md">
+      <h1>Keep every plant alive, one small reminder at a time</h1>
+      <p>Bloom tells you exactly when to water, feed and repot, in plain language. No plant knowledge required. Start free, upgrade the day your windowsill runs out of room.</p>
+      <div data-layout="row" data-gap="sm" data-justify="center" data-wrap>
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start free</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/tour">Take the tour</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="wide" data-gap="xl" data-padding="xl">
+    <div data-layout="stack" data-gap="sm" data-align="center">
+      <h2>Plans that grow with your collection</h2>
+      <p data-tone="subtle">Every plan includes watering reminders and the plant identifier. Cancel any time.</p>
+    </div>
+
+    <div data-layout="grid" data-cols="3" data-gap="lg" data-align="stretch">
+
+      <article data-component="card">
+        <div data-slot="header">Sprout</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="center">
+              <span data-component="stat">$0</span>
+              <span data-tone="subtle">/month</span>
+            </div>
+            <p data-tone="subtle">Free forever, up to five plants</p>
+          </div>
+          <ul>
+            <li>Watering reminders for five plants</li>
+            <li>Photo plant identifier, ten scans a month</li>
+            <li>Beginner care guide for every species</li>
+            <li>Email nudges when a plant is thirsty</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/signup?plan=sprout">Start free</a>
+        </div>
+      </article>
+
+      <article data-component="card" data-variant="featured">
+        <div data-slot="header">
+          <span data-component="badge" data-variant="brand">Most loved</span>
+          Bloom
+        </div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="center">
+              <span data-component="stat">$6</span>
+              <span data-tone="subtle">/month</span>
+            </div>
+            <p data-tone="subtle">Billed monthly, unlimited plants</p>
+          </div>
+          <ul>
+            <li>Unlimited plants and unlimited scans</li>
+            <li>Light and humidity checks room by room</li>
+            <li>Repotting and feeding schedules</li>
+            <li>Ask a question, get an answer in a day</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="primary" data-full href="/signup?plan=bloom">Start free trial</a>
+        </div>
+      </article>
+
+      <article data-component="card">
+        <div data-slot="header">Greenhouse</div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <div data-layout="row" data-gap="xs" data-align="center">
+              <span data-component="stat">$14</span>
+              <span data-tone="subtle">/month</span>
+            </div>
+            <p data-tone="subtle">Billed monthly, up to six people</p>
+          </div>
+          <ul>
+            <li>Everything in Bloom for six people</li>
+            <li>Shared care calendar for the whole home</li>
+            <li>Handover notes for holidays and plant sitters</li>
+            <li>A yearly video call with a plant specialist</li>
+          </ul>
+        </div>
+        <div data-slot="footer">
+          <a data-component="button" data-variant="secondary" data-full href="/signup?plan=greenhouse">Start free trial</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section data-layout="centered" data-width="content" data-gap="xl" data-padding="xl">
+    <div data-layout="stack" data-gap="sm" data-align="center">
+      <h2>Questions we hear a lot</h2>
+      <p data-tone="subtle">Still unsure? Write to us and a real person answers.</p>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <details data-component="disclosure">
+        <summary>I have killed every plant I have owned. Will this help?</summary>
+        <p>That is exactly who Bloom is built for. You tell us what you have and where it sits, and we turn it into a short list of things to do this week. Nothing more. Most people keep their first plant alive past the six month mark.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Do I need to know what my plant is called?</summary>
+        <p>No. Take a photo and Bloom identifies it, then fills in the watering, light and feeding needs for you. If the guess looks wrong you can correct it in one tap.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>What happens when the free trial ends?</summary>
+        <p>Your account drops back to the free Sprout plan and your plants stay exactly where they are. Nothing is deleted, and reminders continue for your first five plants. We do not ask for a card to start the trial.</p>
+      </details>
+
+      <details data-component="disclosure">
+        <summary>Can I share my plants with someone I live with?</summary>
+        <p>On Greenhouse, yes. Everyone sees the same care calendar and can tick off a watering, so nobody waters the fern twice. On Sprout and Bloom the collection belongs to one person.</p>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer data-layout="centered" data-width="wide" data-gap="lg" data-padding="xl">
+  <hr data-component="divider">
+  <div data-layout="grid" data-cols="3" data-gap="lg">
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Product</p>
+      <nav data-component="nav">
+        <a href="/features">Features</a>
+        <a href="/pricing" aria-current="page">Pricing</a>
+        <a href="/identifier">Plant identifier</a>
+        <a href="/mobile">Mobile app</a>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Learn</p>
+      <nav data-component="nav">
+        <a href="/docs">Care guides</a>
+        <a href="/blog">Journal</a>
+        <a href="/beginners">Beginner basics</a>
+        <a href="/help">Help centre</a>
+      </nav>
+    </div>
+
+    <div data-layout="stack" data-gap="sm">
+      <p data-tone="subtle">Company</p>
+      <nav data-component="nav">
+        <a href="/about">About Bloom</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </div>
+
+  </div>
+  <p data-tone="subtle">Bloom, made for people who are new to plants.</p>
+</footer>
+
+</body>
+</html>

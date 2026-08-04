@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing — Vault</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+  <link rel="stylesheet" href="theme-1.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Vault</a>
+    <nav data-slot="nav">
+      <a href="/product">Product</a>
+      <a href="/pricing" aria-current="page">Pricing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="primary" href="/signup">Sign up</a>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/product">Product</a>
+        <a href="/pricing" aria-current="page">Pricing</a>
+        <a href="/docs">Docs</a>
+      </nav>
+    </details>
+  </header>
+
+  <main data-layout="stack" data-gap="xl">
+
+    <section data-layout="hero" data-gap="md" data-align="center" data-justify="center">
+      <h1>Compliance evidence, ready before the examiner asks</h1>
+      <p>Vault collects controls, approvals and audit trails from every system your bank already runs, then keeps them in one reviewable record. Continuous coverage for SOX, BSA/AML, GLBA and internal risk policy.</p>
+      <div data-layout="row" data-gap="sm">
+        <a data-component="button" data-variant="primary" data-size="lg" href="/signup">Start an assessment</a>
+        <a data-component="button" data-variant="secondary" data-size="lg" href="/demo">Book a walkthrough</a>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="wide">
+      <div data-layout="stack" data-gap="lg">
+        <h2>Plans</h2>
+        <div data-layout="grid" data-cols="3" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="header">Baseline</div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <div data-layout="stack" data-gap="xs">
+                  <p><span data-component="stat">$39</span> <span data-tone="subtle">/seat per month</span></p>
+                  <p data-tone="subtle">Billed annually. Minimum ten seats.</p>
+                </div>
+                <p>For a single institution running one regulatory programme.</p>
+                <ul>
+                  <li>Control library with 240 mapped requirements</li>
+                  <li>Evidence collection from 30 connectors</li>
+                  <li>Quarterly attestation workflows</li>
+                  <li>Standard export for external auditors</li>
+                </ul>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <a data-component="button" data-variant="secondary" data-full href="/signup?plan=baseline">Choose Baseline</a>
+            </div>
+          </article>
+
+          <article data-component="card" data-variant="featured">
+            <div data-slot="header">
+              <span data-component="badge" data-variant="brand">Recommended</span>
+              Control
+            </div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <div data-layout="stack" data-gap="xs">
+                  <p><span data-component="stat">$79</span> <span data-tone="subtle">/seat per month</span></p>
+                  <p data-tone="subtle">Billed annually. Minimum twenty-five seats.</p>
+                </div>
+                <p>For risk and audit teams covering several regulations at once.</p>
+                <ul>
+                  <li>Everything in Baseline, across unlimited frameworks</li>
+                  <li>Continuous control testing with failure alerts</li>
+                  <li>Segregated reviewer and approver roles</li>
+                  <li>Examiner portal with time-boxed access</li>
+                </ul>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <a data-component="button" data-variant="primary" data-full href="/signup?plan=control">Choose Control</a>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="header">Enterprise</div>
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="md">
+                <div data-layout="stack" data-gap="xs">
+                  <p><span data-component="stat">Custom</span> <span data-tone="subtle">/annual contract</span></p>
+                  <p data-tone="subtle">Priced by entity count and deployment model.</p>
+                </div>
+                <p>For holding companies consolidating multiple regulated entities.</p>
+                <ul>
+                  <li>Everything in Control, per entity and consolidated</li>
+                  <li>Private deployment in your own cloud tenancy</li>
+                  <li>Named compliance engineer and 24/7 escalation</li>
+                  <li>Custom retention, residency and key management</li>
+                </ul>
+              </div>
+            </div>
+            <div data-slot="footer">
+              <a data-component="button" data-variant="secondary" data-full href="/contact">Contact sales</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section data-layout="centered" data-width="content">
+      <div data-layout="stack" data-gap="lg">
+        <h2>Frequently asked questions</h2>
+        <div data-layout="stack" data-gap="sm">
+
+          <details data-component="disclosure">
+            <summary>How is Vault deployed?</summary>
+            <p>Most institutions run Vault as a single-tenant instance in a region we agree during contracting. Enterprise customers can instead deploy into their own cloud tenancy, where Vault runs under your network controls and your key management. Both options ship the same product and the same release schedule.</p>
+          </details>
+
+          <details data-component="disclosure">
+            <summary>Which regulations does Vault map to?</summary>
+            <p>The shipped library covers SOX, BSA/AML, GLBA, FFIEC IT handbooks, PCI DSS and the CFPB consumer protection rules, with one requirement mapped to one testable control. Internal policies are imported as an additional framework and tested the same way as the statutory ones.</p>
+          </details>
+
+          <details data-component="disclosure">
+            <summary>How long does implementation take?</summary>
+            <p>A Baseline programme is typically collecting evidence within three weeks. Control and Enterprise engagements run six to ten weeks, most of which is connector configuration and agreeing control ownership with your first line. We do not bill for the implementation period.</p>
+          </details>
+
+          <details data-component="disclosure">
+            <summary>Who can see our audit data?</summary>
+            <p>Access is restricted to named users in your tenant. Vault staff have no standing access to customer evidence; support access is granted by your administrator, is time-boxed, and is written to an immutable log you can export. External examiners receive scoped, expiring access through the examiner portal.</p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <hr data-component="divider">
+
+  <footer data-layout="centered" data-width="wide" data-padding="xl">
+    <div data-layout="grid" data-cols="3" data-gap="lg">
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Product</p>
+        <nav data-component="nav">
+          <a href="/product/controls">Control library</a>
+          <a href="/product/connectors">Connectors</a>
+          <a href="/product/examiner-portal">Examiner portal</a>
+          <a href="/docs">Documentation</a>
+        </nav>
+      </div>
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Company</p>
+        <nav data-component="nav">
+          <a href="/about">About Vault</a>
+          <a href="/customers">Customers</a>
+          <a href="/careers">Careers</a>
+          <a href="/contact">Contact sales</a>
+        </nav>
+      </div>
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Legal</p>
+        <nav data-component="nav">
+          <a href="/legal/terms">Terms of service</a>
+          <a href="/legal/privacy">Privacy notice</a>
+          <a href="/legal/dpa">Data processing addendum</a>
+          <a href="/trust">Trust and subprocessors</a>
+        </nav>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

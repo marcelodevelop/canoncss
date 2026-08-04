@@ -203,6 +203,26 @@ vocabulary, already done, mechanically checked, and a third the size. The full
 comparison, including where each control was unfair, is in
 [`test-llm/README.md`](test-llm/README.md).
 
+## The aesthetic moves, the skeleton does not
+
+Canon's structure is closed. Its look is retargeted through a theme file of
+token overrides. That is the founding claim, and it is now measured rather than
+asserted.
+
+Two brands built as far apart as possible, three generations each, same spec,
+each agent writing its own theme: **Vault**, a compliance platform for banks,
+institutional and dense, navy with sharp corners. **Bloom**, a plant care app,
+warm and airy, coral with fully rounded everything.
+
+Each theme overrode 49 tokens and **only two landed on the same value**. The
+pages look like different companies. Their markup is **96% structurally
+identical**, which is the same figure as two generations of the *same* brand,
+and higher than the unbranded baseline.
+
+That is the result a utility framework cannot reproduce, because there the
+brand and the markup are one artefact. Change the look and you have rewritten
+every element.
+
 ## Explore
 
 - [Docs](https://www.canoncss.com) - tokens, layouts, components, live playground
