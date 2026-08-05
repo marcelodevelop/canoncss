@@ -50,8 +50,115 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   failing pairs and every one is now fixed**. CI holds it at zero and fails in
   both directions, so contrast cannot regress and a fix cannot land without
   lowering the number.
+- **TypeScript declarations for the whole vocabulary**, in `types/canon.d.ts`,
+  generated from `bin/vocab.mjs` by the same build step that writes the VS Code
+  data file, so the editor, the linter and the compiler cannot disagree about
+  what exists. A closed vocabulary is a union type, and every TSX codebase was
+  getting none of it: React types allow any `data-*` with any value, so
+  `data-layout="stak"` compiled, rendered unstyled, and waited for the linter.
+  - One `tsconfig` "include" line to adopt. It augments `HTMLAttributes`, so it
+    covers every element with no per-element wiring and no runtime cost, and
+    every attribute is optional, so nothing that was already right breaks.
+  - It closes the hole `canon-lint` reports and cannot fill: a value written as
+    an expression is opaque to a text linter and is checked by the compiler.
+  - `data-x-*` stays `string`, because a closed type on the namespace for things
+    Canon does not have would defeat the escape hatch.
+  - Asserted in both directions. `types/canon.test-d.tsx` checks the vocabulary
+    compiles and that eight wrong values do not, via `@ts-expect-error`, which
+    is itself an error when the line below it turns out to be fine. `npm test`
+    stays dependency-free; this is `npm run test:types` and its own CI job.
+- **R11: a layer in Canon's namespace that Canon does not declare.** The third
+  and quietest member of the family R7 and R9 belong to, and the only one where
+  the page still looks right. `@layer canon.apps { … }` renders exactly as
+  intended, because a layer nothing declared sorts after every layer that was.
+  What stops is the checking: R6 no longer reads that block for hardcoded
+  colours, R9 no longer reads it for inert rules, R8 no longer sees the
+  extensions defined in it, and the app-layer count that measures what Canon is
+  missing reads zero. One character opts the file out of the entire tool.
+  - Only `canon.*` is judged, so a project's own `@layer components` is its own
+    business. Suggestions come from the same Levenshtein pass R7 uses.
+  - The cascade order moved to `bin/vocab.mjs` and `build.sh` now emits the
+    `@layer` statement from it. Two sources for one order was how R11 could
+    have been wrong about what Canon declares. The built file is byte-identical.
+- **Forced-colours support.** Windows High Contrast replaces every colour with
+  the user's own, which is the point, and erases any distinction drawn with
+  background alone, of which Canon had four. Badges (five of six variants had a
+  background and no border, so they became bare text with no difference between
+  success and error), buttons on `<a>` (the UA gives button chrome to `<button>`
+  and not to an anchor, and R5 allows the anchor deliberately, so every call to
+  action rendered as link text), the current step, and the featured card.
+  Nothing else is touched: what stays legible under a forced palette is left to
+  the UA, because overriding it is how a framework ends up ignoring the setting.
+- **`scripts/check-css.mjs`**: the shipped stylesheet was the one artefact
+  nothing parsed. `npm test` passed with exit 0 on a `dist/canon.css` containing
+  `color: ;;;`, measured by building the broken file and running the suite on
+  it, and a dead declaration takes the rest of its block with it. Four checks:
+  the file parses (C1), every declaration has a property and a non-empty value
+  (C2), every `var(--x)` resolves or carries a fallback (C3, which is R7 one
+  level down and aimed at Canon's own source), and every `@layer` block sits
+  inside the declared order (C4). `dist` is checked alone as well as with the
+  themes, because the CDN serves it alone.
+- **A packaging gate.** What npm publishes is a separate artefact from what the
+  repo contains and nothing was checking it. The README promises specific
+  installed paths and a missing `files` entry turns each into a silent 404;
+  `types/canon.test-d.tsx`, whose whole job is to be invalid, was shipping to
+  consumers. Ten paths asserted present, the fixtures asserted absent.
+- **`dist/canon.css` must be pure ASCII.** Comments are stripped at build time,
+  so anything non-ASCII left in it is a value the browser renders, and a
+  rendered glyph written as a literal character is one encoding round-trip from
+  becoming something else. It already had been (see Fixed).
+- **A test for `canon-init`**, which had none, asserting the four things that
+  were unstated: the CSS lands in the target, `AGENTS.md` lands at the repo
+  root, nothing is written into the working directory, and a re-run overwrites
+  nothing and exits 1.
+- **[MIGRATING.md](MIGRATING.md)**: the working procedure for coming off
+  Tailwind, measured on the two paired corpora rather than argued. Same two
+  specs, five generations each under a competent Tailwind house-style prompt and
+  five under Canon: **286 distinct classes and 7,151 uses against 63 distinct
+  pairs and 1,038**, or 715 styling decisions per page against 104.
+  - Which decides what the guide is. Not a lookup table, because most classes do
+    not map to anything, they stop being written: focus rings are 608 uses and
+    8.5% of the styling and all of it disappears, since the corpus turns the
+    outline off and rebuilds it on the next class while Canon's reset has one
+    rule. Text colour is 1,032 uses and almost none survives. So the procedure
+    is ordered around deletion.
+  - Every figure regenerates with `npm run census`, and `--check` asserts the
+    doc still agrees, which `npm test` runs. A table of measurements nobody can
+    reproduce is the drift `check-docs.mjs` already exists to prevent.
 
 ### Fixed
+- **Every completed step rendered `¹3` where the tick should be.** The stepper's
+  complete state carried `content: '¹3'`, bytes `c2 b9 33`, directly under a
+  comment saying a tick replaces the number once the step is done. A literal
+  checkmark went in and an encoding round-trip brought it back as
+  superscript-one followed by a three, and it had been shipping in
+  `dist/canon.css`. Written as `content: '\2713'` now, which is the actual fix:
+  the character was never the fragile part, storing it as a character was. It
+  was the only non-ASCII byte in the built stylesheet, which is what made the
+  gate above cheap.
+- **Dark mode stopped at the edge of what Canon paints.** Canon's tokens colour
+  what Canon draws; everything else is painted by the UA, and the UA reads
+  `color-scheme`, not custom properties. Without it `<html data-theme="dark">`
+  produced a correct dark page with light furniture: a light scrollbar, a light
+  popup under every native `<select>`, a light calendar inside
+  `<input type="date">`, and the browser's light autofill highlight over a dark
+  input. Two lines in the tokens layer. Both shipped themes keep a light surface
+  in light mode and needed no change; the blank theme `canon-init` writes now
+  carries the commented override for a theme whose light mode is itself dark.
+- **`canon-init` put the CSS in one repo and `AGENTS.md` in another.** The
+  destination was the bare string `'AGENTS.md'`, which is the working directory:
+  right by accident when that is already the repo root, and wrong the moment a
+  target is named, so `canon-init ../other-project` vendored Canon into the
+  other project and dropped the agent instructions wherever the command was
+  typed. It genuinely does not belong beside the stylesheet, since agents read
+  it from the root and the CSS usually lands in `src/styles`, so the root is now
+  resolved from the target by walking up for a `.git`.
+- **A duplicated block in the reset**: `nav ul, nav ol` set the same two
+  declarations twice, under two comments saying the same thing in the same
+  language.
+- **The README's size figures were stale**, claiming 29kb raw and 5.5kb gzipped
+  against an actual 29.7 and 5.4. Caught by the size gate on an unrelated edit,
+  which is what it is for.
 - **The select looked wrong, and it was two bugs.** Its right padding was
   `var(--space-2xl)`, the token for the gap *between page sections*: 64px on the
   default theme and **120px on soft**, which is the empty gulf you could see
