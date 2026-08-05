@@ -1,6 +1,11 @@
 // The Canon vocabulary, as data. Single source of truth for canon-lint and for
 // the generated VS Code html.customData file.
 
+// The cascade order, in order. build.sh emits the @layer statement from this
+// and canon-lint validates against it (R11), so the two cannot drift.
+// canon.theme and canon.app are the two Canon declares and leaves empty.
+export const LAYERS = ['canon.reset', 'canon.tokens', 'canon.layouts', 'canon.components', 'canon.utilities', 'canon.theme', 'canon.app'];
+
 export const LAYOUTS = new Set(['stack', 'row', 'grid', 'sidebar', 'centered', 'hero', 'split']);
 export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider', 'disclosure', 'nav', 'stepper']);
 const SCALE = new Set(['xs', 'sm', 'md', 'lg', 'xl', '2xl']);

@@ -104,6 +104,13 @@ tokens, produced markup 96% structurally identical. That only holds while
 everything on the page reads its colour and spacing from tokens. One hardcoded
 value is a component that ignores the brand.
 
+Spell the layer name exactly. `@layer canon.apps` is valid CSS and still
+renders, because a layer nothing declared sorts after every layer that was, so
+there is nothing to see. But it is no longer the escape hatch: none of the
+checks above run on it, the extensions inside it stop counting, and the rule
+total below reads zero. R11 catches that and suggests the name you meant. Your
+own layers, anything outside the `canon.*` namespace, are left alone.
+
 ## The layer is counted, not hidden
 
 Every run prints how many rules you have there:

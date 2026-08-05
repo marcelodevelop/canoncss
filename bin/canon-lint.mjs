@@ -5,7 +5,7 @@
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
-import { VOCAB, ELEMENTS, COMPONENTS } from './vocab.mjs';
+import { VOCAB, ELEMENTS, COMPONENTS, LAYERS } from './vocab.mjs';
 import { TOKENS } from './tokens.mjs';
 import { DEFAULTS } from './defaults.mjs';
 
@@ -187,6 +187,45 @@ function insideLabel(src, at) {
 const declaredExtensions = new Set();
 const usedExtensions = new Map();
 
+/** R11 - a layer in Canon's namespace that Canon does not declare.
+ *
+ *  R7 catches a misspelled token and R9 a rule that restates a default. This is
+ *  the same failure at the layer level, and it is the quietest of the three:
+ *  `@layer canon.apps { … }` is valid CSS that still renders, because an
+ *  undeclared layer sorts after every declared one. Nothing looks wrong.
+ *
+ *  What breaks is every guarantee attached to the escape hatch. R6 stops
+ *  checking that block for hardcoded colours, R9 stops checking it for inert
+ *  rules, R8 stops seeing the extensions defined in it, and the app-layer count
+ *  that is supposed to measure what Canon is missing reads zero. The user opted
+ *  out of the whole tool with a typo and was told everything was clean.
+ *
+ *  Only the canon.* namespace is judged. A project's own `@layer components` is
+ *  its own business and none of this tool's. */
+function lintLayers(src) {
+  const violations = [];
+  const declared = new Set(LAYERS);
+  for (const m of src.matchAll(/@layer\s+([a-zA-Z0-9_.-]+)\s*\{/g)) {
+    const name = m[1];
+    if (declared.has(name) || !name.startsWith('canon.')) continue;
+    let best = null;
+    let bestDistance = Infinity;
+    for (const layer of LAYERS) {
+      const d = distance(name, layer);
+      if (d < bestDistance) {
+        bestDistance = d;
+        best = layer;
+      }
+    }
+    violations.push([
+      lineOf(src, m.index),
+      'R11',
+      `@layer ${name} is not a Canon layer, so nothing here is checked${bestDistance <= 3 ? `. Did you mean ${best}?` : ''}`,
+    ]);
+  }
+  return violations;
+}
+
 function lintCss(file, src) {
   const violations = [];
   let rules = 0;
@@ -208,6 +247,7 @@ function lintCss(file, src) {
     }
   }
   violations.push(...lintInertOverrides(src));
+  violations.push(...lintLayers(src));
   const tokens = lintTokens(src);
   violations.push(...tokens.violations);
   return { violations, rules, overrides: tokens.overrides };

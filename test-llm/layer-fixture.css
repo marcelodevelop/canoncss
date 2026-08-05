@@ -1,0 +1,39 @@
+/* R11 fixture - the escape hatch spelled wrong.
+ *
+ * Both blocks below are valid CSS and both still render, because a layer that
+ * the @layer statement never declared sorts after every layer it did. Nothing
+ * looks broken, which is the problem: R6 stops checking these blocks for
+ * hardcoded colours, R9 stops checking them for inert rules, R8 stops seeing
+ * the extensions they define, and the app-layer count that measures what Canon
+ * is missing reads zero. A typo opts the file out of the entire tool and the
+ * tool used to say it was clean.
+ *
+ * The hardcoded #hex below is deliberate: it is an R6 violation sitting inside
+ * an unchecked layer, and it stays unreported, which is the damage R11 names.
+ */
+
+@layer canon.apps {
+  [data-x-component='datepicker'] {
+    display: grid;
+    background: #ff0000;
+  }
+}
+
+@layer canon.aplication {
+  [data-x-component='kanban-board'] {
+    display: flex;
+  }
+}
+
+/* A project's own layers are its own business and must stay unflagged. */
+@layer components {
+  .legacy { color: #ff0000; }
+}
+
+/* The real one, for contrast: this block is checked. */
+@layer canon.app {
+  [data-x-component='timeline'] {
+    display: grid;
+    gap: var(--space-sm);
+  }
+}

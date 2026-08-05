@@ -18,7 +18,19 @@ jobs:
       - name: Lint 20-page LLM regression corpus + fixture
         run: npm test
       - name: Fail if build output drifted from committed dist
-        run: git diff --exit-code dist/ prompts/AGENTS.md vscode/
+        run: git diff --exit-code dist/ prompts/AGENTS.md vscode/ types/canon.d.ts
+
+  # Separate job because it is the only check here that needs a dependency. The
+  # framework's own suite stays runnable with nothing but node and bash.
+  types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Type-check the generated vocabulary declarations
+        run: npm run test:types
 
   gitleaks:
     runs-on: ubuntu-latest

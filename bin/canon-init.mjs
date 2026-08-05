@@ -27,6 +27,11 @@ const THEME = `/* Your brand. This file is the only place Canon is allowed to va
    at all goes in @layer canon.app. canon-lint checks both. */
 
 :root {
+  /* Canon sets color-scheme: light here and dark on [data-theme='dark'], which
+     is what paints scrollbars, native select popups and autofill. Only touch it
+     if your light mode is itself dark, which is rare and deliberate. */
+  /* color-scheme: dark; */
+
   /* --color-brand: #0f766e; */
   /* --color-accent: #ea580c; */
   /* --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif; */
@@ -42,6 +47,23 @@ const THEME = `/* Your brand. This file is the only place Canon is allowed to va
   /* Brand details tokens cannot express. Keep this small. */
 }
 `;
+
+// AGENTS.md is the one file here that does not belong next to the stylesheet:
+// coding agents read it from the repo root, not from src/styles. It used to be
+// written to the bare path 'AGENTS.md', which is the process's cwd - correct
+// only by accident, and only when cwd already was the root. `canon-init
+// ../other-project` put the CSS in one repo and the agent instructions in
+// another. Walk up from the target for a .git instead, and fall back to the
+// target itself when there is none.
+function repoRoot(from) {
+  let dir = resolve(from);
+  for (;;) {
+    if (existsSync(join(dir, '.git'))) return dir;
+    const up = dirname(dir);
+    if (up === dir) return resolve(from);
+    dir = up;
+  }
+}
 
 function pickTarget(argv) {
   if (argv[0]) return argv[0];
@@ -119,7 +141,7 @@ written += copy(join(PKG, 'dist/canon.css'), join(target, 'canon.css'), '(the fr
 written += themeName
   ? copy(join(THEME_DIR, `${themeName}.css`), join(target, 'theme.css'), `(the ${themeName} theme, yours to edit)`)
   : write(join(target, 'theme.css'), THEME, '(your brand, start here)');
-written += copy(join(PKG, 'prompts/AGENTS.md'), 'AGENTS.md', '(so coding agents speak Canon)');
+written += copy(join(PKG, 'prompts/AGENTS.md'), join(repoRoot(target), 'AGENTS.md'), '(so coding agents speak Canon)');
 if (extName) {
   written += copy(join(EXT_DIR, `${extName}.css`), join(target, `${extName}.css`), `(the ${extName} extension, yours to change)`);
 }

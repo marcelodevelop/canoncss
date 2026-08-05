@@ -124,8 +124,78 @@ if [ "$CODE5" -ne 1 ] || [ "$COUNT5" -ne 6 ]; then
 fi
 echo "✓ restyle corpus caught ($COUNT5 violations, exit $CODE5)"
 
+# The quietest of the three "valid CSS that does nothing" failures. R7 catches
+# a misspelled token, R9 a rule that restates a default, and R11 a misspelled
+# layer - which still renders, because an undeclared layer sorts after every
+# declared one, while silently exempting its whole block from R6, R8 and R9.
+echo "- layer fixture must fail with exactly 2 R11 violations:"
+set +e
+OUT8=$(node bin/canon-lint.mjs test-llm/layer-fixture.css)
+CODE8=$?
+set -e
+COUNT8=$(echo "$OUT8" | grep -cE '  R11  ')
+ALL8=$(echo "$OUT8" | grep -cE '  R[0-9]+  ')
+if [ "$CODE8" -ne 1 ] || [ "$COUNT8" -ne 2 ] || [ "$ALL8" -ne 2 ]; then
+  echo "FAIL: expected exit 1 with 2 violations, all R11; got exit $CODE8, $COUNT8 R11 of $ALL8 total:"
+  echo "$OUT8"
+  exit 1
+fi
+echo "✓ layer fixture caught ($COUNT8 violations, exit $CODE8)"
+
+# canon-init had no test at all, and it shipped a bug that only showed up when
+# the target was somewhere other than the working directory: the CSS went where
+# it was told and AGENTS.md went to cwd, so `canon-init ../other-project` put
+# the framework in one repo and the agent instructions in another.
+echo "- canon-init writes where it says it writes:"
+ROOT=$PWD
+INIT_TMP=$(mktemp -d)
+mkdir -p "$INIT_TMP/proj/.git" "$INIT_TMP/proj/src/styles" "$INIT_TMP/elsewhere"
+(cd "$INIT_TMP/elsewhere" && node "$ROOT/bin/canon-init.mjs" "$INIT_TMP/proj/src/styles" >/dev/null)
+for f in canon.css theme.css; do
+  [ -f "$INIT_TMP/proj/src/styles/$f" ] || { echo "FAIL: $f not written to the target"; exit 1; }
+done
+# AGENTS.md belongs at the repo root, because that is where coding agents read
+# it, and never in whatever directory the command happened to run from.
+[ -f "$INIT_TMP/proj/AGENTS.md" ] || { echo "FAIL: AGENTS.md not at the repo root"; exit 1; }
+[ -z "$(ls -A "$INIT_TMP/elsewhere")" ] || { echo "FAIL: canon-init wrote into cwd: $(ls -A "$INIT_TMP/elsewhere")"; exit 1; }
+# Re-running must never overwrite: exit 1 and nothing written is the contract.
+set +e
+(cd "$INIT_TMP/elsewhere" && node "$ROOT/bin/canon-init.mjs" "$INIT_TMP/proj/src/styles" >/dev/null)
+RERUN=$?
+set -e
+[ "$RERUN" -eq 1 ] || { echo "FAIL: re-run should exit 1 with nothing to do, got $RERUN"; exit 1; }
+node bin/canon-lint.mjs "$INIT_TMP/proj/src/styles/theme.css" >/dev/null
+node scripts/check-css.mjs "$INIT_TMP/proj/src/styles/theme.css" dist/canon.css >/dev/null
+rm -rf "$INIT_TMP"
+echo "✓ canon-init lands the CSS in the target and AGENTS.md at the root"
+
+# What npm publishes is a separate artifact from what the repo contains, and
+# nothing was checking it. The README promises specific paths - the CDN file,
+# the prompt drop-in, the editor data, the declarations - and a missing entry in
+# "files" makes every one of those a 404 for an installed user, silently, until
+# somebody installs the package and looks.
+#
+# The exclusions matter too: types/canon.test-d.tsx contains deliberately
+# invalid markup, as its whole job is to assert those values do not compile, and
+# it was shipping to consumers until this check was written.
+echo "- the published package must contain what the docs promise:"
+PACKED=$(npm pack --dry-run --json 2>/dev/null)
+for want in MIGRATING.md dist/canon.css prompts/AGENTS.md prompts/system-prompt.txt types/canon.d.ts vscode/canon.html-data.json bin/canon-lint.mjs bin/canon-init.mjs bin/vocab.mjs themes/institutional.css extensions/date-field.css; do
+  echo "$PACKED" | grep -q "\"$want\"" || { echo "FAIL: npm would not publish $want"; exit 1; }
+done
+for unwanted in canon.test-d.tsx tsconfig.json; do
+  echo "$PACKED" | grep -q "$unwanted" && { echo "FAIL: npm would publish $unwanted"; exit 1; }
+done
+echo "✓ package ships the documented paths and no test fixtures"
+
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs
+
+# MIGRATING.md is a table of measurements over the two corpora, and a table of
+# measurements nobody can regenerate is the drift this repo already fixed once
+# for the README. The census is the source; the doc has to agree with it.
+echo "- migration guide must match the census:"
+node scripts/migration-census.mjs --check
 
 echo "- repro metric self-check:"
 node scripts/repro.mjs --selftest
@@ -144,5 +214,36 @@ node scripts/check-contrast.mjs --max 0 > /dev/null
 
 echo "- rule 3 checker self-check:"
 node scripts/check-tailwind-patterns.mjs --selftest
+
+# The shipped CSS was the one artifact nothing checked. This suite would pass
+# with exit 0 on a dist/canon.css containing `color: ;;;` - measured before the
+# gate was written, not assumed - and a broken declaration takes the rest of its
+# block with it, so a component silently stops existing on every page.
+# The shipped stylesheet must be pure ASCII. Comments are stripped at build
+# time, so anything non-ASCII left in it is a value the browser renders, and a
+# rendered glyph written as a literal character is one encoding round-trip away
+# from becoming something else. That is not hypothetical: the stepper's tick
+# shipped as a literal and arrived as "¹3", which is what every completed step
+# displayed. CSS escapes survive any encoding, so this rule costs nothing.
+echo "- dist/canon.css must be pure ASCII:"
+if LC_ALL=C grep -nP '[^\x00-\x7F]' dist/canon.css; then
+  echo "FAIL: non-ASCII in the shipped CSS - write it as a CSS escape (\\2713) instead"
+  exit 1
+fi
+echo "✓ no literal glyphs in the shipped CSS"
+
+echo "- css integrity checker self-check:"
+node scripts/check-css.mjs --selftest
+
+# dist alone, because the CDN serves it alone: every token it uses must be
+# defined in it, not in a theme the page may not have loaded.
+echo "- dist/canon.css must parse and be self-contained:"
+node scripts/check-css.mjs dist/canon.css
+
+# Themes and the reference extension resolve against Canon, so they are judged
+# with it. src/ is not checked separately: dist is its concatenation, and the
+# @layer order statement lives in build.sh rather than in any source file.
+echo "- shipped themes and extensions must parse:"
+node scripts/check-css.mjs dist/canon.css themes/*.css extensions/*.css
 
 echo "✓ all tests passed"

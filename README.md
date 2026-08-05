@@ -33,7 +33,7 @@ or zero-install via CDN:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) - **~29kb raw, ~5.5kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) - **~29.7kb raw, ~5.4kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular - concatenate only the files you use.)
@@ -129,6 +129,13 @@ It also reports its own coverage. A value written as a JSX expression
 states how much of the markup it actually checked rather than implying all of
 it.
 
+R10 is the one accessibility check, and it is deliberately only one. A form
+control with no accessible name renders perfectly, reads correctly to anyone
+looking at it, and is unusable to anyone who is not, which is the same silent
+failure R7 and R9 exist for. A name comes from a wrapping `<label>`, a `<label
+for>`, or `aria-label`; a placeholder is not a label. It found 10 of 357
+controls across the corpus, every one in a toolbar or filter row.
+
 Point it at a theme file and it checks that too. A misspelled custom property
 is valid CSS that overrides nothing, so `--color-brnd` produces a page that
 looks almost right with no visible cause. R7 catches it and suggests the token
@@ -141,6 +148,15 @@ six clean-context agents asked to give cards rounder corners wrote
 `border-radius: var(--radius-lg)`, which is what a card already had, and every
 one reported the job done. Only provably inert declarations are flagged, so a
 property the component's own variants disagree about is never judged.
+
+R11 is the quietest one in the family. `@layer canon.apps { … }` is valid CSS
+that still renders, because a layer nothing declared sorts after every layer
+that was, so the page looks right. What stops is the checking: R6 no longer
+reads that block for hardcoded colours, R9 no longer reads it for inert rules,
+R8 no longer sees the extensions defined in it, and the app-layer count that is
+supposed to measure what Canon is missing reads zero. A typo opts the file out
+of the whole tool and the tool used to call it clean. Only the `canon.*`
+namespace is judged, so your own `@layer components` is left alone.
 
 ## When Canon does not have it
 
@@ -204,6 +220,37 @@ point: the size of your app layer measures what Canon is missing for your
 product. It is meant to be looked at, not hidden. A big one is a bug report, and
 the vocabulary is supposed to grow toward it on the evidence rule in
 [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## TypeScript
+
+A closed vocabulary is a union type. React's types allow any `data-*` attribute
+with any value, so `data-layout="stak"` compiled fine and stayed wrong until
+`canon-lint` ran. Canon ships the vocabulary as declarations, generated from the
+same table the linter enforces:
+
+```json
+{
+  "include": ["node_modules/canoncss/types/canon.d.ts", "src"]
+}
+```
+
+That is the whole setup. Every `data-*` attribute now autocompletes with exactly
+the values Canon accepts, and a wrong one is a compile error with the same
+suggestion the linter would have given:
+
+```
+Type '"stak"' is not assignable to type '"stack" | "row" | "grid" | …'.
+  Did you mean '"stack"'?
+```
+
+It augments React's `HTMLAttributes`, so it covers every element with no
+per-element wiring and no runtime cost, and every attribute is optional, so
+adding it to an existing codebase breaks nothing that was already right. The
+extension namespace (`data-x-*`) types as `string`, because it is open by
+design.
+
+This also closes the one hole `canon-lint` reports and cannot fill: a value
+written as an expression is opaque to the linter, and is checked here.
 
 ## Editor autocomplete
 
@@ -285,6 +332,19 @@ That is the result a utility framework cannot reproduce, because there the
 brand and the markup are one artefact. Change the look and you have rewritten
 every element.
 
+## Coming from Tailwind
+
+**[MIGRATING.md](MIGRATING.md)** is the working procedure, measured on the two
+corpora rather than argued. The same two specs, generated under a competent
+Tailwind house-style prompt and under Canon: **286 distinct classes and 7,151
+uses against 63 distinct pairs and 1,038**, which is 715 styling decisions per
+page against 104.
+
+So the job is mostly deletion, and the guide is ordered around that. Focus
+rings alone are 8.5% of the Tailwind styling and every one of them disappears,
+because the corpus turns the outline off and rebuilds it on the next class,
+and Canon's reset just has one. Regenerate any figure with `npm run census`.
+
 ## Explore
 
 - [Docs](https://www.canoncss.com) - tokens, layouts, components, live playground
@@ -311,9 +371,10 @@ examples/   Five pages built with zero extra CSS
 test-llm/   LLM regression corpus
 scripts/    build.sh (cat + comment-strip)
 vscode/     generated html.customData for editor autocomplete
+types/      generated TypeScript declarations for the vocabulary
 ```
 
-Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.components → canon.utilities`.
+Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.components → canon.utilities → canon.theme → canon.app`.
 
 ## Rules
 

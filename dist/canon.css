@@ -91,10 +91,6 @@ nav ul, nav ol {
 list-style: none;
 padding-inline-start: 0;
 }
-nav ul, nav ol {
-list-style: none;
-padding-inline-start: 0;
-}
 li + li {
 margin-top: var(--space-xs);
 }
@@ -137,6 +133,7 @@ outline-offset: 2px;
 }
 @layer canon.tokens {
 :root {
+color-scheme: light;
 --space-xs:  0.25rem;
 --space-sm:  0.5rem;
 --space-md:  1rem;
@@ -197,6 +194,7 @@ Palatino, Georgia, serif;
 --duration-slow:   300ms;
 }
 [data-theme="dark"] {
+color-scheme: dark;
 --color-brand:           #f5f4f2;
 --color-brand-subtle:    color-mix(in srgb, #f5f4f2 8%, #12100e);
 --color-accent:          #e8593a;
@@ -582,7 +580,7 @@ color: var(--color-content-inverse);
 color: var(--color-content);
 }
 [data-component="stepper"] > li[data-state="complete"]::before {
-content: '¹3';
+content: '\2713';
 background: var(--color-brand-subtle);
 border-color: var(--color-brand);
 color: var(--color-brand);
@@ -967,6 +965,25 @@ margin: 0;
 }
 [data-component="divider"][data-variant="strong"] {
 border-top-color: var(--color-border-strong);
+}
+@media (forced-colors: active) {
+[data-component="badge"] {
+border: 1px solid currentColor;
+}
+[data-component="button"] {
+border: 1px solid currentColor;
+}
+[data-component="button"]:disabled,
+[data-component="button"][aria-disabled="true"] {
+color: GrayText;
+border-color: GrayText;
+}
+[data-component="stepper"] > li[aria-current]::before {
+border-width: 3px;
+}
+[data-component="card"][data-variant="featured"] {
+border-width: 3px;
+}
 }
 }
 @layer canon.utilities {
