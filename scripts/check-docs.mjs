@@ -58,7 +58,11 @@ function checkSize(label, file, actualKb, re, source = README, tolerance = 0.6) 
   }
 }
 
-const kb = (path) => readFileSync(path).length / 1000;
+// Line endings are normalised before measuring. Git hands out CRLF on Windows
+// checkouts and the build writes LF, which is a byte per line and about a
+// kilobyte across canon.css: enough to fail this check on one platform and pass
+// it on another, which is worse than not checking at all.
+const kb = (path) => readFileSync(path, 'utf-8').replace(/\r\n/g, '\n').length / 1000;
 const PROMPTS_README = readFileSync('prompts/README.md', 'utf-8');
 
 checkSize('dist/canon.css', 'README.md', kb('dist/canon.css'), /~([\d.]+)kb raw/);
@@ -69,7 +73,8 @@ checkSize('the full prompt', 'prompts/README.md', kb('prompts/system-prompt-full
 // The gzipped figure is the one people actually compare frameworks on, so it is
 // worth being right about. Node ships the compressor, so there is no reason to
 // take the README's word for it.
-const gzipKb = gzipSync(readFileSync('dist/canon.css')).length / 1000;
+const gzipKb =
+  gzipSync(readFileSync('dist/canon.css', 'utf-8').replace(/\r\n/g, '\n')).length / 1000;
 checkSize('gzipped canon.css', 'README.md', gzipKb, /~([\d.]+)kb gzipped/);
 
 // RESEARCH.md is the piece written to be read by strangers, and it describes
