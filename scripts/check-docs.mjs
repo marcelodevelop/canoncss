@@ -41,6 +41,20 @@ for (const name of COMPONENTS) {
   if (!prompt.includes(name)) failures.push(`prompts/system-prompt.txt never mentions ${name}`);
 }
 
+// Mentioned is not enough: it has to be listed like its siblings. Both prompts
+// are hand-aligned tables and both had `stepper` indented four spaces where
+// every other entry sits at two, so the one block describing a component read
+// as a continuation of the line above it. Cheap to assert, and this is the file
+// the whole thesis rests on.
+for (const file of ['prompts/system-prompt.txt', 'prompts/system-prompt-full.txt']) {
+  const src = readFileSync(file, 'utf-8');
+  for (const name of [...COMPONENTS, ...LAYOUTS]) {
+    if (!new RegExp(`^ {2}${name} `, 'm').test(src)) {
+      failures.push(`${file} does not list ${name} at the table's own indentation`);
+    }
+  }
+}
+
 // Sizes drift the same way counts do, and worse, because nothing about editing
 // a stylesheet reminds you that a number in the README describes it. Every one
 // of these was wrong when it was checked: the CSS had grown from 24kb to 27kb,

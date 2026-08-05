@@ -24,7 +24,6 @@ export const DEFAULTS = {
   },
   "button": {
     "align-items": "center",
-    "border": "1px solid transparent",
     "border-radius": "var(--radius-md)",
     "display": "inline-flex",
     "font-weight": "var(--weight-medium)",
