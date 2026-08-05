@@ -79,6 +79,31 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   component. Naming the component apart from styling it is what closes that hole,
   and it is the only part of this finding that is structural rather than a matter
   of who wrote which script.
+- **Finding 7 tests that last claim properly, and it holds.** The floor above
+  rested on one synthetic `sed`. Run instead with three clean-context agents per
+  system on the same restyle request, "cards should be flat panels, drop the
+  outline, subtle grey fill": the page still has three cards afterwards, and
+  **Canon's tooling still finds 3, 3, 3 while the Tailwind checker finds 0, 0,
+  1** and reports clean on all three, because a card it cannot recognise is not
+  a card it can check. Its identifiable patterns fall 18 to 15.
+- **All three Canon runs changed one line of markup: the `<link>`.** The restyle
+  went to a stylesheet, `canon-lint` came back clean and counted `1 rule in
+  @layer canon.app`. The reason is rule 2 of the control, no custom CSS, so a
+  Tailwind restyle has nowhere to go but the class attributes. Both systems hit
+  a floor again: all three Tailwind runs reported "round the corners more" was
+  inexpressible, and Canon has no card modifier for fill or radius either.
+- **Finding 7 replicated on the dashboard, and got stronger.** Canon **4, 4, 4**
+  against a base of 4; Tailwind **0, 0, 0** against a base of 5, with the checker
+  reporting clean on all three and its identifiable patterns falling 28 to 23.
+  Twelve runs across two specs, unanimous. The only result in this sequence that
+  did not shrink when it was attacked, and the spec that broke the previous two
+  did not break this one.
+- **The agents lose track too, not just the tooling.** All three Tailwind runs on
+  the dashboard restyled **five** things, the fifth being a table wrapper that
+  uses the Card class string verbatim. Two flagged it and asked whether it was
+  meant to be a card, because nothing in the file answers that. The Canon runs
+  restyled `[data-component="card"]` and hit exactly four. The identifier that
+  survives the edit is the same one that scopes it.
 - **Canon has a floor too, and the dashboard found it.** Eight of that page's
   fifteen gaps were already at `xs` and the base carried no `data-padding`, so
   two of three runs reported that card interiors could not be tightened without

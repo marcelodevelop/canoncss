@@ -1,0 +1,7 @@
+@layer canon.theme {
+  [data-component="card"] {
+    border: none;
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-lg);
+  }
+}
