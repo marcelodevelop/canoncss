@@ -130,6 +130,22 @@ node scripts/check-docs.mjs
 echo "- repro metric self-check:"
 node scripts/repro.mjs --selftest
 
+# Contrast, held at a baseline rather than asserted clean, because the
+# remaining failures need design decisions on two published themes and those
+# are not CI's call. The gate fails in both directions: it catches a
+# regression, and it catches a fix that nobody lowered the number for.
+#
+# What is left, all of it visible in the script's own output:
+#   11  themes/soft.css light. Its coral brand carries cream label text at
+#       2.79 and its badges are mid-tone ink on pale tints at 2.4 to 3.2.
+#    5  the input, select and textarea boundary, every theme and both modes.
+#       They sit on --color-surface, the same colour as the page, so the
+#       border is the only thing saying where the control is, and it runs
+#       1.52 to 2.41 against the 3.0 that WCAG 1.4.11 asks for.
+#    2  the default light theme, both marginal: 4.41 and 4.30 against 4.5.
+echo "- colour contrast must not regress past the baseline:"
+node scripts/check-contrast.mjs --max 17 > /dev/null
+
 echo "- rule 3 checker self-check:"
 node scripts/check-tailwind-patterns.mjs --selftest
 

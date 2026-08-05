@@ -44,6 +44,18 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
     `examples/`, which are meant to be exemplary, and are fixed. The other seven
     are generated evidence and are baselined instead: `npm test` asserts exactly
     seven, and that R10 is the only rule they break.
+- **`scripts/check-contrast.mjs`**: WCAG ratios for the colour pairs Canon's
+  components actually render, read out of `src/components.css` rather than
+  invented, across both shipped themes and both modes. CI holds a baseline that
+  fails in both directions, so contrast cannot regress and a fix cannot land
+  without lowering the number.
+  - **It found a real bug on its first run.** `themes/soft.css` redefines the
+    status colours in `:root` and omits all eight from its dark block. A theme
+    file is not in a layer, so its `:root` beats Canon's own layered
+    `[data-theme="dark"]`, and the light values were being served on a dark
+    page: four pale mint and cream badge backgrounds on `#241c18`, with label
+    text measuring 2.5 to 3.2 against a 4.5 requirement. Fixed by restating the
+    eight tokens in the dark block, which now measure 4.7 to 6.7.
 - **`scripts/check-tailwind-patterns.mjs`**: enforces rule 3 of the Tailwind
   control, the verbatim component patterns, which `check-tailwind-control.mjs`
   never covered. Written to refute a finding of this project's own, and it did.
