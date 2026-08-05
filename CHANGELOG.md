@@ -52,6 +52,22 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   lowering the number.
 
 ### Fixed
+- **The select looked wrong, and it was two bugs.** Its right padding was
+  `var(--space-2xl)`, the token for the gap *between page sections*: 64px on the
+  default theme and **120px on soft**, which is the empty gulf you could see
+  between the label and the edge. An arrow is a fixed-size mark rather than part
+  of the page's spacing rhythm, so the padding is now the control's own
+  horizontal padding plus a fixed allowance, and it tracks `data-size` instead
+  of ignoring it: 28, 36 and 44px for `sm`, `md` and `lg`.
+- **The select's caret carried a literal `#6b7280`**, a cold grey baked into a
+  data URI, which is exactly what Canon's own rule 1 forbids. It could not
+  follow a theme and it was nearly invisible in dark mode. A data URI cannot
+  read a custom property, so the caret is now drawn with two gradients and
+  follows `--color-content-subtle` like every other piece of secondary ink.
+  - Worth noting: the size rules carry two attribute selectors, so they outrank
+    the base rule's `padding-right` regardless of source order. The first
+    version of this fix left `sm` and `lg` with the label running underneath
+    the caret.
 - **A theme's `:root` silently beat Canon's dark block.** Theme files are not in
   a layer and Canon's `[data-theme="dark"]` is, so any token a theme sets in
   `:root` and omits from its own dark block keeps its light value on a dark
@@ -71,6 +87,38 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   `--color-border-strong` is darker in each of them now.
 - Two marginal misses in the default light theme, `--color-content-subtle` at
   4.41 and `--color-success` at 4.30, against 4.5.
+- **The modal was broken on `<dialog>`, which is its canonical element.** Three
+  user agent styles were never reset, and a `<div>` carries none of them, which
+  is why it went unnoticed until a `<dialog>` example was rendered.
+  - `dialog:not([open]) { display: none }` is a **user agent** rule and Canon's
+    `display: flex` is an author rule, so the author rule won. **Every Canon
+    modal on a `<dialog>` was permanently on screen, closed or not.** That is
+    the serious one.
+  - `width` and `height` default to `fit-content`, which beats `inset: 0`, so
+    the full-screen overlay rendered as a 517x283 box in a 1280x720 viewport.
+  - `border` defaults to solid, drawing a 2.4px black frame around the scrim.
+  - Now covers the layout viewport exactly, with the panel centred in it, on
+    both `<dialog>` and `<div>`.
+- **The modal scrim blurs what is behind it** rather than only dimming it, the
+  same `backdrop-filter` treatment the topbar already used. Because the blur
+  separates the layers on its own, the scrim itself got lighter: 0.5 flat was a
+  smear of unreadable shapes competing for attention, and it is 0.32 now.
+  - `::backdrop` is styled to match, so a `<dialog>` opened with `showModal()`
+    gets the same treatment as one used with the `open` attribute. `modal` sits
+    on `<dialog>` or `<div>` and only one of those has a `::backdrop`.
+  - `@supports not (backdrop-filter: ...)` restores a heavier scrim where blur
+    is unavailable, since there the scrim is the only separation.
+  - `prefers-reduced-transparency: reduce` drops the blur entirely and darkens
+    the scrim instead. Blur is a transparency effect and people switch those off
+    because they make text harder to read.
+  - The scrim colour is a literal, and it is the only one in `components.css`.
+    No token fits: a scrim must stay dark in both modes and every colour token
+    inverts between them, so deriving it from `--color-content` puts fog over a
+    dark page. A `--color-scrim` token would fix that and is a five-file
+    vocabulary change, not taken here.
+- **`examples/modal/`**: a page with enough behind the dialog to actually see
+  the blur, and the three select sizes side by side. A flat scrim over a plain
+  page proves nothing.
 - **`scripts/check-tailwind-patterns.mjs`**: enforces rule 3 of the Tailwind
   control, the verbatim component patterns, which `check-tailwind-control.mjs`
   never covered. Written to refute a finding of this project's own, and it did.

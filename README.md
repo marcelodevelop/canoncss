@@ -33,7 +33,7 @@ or zero-install via CDN:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) - **~28kb raw, ~5.4kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) - **~29kb raw, ~5.5kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular - concatenate only the files you use.)

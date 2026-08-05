@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canon CSS - Example Modal</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Meridian</a>
+  <nav data-slot="nav">
+    <ul>
+      <li><a href="/overview">Overview</a></li>
+      <li><a href="/streams" aria-current="page">Streams</a></li>
+    </ul>
+  </nav>
+  <div data-slot="actions">
+    <span data-component="avatar" data-size="sm">MA</span>
+  </div>
+</header>
+
+<div data-layout="centered" data-width="content">
+  <div data-layout="stack" data-gap="xl" data-padding="2xl">
+
+    <div data-layout="stack" data-gap="sm">
+      <h1>Streams</h1>
+      <p data-tone="subtle">There is enough behind the dialog to see the blur
+        working. A flat scrim over a plain page proves nothing.</p>
+    </div>
+
+    <div data-layout="row" data-gap="sm" data-align="end" data-wrap>
+      <div data-layout="stack" data-gap="xs">
+        <label for="q">Search</label>
+        <input data-component="input" data-size="sm" id="q" type="search" placeholder="Filter streams">
+      </div>
+      <div data-layout="stack" data-gap="xs">
+        <label for="range">Range</label>
+        <select data-component="select" data-size="sm" id="range">
+          <option>Last 30 days</option>
+          <option>Last 7 days</option>
+          <option>Last 24 hours</option>
+        </select>
+      </div>
+      <div data-layout="stack" data-gap="xs">
+        <label for="status">Status</label>
+        <select data-component="select" id="status">
+          <option>All statuses</option>
+          <option>Healthy</option>
+        </select>
+      </div>
+      <div data-layout="stack" data-gap="xs">
+        <label for="team">Team</label>
+        <select data-component="select" data-size="lg" id="team">
+          <option>Every team</option>
+          <option>Platform</option>
+        </select>
+      </div>
+    </div>
+
+    <div data-layout="grid" data-cols="3" data-gap="lg">
+      <article data-component="card">
+        <div data-slot="header">Ingest</div>
+        <div data-slot="body">
+          <div data-layout="stack" data-gap="xs">
+            <span data-component="stat">4.8M</span>
+            <span data-tone="subtle">events today</span>
+          </div>
+        </div>
+      </article>
+      <article data-component="card">
+        <div data-slot="header">Latency</div>
+        <div data-slot="body">
+          <div data-layout="stack" data-gap="xs">
+            <span data-component="stat">112ms</span>
+            <span data-tone="subtle">p95</span>
+          </div>
+        </div>
+      </article>
+      <article data-component="card" data-variant="featured">
+        <div data-slot="header">
+          <span data-component="badge" data-variant="success">Healthy</span>
+        </div>
+        <div data-slot="body">
+          <div data-layout="stack" data-gap="xs">
+            <span data-component="stat">99.98%</span>
+            <span data-tone="subtle">uptime</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <table data-component="table">
+      <thead>
+        <tr><th>Stream</th><th>Region</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>orders</td><td>eu-west</td><td><span data-component="badge" data-variant="success">Healthy</span></td></tr>
+        <tr><td>payments</td><td>us-east</td><td><span data-component="badge" data-variant="warning">Degraded</span></td></tr>
+        <tr><td>webhooks</td><td>ap-south</td><td><span data-component="badge" data-variant="error">Down</span></td></tr>
+        <tr><td>audit</td><td>eu-west</td><td><span data-component="badge" data-variant="info">Paused</span></td></tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<dialog data-component="modal" open>
+  <div data-slot="panel">
+    <div data-slot="header">Pause the payments stream?</div>
+    <div data-slot="body">
+      <p>Nothing is lost while a stream is paused. Events queue at the edge and
+        replay in order when you resume it.</p>
+    </div>
+    <div data-slot="footer">
+      <div data-layout="row" data-gap="sm" data-justify="end">
+        <button data-component="button" data-variant="ghost">Cancel</button>
+        <button data-component="button" data-variant="primary">Pause stream</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+</body>
+</html>
