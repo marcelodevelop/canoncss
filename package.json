@@ -5,7 +5,7 @@
   "main": "dist/canon.css",
   "style": "dist/canon.css",
   "bin": { "canon-lint": "bin/canon-lint.mjs", "canon-init": "bin/canon-init.mjs" },
-  "files": ["dist", "prompts", "src", "bin", "vscode", "themes", "extensions", "types", "EXTENDING.md", "RESEARCH.md"],
+  "files": ["dist", "prompts", "src", "bin", "vscode", "themes", "extensions", "types", "!types/canon.test-d.tsx", "!types/tsconfig.json", "EXTENDING.md", "RESEARCH.md"],
   "scripts": {
     "build": "bash scripts/build.sh",
     "test": "bash scripts/test.sh",

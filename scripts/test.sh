@@ -169,6 +169,25 @@ node scripts/check-css.mjs "$INIT_TMP/proj/src/styles/theme.css" dist/canon.css 
 rm -rf "$INIT_TMP"
 echo "✓ canon-init lands the CSS in the target and AGENTS.md at the root"
 
+# What npm publishes is a separate artifact from what the repo contains, and
+# nothing was checking it. The README promises specific paths - the CDN file,
+# the prompt drop-in, the editor data, the declarations - and a missing entry in
+# "files" makes every one of those a 404 for an installed user, silently, until
+# somebody installs the package and looks.
+#
+# The exclusions matter too: types/canon.test-d.tsx contains deliberately
+# invalid markup, as its whole job is to assert those values do not compile, and
+# it was shipping to consumers until this check was written.
+echo "- the published package must contain what the docs promise:"
+PACKED=$(npm pack --dry-run --json 2>/dev/null)
+for want in dist/canon.css prompts/AGENTS.md prompts/system-prompt.txt types/canon.d.ts vscode/canon.html-data.json bin/canon-lint.mjs bin/canon-init.mjs bin/vocab.mjs themes/institutional.css extensions/date-field.css; do
+  echo "$PACKED" | grep -q "\"$want\"" || { echo "FAIL: npm would not publish $want"; exit 1; }
+done
+for unwanted in canon.test-d.tsx tsconfig.json; do
+  echo "$PACKED" | grep -q "$unwanted" && { echo "FAIL: npm would publish $unwanted"; exit 1; }
+done
+echo "✓ package ships the documented paths and no test fixtures"
+
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs
 
