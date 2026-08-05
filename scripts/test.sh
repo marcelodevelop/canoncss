@@ -124,10 +124,6 @@ if [ "$CODE5" -ne 1 ] || [ "$COUNT5" -ne 6 ]; then
 fi
 echo "✓ restyle corpus caught ($COUNT5 violations, exit $CODE5)"
 
-# canon-init had no test at all, and it shipped a bug that only showed up when
-# the target was somewhere other than the working directory: the CSS went where
-# it was told and AGENTS.md went to cwd, so `canon-init ../other-project` put
-# the framework in one repo and the agent instructions in another.
 # The quietest of the three "valid CSS that does nothing" failures. R7 catches
 # a misspelled token, R9 a rule that restates a default, and R11 a misspelled
 # layer - which still renders, because an undeclared layer sorts after every
@@ -146,6 +142,10 @@ if [ "$CODE8" -ne 1 ] || [ "$COUNT8" -ne 2 ] || [ "$ALL8" -ne 2 ]; then
 fi
 echo "✓ layer fixture caught ($COUNT8 violations, exit $CODE8)"
 
+# canon-init had no test at all, and it shipped a bug that only showed up when
+# the target was somewhere other than the working directory: the CSS went where
+# it was told and AGENTS.md went to cwd, so `canon-init ../other-project` put
+# the framework in one repo and the agent instructions in another.
 echo "- canon-init writes where it says it writes:"
 ROOT=$PWD
 INIT_TMP=$(mktemp -d)
@@ -180,7 +180,7 @@ echo "✓ canon-init lands the CSS in the target and AGENTS.md at the root"
 # it was shipping to consumers until this check was written.
 echo "- the published package must contain what the docs promise:"
 PACKED=$(npm pack --dry-run --json 2>/dev/null)
-for want in dist/canon.css prompts/AGENTS.md prompts/system-prompt.txt types/canon.d.ts vscode/canon.html-data.json bin/canon-lint.mjs bin/canon-init.mjs bin/vocab.mjs themes/institutional.css extensions/date-field.css; do
+for want in MIGRATING.md dist/canon.css prompts/AGENTS.md prompts/system-prompt.txt types/canon.d.ts vscode/canon.html-data.json bin/canon-lint.mjs bin/canon-init.mjs bin/vocab.mjs themes/institutional.css extensions/date-field.css; do
   echo "$PACKED" | grep -q "\"$want\"" || { echo "FAIL: npm would not publish $want"; exit 1; }
 done
 for unwanted in canon.test-d.tsx tsconfig.json; do
@@ -190,6 +190,12 @@ echo "✓ package ships the documented paths and no test fixtures"
 
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs
+
+# MIGRATING.md is a table of measurements over the two corpora, and a table of
+# measurements nobody can regenerate is the drift this repo already fixed once
+# for the README. The census is the source; the doc has to agree with it.
+echo "- migration guide must match the census:"
+node scripts/migration-census.mjs --check
 
 echo "- repro metric self-check:"
 node scripts/repro.mjs --selftest

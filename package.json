@@ -5,12 +5,13 @@
   "main": "dist/canon.css",
   "style": "dist/canon.css",
   "bin": { "canon-lint": "bin/canon-lint.mjs", "canon-init": "bin/canon-init.mjs" },
-  "files": ["dist", "prompts", "src", "bin", "vscode", "themes", "extensions", "types", "!types/canon.test-d.tsx", "!types/tsconfig.json", "EXTENDING.md", "RESEARCH.md"],
+  "files": ["dist", "prompts", "src", "bin", "vscode", "themes", "extensions", "types", "!types/canon.test-d.tsx", "!types/tsconfig.json", "EXTENDING.md", "MIGRATING.md", "RESEARCH.md"],
   "scripts": {
     "build": "bash scripts/build.sh",
     "test": "bash scripts/test.sh",
     "test:types": "bash scripts/test-types.sh",
     "repro": "node scripts/repro.mjs",
+    "census": "node scripts/migration-census.mjs",
     "dev": "bash scripts/build.sh && echo 'Watching...' && fswatch -o src/ | xargs -n1 bash scripts/build.sh"
   },
   "keywords": ["css", "framework", "llm", "ai", "design-system", "data-attributes"],

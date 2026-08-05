@@ -325,6 +325,19 @@ That is the result a utility framework cannot reproduce, because there the
 brand and the markup are one artefact. Change the look and you have rewritten
 every element.
 
+## Coming from Tailwind
+
+**[MIGRATING.md](MIGRATING.md)** is the working procedure, measured on the two
+corpora rather than argued. The same two specs, generated under a competent
+Tailwind house-style prompt and under Canon: **286 distinct classes and 7,151
+uses against 63 distinct pairs and 1,038**, which is 715 styling decisions per
+page against 104.
+
+So the job is mostly deletion, and the guide is ordered around that. Focus
+rings alone are 8.5% of the Tailwind styling and every one of them disappears,
+because the corpus turns the outline off and rebuilds it on the next class,
+and Canon's reset just has one. Regenerate any figure with `npm run census`.
+
 ## Explore
 
 - [Docs](https://www.canoncss.com) - tokens, layouts, components, live playground
