@@ -7,7 +7,7 @@
        this line a correct dark page arrives with light furniture. */
     color-scheme: light;
 
-    /* ── SPACING (6 niveles) ── */
+    /* ── SPACING (6 steps) ── */
     --space-xs:  0.25rem;   /* 4px  */
     --space-sm:  0.5rem;    /* 8px  */
     --space-md:  1rem;      /* 16px */
@@ -15,7 +15,7 @@
     --space-xl:  2.5rem;    /* 40px */
     --space-2xl: 4rem;      /* 64px */
 
-    /* ── TYPE SCALE (7 niveles) ── */
+    /* ── TYPE SCALE (7 steps) ── */
     --text-xs:   0.75rem;   /* 12px */
     --text-sm:   0.875rem;  /* 14px */
     --text-md:   1rem;      /* 16px - body */
@@ -31,8 +31,8 @@
                     Palatino, Georgia, serif;
     --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
 
-    /* ── COLOR - semántico. Identidad "tinta y rúbrica":
-       papel cálido, tinta como primario, vermellón de rúbrica como acento. ── */
+    /* ── COLOR - semantic. The "ink and signature" identity:
+       warm paper, ink as the primary, signature vermilion as the accent. ── */
     --color-brand:           #1c1917;
     --color-brand-subtle:    color-mix(in srgb, #1c1917 6%, #fdfcfb);
     --color-accent:          #c2410c;
@@ -59,18 +59,18 @@
     --color-error-subtle:    color-mix(in srgb, #b91c1c 8%, #fdfcfb);
     --color-info-subtle:     color-mix(in srgb, #1d4ed8 8%, #fdfcfb);
 
-    /* ── WIDTHS (3 niveles, para data-layout="centered") ── */
+    /* ── WIDTHS (3 steps, for data-layout="centered") ── */
     --width-prose:   65ch;
     --width-content: 768px;
     --width-wide:    1200px;
 
-    /* ── RADIUS (4 niveles) ── */
+    /* ── RADIUS (4 steps) ── */
     --radius-sm:   0.25rem;
     --radius-md:   0.5rem;
     --radius-lg:   0.75rem;
     --radius-full: 9999px;
 
-    /* ── SHADOW (3 niveles) - tinta cálida, nunca negro puro ── */
+    /* ── SHADOW (3 steps) - warm ink, never pure black ── */
     --shadow-sm: 0 1px 2px rgb(28 25 23 / 0.05);
     --shadow-md: 0 2px 4px rgb(28 25 23 / 0.05), 0 4px 8px rgb(28 25 23 / 0.05);
     --shadow-lg: 0 4px 8px rgb(28 25 23 / 0.06), 0 12px 24px rgb(28 25 23 / 0.09);
@@ -91,8 +91,8 @@
     --duration-slow:   300ms;
   }
 
-  /* ── DARK MODE - solo explícito, nunca automático.
-     Light es el default de Canon; dark se pide con data-theme="dark". ── */
+  /* ── DARK MODE - explicit only, never automatic.
+     Light is Canon's default; dark is asked for with data-theme="dark". ── */
   [data-theme="dark"] {
     color-scheme: dark;
 

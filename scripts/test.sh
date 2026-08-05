@@ -232,6 +232,23 @@ if LC_ALL=C grep -nP '[^\x00-\x7F]' dist/canon.css; then
 fi
 echo "✓ no literal glyphs in the shipped CSS"
 
+# The source comments were half Spanish and half English, in a project that is
+# otherwise obsessive about consistency, and the two languages were sometimes
+# two lines apart inside the same rule. All English now.
+#
+# The test is a word list rather than language detection, because the words that
+# matter are the short function words that only appear in running prose: a
+# stray "que" or "para" in a comment is the tell, and no English comment
+# contains them. It reads comments only, so Spanish in a string or a token name
+# is not its business.
+echo "- source comments must be in English:"
+if grep -rnPi '(^|[^a-z])(que|para|con|sin|una|los|las|del|por|como|nunca|siempre|cuando|esto|esta|este|pero|desde|entre|sobre|cada|donde|porque|aunque|hereda|niveles|scrollea|hamburguesa)([^a-z]|$)' \
+     --include=*.css src/ | grep -P '/\*|^\s*[^:]*:\s*\*'; then
+  echo "FAIL: Spanish in a source comment - the source is English"
+  exit 1
+fi
+echo "✓ source comments are in one language"
+
 echo "- css integrity checker self-check:"
 node scripts/check-css.mjs --selftest
 

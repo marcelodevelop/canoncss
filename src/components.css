@@ -120,8 +120,8 @@
     font-weight: var(--weight-medium);
   }
 
-  /* LLM-proof: cualquier heading dentro del header se normaliza - la card
-     es dueña de su tipografía, sin importar qué tag eligió el autor. */
+  /* LLM-proof: any heading inside the header is normalised. The card owns its
+     own typography, whichever tag the author reached for. */
   [data-component="card"] > [data-slot="header"] :is(h1, h2, h3, h4, h5, h6),
   [data-component="card"] > [data-slot="header"] :is(h1, h2, h3, h4, h5, h6) * {
     font-family: var(--font-sans);
@@ -156,12 +156,12 @@
     background-color: var(--color-surface-sunken);
   }
 
-  /* Card sin slots: padding directo */
+  /* A card with no slots: padding straight on the card */
   [data-component="card"]:not(:has(> [data-slot])) {
     padding: var(--space-lg);
   }
 
-  /* Card clickeable: un <a> card no se tiñe ni se subraya como link */
+  /* A clickable card: an <a> card is not tinted or underlined like a link */
   a[data-component="card"] {
     color: inherit;
     text-decoration: none;
@@ -179,7 +179,7 @@
   ════════════════════════════════ */
   [data-component="badge"] {
     display: inline-flex;
-    /* fit-content: que un stack con align stretch no lo convierta en barra */
+    /* fit-content: so a stack with align stretch does not turn it into a bar */
     width: fit-content;
     align-items: center;
     gap: var(--space-xs);
@@ -583,7 +583,7 @@
     color: var(--color-content);
   }
 
-  /* El brand suele venir como <a> anidado: hereda, no parezcas link */
+  /* The brand usually arrives as a nested <a>: inherit, do not look like a link */
   [data-component="topbar"] > [data-slot="brand"] a {
     color: inherit;
     text-decoration: none;
@@ -602,7 +602,7 @@
     justify-content: flex-end;
   }
 
-  /* MENU: hamburguesa canonica, zero-JS via <details>. Solo existe en mobile.
+  /* MENU: the canonical burger, zero-JS via <details>. It exists only on mobile.
      <details data-slot="menu"><summary>☰</summary><nav>links</nav></details> */
   [data-component="topbar"] > [data-slot="menu"] {
     display: none;
@@ -674,7 +674,7 @@
       display: none;
     }
 
-    /* Con hamburguesa el topbar vuelve a una sola fila: brand | actions ☰ */
+    /* With a burger the topbar collapses back to one row: brand | actions */
     [data-component="topbar"]:has(> [data-slot="menu"]) {
       display: flex;
       align-items: center;
@@ -915,7 +915,7 @@
     background-color: var(--color-surface-raised);
   }
 
-  /* Mobile: la tabla scrollea dentro de si misma, nunca rompe la pagina */
+  /* Mobile: the table scrolls inside itself, and never breaks the page */
   @media (max-width: 768px) {
     [data-component="table"] {
       display: block;

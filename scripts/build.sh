@@ -21,7 +21,7 @@ mkdir -p dist
 
 echo "✓ Built $OUTPUT ($(wc -c < $OUTPUT) bytes)"
 
-# AGENTS.md drop-in: generado desde system-prompt.txt - una sola fuente de verdad.
+# The AGENTS.md drop-in, generated from system-prompt.txt so there is one source.
 {
   echo "# Canon CSS - agent instructions"
   echo ""
