@@ -124,6 +124,33 @@ if [ "$CODE5" -ne 1 ] || [ "$COUNT5" -ne 6 ]; then
 fi
 echo "✓ restyle corpus caught ($COUNT5 violations, exit $CODE5)"
 
+# canon-init had no test at all, and it shipped a bug that only showed up when
+# the target was somewhere other than the working directory: the CSS went where
+# it was told and AGENTS.md went to cwd, so `canon-init ../other-project` put
+# the framework in one repo and the agent instructions in another.
+echo "- canon-init writes where it says it writes:"
+ROOT=$PWD
+INIT_TMP=$(mktemp -d)
+mkdir -p "$INIT_TMP/proj/.git" "$INIT_TMP/proj/src/styles" "$INIT_TMP/elsewhere"
+(cd "$INIT_TMP/elsewhere" && node "$ROOT/bin/canon-init.mjs" "$INIT_TMP/proj/src/styles" >/dev/null)
+for f in canon.css theme.css; do
+  [ -f "$INIT_TMP/proj/src/styles/$f" ] || { echo "FAIL: $f not written to the target"; exit 1; }
+done
+# AGENTS.md belongs at the repo root, because that is where coding agents read
+# it, and never in whatever directory the command happened to run from.
+[ -f "$INIT_TMP/proj/AGENTS.md" ] || { echo "FAIL: AGENTS.md not at the repo root"; exit 1; }
+[ -z "$(ls -A "$INIT_TMP/elsewhere")" ] || { echo "FAIL: canon-init wrote into cwd: $(ls -A "$INIT_TMP/elsewhere")"; exit 1; }
+# Re-running must never overwrite: exit 1 and nothing written is the contract.
+set +e
+(cd "$INIT_TMP/elsewhere" && node "$ROOT/bin/canon-init.mjs" "$INIT_TMP/proj/src/styles" >/dev/null)
+RERUN=$?
+set -e
+[ "$RERUN" -eq 1 ] || { echo "FAIL: re-run should exit 1 with nothing to do, got $RERUN"; exit 1; }
+node bin/canon-lint.mjs "$INIT_TMP/proj/src/styles/theme.css" >/dev/null
+node scripts/check-css.mjs "$INIT_TMP/proj/src/styles/theme.css" dist/canon.css >/dev/null
+rm -rf "$INIT_TMP"
+echo "✓ canon-init lands the CSS in the target and AGENTS.md at the root"
+
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs
 
