@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian - Alerts</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <div data-slot="brand">Meridian</div>
+  <nav data-slot="nav">
+    <a href="#overview">Overview</a>
+    <a href="#streams">Streams</a>
+    <a href="#alerts" aria-current="page">Alerts</a>
+    <a href="#settings">Settings</a>
+  </nav>
+  <div data-slot="actions">
+    <span data-component="avatar" data-size="sm">RA</span>
+    <span class="sr-only">Signed in as Rita Alvarez</span>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#streams">Streams</a>
+      <a href="#alerts" aria-current="page">Alerts</a>
+      <a href="#settings">Settings</a>
+    </nav>
+  </details>
+</header>
+
+<div data-layout="sidebar" data-gap="xl">
+
+  <aside data-slot="sidebar" data-padding="lg">
+    <p data-tone="subtle">Monitoring</p>
+    <ul data-component="nav">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#streams">Streams</a></li>
+      <li><a href="#alerts" aria-current="page">Alerts</a></li>
+      <li><a href="#settings">Settings</a></li>
+    </ul>
+  </aside>
+
+  <main data-slot="main" data-padding="lg">
+    <div data-layout="stack" data-gap="xl">
+
+      <h1>Alerts</h1>
+
+      <div data-layout="grid" data-cols="4" data-gap="md">
+
+        <article data-component="card">
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">128</span>
+              <span data-tone="subtle">Open alerts</span>
+            </div>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">14</span>
+              <span data-tone="subtle">Critical last 24h</span>
+            </div>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">3.2M</span>
+              <span data-tone="subtle">Events ingested today</span>
+            </div>
+          </div>
+        </article>
+
+        <article data-component="card">
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">6m</span>
+              <span data-tone="subtle">Median acknowledge time</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div data-layout="row" data-gap="md" data-align="end" data-wrap>
+
+        <div data-layout="stack" data-gap="xs">
+          <label for="alert-search">Search alerts</label>
+          <input data-component="input" type="search" id="alert-search" name="alert-search" placeholder="Message or source">
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <label for="alert-range">Time range</label>
+          <select data-component="select" id="alert-range" name="alert-range">
+            <option>Last 15 minutes</option>
+            <option selected>Last 24 hours</option>
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+          </select>
+        </div>
+
+        <div data-layout="stack" data-gap="xs">
+          <label for="alert-severity">Severity</label>
+          <select data-component="select" id="alert-severity" name="alert-severity">
+            <option selected>All severities</option>
+            <option>Critical</option>
+            <option>Warning</option>
+            <option>Info</option>
+          </select>
+        </div>
+
+        <button data-component="button" data-variant="primary" type="button">Apply filters</button>
+
+      </div>
+
+      <table data-component="table">
+        <caption>Recent alerts</caption>
+        <thead>
+          <tr>
+            <th scope="col">Severity</th>
+            <th scope="col">Source</th>
+            <th scope="col">Message</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span data-component="badge" data-variant="error">Critical</span></td>
+            <td data-mono>api-gateway-01</td>
+            <td>Upstream timeout rate above 12% for 5 consecutive minutes</td>
+            <td>14:02</td>
+          </tr>
+          <tr>
+            <td><span data-component="badge" data-variant="error">Critical</span></td>
+            <td data-mono>postgres-primary</td>
+            <td>Replication lag exceeded 90 seconds</td>
+            <td>13:47</td>
+          </tr>
+          <tr>
+            <td><span data-component="badge" data-variant="warning">Warning</span></td>
+            <td data-mono>worker-pool-eu</td>
+            <td>Queue depth climbing steadily, 4,180 jobs pending</td>
+            <td>13:21</td>
+          </tr>
+          <tr>
+            <td><span data-component="badge" data-variant="warning">Warning</span></td>
+            <td data-mono>edge-cdn-sfo</td>
+            <td>Cache hit ratio dropped below 70%</td>
+            <td>12:58</td>
+          </tr>
+          <tr>
+            <td><span data-component="badge" data-variant="info">Info</span></td>
+            <td data-mono>auth-service</td>
+            <td>Certificate renewed automatically, expires in 90 days</td>
+            <td>11:30</td>
+          </tr>
+          <tr>
+            <td><span data-component="badge" data-variant="info">Info</span></td>
+            <td data-mono>ingest-pipeline</td>
+            <td>New log stream registered: billing-audit</td>
+            <td>09:14</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

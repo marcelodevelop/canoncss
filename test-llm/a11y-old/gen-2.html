@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alerts - Meridian</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="#">Meridian</a>
+    <div data-slot="actions">
+      <span data-component="avatar" data-size="sm">RK</span>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="#">Overview</a>
+        <a href="#">Streams</a>
+        <a href="#" aria-current="page">Alerts</a>
+        <a href="#">Settings</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl" data-padding="lg">
+
+    <aside data-slot="sidebar">
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle">Monitoring</p>
+        <nav data-component="nav" aria-label="Main">
+          <ul>
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Streams</a></li>
+            <li><a href="#" aria-current="page">Alerts</a></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="xl">
+
+        <h1>Alerts</h1>
+
+        <div data-layout="grid" data-cols="4" data-gap="md">
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">128</span>
+                <p data-tone="subtle">Open alerts</p>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">17</span>
+                <p data-tone="subtle">Critical this hour</p>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">4.2m</span>
+                <p data-tone="subtle">Median time to ack</p>
+              </div>
+            </div>
+          </article>
+
+          <article data-component="card">
+            <div data-slot="body">
+              <div data-layout="stack" data-gap="xs">
+                <span data-component="stat">99.94</span>
+                <span data-tone="subtle">% ingest uptime</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div data-layout="row" data-gap="md" data-wrap data-align="end">
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="alert-search">Search</label>
+            <input data-component="input" id="alert-search" type="search" name="q" placeholder="Search messages">
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="alert-range">Time range</label>
+            <select data-component="select" id="alert-range" name="range">
+              <option>Last 15 minutes</option>
+              <option selected>Last hour</option>
+              <option>Last 24 hours</option>
+              <option>Last 7 days</option>
+            </select>
+          </div>
+
+          <div data-layout="stack" data-gap="xs">
+            <label for="alert-severity">Severity</label>
+            <select data-component="select" id="alert-severity" name="severity">
+              <option selected>All severities</option>
+              <option>Critical</option>
+              <option>Warning</option>
+              <option>Info</option>
+            </select>
+          </div>
+
+        </div>
+
+        <table data-component="table">
+          <caption>Recent alerts</caption>
+          <thead>
+            <tr>
+              <th scope="col">Severity</th>
+              <th scope="col">Source</th>
+              <th scope="col">Message</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span data-component="badge" data-variant="error">Critical</span></td>
+              <td data-mono>api-gateway-03</td>
+              <td>Upstream timeout rate above 8% for 5 minutes</td>
+              <td>14:02:11</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="error">Critical</span></td>
+              <td data-mono>postgres-primary</td>
+              <td>Replication lag exceeded 60s</td>
+              <td>13:58:47</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="warning">Warning</span></td>
+              <td data-mono>worker-pool-eu</td>
+              <td>Queue depth growing, 12k jobs pending</td>
+              <td>13:41:05</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="warning">Warning</span></td>
+              <td data-mono>auth-service</td>
+              <td>Elevated 401 responses from mobile clients</td>
+              <td>13:20:33</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="info">Info</span></td>
+              <td data-mono>ingest-edge-07</td>
+              <td>Node rejoined the cluster after restart</td>
+              <td>12:55:19</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="info">Info</span></td>
+              <td data-mono>billing-cron</td>
+              <td>Nightly usage rollup finished in 3m 12s</td>
+              <td>12:30:02</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

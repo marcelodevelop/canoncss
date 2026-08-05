@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alerts - Meridian</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="#">Meridian</a>
+    <div data-slot="actions">
+      <span data-component="avatar" data-size="sm">RK</span>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#streams">Streams</a></li>
+          <li><a href="#alerts" aria-current="page">Alerts</a></li>
+          <li><a href="#settings">Settings</a></li>
+        </ul>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl" data-padding="lg">
+
+    <nav data-slot="sidebar" data-component="nav" aria-label="Main">
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#streams">Streams</a></li>
+        <li><a href="#alerts" aria-current="page">Alerts</a></li>
+        <li><a href="#settings">Settings</a></li>
+      </ul>
+    </nav>
+
+    <main data-slot="main" data-layout="stack" data-gap="xl">
+
+      <div data-layout="stack" data-gap="xs">
+        <h1>Alerts</h1>
+        <p data-tone="subtle">Everything your streams have flagged in the last 24 hours.</p>
+      </div>
+
+      <section data-layout="grid" data-cols="4" data-gap="md" aria-label="Alert metrics">
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">128</span>
+            <span data-tone="subtle">Open alerts</span>
+          </div>
+        </article>
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">14</span>
+            <span data-tone="subtle">Critical</span>
+          </div>
+        </article>
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">2.4M</span>
+            <span data-tone="subtle">Events ingested</span>
+          </div>
+        </article>
+        <article data-component="card">
+          <div data-slot="body" data-layout="stack" data-gap="xs">
+            <span data-component="stat">6m</span>
+            <span data-tone="subtle">Median time to ack</span>
+          </div>
+        </article>
+      </section>
+
+      <section data-layout="stack" data-gap="md" aria-label="Recent alerts">
+
+        <div data-layout="row" data-gap="sm" data-align="center" data-wrap>
+          <input data-component="input" type="search" id="alert-search" name="q"
+                 aria-label="Search alerts" placeholder="Search alerts" data-full>
+          <select data-component="select" id="alert-range" name="range" aria-label="Time range">
+            <option>Last 15 minutes</option>
+            <option>Last hour</option>
+            <option selected>Last 24 hours</option>
+            <option>Last 7 days</option>
+          </select>
+          <select data-component="select" id="alert-severity" name="severity" aria-label="Severity">
+            <option selected>All severities</option>
+            <option>Critical</option>
+            <option>Warning</option>
+            <option>Info</option>
+          </select>
+          <button data-component="button" data-variant="primary" type="button">Apply</button>
+        </div>
+
+        <table data-component="table">
+          <caption class="sr-only">Recent alerts, newest first</caption>
+          <thead>
+            <tr>
+              <th scope="col">Severity</th>
+              <th scope="col">Source</th>
+              <th scope="col">Message</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span data-component="badge" data-variant="error">Critical</span></td>
+              <td>api-gateway-01</td>
+              <td>Error rate above 5% for 3 consecutive minutes</td>
+              <td data-mono>14:02:11</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="error">Critical</span></td>
+              <td>payments-worker</td>
+              <td>Dead-letter queue exceeded 500 messages</td>
+              <td data-mono>13:47:53</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="warning">Warning</span></td>
+              <td>ingest-eu-west</td>
+              <td>Ingestion lag at 42 seconds, threshold is 30</td>
+              <td data-mono>13:21:08</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="warning">Warning</span></td>
+              <td>db-primary</td>
+              <td>Connection pool at 88% saturation</td>
+              <td data-mono>12:58:40</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="info">Info</span></td>
+              <td>auth-service</td>
+              <td>Certificate renews in 12 days</td>
+              <td data-mono>11:30:17</td>
+            </tr>
+            <tr>
+              <td><span data-component="badge" data-variant="info">Info</span></td>
+              <td>edge-cdn-us</td>
+              <td>Cache hit ratio recovered to 96%</td>
+              <td data-mono>09:14:02</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

@@ -30,6 +30,20 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
     restated `border: 1px solid var(--color-border)` on `card`, which the card
     already had. The theme's hairline look comes from its flattened `--shadow-*`
     tokens; that line did nothing. Removed.
+- **R10: a form control with no accessible name.** Not a general accessibility
+  linter and it does not try to be. It checks one thing, for the same reason R7
+  and R9 exist: the failure is silent. A `<select>` with no label renders
+  perfectly, reads correctly to anyone looking at it, and is unusable to anyone
+  who is not. A name comes from a wrapping `<label>`, a `<label for>`, or
+  `aria-label`/`aria-labelledby`. A placeholder is not a label.
+  - Scoped to Canon markup. A file with no Canon attribute anywhere is somebody
+    else's HTML, and grading the Tailwind control condition against Canon's
+    rules would be the kind of rigged comparison the study exists to avoid.
+  - Measured before it was written: **10 controls of 357 across the corpus had
+    no accessible name**, every one in a toolbar or filter row. Two were in
+    `examples/`, which are meant to be exemplary, and are fixed. The other seven
+    are generated evidence and are baselined instead: `npm test` asserts exactly
+    seven, and that R10 is the only rule they break.
 - **`scripts/check-tailwind-patterns.mjs`**: enforces rule 3 of the Tailwind
   control, the verbatim component patterns, which `check-tailwind-control.mjs`
   never covered. Written to refute a finding of this project's own, and it did.
@@ -124,6 +138,28 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   hatches are nearly identical: same three declarations, same three tokens,
   varying only in layer choice. Generations that converge do not qualify, however
   real the need. Same shape as the footer in Finding 4.
+- **A prompt line meant to close the accessible-name gap was tried and
+  reverted, because it made the interface worse while the metric stayed flat.**
+  Two lines were added telling the model to associate labels and to use
+  `aria-label` for toolbar controls. Ten generations of one toolbar-heavy spec,
+  five per arm:
+
+  | | `<label for>` | `aria-label` | R10 |
+  |---|---|---|---|
+  | Shipped prompt | **15** | 3 | 0 |
+  | With the added lines | **0** | 22 | 0 |
+
+  Both arms are fully compliant, because the shipped prompt already gets this
+  right: it produced `<label for="alert-search">Search</label>` above every
+  control, which is the canonical pairing rule working. The variant read
+  "a filter select in a toolbar still needs aria-label" as a licence to use
+  `aria-label` everywhere and **deleted every visible label on the page**. A
+  visible label is better than an invisible one for everyone.
+  - So the linter earns its place and the prompt change does not. R10 catches a
+    real defect class, proven by the seven it finds in older corpus files. The
+    prompt needed no help, and helping it cost 15 labels.
+  - Both arms are kept in `test-llm/a11y-old` and `a11y-new`, and CI asserts
+    zero R10 in each, because the negative result is the finding.
 - **The agents lose track too, not just the tooling.** All three Tailwind runs on
   the dashboard restyled **five** things, the fifth being a table wrapper that
   uses the Card class string verbatim. Two flagged it and asked whether it was
