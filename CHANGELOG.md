@@ -46,16 +46,31 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
     seven, and that R10 is the only rule they break.
 - **`scripts/check-contrast.mjs`**: WCAG ratios for the colour pairs Canon's
   components actually render, read out of `src/components.css` rather than
-  invented, across both shipped themes and both modes. CI holds a baseline that
-  fails in both directions, so contrast cannot regress and a fix cannot land
-  without lowering the number.
-  - **It found a real bug on its first run.** `themes/soft.css` redefines the
-    status colours in `:root` and omits all eight from its dark block. A theme
-    file is not in a layer, so its `:root` beats Canon's own layered
-    `[data-theme="dark"]`, and the light values were being served on a dark
-    page: four pale mint and cream badge backgrounds on `#241c18`, with label
-    text measuring 2.5 to 3.2 against a 4.5 requirement. Fixed by restating the
-    eight tokens in the dark block, which now measure 4.7 to 6.7.
+  invented, across both shipped themes and both modes. It started at **17
+  failing pairs and every one is now fixed**. CI holds it at zero and fails in
+  both directions, so contrast cannot regress and a fix cannot land without
+  lowering the number.
+
+### Fixed
+- **A theme's `:root` silently beat Canon's dark block.** Theme files are not in
+  a layer and Canon's `[data-theme="dark"]` is, so any token a theme sets in
+  `:root` and omits from its own dark block keeps its light value on a dark
+  page. `themes/soft.css` did exactly that with all eight status tokens: four
+  pale mint and cream badge backgrounds sitting on `#241c18`, label text at 2.5
+  to 3.2 against a 4.5 requirement. Now 4.7 to 6.7.
+- **`themes/soft.css` light was failing eleven pairs**, including its primary
+  button at 2.79. The coral is a background under the inverse ink, ink on the
+  page for a link, and ink on its own tint for a badge, and in this theme the
+  inverse and the surface are the same cream, so all three are one contrast
+  test. `#f2705a` could not pass any of them; `#b53a20` passes all three. The
+  status colours moved the same way and the pale tints they sit on did not.
+- **Every control boundary failed WCAG 1.4.11.** `input`, `select` and
+  `textarea` sit on `--color-surface`, the same colour as the page, so the
+  border is the only thing saying where the control is. It ran 1.52 to 2.41
+  against the required 3.0 in all five theme and mode combinations.
+  `--color-border-strong` is darker in each of them now.
+- Two marginal misses in the default light theme, `--color-content-subtle` at
+  4.41 and `--color-success` at 4.30, against 4.5.
 - **`scripts/check-tailwind-patterns.mjs`**: enforces rule 3 of the Tailwind
   control, the verbatim component patterns, which `check-tailwind-control.mjs`
   never covered. Written to refute a finding of this project's own, and it did.
