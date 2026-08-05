@@ -42,9 +42,9 @@ COMPONENTS - data-component on semantic elements:
             the span - never data-component on the <img> itself.
   stat      the big number of a metric (<span data-component="stat">4.8M</span>)
   table     on a <table> element; style-free thead/tbody/th/td inside
-    stepper   an <ol> of checkout/onboarding steps. Current one is
-              aria-current="step"; done ones are data-state="complete";
-              upcoming is neither. Numbers and rails are generated.
+  stepper   an <ol> of checkout/onboarding steps. Current one is
+            aria-current="step"; done ones are data-state="complete";
+            upcoming is neither. Numbers and rails are generated.
   nav       a list of navigation links, usually in a sidebar. Mark the
             current one with aria-current="page", never a data-* value.
             The topbar's own nav slot honours aria-current too.

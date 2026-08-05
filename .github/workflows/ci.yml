@@ -17,8 +17,13 @@ jobs:
         run: npm run build
       - name: Lint 20-page LLM regression corpus + fixture
         run: npm test
-      - name: Fail if build output drifted from committed dist
-        run: git diff --exit-code dist/ prompts/AGENTS.md vscode/ types/canon.d.ts
+      # No path list. build.sh only ever writes generated artefacts, so after it
+      # runs the tree must be clean, full stop. The list this replaces named
+      # four paths and missed two: bin/tokens.mjs and bin/defaults.mjs are
+      # generated too, and defaults.mjs went stale for a commit without CI
+      # noticing, which quietly cost R9 a property it had been checking.
+      - name: Fail if anything generated drifted from what is committed
+        run: git diff --exit-code
 
   # Separate job because it is the only check here that needs a dependency. The
   # framework's own suite stays runnable with nothing but node and bash.
