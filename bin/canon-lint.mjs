@@ -401,9 +401,41 @@ function lintFile(file) {
   return { violations, checked, opaque, appRules: 0, overrides: 0 };
 }
 
+// Every rule this tool can emit, described where somebody who just got the
+// code will look for it. The failure output prints a code and one line; this
+// is the other half. canon-init already answered --help and this did not, so
+// the first thing a new user typed came back as ENOENT on a file called
+// "--help".
+const RULES = [
+  ['R1', 'a value outside the closed vocabulary'],
+  ['R2', 'an inline style attribute'],
+  ['R3', 'a <style> block'],
+  ['R4', 'data-layout and data-component on one element'],
+  ['R5', 'a component role on the wrong element'],
+  ['R6', 'a hardcoded colour or spacing in @layer canon.app'],
+  ['R7', 'a custom property that overrides no Canon token'],
+  ['R8', 'a data-x-component nothing styles, or a bad extension name'],
+  ['R9', 'an escape-hatch rule that restates a component default'],
+  ['R10', 'a form control with no accessible name'],
+  ['R11', 'a @layer in the canon.* namespace that Canon does not declare'],
+];
+
 const args = process.argv.slice(2);
+if (args[0] === '-h' || args[0] === '--help') {
+  console.log(
+    `Usage: canon-lint <files|dirs...>\n\n` +
+      `Validates Canon markup in .html/.htm/.jsx/.tsx and Canon CSS in .css.\n` +
+      `Exit 0 = clean, 1 = violations, 2 = usage error.\n\n` +
+      RULES.map(([id, what]) => `  ${id.padEnd(4)} ${what}`).join('\n') +
+      `\n\nIt also reports, without ever failing on them: how many rules you have\n` +
+      `in @layer canon.app, which measures what Canon is missing for your\n` +
+      `codebase, and what share of the markup it could actually read, since a\n` +
+      `value written as a JSX expression is opaque to it.`,
+  );
+  process.exit(0);
+}
 if (args.length === 0) {
-  console.error('Usage: canon-lint <files|dirs...>');
+  console.error('Usage: canon-lint <files|dirs...>   (--help for the rules)');
   process.exit(2);
 }
 

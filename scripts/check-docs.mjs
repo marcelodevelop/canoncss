@@ -95,10 +95,16 @@ else if (Math.abs(Number(claimed[1]) - metricLines) > 25) {
 // the README never mentioned it. This is a count a human has to keep in sync,
 // which is the category this file exists for.
 const LINT = readFileSync('bin/canon-lint.mjs', 'utf-8');
-const emitted = [...new Set([...LINT.matchAll(/'(R\d+)'/g)].map((m) => m[1]))];
+// The RULES table is the --help text, so its own entries are not evidence that
+// a rule is implemented. Read the emitted codes from everything else.
+const helpTable = LINT.match(/const RULES = \[[\s\S]*?\n\];/)?.[0] ?? '';
+const emitted = [...new Set([...LINT.replace(helpTable, '').matchAll(/'(R\d+)'/g)].map((m) => m[1]))];
 for (const rule of emitted) {
   if (!new RegExp(`\\b${rule}\\b`).test(README)) {
     failures.push(`canon-lint emits ${rule} and README.md never explains it`);
+  }
+  if (!new RegExp(`'${rule}'`).test(helpTable)) {
+    failures.push(`canon-lint emits ${rule} and its own --help never lists it`);
   }
 }
 

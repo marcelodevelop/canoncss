@@ -67,6 +67,44 @@ A closed vocabulary should not also be a lock-in. The author's own portfolio
 runs this way: a committed `canon.css` next to a 60-line `theme.css`, no
 install.
 
+## In your framework
+
+There is no plugin, no PostCSS step and no config. It is one stylesheet, so the
+integration is one import, and the only thing that differs between frameworks is
+which file you put it in.
+
+```js
+import 'canoncss/dist/canon.css';
+import './theme.css';              // yours, second
+```
+
+(Bare `import 'canoncss'` also resolves, via the package's `main`, but the
+explicit path is the one every bundler agrees about.)
+
+| | Import goes in | `data-theme` goes on |
+|---|---|---|
+| Next.js (App Router) | `app/layout.tsx` | the `<html>` you already render there |
+| Next.js (Pages) | `pages/_app.tsx` | `<Html>` in `pages/_document.tsx` |
+| Vite, CRA, Remix | your root entry | `index.html` |
+| Astro | your layout's frontmatter | `<html>` in that layout |
+| Nuxt, SvelteKit | `app.vue` / `+layout.svelte` | `app.html` |
+| Plain HTML | a `<link>` | `<html>` |
+
+Import Canon first and your theme second. Canon ships everything inside
+`@layer`, and an unlayered rule beats a layered one regardless of order, so a
+theme's plain `:root` block wins either way. That is what lets 60 lines
+retarget the whole framework. The ordering still matters for the
+`@layer canon.theme` block a theme uses for the few details tokens cannot
+express, and getting into the habit costs nothing.
+
+Anything server-rendered works unchanged, because there is no JavaScript to
+hydrate and no class names to generate. That also means no purge step, no
+safelist, and no dynamic-class footgun: `data-variant={x}` cannot be tree-shaken
+away, because nothing is generating it.
+
+On TypeScript, add the declarations and a wrong value stops compiling. See
+[TypeScript](#typescript) below.
+
 ## Use
 
 ```html
