@@ -966,6 +966,25 @@ margin: 0;
 [data-component="divider"][data-variant="strong"] {
 border-top-color: var(--color-border-strong);
 }
+@media (forced-colors: active) {
+[data-component="badge"] {
+border: 1px solid currentColor;
+}
+[data-component="button"] {
+border: 1px solid currentColor;
+}
+[data-component="button"]:disabled,
+[data-component="button"][aria-disabled="true"] {
+color: GrayText;
+border-color: GrayText;
+}
+[data-component="stepper"] > li[aria-current]::before {
+border-width: 3px;
+}
+[data-component="card"][data-variant="featured"] {
+border-width: 3px;
+}
+}
 }
 @layer canon.utilities {
 .sr-only {

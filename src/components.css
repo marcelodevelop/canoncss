@@ -915,4 +915,58 @@
   [data-component="divider"][data-variant="strong"] {
     border-top-color: var(--color-border-strong);
   }
+
+
+  /* ════════════════════════════════
+     FORCED COLOURS
+  ════════════════════════════════
+     Windows High Contrast and friends. The UA replaces every colour on the
+     page with the user's own palette, which is the whole point and is not
+     something to fight. What it also does is erase any distinction Canon was
+     drawing with background alone, and Canon draws several.
+
+     Only genuine breakage is repaired here. Anything that stays legible and
+     distinguishable under a forced palette is left to the UA, because
+     overriding it is how a framework ends up ignoring the setting.
+
+     Verified by reading the cascade, not by rendering: this mode cannot be
+     screenshotted from CI. Each rule below names the thing that disappears. */
+  @media (forced-colors: active) {
+    /* Five of the six badge variants carry a background and no border, so a
+       forced palette leaves them as bare text: no pill, and no difference
+       between success and error. Only `neutral` had a border and stayed
+       visible, which made the set inconsistent even before this mode. */
+    [data-component="badge"] {
+      border: 1px solid currentColor;
+    }
+
+    /* A button on <a> gets no button chrome from the UA, because it is not a
+       button, and Canon deliberately allows it (R5) and the corpus uses it for
+       every call to action. Without this the primary CTA renders as ordinary
+       link text. <button> is included so the two spellings stay identical. */
+    [data-component="button"] {
+      border: 1px solid currentColor;
+    }
+
+    /* Disabled is opacity, and opacity is not a colour, so it survives the
+       forced palette but reads as "slightly faint" rather than "off". */
+    [data-component="button"]:disabled,
+    [data-component="button"][aria-disabled="true"] {
+      color: GrayText;
+      border-color: GrayText;
+    }
+
+    /* The current step differs from a pending one only by background and
+       border colour, so a forced palette makes every marker identical. The
+       completed one keeps its tick and needs nothing. */
+    [data-component="stepper"] > li[aria-current]::before {
+      border-width: 3px;
+    }
+
+    /* Same failure: the featured card is border-colour only, and on a pricing
+       page it is the one carrying "this is the plan we recommend". */
+    [data-component="card"][data-variant="featured"] {
+      border-width: 3px;
+    }
+  }
 }
