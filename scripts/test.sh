@@ -145,4 +145,22 @@ node scripts/check-contrast.mjs --max 0 > /dev/null
 echo "- rule 3 checker self-check:"
 node scripts/check-tailwind-patterns.mjs --selftest
 
+# The shipped CSS was the one artifact nothing checked. This suite would pass
+# with exit 0 on a dist/canon.css containing `color: ;;;` - measured before the
+# gate was written, not assumed - and a broken declaration takes the rest of its
+# block with it, so a component silently stops existing on every page.
+echo "- css integrity checker self-check:"
+node scripts/check-css.mjs --selftest
+
+# dist alone, because the CDN serves it alone: every token it uses must be
+# defined in it, not in a theme the page may not have loaded.
+echo "- dist/canon.css must parse and be self-contained:"
+node scripts/check-css.mjs dist/canon.css
+
+# Themes and the reference extension resolve against Canon, so they are judged
+# with it. src/ is not checked separately: dist is its concatenation, and the
+# @layer order statement lives in build.sh rather than in any source file.
+echo "- shipped themes and extensions must parse:"
+node scripts/check-css.mjs dist/canon.css themes/*.css extensions/*.css
+
 echo "✓ all tests passed"
