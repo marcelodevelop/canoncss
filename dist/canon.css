@@ -17,6 +17,7 @@ line-height: var(--leading-normal);
 color: var(--color-content);
 background-color: var(--color-surface);
 -webkit-font-smoothing: antialiased;
+overflow-wrap: break-word;
 }
 img, video, svg {
 display: block;
@@ -28,9 +29,6 @@ color: inherit;
 }
 input[type="checkbox"], input[type="radio"], progress {
 accent-color: var(--color-brand);
-}
-p, h1, h2, h3, h4, h5, h6 {
-overflow-wrap: break-word;
 }
 h1, h2, h3, h4, h5, h6 {
 line-height: var(--leading-tight);

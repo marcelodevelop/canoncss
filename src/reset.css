@@ -17,6 +17,17 @@
     color: var(--color-content);
     background-color: var(--color-surface);
     -webkit-font-smoothing: antialiased;
+
+    /* Inherited, so it reaches every box that holds text rather than the
+       handful of tags that used to name it. It used to be on p and h1-h6 only,
+       which left the containers: a card body is a <div>, the card clips at its
+       radius, and a long URL or an API key in one lost a third of itself with
+       no wrap, no scrollbar and nothing to indicate the text continued.
+       Measured at 372px visible of 559px.
+       break-word rather than anywhere: it breaks a word only when the word
+       would otherwise overflow, and it leaves min-content sizing alone, so no
+       grid or flex track changes size because of it. */
+    overflow-wrap: break-word;
   }
 
   img, video, svg {
@@ -33,9 +44,6 @@
     accent-color: var(--color-brand);
   }
 
-  p, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
-  }
 
   h1, h2, h3, h4, h5, h6 {
     line-height: var(--leading-tight);
