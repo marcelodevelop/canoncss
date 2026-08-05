@@ -6,6 +6,24 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Added
+- **`canon-lint --help`**, which used to fail with `ENOENT` on a file called
+  `--help`. `canon-init` answered the flag and this did not, so the first thing
+  a new user types came back as a filesystem error. It now prints usage and all
+  eleven rules with one line each: the failure output gives a code, and nothing
+  told anyone what a code meant without opening the README.
+- **Framework integration docs**, which did not exist in any file. Not Next.js,
+  not Astro, not Vite, not one word. Canon is a single stylesheet with no build
+  step so the answer is one import line, but "obvious once you know" is what
+  documentation is for. A table of which file the import goes in and where
+  `data-theme` goes, per framework, plus the parts that genuinely differ from a
+  utility framework: no purge step, no safelist, no dynamic-class footgun.
+  - Every path verified against the real packed tarball installed into a scratch
+    project, rather than asserted.
+  - The cascade note was wrong on the first draft and was checked in a browser
+    before it shipped. "Canon first, your theme second" implies order decides
+    it; it does not, because an unlayered theme `:root` beats Canon's layered
+    rules in either order, which is the property that lets 60 lines retarget the
+    framework.
 - **`data-component="stepper"`**: an `<ol>` of checkout or onboarding steps.
   Current step is `aria-current="step"`, the same standard-attribute pattern
   `nav` uses; completed steps are `data-state="complete"`; upcoming is neither,
@@ -127,6 +145,23 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
     reproduce is the drift `check-docs.mjs` already exists to prevent.
 
 ### Fixed
+- **Two generated files were outside the CI drift check, and one had drifted.**
+  The check compared four paths and `bin/tokens.mjs` and `bin/defaults.mjs` were
+  in neither that list nor anyone's memory. `defaults.mjs` was stale: the
+  forced-colours work added a `border` rule for `[data-component="button"]`,
+  which makes the button's variants disagree about `border`, so `gen-defaults`
+  correctly stops treating it as a settled default. It was never regenerated and
+  CI had no opinion, and the effect was quiet and real, because **R9 lost the
+  ability to flag an inert `border` override on a button**, which is exactly the
+  valid-CSS-that-changes-nothing R9 exists for. The check now has no path list:
+  `build.sh` only writes generated artefacts, so after it runs the tree must be
+  clean, and anything generated later is covered without anyone remembering.
+- **Both prompts had `stepper` indented four spaces** where every other
+  component sits at two, so the one block describing it read as a continuation
+  of the `table` line above it, in the file the whole thesis rests on.
+  `check-docs.mjs` now asserts every component and layout appears at the table's
+  own indentation rather than merely appearing somewhere, which is all the
+  previous check required.
 - **Every completed step rendered `¹3` where the tick should be.** The stepper's
   complete state carried `content: '¹3'`, bytes `c2 b9 33`, directly under a
   comment saying a tick replaces the number once the step is done. A literal
