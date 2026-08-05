@@ -91,10 +91,6 @@ nav ul, nav ol {
 list-style: none;
 padding-inline-start: 0;
 }
-nav ul, nav ol {
-list-style: none;
-padding-inline-start: 0;
-}
 li + li {
 margin-top: var(--space-xs);
 }
@@ -584,7 +580,7 @@ color: var(--color-content-inverse);
 color: var(--color-content);
 }
 [data-component="stepper"] > li[data-state="complete"]::before {
-content: '¹3';
+content: '\2713';
 background: var(--color-brand-subtle);
 border-color: var(--color-brand);
 color: var(--color-brand);

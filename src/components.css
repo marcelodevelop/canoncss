@@ -350,9 +350,12 @@
   }
 
   /* A tick replaces the number once the step is done: the index stops being
-     the useful information. */
+     the useful information.
+     Written as an escape, not as the character. It shipped as the literal
+     glyph and an encoding round-trip turned it into "¹3", which is what every
+     completed step rendered. An escape cannot be mangled by one. */
   [data-component="stepper"] > li[data-state="complete"]::before {
-    content: '¹3';
+    content: '\2713';
     background: var(--color-brand-subtle);
     border-color: var(--color-brand);
     color: var(--color-brand);

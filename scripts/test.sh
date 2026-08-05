@@ -213,6 +213,19 @@ node scripts/check-tailwind-patterns.mjs --selftest
 # with exit 0 on a dist/canon.css containing `color: ;;;` - measured before the
 # gate was written, not assumed - and a broken declaration takes the rest of its
 # block with it, so a component silently stops existing on every page.
+# The shipped stylesheet must be pure ASCII. Comments are stripped at build
+# time, so anything non-ASCII left in it is a value the browser renders, and a
+# rendered glyph written as a literal character is one encoding round-trip away
+# from becoming something else. That is not hypothetical: the stepper's tick
+# shipped as a literal and arrived as "¹3", which is what every completed step
+# displayed. CSS escapes survive any encoding, so this rule costs nothing.
+echo "- dist/canon.css must be pure ASCII:"
+if LC_ALL=C grep -nP '[^\x00-\x7F]' dist/canon.css; then
+  echo "FAIL: non-ASCII in the shipped CSS - write it as a CSS escape (\\2713) instead"
+  exit 1
+fi
+echo "✓ no literal glyphs in the shipped CSS"
+
 echo "- css integrity checker self-check:"
 node scripts/check-css.mjs --selftest
 
