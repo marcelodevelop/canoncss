@@ -168,6 +168,19 @@ function lintInertOverrides(src) {
   return violations;
 }
 
+// R10's vocabulary. A submit or a button carries its own name in its value or
+// its text, and a hidden input is not a control anyone reaches.
+const CONTROLS = new Set(['input', 'select', 'textarea']);
+const SELF_LABELLING = new Set(['hidden', 'submit', 'button', 'image', 'reset']);
+
+/** Is this control inside a <label>? The nearest opening tag before it has to
+ *  be unclosed. Cheap, and correct for markup people actually write: a label
+ *  wrapping its control is never nested inside another label. */
+function insideLabel(src, at) {
+  const before = src.slice(0, at);
+  return before.lastIndexOf('<label') > before.lastIndexOf('</label>');
+}
+
 /** Extension components declared in an app layer, as `[data-x-component="x"]`
  *  selectors. Collected across every file so markup can be checked against
  *  what the CSS actually defines. */
@@ -224,6 +237,20 @@ function lintFile(file) {
     violations.push([lineOf(src, m.index), 'R3', 'no <style> blocks - Canon markup needs no extra CSS']);
   }
 
+  // Every id a <label for> points at, collected up front because a label is
+  // free to sit after the control it names.
+  const labelledIds = new Set(
+    [...src.matchAll(/<label[^>]*\bfor=["']([^"']+)["']/g)].map((m) => m[1]),
+  );
+
+  // R10 only judges Canon markup. A file with no Canon attribute anywhere is
+  // somebody else's HTML, and an accessible-name rule applied to it would make
+  // this a general-purpose accessibility linter, which it is not and should
+  // not become. The corpus contains the Tailwind control condition, and
+  // silently grading it against Canon's rules would be exactly the kind of
+  // rigged comparison the study is written to avoid.
+  const isCanonMarkup = /data-(component|layout|slot|x-component)=/.test(src);
+
   // Per-tag checks
   for (const tag of src.matchAll(/<([a-zA-Z][a-zA-Z0-9-]*)[^<>]*>/g)) {
     const text = tag[0];
@@ -251,6 +278,39 @@ function lintFile(file) {
       const allowed = ELEMENTS[role];
       if (allowed && !allowed.has(name)) {
         violations.push([line, 'R5', `<${name} data-component="${role}"> - use ${[...allowed].map((t) => `<${t}>`).join(' or ')}`]);
+      }
+    }
+
+    // R10 - a form control with no accessible name.
+    //
+    // This is not a general accessibility linter and does not try to be. It
+    // checks one thing, for the same reason R7 and R9 exist: the failure is
+    // silent. A <select> with no label renders perfectly, reads correctly to
+    // anyone looking at it, and is unusable to anyone who is not.
+    //
+    // Measured across the corpus before it was written: 10 controls of 357 had
+    // no accessible name, and every one of them sat in a toolbar or a filter
+    // row, where a visible label would be wrong and nobody added the invisible
+    // one instead. Canon's prompt says a control and its label are a stack,
+    // which puts the label in the right place when there is one, and says
+    // nothing about the case where there is not.
+    //
+    // A name comes from a wrapping <label>, a <label for> pointing at the id,
+    // or aria-label / aria-labelledby. Nothing else counts: placeholder is not
+    // a label, and a <span> sitting next to the control is not one either.
+    if (isCanonMarkup && CONTROLS.has(name) && !SELF_LABELLING.has(attrs.get('type'))) {
+      const id = attrs.get('id');
+      const named =
+        attrs.has('aria-label') ||
+        attrs.has('aria-labelledby') ||
+        (id && labelledIds.has(id)) ||
+        insideLabel(src, tag.index);
+      if (!named) {
+        violations.push([
+          line,
+          'R10',
+          `<${name}> has no accessible name - add aria-label, or a <label for="…"> if it has a visible one`,
+        ]);
       }
     }
 

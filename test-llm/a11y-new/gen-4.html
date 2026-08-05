@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alerts - Meridian</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="#">Meridian</a>
+  <nav data-slot="nav">
+    <a href="#">Docs</a>
+    <a href="#">Support</a>
+  </nav>
+  <div data-slot="actions">
+    <span data-component="avatar" data-size="sm">RK</span>
+    <span class="sr-only">Signed in as Rita Kwan</span>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="#">Docs</a>
+      <a href="#">Support</a>
+    </nav>
+  </details>
+</header>
+
+<div data-layout="sidebar" data-gap="xl">
+
+  <div data-slot="sidebar" data-layout="stack" data-gap="md">
+    <p data-tone="subtle">Monitoring</p>
+    <nav data-component="nav" aria-label="Main">
+      <ul>
+        <li><a href="#">Overview</a></li>
+        <li><a href="#">Streams</a></li>
+        <li><a href="#" aria-current="page">Alerts</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main data-slot="main" data-layout="stack" data-gap="xl">
+
+    <div data-layout="stack" data-gap="xs">
+      <h1>Alerts</h1>
+      <p data-tone="subtle">Everything your streams flagged in the last 24 hours.</p>
+    </div>
+
+    <div data-layout="grid" data-cols="4" data-gap="md">
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">128</span>
+          <span data-tone="subtle">Open alerts</span>
+        </div>
+      </article>
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">9</span>
+          <span data-tone="subtle">Critical</span>
+        </div>
+      </article>
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">4.2m</span>
+          <span data-tone="subtle">Median time to ack</span>
+        </div>
+      </article>
+      <article data-component="card">
+        <div data-slot="body" data-layout="stack" data-gap="xs">
+          <span data-component="stat">37</span>
+          <span data-tone="subtle">Streams reporting</span>
+        </div>
+      </article>
+    </div>
+
+    <div data-layout="row" data-gap="md" data-align="center" data-wrap>
+      <input data-component="input" type="search" id="alert-search" aria-label="Search alerts" placeholder="Search alerts">
+      <select data-component="select" id="alert-range" aria-label="Time range">
+        <option>Last hour</option>
+        <option selected>Last 24 hours</option>
+        <option>Last 7 days</option>
+        <option>Last 30 days</option>
+      </select>
+      <select data-component="select" id="alert-severity" aria-label="Severity">
+        <option selected>All severities</option>
+        <option>Critical</option>
+        <option>Warning</option>
+        <option>Info</option>
+      </select>
+      <button data-component="button" data-variant="secondary" type="button">Apply</button>
+    </div>
+
+    <table data-component="table">
+      <caption class="sr-only">Recent alerts</caption>
+      <thead>
+        <tr>
+          <th scope="col">Severity</th>
+          <th scope="col">Source</th>
+          <th scope="col">Message</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span data-component="badge" data-variant="error">Critical</span></td>
+          <td data-mono>api-gateway-01</td>
+          <td>Error rate above 5% for 3 consecutive minutes</td>
+          <td>14:02</td>
+        </tr>
+        <tr>
+          <td><span data-component="badge" data-variant="error">Critical</span></td>
+          <td data-mono>payments-worker</td>
+          <td>Queue depth exceeded 10,000 pending jobs</td>
+          <td>13:47</td>
+        </tr>
+        <tr>
+          <td><span data-component="badge" data-variant="warning">Warning</span></td>
+          <td data-mono>auth-service</td>
+          <td>p99 latency at 1.8s, threshold is 1.2s</td>
+          <td>13:15</td>
+        </tr>
+        <tr>
+          <td><span data-component="badge" data-variant="warning">Warning</span></td>
+          <td data-mono>ingest-eu-west</td>
+          <td>Disk usage at 88% on log volume</td>
+          <td>12:58</td>
+        </tr>
+        <tr>
+          <td><span data-component="badge" data-variant="info">Info</span></td>
+          <td data-mono>search-indexer</td>
+          <td>Reindex completed, 2.4M documents processed</td>
+          <td>12:30</td>
+        </tr>
+        <tr>
+          <td><span data-component="badge" data-variant="info">Info</span></td>
+          <td data-mono>cdn-edge-us</td>
+          <td>Cache hit ratio recovered to 96%</td>
+          <td>11:52</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </main>
+
+</div>
+
+</body>
+</html>
