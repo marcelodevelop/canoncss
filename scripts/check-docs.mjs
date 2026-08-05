@@ -6,6 +6,7 @@
 // human has to keep in sync is a number that will be wrong, so CI keeps it.
 
 import { readFileSync } from 'node:fs';
+import { gzipSync } from 'node:zlib';
 import { COMPONENTS, LAYOUTS } from '../bin/vocab.mjs';
 
 const README = readFileSync('README.md', 'utf-8');
@@ -38,6 +39,47 @@ for (const name of LAYOUTS) {
 const prompt = readFileSync('prompts/system-prompt.txt', 'utf-8');
 for (const name of COMPONENTS) {
   if (!prompt.includes(name)) failures.push(`prompts/system-prompt.txt never mentions ${name}`);
+}
+
+// Sizes drift the same way counts do, and worse, because nothing about editing
+// a stylesheet reminds you that a number in the README describes it. Every one
+// of these was wrong when it was checked: the CSS had grown from 24kb to 27kb,
+// the short prompt from 3.7kb to 5.9kb, and the metric from 200 lines to 335.
+// A tolerance rather than an exact match, so an ordinary edit does not fail the
+// build, but tight enough that the drift above would have.
+function checkSize(label, file, actualKb, re, source = README, tolerance = 0.6) {
+  const m = source.match(re);
+  if (!m) {
+    failures.push(`${file} no longer states a size for ${label}`);
+    return;
+  }
+  if (Math.abs(Number(m[1]) - actualKb) > tolerance) {
+    failures.push(`${file} says ${m[1]}kb for ${label}, it is ${actualKb.toFixed(1)}kb`);
+  }
+}
+
+const kb = (path) => readFileSync(path).length / 1000;
+const PROMPTS_README = readFileSync('prompts/README.md', 'utf-8');
+
+checkSize('dist/canon.css', 'README.md', kb('dist/canon.css'), /~([\d.]+)kb raw/);
+checkSize('the short prompt', 'README.md', kb('prompts/system-prompt.txt'), /\(([\d.]+)kb, roughly/);
+checkSize('the short prompt', 'prompts/README.md', kb('prompts/system-prompt.txt'), /`system-prompt\.txt`\s*\|\s*([\d.]+)kb/, PROMPTS_README);
+checkSize('the full prompt', 'prompts/README.md', kb('prompts/system-prompt-full.txt'), /`system-prompt-full\.txt`\s*\|\s*([\d.]+)kb/, PROMPTS_README);
+
+// The gzipped figure is the one people actually compare frameworks on, so it is
+// worth being right about. Node ships the compressor, so there is no reason to
+// take the README's word for it.
+const gzipKb = gzipSync(readFileSync('dist/canon.css')).length / 1000;
+checkSize('gzipped canon.css', 'README.md', gzipKb, /~([\d.]+)kb gzipped/);
+
+// RESEARCH.md is the piece written to be read by strangers, and it describes
+// the metric they are being invited to check.
+const RESEARCH = readFileSync('RESEARCH.md', 'utf-8');
+const metricLines = readFileSync('scripts/repro.mjs', 'utf-8').split('\n').length;
+const claimed = RESEARCH.match(/about (\d+) lines with no dependencies/);
+if (!claimed) failures.push('RESEARCH.md no longer states the size of the metric');
+else if (Math.abs(Number(claimed[1]) - metricLines) > 25) {
+  failures.push(`RESEARCH.md says the metric is about ${claimed[1]} lines, repro.mjs is ${metricLines}`);
 }
 
 if (failures.length > 0) {

@@ -33,7 +33,7 @@ or zero-install via CDN:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) - **~24kb raw, ~4.8kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) - **~28kb raw, ~5.4kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular - concatenate only the files you use.)
@@ -103,7 +103,7 @@ Three ways, pick one:
 - **Any coding agent** - copy [`prompts/AGENTS.md`](prompts/AGENTS.md) into your
   repo root (works with Cursor, Copilot, Codex, Claude Code).
 - **Raw prompt** - inject [`prompts/system-prompt.txt`](prompts/system-prompt.txt)
-  (3.7kb, roughly 1k tokens) as a system message. If output drifts, use
+  (6kb, roughly 1.5k tokens) as a system message. If output drifts, use
   [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt), which adds
   canonical patterns and anti-patterns. See [`prompts/README.md`](prompts/README.md).
 

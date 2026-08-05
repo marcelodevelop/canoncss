@@ -508,7 +508,7 @@ Every generation is in [`test-llm/`](test-llm/), with
 [a guide to what each directory is](test-llm/README.md). The prompts for all
 three conditions are in [`prompts/`](prompts/) and
 [`prompts/experiments/`](prompts/experiments/). The metric is
-[`scripts/repro.mjs`](scripts/repro.mjs), about 200 lines with no dependencies
+[`scripts/repro.mjs`](scripts/repro.mjs), about 335 lines with no dependencies
 and a self-check that runs in CI.
 
 Nothing here is specific to one framework. The neutral mode was built to
