@@ -1,5 +1,12 @@
 @layer canon.tokens {
   :root {
+    /* Canon's tokens only paint what Canon draws. The scrollbar, the popup a
+       native <select> opens, the date picker inside <input type="date">, the
+       autofill highlight and the default form-control chrome are painted by
+       the UA, and the UA reads color-scheme, not custom properties. Without
+       this line a correct dark page arrives with light furniture. */
+    color-scheme: light;
+
     /* ── SPACING (6 niveles) ── */
     --space-xs:  0.25rem;   /* 4px  */
     --space-sm:  0.5rem;    /* 8px  */
@@ -87,6 +94,8 @@
   /* ── DARK MODE - solo explícito, nunca automático.
      Light es el default de Canon; dark se pide con data-theme="dark". ── */
   [data-theme="dark"] {
+    color-scheme: dark;
+
     --color-brand:           #f5f4f2;
     --color-brand-subtle:    color-mix(in srgb, #f5f4f2 8%, #12100e);
     --color-accent:          #e8593a;

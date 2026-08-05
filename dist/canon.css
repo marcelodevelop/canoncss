@@ -137,6 +137,7 @@ outline-offset: 2px;
 }
 @layer canon.tokens {
 :root {
+color-scheme: light;
 --space-xs:  0.25rem;
 --space-sm:  0.5rem;
 --space-md:  1rem;
@@ -197,6 +198,7 @@ Palatino, Georgia, serif;
 --duration-slow:   300ms;
 }
 [data-theme="dark"] {
+color-scheme: dark;
 --color-brand:           #f5f4f2;
 --color-brand-subtle:    color-mix(in srgb, #f5f4f2 8%, #12100e);
 --color-accent:          #e8593a;

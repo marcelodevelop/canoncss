@@ -27,6 +27,11 @@ const THEME = `/* Your brand. This file is the only place Canon is allowed to va
    at all goes in @layer canon.app. canon-lint checks both. */
 
 :root {
+  /* Canon sets color-scheme: light here and dark on [data-theme='dark'], which
+     is what paints scrollbars, native select popups and autofill. Only touch it
+     if your light mode is itself dark, which is rare and deliberate. */
+  /* color-scheme: dark; */
+
   /* --color-brand: #0f766e; */
   /* --color-accent: #ea580c; */
   /* --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif; */
