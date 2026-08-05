@@ -377,18 +377,55 @@ markup alone: **one added line, the `<link>`, and not a single attribute
 touched.** `canon-lint` came back clean on all of them and counted the rules in
 `@layer canon.app`, which is the escape hatch reporting itself.
 
-#### What it costs, on both sides
+#### What it costs, and this part goes against Canon
 
 All six Tailwind runs reported that "round the corners more" was not expressible:
 the radius scale has no step between `rounded-lg` and `rounded-full`, and rule 1
-bans anything unlisted. A third of the request came back undone every time. That
-is the control hitting a floor of its own, the same way the dashboard found
-Canon's in Finding 6.
+says an unlisted utility does not exist. A third of the request came back undone,
+every time, with the agent naming the missing step and asking whether to add it.
+
+Canon has **the same ceiling**. Its radius scale is `sm` `md` `lg` `full`, and
+`src/components.css` already gives the card `border-radius: var(--radius-lg)`.
+
+All six Canon runs wrote `border-radius: var(--radius-lg)` into their escape
+hatch. That is the value the card already had. **It is a no-op, in six runs out
+of six, and not one of them noticed.** The other two thirds of the request landed
+for real, `border: none` and a genuine fill change from `--color-surface-raised`
+to `--color-surface-sunken`, and the declared layer order puts `canon.app` after
+`canon.components` so those do apply. The corners simply did not move, and every
+run reported the job done.
+
+So the floors are identical and the failure modes are opposite:
+
+| | Tailwind, strict | Closed vocabulary |
+|---|---|---|
+| Radius ceiling | `rounded-lg` | `--radius-lg` |
+| Request completed | 2 of 3 | 2 of 3 |
+| Did the run say so? | **6 of 6 yes** | **0 of 6** |
+
+Rule 1 left the Tailwind agent nowhere to put the change, so it had to surface
+the gap. Canon's escape hatch gave it somewhere to put *something*, and something
+plausible-looking is what it wrote. `canon-lint` counted the rule, correctly, as
+one thing the vocabulary does not cover. It has no way to notice that the rule
+does nothing.
+
+**An escape hatch converts a visible failure into a silent one.** That is a real
+cost of having one, it is not in this project's documentation, and it took six
+runs converging on the same inert line to make it visible.
 
 And Canon did not express this in its vocabulary either. It has no modifier for
 outline, fill or radius on a card, so every run went to the app layer or the
-extension namespace. The difference is that both are declared, linted, counted
-places to go, and the census survives the trip.
+extension namespace. What that buys is that the census survives the trip. What it
+costs is the paragraph above.
+
+There is one more thing in those six escape hatches worth reading. They are
+nearly identical: the same three declarations, the same three tokens, six times,
+varying only in which layer they chose and whether they added a
+`data-x-variant="flat"` selector. By this project's own admission test, which
+admits a component when generations build it *differently* and never when they
+merely need it, **a flat card variant is rejected.** Six independent runs reached
+one construction. The need is real and it costs nothing in variance, which is
+exactly the footer case from Finding 4 again.
 
 This is the only result in this sequence that did not shrink when it was
 attacked. Three attempts to knock the earlier ones down all succeeded to some

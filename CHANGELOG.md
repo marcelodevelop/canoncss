@@ -98,6 +98,19 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   Twelve runs across two specs, unanimous. The only result in this sequence that
   did not shrink when it was attacked, and the spec that broke the previous two
   did not break this one.
+- **An escape hatch turns a visible failure into a silent one, and that is a
+  cost Canon had not measured.** Both systems have the identical radius ceiling:
+  Tailwind stops at `rounded-lg`, Canon at `--radius-lg`, and `components.css`
+  already gives the card exactly that. All six Tailwind runs reported that "round
+  the corners more" was impossible and named the missing step. **All six Canon
+  runs wrote `border-radius: var(--radius-lg)` into their app layer, which is a
+  no-op, and reported the job done.** The other two thirds of the request landed
+  for real. `canon-lint` counted the rule correctly as something the vocabulary
+  does not cover, and has no way to notice the rule does nothing.
+- **A flat card variant is rejected by the admission test.** The six escape
+  hatches are nearly identical: same three declarations, same three tokens,
+  varying only in layer choice. Generations that converge do not qualify, however
+  real the need. Same shape as the footer in Finding 4.
 - **The agents lose track too, not just the tooling.** All three Tailwind runs on
   the dashboard restyled **five** things, the fifth being a table wrapper that
   uses the Card class string verbatim. Two flagged it and asked whether it was
