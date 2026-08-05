@@ -129,6 +129,13 @@ It also reports its own coverage. A value written as a JSX expression
 states how much of the markup it actually checked rather than implying all of
 it.
 
+R10 is the one accessibility check, and it is deliberately only one. A form
+control with no accessible name renders perfectly, reads correctly to anyone
+looking at it, and is unusable to anyone who is not, which is the same silent
+failure R7 and R9 exist for. A name comes from a wrapping `<label>`, a `<label
+for>`, or `aria-label`; a placeholder is not a label. It found 10 of 357
+controls across the corpus, every one in a toolbar or filter row.
+
 Point it at a theme file and it checks that too. A misspelled custom property
 is valid CSS that overrides nothing, so `--color-brnd` produces a page that
 looks almost right with no visible cause. R7 catches it and suggests the token

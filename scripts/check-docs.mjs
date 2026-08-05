@@ -87,6 +87,21 @@ else if (Math.abs(Number(claimed[1]) - metricLines) > 25) {
   failures.push(`RESEARCH.md says the metric is about ${claimed[1]} lines, repro.mjs is ${metricLines}`);
 }
 
+// Every rule canon-lint can emit has to be described where the people running
+// it will look. A rule nobody documented is a build that fails with a code the
+// reader has to go and grep for.
+//
+// R10 had already drifted this way: it shipped, it was in the changelog, and
+// the README never mentioned it. This is a count a human has to keep in sync,
+// which is the category this file exists for.
+const LINT = readFileSync('bin/canon-lint.mjs', 'utf-8');
+const emitted = [...new Set([...LINT.matchAll(/'(R\d+)'/g)].map((m) => m[1]))];
+for (const rule of emitted) {
+  if (!new RegExp(`\\b${rule}\\b`).test(README)) {
+    failures.push(`canon-lint emits ${rule} and README.md never explains it`);
+  }
+}
+
 if (failures.length > 0) {
   console.error('✗ docs are out of sync with the vocabulary:');
   for (const f of failures) console.error(`  ${f}`);
