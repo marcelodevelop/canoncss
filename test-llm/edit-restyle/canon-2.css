@@ -1,0 +1,8 @@
+/* Cards read as flat panels: no outline, subtle grey fill, rounder corners. */
+@layer canon.theme {
+  [data-component="card"] {
+    border: none;
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-lg);
+  }
+}

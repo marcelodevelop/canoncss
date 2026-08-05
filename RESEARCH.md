@@ -1,15 +1,15 @@
 # How reproducible is LLM-generated UI?
 
-**A measurement across three styling conditions, three page specs and 108
+**A measurement across three styling conditions, three page specs and 114
 generations. August 2026.**
 
 Ask a language model to build the same page twice and you get two different
 pages. Everyone building with these tools knows this. Almost nobody has put a
 number on it, which means nobody can tell whether an intervention helped.
 
-This is an attempt at that number, the method for producing it, and six findings
+This is an attempt at that number, the method for producing it, and seven findings
 that came out of it. One of them contradicts the project that ran the study, and
-the last one is about the half of the work the first five never touched.
+the last two are about the half of the work the first five never touched.
 
 The tooling is open source and the whole corpus is in this repository. Every
 figure below can be recomputed with one command.
@@ -317,6 +317,64 @@ That last point is the floor. It is a good deal smaller than the claim this
 project started with, and it is the one that has survived every attempt so far to
 knock it over, including this one.
 
+### Finding 7: after a restyle, only one of the two systems still knows what the page is made of
+
+The floor above rested on a single synthetic test, one file with `bg-teal-700`
+replaced by hand. That is the weakest evidence in this document supporting the
+last claim left standing, so it was run properly: three clean-context agents per
+system, one base page each, the same request.
+
+> Design update: the cards should read as flat panels rather than outlined
+> boxes. Drop the outline, give them a subtle grey fill, and round the corners
+> more. Nothing else about the page changes.
+
+The measurement is not churn. It is a census: **the page has three cards before
+and three cards after, so how many can each system's tooling still find?**
+
+| | Closed vocabulary | Tailwind, strict |
+|---|---|---|
+| Cards actually on the page, after | 3 | 3 |
+| Cards the tooling can find, before | 3 | 3 |
+| **Cards the tooling can find, after** | **3, 3, 3** | **0, 0, 1** |
+| Its checker's verdict, after | clean | clean, 0 violations |
+| Patterns it can identify at all, after | unchanged | 18 → 15, 15, 16 |
+| Lines of markup touched | 1, 1, 1 | 2 to 3 elements |
+
+The one Tailwind run that finds a card is the one whose agent deliberately kept
+the featured card's teal outline, reasoning that removing it would erase which
+plan is recommended. The other two flattened all three and the census went to
+zero. **`check-tailwind-patterns.mjs` reports clean on all three**, because a
+card it can no longer recognise is not a card it can check.
+
+#### The mechanism is in the control's own rules, not in the framing
+
+The obvious objection is that this compares a CSS change against a markup change.
+It does, and the reason is rule 2 of the house style: *no inline styles, no
+`<style>` blocks, no custom CSS*. A restyle has nowhere to go but the class
+attributes. That is the control's own text, written to make it a strong control,
+and it is what makes the component patterns and the styling the same artefact.
+
+All three Canon runs routed the change into a stylesheet instead and left the
+markup alone: **one added line, the `<link>`, and not a single attribute
+touched.** `canon-lint` came back clean and reported `1 rule in @layer canon.app`,
+which is the escape hatch counting itself.
+
+#### What it costs, on both sides
+
+All three Tailwind runs reported that "round the corners more" was not
+expressible: the radius scale has no step between `rounded-lg` and
+`rounded-full`. That is the control hitting a floor of its own, the same way the
+dashboard found Canon's in Finding 6.
+
+And Canon did not express this in its vocabulary either. It has no modifier for
+outline, fill or radius on a card, so all three runs went to the app layer. The
+difference is that the app layer is a declared, linted, counted place to go, and
+the census survives the trip.
+
+This is the first result in this sequence that did not shrink when it was
+attacked. Three attempts to knock the previous ones down all succeeded to some
+degree. This one predicted the numbers in advance and got them.
+
 ---
 
 ## Limitations
@@ -346,6 +404,16 @@ Stated plainly, because the findings are only as good as these.
   The direction is the same on both, the size is not: pricing is a factor of
   four on edits, the dashboard a factor of two. Read it as "roughly half or
   better", not as a coefficient.
+- **Finding 7 is one spec, one base page, n=3, and one request.** It is the
+  cleanest result here and it is also the youngest. The census gap is large
+  enough that noise is not a plausible explanation, but a second spec has now
+  overturned a conclusion in this document twice, so treat it as provisional
+  until it has one.
+- **Finding 7 compares a CSS change to a markup change**, because rule 2 of the
+  control forbids custom CSS and Canon's card has no markup knob for fill or
+  radius. Both systems were given the identical request and routed it where
+  their own rules allow. That routing is the finding rather than a flaw in it,
+  but a house style that permitted a stylesheet would not behave this way.
 - **Finding 6's edits were told not to reformat.** Without that instruction line
   churn measures tidying as much as editing. It applied equally to both
   conditions, but it does mean the line figures are a floor on a real diff.

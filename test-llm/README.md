@@ -13,6 +13,7 @@ vocabulary edit that would break real generated markup fails CI.
 | `site-relay/` | A seven-page product written by seven agents that never saw each other's output. Tests cross-page consistency. |
 | `repro-pricing*`, `repro-dashboard*` | Reproduction runs. Five clean-context agents given the **same** spec, so the outputs can be compared to each other. Numbered rounds correspond to prompt versions. |
 | `edit-density/`, `edit-density-dash/`, `edit-section/`, `edit-remove/` | Edit runs. One base page per styling system, three clean-context agents each given the **same change request**, so the diffs can be compared. Measures changing a page rather than writing one. `edit-density-dash` is the replication of `edit-density` on the second spec; `edit-section` and `edit-remove` are controls. |
+| `edit-restyle/` | The same, for a restyle rather than a resize. Measures a census rather than a diff: the page has three cards before and after, so how many can each system's tooling still find? The Canon runs carry a `.css` sidecar because that is where the change landed. |
 | `violations-fixture.html` | Deliberately broken. `npm test` fails if the linter stops catching all six violations. |
 
 ## Reproduction: the number that matters

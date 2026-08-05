@@ -79,6 +79,20 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   component. Naming the component apart from styling it is what closes that hole,
   and it is the only part of this finding that is structural rather than a matter
   of who wrote which script.
+- **Finding 7 tests that last claim properly, and it holds.** The floor above
+  rested on one synthetic `sed`. Run instead with three clean-context agents per
+  system on the same restyle request, "cards should be flat panels, drop the
+  outline, subtle grey fill": the page still has three cards afterwards, and
+  **Canon's tooling still finds 3, 3, 3 while the Tailwind checker finds 0, 0,
+  1** and reports clean on all three, because a card it cannot recognise is not
+  a card it can check. Its identifiable patterns fall 18 to 15.
+- **All three Canon runs changed one line of markup: the `<link>`.** The restyle
+  went to a stylesheet, `canon-lint` came back clean and counted `1 rule in
+  @layer canon.app`. The reason is rule 2 of the control, no custom CSS, so a
+  Tailwind restyle has nowhere to go but the class attributes. Both systems hit
+  a floor again: all three Tailwind runs reported "round the corners more" was
+  inexpressible, and Canon has no card modifier for fill or radius either.
+  First result in this sequence that did not shrink when it was attacked.
 - **Canon has a floor too, and the dashboard found it.** Eight of that page's
   fifteen gaps were already at `xs` and the base carried no `data-padding`, so
   two of three runs reported that card interiors could not be tightened without
