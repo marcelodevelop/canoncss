@@ -1,6 +1,6 @@
 # How reproducible is LLM-generated UI?
 
-**A measurement across three styling conditions, three page specs and 114
+**A measurement across three styling conditions, three page specs and 120
 generations. August 2026.**
 
 Ask a language model to build the same page twice and you get two different
@@ -322,29 +322,47 @@ knock it over, including this one.
 The floor above rested on a single synthetic test, one file with `bg-teal-700`
 replaced by hand. That is the weakest evidence in this document supporting the
 last claim left standing, so it was run properly: three clean-context agents per
-system, one base page each, the same request.
+system, on both specs, the same request.
 
 > Design update: the cards should read as flat panels rather than outlined
 > boxes. Drop the outline, give them a subtle grey fill, and round the corners
 > more. Nothing else about the page changes.
 
-The measurement is not churn. It is a census: **the page has three cards before
-and three cards after, so how many can each system's tooling still find?**
+The measurement is not churn. It is a census: **the page has the same cards
+before and after, so how many can each system's tooling still find?**
 
 | | Closed vocabulary | Tailwind, strict |
 |---|---|---|
-| Cards actually on the page, after | 3 | 3 |
-| Cards the tooling can find, before | 3 | 3 |
-| **Cards the tooling can find, after** | **3, 3, 3** | **0, 0, 1** |
+| Pricing: cards the tooling finds, before | 3 | 3 |
+| **Pricing: after** | **3, 3, 3** | **0, 0, 1** |
+| Dashboard: cards the tooling finds, before | 4 | 5 |
+| **Dashboard: after** | **4, 4, 4** | **0, 0, 0** |
 | Its checker's verdict, after | clean | clean, 0 violations |
-| Patterns it can identify at all, after | unchanged | 18 → 15, 15, 16 |
-| Lines of markup touched | 1, 1, 1 | 2 to 3 elements |
+| Patterns it can identify at all, after | unchanged | 18 → 15, 28 → 23 |
+| Lines of markup touched | 1, 1, 1 and 1, 9, 1 | 2 to 5 elements |
 
-The one Tailwind run that finds a card is the one whose agent deliberately kept
-the featured card's teal outline, reasoning that removing it would erase which
-plan is recommended. The other two flattened all three and the census went to
-zero. **`check-tailwind-patterns.mjs` reports clean on all three**, because a
-card it can no longer recognise is not a card it can check.
+**Six runs of six on each side, and the direction is unanimous.** The one
+Tailwind run that still finds a card is the one whose agent deliberately kept the
+featured card's teal outline, reasoning that removing it would erase which plan
+is recommended. Every other run went to zero. `check-tailwind-patterns.mjs`
+reports clean on all six, because a card it can no longer recognise is not a card
+it can check.
+
+The nine-line Canon run is worth noting because it took a different route: rather
+than restyle `[data-component="card"]` wholesale, its agent tagged the four cards
+with `data-x-variant="flat"`, the extension namespace. Different strategy, same
+census, because it never touched the `data-component` that does the identifying.
+
+#### The tooling is not the only thing that loses track
+
+On the dashboard, all three Tailwind runs restyled **five** things. The fifth is
+a table wrapper that happens to use the Card class string verbatim. Two of the
+three flagged it and asked whether it was meant to be a card, because there is
+nothing in the file that answers that question: a card and a table container that
+look alike *are* alike, as far as the markup is concerned.
+
+The Canon runs restyled `[data-component="card"]` and hit exactly four. The
+identifier that survives the edit is the same identifier that scopes it.
 
 #### The mechanism is in the control's own rules, not in the framing
 
@@ -354,26 +372,30 @@ It does, and the reason is rule 2 of the house style: *no inline styles, no
 attributes. That is the control's own text, written to make it a strong control,
 and it is what makes the component patterns and the styling the same artefact.
 
-All three Canon runs routed the change into a stylesheet instead and left the
+Five of the six Canon runs routed the change into a stylesheet and left the
 markup alone: **one added line, the `<link>`, and not a single attribute
-touched.** `canon-lint` came back clean and reported `1 rule in @layer canon.app`,
-which is the escape hatch counting itself.
+touched.** `canon-lint` came back clean on all of them and counted the rules in
+`@layer canon.app`, which is the escape hatch reporting itself.
 
 #### What it costs, on both sides
 
-All three Tailwind runs reported that "round the corners more" was not
-expressible: the radius scale has no step between `rounded-lg` and
-`rounded-full`. That is the control hitting a floor of its own, the same way the
-dashboard found Canon's in Finding 6.
+All six Tailwind runs reported that "round the corners more" was not expressible:
+the radius scale has no step between `rounded-lg` and `rounded-full`, and rule 1
+bans anything unlisted. A third of the request came back undone every time. That
+is the control hitting a floor of its own, the same way the dashboard found
+Canon's in Finding 6.
 
 And Canon did not express this in its vocabulary either. It has no modifier for
-outline, fill or radius on a card, so all three runs went to the app layer. The
-difference is that the app layer is a declared, linted, counted place to go, and
-the census survives the trip.
+outline, fill or radius on a card, so every run went to the app layer or the
+extension namespace. The difference is that both are declared, linted, counted
+places to go, and the census survives the trip.
 
-This is the first result in this sequence that did not shrink when it was
-attacked. Three attempts to knock the previous ones down all succeeded to some
-degree. This one predicted the numbers in advance and got them.
+This is the only result in this sequence that did not shrink when it was
+attacked. Three attempts to knock the earlier ones down all succeeded to some
+degree: a percentage inverted on a second spec, and an "unenforceable" claim was
+refuted by a checker written in an afternoon. This one predicted its numbers in
+advance, got them, and then got them again on the spec that had broken the
+previous two.
 
 ---
 
@@ -404,11 +426,10 @@ Stated plainly, because the findings are only as good as these.
   The direction is the same on both, the size is not: pricing is a factor of
   four on edits, the dashboard a factor of two. Read it as "roughly half or
   better", not as a coefficient.
-- **Finding 7 is one spec, one base page, n=3, and one request.** It is the
-  cleanest result here and it is also the youngest. The census gap is large
-  enough that noise is not a plausible explanation, but a second spec has now
-  overturned a conclusion in this document twice, so treat it as provisional
-  until it has one.
+- **Finding 7 is two specs, n=3 each, and one request.** It is the youngest
+  result here and the only one that has replicated without shrinking. What it
+  has not had is a second *request*: everything rests on one restyle, and a
+  different one could behave differently.
 - **Finding 7 compares a CSS change to a markup change**, because rule 2 of the
   control forbids custom CSS and Canon's card has no markup knob for fill or
   radius. Both systems were given the identical request and routed it where

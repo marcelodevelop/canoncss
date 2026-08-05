@@ -92,7 +92,18 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   Tailwind restyle has nowhere to go but the class attributes. Both systems hit
   a floor again: all three Tailwind runs reported "round the corners more" was
   inexpressible, and Canon has no card modifier for fill or radius either.
-  First result in this sequence that did not shrink when it was attacked.
+- **Finding 7 replicated on the dashboard, and got stronger.** Canon **4, 4, 4**
+  against a base of 4; Tailwind **0, 0, 0** against a base of 5, with the checker
+  reporting clean on all three and its identifiable patterns falling 28 to 23.
+  Twelve runs across two specs, unanimous. The only result in this sequence that
+  did not shrink when it was attacked, and the spec that broke the previous two
+  did not break this one.
+- **The agents lose track too, not just the tooling.** All three Tailwind runs on
+  the dashboard restyled **five** things, the fifth being a table wrapper that
+  uses the Card class string verbatim. Two flagged it and asked whether it was
+  meant to be a card, because nothing in the file answers that. The Canon runs
+  restyled `[data-component="card"]` and hit exactly four. The identifier that
+  survives the edit is the same one that scopes it.
 - **Canon has a floor too, and the dashboard found it.** Eight of that page's
   fifteen gaps were already at `xs` and the base carried no `data-padding`, so
   two of three runs reported that card interiors could not be tightened without

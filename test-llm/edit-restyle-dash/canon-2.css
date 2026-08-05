@@ -1,0 +1,10 @@
+@layer canon.app {
+
+  /* Flat panel cards: no outline, subtle grey fill, softer corners. */
+  [data-component="card"][data-x-variant="flat"] {
+    border: none;
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-lg);
+  }
+
+}

@@ -1,0 +1,9 @@
+/* Cards read as flat panels rather than outlined boxes: no outline,
+   subtle grey fill, softer corners. Canon's card has no flat variant. */
+@layer canon.app {
+  [data-component="card"] {
+    border: none;
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-lg);
+  }
+}

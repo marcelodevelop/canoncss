@@ -1,0 +1,10 @@
+@layer canon.app {
+
+  /* Cards on this page read as flat panels, not outlined boxes. */
+  [data-component="card"] {
+    border: none;
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-lg);
+  }
+
+}
