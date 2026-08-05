@@ -64,7 +64,7 @@
     text-decoration-skip-ink: auto;
   }
 
-  /* Links dentro de <nav> son navegación, no prosa: sin subrayado, tono neutro. */
+  /* A link inside <nav> is navigation, not prose: no underline, neutral tone. */
   nav a {
     color: var(--color-content-subtle);
     text-decoration: none;
@@ -81,7 +81,7 @@
     background-color: var(--color-surface-raised);
   }
 
-  /* Underline animado en hover: el detalle que separa nav de prosa */
+  /* An animated underline on hover: the detail that separates nav from prose */
   @media (prefers-reduced-motion: no-preference) {
     nav a {
       background-image: linear-gradient(var(--color-accent), var(--color-accent));
@@ -99,27 +99,27 @@
     }
   }
 
-  /* Item activo: aria-current es el contrato, el accent lo marca */
+  /* The active item: aria-current is the contract, the accent marks it */
   nav a[aria-current="page"] {
     color: var(--color-content);
     box-shadow: inset 0 -2px 0 var(--color-accent);
     border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   }
 
-  /* Prose primitives: el reset global mata margin/padding, así que las
-     primitivas de texto se restauran acá con la voz editorial de Canon. */
+  /* Prose primitives: the global reset kills margin and padding, so the text
+     primitives are restored here in Canon's editorial voice. */
   ul, ol {
     padding-inline-start: 1.5em;
   }
 
-  /* Listas con controles (filtros, settings) son UI, no prosa: sin bullets */
+  /* A list of controls (filters, settings) is UI, not prose: no bullets */
   ul:has(input), ol:has(input) {
     list-style: none;
     padding-inline-start: 0;
   }
 
-  /* Una lista dentro de <nav> es navegacion, no prosa. Encontrado porque el
-     sitio de docs venia parcheando esto a mano sobre su copia vendorizada. */
+  /* A list inside <nav> is navigation, not prose. Found because the docs site
+     had been patching this by hand on its vendored copy. */
   nav ul, nav ol {
     list-style: none;
     padding-inline-start: 0;

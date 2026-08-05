@@ -20,7 +20,7 @@ export const VOCAB = {
   'data-cols': new Set(['1', '2', '3', '4', 'auto']),
   'data-width': new Set(['prose', 'content', 'wide']),
   'data-size': new Set(['sm', 'md', 'lg']),
-  // ponytail: unión de variants de todos los componentes; per-component si hace falta
+  // ponytail: the union of every component's variants; split per component if it matters
   'data-variant': new Set(['primary', 'secondary', 'ghost', 'danger', 'link', 'neutral', 'brand', 'success', 'warning', 'error', 'info', 'strong', 'featured']),
   'data-state': new Set(['error', 'success', 'complete']),
   'data-tone': new Set(['subtle', 'brand', 'accent', 'success', 'error']),

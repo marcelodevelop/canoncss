@@ -20,7 +20,7 @@
     white-space: nowrap;
   }
 
-  /* Padding directo sobre cualquier elemento */
+  /* Padding straight onto any element */
   [data-padding="xs"]  { padding: var(--space-xs); }
   [data-padding="sm"]  { padding: var(--space-sm); }
   [data-padding="md"]  { padding: var(--space-md); }
@@ -35,7 +35,7 @@
   [data-tone="success"] { color: var(--color-success); }
   [data-tone="error"]   { color: var(--color-error); }
 
-  /* Mono sin chip: eyebrows, labels tecnicos. code es para codigo. */
+  /* Mono without the chip: eyebrows, technical labels. <code> is for code. */
   [data-mono] { font-family: var(--font-mono); }
 
   /* Full width */
@@ -50,25 +50,25 @@
     [data-hide="mobile"] { display: none; }
   }
 
-  /* ── MOTION: intents, no implementaciones. Cuatro y solo cuatro.
-     Todo respeta prefers-reduced-motion sin que el autor haga nada. ── */
+  /* ── MOTION: intents, not implementations. Four, and only four.
+     Every one respects prefers-reduced-motion with no author effort. ── */
   @media (prefers-reduced-motion: no-preference) {
-    /* rise: entrada al cargar (hero, secciones principales) */
+    /* rise: entrance on load (hero, main sections) */
     [data-motion="rise"] {
       animation: canon-rise 480ms var(--ease-default) both;
     }
 
-    /* float: deriva suave en loop (decoraciones, ilustraciones) */
+    /* float: a gentle drift on loop (decorations, illustrations) */
     [data-motion="float"] {
       animation: canon-float 6s ease-in-out infinite;
     }
 
-    /* pulse: atencion periodica (dots de estado, badges live) */
+    /* pulse: periodic attention (status dots, live badges) */
     [data-motion="pulse"] {
       animation: canon-pulse 2.4s var(--ease-default) infinite;
     }
 
-    /* lift: elevacion al hover (cards clickeables) */
+    /* lift: elevation on hover (clickable cards) */
     [data-motion="lift"] {
       transition:
         transform var(--duration-normal) var(--ease-default),

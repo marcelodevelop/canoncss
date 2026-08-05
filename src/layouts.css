@@ -1,12 +1,12 @@
 @layer canon.layouts {
 
-  /* ── STACK: flujo vertical con gap uniforme ── */
+  /* ── STACK: vertical flow with a uniform gap ── */
   [data-layout="stack"] {
     display: flex;
     flex-direction: column;
   }
 
-  /* ── ROW: flujo horizontal ── */
+  /* ── ROW: horizontal flow ── */
   [data-layout="row"] {
     display: flex;
     flex-direction: row;
@@ -59,10 +59,10 @@
   [data-layout="centered"][data-width="prose"]   { max-width: var(--width-prose); }
   [data-layout="centered"][data-width="content"] { max-width: var(--width-content); }
   [data-layout="centered"][data-width="wide"]    { max-width: var(--width-wide); }
-  /* Default cuando no hay data-width */
+  /* The default when no data-width is given */
   [data-layout="centered"]:not([data-width]) { max-width: var(--width-wide); }
 
-  /* ── HERO: sección full-viewport ── */
+  /* ── HERO: full-viewport section ── */
   [data-layout="hero"] {
     display: flex;
     flex-direction: column;
@@ -90,8 +90,8 @@
   [data-gap="2xl"] { gap: var(--space-2xl); }
 
   /* align (cross axis) */
-  /* Stacks centrados centran su texto: sin esto un heading que envuelve
-     queda rag-left dentro de un bloque visualmente centrado */
+  /* A centred stack centres its text too: without this, a heading that wraps
+     sits rag-left inside a block that is visually centred */
   [data-layout="stack"][data-align="center"],
   [data-layout="hero"] {
     text-align: center;
