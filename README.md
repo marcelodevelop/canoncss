@@ -134,6 +134,14 @@ is valid CSS that overrides nothing, so `--color-brnd` produces a page that
 looks almost right with no visible cause. R7 catches it and suggests the token
 you meant. Your own variables are left alone.
 
+R9 is the same failure one level up. A rule in an escape-hatch layer that
+restates a value the component already has is valid CSS that changes no pixel,
+and in review it reads as the change having been made. This was measured: six of
+six clean-context agents asked to give cards rounder corners wrote
+`border-radius: var(--radius-lg)`, which is what a card already had, and every
+one reported the job done. Only provably inert declarations are flagged, so a
+property the component's own variants disagree about is never judged.
+
 ## When Canon does not have it
 
 The vocabulary is closed, not a cage. Design will ask for a datepicker, a

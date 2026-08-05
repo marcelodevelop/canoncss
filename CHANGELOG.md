@@ -17,6 +17,19 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   an edit rewrites, in styling decisions and in lines, each normalised by the
   base file. Reproduction measures writing a page twice; this measures the other
   half of the work.
+- **R9: an override that overrides nothing.** A rule in `@layer canon.app` or
+  `@layer canon.theme` that restates a value the component already carries is
+  valid CSS, changes no pixel, and reads in review as the change having been
+  made. R7 catches this at the token level; R9 is the same failure one level up.
+  Only provably inert declarations are flagged: `bin/defaults.mjs`, generated
+  from `src/components.css` by `scripts/gen-defaults.mjs`, drops any property
+  the component's own variants disagree about.
+  - It exists because six of six agents wrote one. Those six files are now the
+    regression test: `npm test` fails if they stop being caught.
+  - **It found one in shipped code on its first run.** `themes/institutional.css`
+    restated `border: 1px solid var(--color-border)` on `card`, which the card
+    already had. The theme's hairline look comes from its flattened `--shadow-*`
+    tokens; that line did nothing. Removed.
 - **`scripts/check-tailwind-patterns.mjs`**: enforces rule 3 of the Tailwind
   control, the verbatim component patterns, which `check-tailwind-control.mjs`
   never covered. Written to refute a finding of this project's own, and it did.
@@ -98,6 +111,19 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   Twelve runs across two specs, unanimous. The only result in this sequence that
   did not shrink when it was attacked, and the spec that broke the previous two
   did not break this one.
+- **An escape hatch turns a visible failure into a silent one, and that is a
+  cost Canon had not measured.** Both systems have the identical radius ceiling:
+  Tailwind stops at `rounded-lg`, Canon at `--radius-lg`, and `components.css`
+  already gives the card exactly that. All six Tailwind runs reported that "round
+  the corners more" was impossible and named the missing step. **All six Canon
+  runs wrote `border-radius: var(--radius-lg)` into their app layer, which is a
+  no-op, and reported the job done.** The other two thirds of the request landed
+  for real. `canon-lint` counted the rule correctly as something the vocabulary
+  does not cover, and has no way to notice the rule does nothing.
+- **A flat card variant is rejected by the admission test.** The six escape
+  hatches are nearly identical: same three declarations, same three tokens,
+  varying only in layer choice. Generations that converge do not qualify, however
+  real the need. Same shape as the footer in Finding 4.
 - **The agents lose track too, not just the tooling.** All three Tailwind runs on
   the dashboard restyled **five** things, the fifth being a table wrapper that
   uses the Card class string verbatim. Two flagged it and asked whether it was
