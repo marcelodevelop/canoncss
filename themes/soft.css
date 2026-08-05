@@ -23,7 +23,16 @@
   --weight-bold: 800;
 
   /* Colour: coral on cream, with warm browns instead of grey. */
-  --color-brand: #f2705a;
+  /* The coral is deeper than it looks like it wants to be, and it has to be.
+     --color-brand is a background under --color-content-inverse on the primary
+     button and the stepper, and it is also ink on the page for a link and a
+     brand badge. In this theme the inverse and the surface are the same cream,
+     so both uses are the same contrast test, and the original #f2705a scored
+     2.79 against a 4.5 requirement. There is a third reading too, as badge ink
+     on its own tint, and that one is the binding constraint: this is the
+     lightest coral that clears all three without washing the tint out to
+     nothing. */
+  --color-brand: #b53a20;
   --color-brand-subtle: #ffe3db;
   --color-accent: #7aa87b;
   --color-accent-subtle: #e3f0e2;
@@ -33,19 +42,22 @@
   --color-surface-sunken: #fdefe4;
 
   --color-content: #4a382f;
-  --color-content-subtle: #927b6d;
+  --color-content-subtle: #7d685c;
   --color-content-inverse: #fffaf4;
 
   --color-border: #f3e2d5;
-  --color-border-strong: #e3c9b6;
+  --color-border-strong: #9c8271;
 
-  --color-success: #5f9c6c;
+  /* The tints stay soft; the ink on them does not get to. Each of these is
+     read twice: as badge text on its own pale tint, and as a button background
+     under cream. The muted originals scored 2.1 to 3.6 on both. */
+  --color-success: #3f6b49;
   --color-success-subtle: #e2f0e3;
-  --color-warning: #d99a3f;
+  --color-warning: #7a5312;
   --color-warning-subtle: #fbeed6;
-  --color-error: #d95f4c;
+  --color-error: #a3311f;
   --color-error-subtle: #fce0da;
-  --color-info: #6e9cc4;
+  --color-info: #2f5f87;
   --color-info-subtle: #e2eef7;
 
   /* Air: every step of the spacing scale is more generous than the default. */
@@ -97,7 +109,7 @@
   --color-content-inverse: #241c18;
 
   --color-border: #3d302a;
-  --color-border-strong: #574439;
+  --color-border-strong: #89725f;
 
   /* Status colours have to be restated here, and leaving them out was a real
      bug. This file is not in a layer, so its :root beats Canon's own
