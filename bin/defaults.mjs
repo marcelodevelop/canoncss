@@ -50,8 +50,10 @@ export const DEFAULTS = {
   },
   "modal": {
     "align-items": "center",
-    "display": "flex",
+    "border": "0",
+    "height": "auto",
     "inset": "0",
+    "margin": "0",
     "position": "fixed",
     "z-index": "200"
   },
