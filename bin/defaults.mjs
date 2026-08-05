@@ -61,11 +61,12 @@ export const DEFAULTS = {
   },
   "select": {
     "appearance": "none",
-    "background-image": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E\")",
-    "background-position": "right var(--space-md) center",
+    "background-image": "linear-gradient(45deg, transparent 50%, var(--color-content-subtle) 50%), linear-gradient(135deg, var(--color-content-subtle) 50%, transparent 50%)",
+    "background-position": "right calc(var(--_control-pad-x) + 6px) center, right var(--_control-pad-x) center",
     "background-repeat": "no-repeat",
+    "background-size": "6px 6px, 6px 6px",
     "cursor": "pointer",
-    "padding-right": "var(--space-2xl)"
+    "padding-right": "calc(var(--_control-pad-x) + 1.25rem)"
   },
   "stat": {
     "display": "block",
