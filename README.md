@@ -214,6 +214,37 @@ product. It is meant to be looked at, not hidden. A big one is a bug report, and
 the vocabulary is supposed to grow toward it on the evidence rule in
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## TypeScript
+
+A closed vocabulary is a union type. React's types allow any `data-*` attribute
+with any value, so `data-layout="stak"` compiled fine and stayed wrong until
+`canon-lint` ran. Canon ships the vocabulary as declarations, generated from the
+same table the linter enforces:
+
+```json
+{
+  "include": ["node_modules/canoncss/types/canon.d.ts", "src"]
+}
+```
+
+That is the whole setup. Every `data-*` attribute now autocompletes with exactly
+the values Canon accepts, and a wrong one is a compile error with the same
+suggestion the linter would have given:
+
+```
+Type '"stak"' is not assignable to type '"stack" | "row" | "grid" | …'.
+  Did you mean '"stack"'?
+```
+
+It augments React's `HTMLAttributes`, so it covers every element with no
+per-element wiring and no runtime cost, and every attribute is optional, so
+adding it to an existing codebase breaks nothing that was already right. The
+extension namespace (`data-x-*`) types as `string`, because it is open by
+design.
+
+This also closes the one hole `canon-lint` reports and cannot fill: a value
+written as an expression is opaque to the linter, and is checked here.
+
 ## Editor autocomplete
 
 Canon ships a VS Code [custom data](https://code.visualstudio.com/api/extension-guides/custom-data-extension)
@@ -320,9 +351,10 @@ examples/   Five pages built with zero extra CSS
 test-llm/   LLM regression corpus
 scripts/    build.sh (cat + comment-strip)
 vscode/     generated html.customData for editor autocomplete
+types/      generated TypeScript declarations for the vocabulary
 ```
 
-Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.components → canon.utilities`.
+Cascade order: `canon.reset → canon.tokens → canon.layouts → canon.components → canon.utilities → canon.theme → canon.app`.
 
 ## Rules
 
