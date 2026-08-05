@@ -739,14 +739,35 @@
     display: none;
   }
 
-  /* A <dialog> opened with showModal() gets a real ::backdrop from the browser,
-     and the element's own background never covers the viewport. Both routes are
-     supported because `modal` sits on <dialog> or <div>, and only one of them
-     has a ::backdrop. */
+  /* A <dialog> opened with showModal() gets a real ::backdrop from the browser.
+     Both routes are supported because `modal` sits on <dialog> or <div>, and
+     only one of them has a ::backdrop. */
   [data-component="modal"]::backdrop {
     background-color: rgb(0 0 0 / 0.32);
     backdrop-filter: blur(10px) saturate(120%);
     -webkit-backdrop-filter: blur(10px) saturate(120%);
+  }
+
+  /* And then both of them painted. The note here used to say the element's own
+     background never covers the viewport under showModal(), which was true of a
+     default <dialog> and false of this one: the rule above forces
+     position: fixed with inset: 0 precisely so it does. So the scrim rendered
+     twice, once on ::backdrop and once on the element sitting over it. Measured
+     at 980x2122 in a 980x2122 viewport, two layers of rgb(0 0 0 / 0.32) for an
+     effective 0.54, and blur(10px) applied to the result of blur(10px).
+
+     :modal is the distinction the previous version had no way to draw. It
+     matches only a dialog the browser has put in the top layer, which is
+     exactly the case that already has a ::backdrop to carry the scrim, so the
+     element hands it over. A <div data-component="modal"> never matches and
+     keeps its own, which is the only scrim it has.
+
+     A browser without :modal drops this rule and gets the doubled scrim it
+     would have had anyway, so the degradation is the old behaviour. */
+  [data-component="modal"]:modal {
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   /* Without blur support the scrim is the only thing separating the layers, so
