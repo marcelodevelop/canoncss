@@ -87,6 +87,18 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   `--color-border-strong` is darker in each of them now.
 - Two marginal misses in the default light theme, `--color-content-subtle` at
   4.41 and `--color-success` at 4.30, against 4.5.
+- **The modal was broken on `<dialog>`, which is its canonical element.** Three
+  user agent styles were never reset, and a `<div>` carries none of them, which
+  is why it went unnoticed until a `<dialog>` example was rendered.
+  - `dialog:not([open]) { display: none }` is a **user agent** rule and Canon's
+    `display: flex` is an author rule, so the author rule won. **Every Canon
+    modal on a `<dialog>` was permanently on screen, closed or not.** That is
+    the serious one.
+  - `width` and `height` default to `fit-content`, which beats `inset: 0`, so
+    the full-screen overlay rendered as a 517x283 box in a 1280x720 viewport.
+  - `border` defaults to solid, drawing a 2.4px black frame around the scrim.
+  - Now covers the layout viewport exactly, with the panel centred in it, on
+    both `<dialog>` and `<div>`.
 - **The modal scrim blurs what is behind it** rather than only dimming it, the
   same `backdrop-filter` treatment the topbar already used. Because the blur
   separates the layers on its own, the scrim itself got lighter: 0.5 flat was a
