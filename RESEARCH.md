@@ -410,8 +410,23 @@ one thing the vocabulary does not cover. It has no way to notice that the rule
 does nothing.
 
 **An escape hatch converts a visible failure into a silent one.** That is a real
-cost of having one, it is not in this project's documentation, and it took six
-runs converging on the same inert line to make it visible.
+cost of having one, and it took six runs converging on the same inert line to
+make it visible.
+
+It is also fixable, which is the part that turns this from a defeat into the
+clearest example of what the closed vocabulary is for. `canon-lint` gained
+**R9**: a declaration in an escape-hatch layer whose property and value already
+match the component's own default. The six files above are now its regression
+test. On its first run against the rest of the repository it found one more, in
+a shipped theme, where `themes/institutional.css` restated a border the card
+already had.
+
+A class-string system cannot copy this check, and not for want of effort.
+Comparing an override against a default requires a default to compare against,
+declared somewhere other than the override itself. Tailwind's card *is* its class
+string: there is no separate statement of what a card normally looks like, so
+there is nothing for a redundant declaration to be redundant against. This is the
+same property as the census in the table above, seen from the other side.
 
 And Canon did not express this in its vocabulary either. It has no modifier for
 outline, fill or radius on a card, so every run went to the app layer or the

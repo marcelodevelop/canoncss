@@ -7,6 +7,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { VOCAB, ELEMENTS, COMPONENTS } from './vocab.mjs';
 import { TOKENS } from './tokens.mjs';
+import { DEFAULTS } from './defaults.mjs';
 
 const EXTS = new Set(['.html', '.htm', '.jsx', '.tsx', '.css']);
 const SKIP_DIRS = new Set(['node_modules', 'dist', '.next', '.git']);
@@ -42,9 +43,9 @@ const SPACING_PROP = /^\s*(padding|margin|gap|row-gap|column-gap|font-size)[^:]*
 
 /** Extracts the body of every `@layer canon.app { … }` block, with the offset
  *  each one starts at so line numbers stay real. */
-function appLayers(src) {
+function appLayers(src, name = 'canon.app') {
   const out = [];
-  for (const m of src.matchAll(/@layer\s+canon\.app\s*\{/g)) {
+  for (const m of src.matchAll(new RegExp(`@layer\\s+${name.replace('.', '\\.')}\\s*\\{`, 'g'))) {
     let depth = 1;
     let i = m.index + m[0].length;
     const start = i;
@@ -121,6 +122,52 @@ function lintTokens(src) {
   return { violations, overrides };
 }
 
+/** R9 - an override that overrides nothing.
+ *
+ *  R7 catches this at the token level: a misspelled custom property is valid
+ *  CSS that does nothing. This is the same failure one level up. A rule in an
+ *  escape-hatch layer that restates a value the component already has is valid
+ *  CSS, changes no pixel, and reads in review as the change having been made.
+ *
+ *  Six of six clean-context agents asked to give cards rounder corners wrote
+ *  `border-radius: var(--radius-lg)`, which is what the card already had, and
+ *  every one of them reported the job done. An escape hatch turns a visible
+ *  failure into a silent one, and this is the check that turns it back.
+ *
+ *  Both escape-hatch layers are read. `canon.theme` is included because two of
+ *  those six landed there rather than in `canon.app`. Only exact matches on
+ *  property and value are flagged, and `bin/defaults.mjs` already dropped any
+ *  property the component's own variants disagree about, so a flag here means
+ *  the declaration is provably inert rather than merely suspicious. */
+const RULE_BLOCK = /([^{}]+)\{([^{}]*)\}/g;
+
+function lintInertOverrides(src) {
+  const violations = [];
+  for (const name of ['canon.app', 'canon.theme']) {
+    for (const layer of appLayers(src, name)) {
+      for (const block of layer.body.matchAll(RULE_BLOCK)) {
+        const selector = block[1];
+        const comp = selector.match(/\[data-component=["']([a-z-]+)["']\]/)?.[1];
+        const defaults = comp && DEFAULTS[comp];
+        if (!defaults) continue;
+        for (const part of block[2].split(';')) {
+          const i = part.indexOf(':');
+          if (i === -1) continue;
+          const prop = part.slice(0, i).trim();
+          const value = part.slice(i + 1).trim().replace(/\s+/g, ' ');
+          if (defaults[prop] !== value) continue;
+          violations.push([
+            lineOf(src, layer.offset + block.index + block[0].indexOf(part)),
+            'R9',
+            `${prop}: ${value} on ${comp} is already the default in @layer ${name} - this rule changes nothing`,
+          ]);
+        }
+      }
+    }
+  }
+  return violations;
+}
+
 /** Extension components declared in an app layer, as `[data-x-component="x"]`
  *  selectors. Collected across every file so markup can be checked against
  *  what the CSS actually defines. */
@@ -147,6 +194,7 @@ function lintCss(file, src) {
       }
     }
   }
+  violations.push(...lintInertOverrides(src));
   const tokens = lintTokens(src);
   violations.push(...tokens.violations);
   return { violations, rules, overrides: tokens.overrides };

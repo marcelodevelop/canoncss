@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 echo "- clean files must pass:"
-node bin/canon-lint.mjs themes extensions examples test-llm/settings.html test-llm/dashboard.html test-llm/landing.html test-llm/blog.html test-llm/v2 test-llm/v3 test-llm/site-relay test-llm/repro-pricing test-llm/repro-pricing-v2 test-llm/repro-pricing-v3 test-llm/repro-dashboard test-llm/repro-dashboard-v2 test-llm/repro-dashboard-v3 test-llm/repro-pricing-v4 test-llm/control-tailwind test-llm/edit-density test-llm/edit-section test-llm/edit-density-dash test-llm/edit-remove test-llm/edit-restyle test-llm/edit-restyle-dash
+node bin/canon-lint.mjs themes extensions examples test-llm/settings.html test-llm/dashboard.html test-llm/landing.html test-llm/blog.html test-llm/v2 test-llm/v3 test-llm/site-relay test-llm/repro-pricing test-llm/repro-pricing-v2 test-llm/repro-pricing-v3 test-llm/repro-dashboard test-llm/repro-dashboard-v2 test-llm/repro-dashboard-v3 test-llm/repro-pricing-v4 test-llm/control-tailwind test-llm/edit-density test-llm/edit-section test-llm/edit-density-dash test-llm/edit-remove
 
 echo "- fixture must fail with exactly 6 violations:"
 set +e
@@ -57,6 +57,23 @@ if [ "$CODE4" -ne 1 ] || [ "$COUNT4" -ne 3 ]; then
   exit 1
 fi
 echo "✓ extension fixture caught ($COUNT4 violations, exit $CODE4)"
+
+# The restyle corpus is a fixture rather than clean markup. Six clean-context
+# agents wrote an inert border-radius into their escape hatch and every one
+# reported the job done; R9 exists because of those six files, so they are the
+# regression test for it. If this stops failing, R9 has stopped working.
+echo "- restyle corpus must fail with exactly 6 R9 violations:"
+set +e
+OUT5=$(node bin/canon-lint.mjs test-llm/edit-restyle test-llm/edit-restyle-dash)
+CODE5=$?
+set -e
+COUNT5=$(echo "$OUT5" | grep -cE '  R9  ')
+if [ "$CODE5" -ne 1 ] || [ "$COUNT5" -ne 6 ]; then
+  echo "FAIL: expected exit 1 with 6 violations, got exit $CODE5 with $COUNT5:"
+  echo "$OUT5"
+  exit 1
+fi
+echo "✓ restyle corpus caught ($COUNT5 violations, exit $CODE5)"
 
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs

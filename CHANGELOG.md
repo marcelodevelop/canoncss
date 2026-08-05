@@ -17,6 +17,19 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   an edit rewrites, in styling decisions and in lines, each normalised by the
   base file. Reproduction measures writing a page twice; this measures the other
   half of the work.
+- **R9: an override that overrides nothing.** A rule in `@layer canon.app` or
+  `@layer canon.theme` that restates a value the component already carries is
+  valid CSS, changes no pixel, and reads in review as the change having been
+  made. R7 catches this at the token level; R9 is the same failure one level up.
+  Only provably inert declarations are flagged: `bin/defaults.mjs`, generated
+  from `src/components.css` by `scripts/gen-defaults.mjs`, drops any property
+  the component's own variants disagree about.
+  - It exists because six of six agents wrote one. Those six files are now the
+    regression test: `npm test` fails if they stop being caught.
+  - **It found one in shipped code on its first run.** `themes/institutional.css`
+    restated `border: 1px solid var(--color-border)` on `card`, which the card
+    already had. The theme's hairline look comes from its flattened `--shadow-*`
+    tokens; that line did nothing. Removed.
 - **`scripts/check-tailwind-patterns.mjs`**: enforces rule 3 of the Tailwind
   control, the verbatim component patterns, which `check-tailwind-control.mjs`
   never covered. Written to refute a finding of this project's own, and it did.
