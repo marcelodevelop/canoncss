@@ -145,6 +145,30 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
     reproduce is the drift `check-docs.mjs` already exists to prevent.
 
 ### Fixed
+- **A card ate a third of any long word it was given.** `overflow-wrap:
+  break-word` was on `p` and `h1`-`h6`, the tags that hold prose rather than the
+  boxes that hold text. A card body is a `<div>` and the card clips at its own
+  radius with `overflow: hidden`, so a URL, an API key, an email or a hash in
+  one did not wrap, did not scroll and did not warn. Measured in a browser at
+  **372px of a 559px string visible**, 67%, with no scrollbar and nothing to
+  suggest the text continued. Moved to `body`, where it inherits into every box
+  that holds text: three lines out, one line in. `break-word` rather than
+  `anywhere` deliberately, since it leaves `min-content` sizing alone and so no
+  grid track or flex item changes size because of it.
+- **A modal opened with `showModal()` painted its scrim twice.** The note in the
+  source said the element's own background never covers the viewport in that
+  case, which is true of a default `<dialog>` and false of this one, because
+  Canon forces `position: fixed` with `inset: 0` precisely so it does. So both
+  the `::backdrop` and the element over it painted: two layers of
+  `rgb(0 0 0 / 0.32)` for an effective 0.54, and `blur(10px)` applied to the
+  result of `blur(10px)`. Measured at 980x2122 in a 980x2122 viewport.
+  - `:modal` is the distinction the previous version had no way to draw. It
+    matches only a dialog the browser has put in the top layer, which is exactly
+    the case that already has a `::backdrop`, so the element hands the scrim
+    over. A `<div data-component="modal">` never matches and keeps its own, and
+    neither does a declarative `<dialog open>`, which is what `examples/modal/`
+    uses and which has no `::backdrop` either. A browser without `:modal` drops
+    the rule and gets the previous behaviour.
 - **Two generated files were outside the CI drift check, and one had drifted.**
   The check compared four paths and `bin/tokens.mjs` and `bin/defaults.mjs` were
   in neither that list nor anyone's memory. `defaults.mjs` was stale: the
