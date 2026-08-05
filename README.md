@@ -142,6 +142,15 @@ six clean-context agents asked to give cards rounder corners wrote
 one reported the job done. Only provably inert declarations are flagged, so a
 property the component's own variants disagree about is never judged.
 
+R11 is the quietest one in the family. `@layer canon.apps { … }` is valid CSS
+that still renders, because a layer nothing declared sorts after every layer
+that was, so the page looks right. What stops is the checking: R6 no longer
+reads that block for hardcoded colours, R9 no longer reads it for inert rules,
+R8 no longer sees the extensions defined in it, and the app-layer count that is
+supposed to measure what Canon is missing reads zero. A typo opts the file out
+of the whole tool and the tool used to call it clean. Only the `canon.*`
+namespace is judged, so your own `@layer components` is left alone.
+
 ## When Canon does not have it
 
 The vocabulary is closed, not a cage. Design will ask for a datepicker, a

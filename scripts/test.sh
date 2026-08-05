@@ -128,6 +128,24 @@ echo "✓ restyle corpus caught ($COUNT5 violations, exit $CODE5)"
 # the target was somewhere other than the working directory: the CSS went where
 # it was told and AGENTS.md went to cwd, so `canon-init ../other-project` put
 # the framework in one repo and the agent instructions in another.
+# The quietest of the three "valid CSS that does nothing" failures. R7 catches
+# a misspelled token, R9 a rule that restates a default, and R11 a misspelled
+# layer - which still renders, because an undeclared layer sorts after every
+# declared one, while silently exempting its whole block from R6, R8 and R9.
+echo "- layer fixture must fail with exactly 2 R11 violations:"
+set +e
+OUT8=$(node bin/canon-lint.mjs test-llm/layer-fixture.css)
+CODE8=$?
+set -e
+COUNT8=$(echo "$OUT8" | grep -cE '  R11  ')
+ALL8=$(echo "$OUT8" | grep -cE '  R[0-9]+  ')
+if [ "$CODE8" -ne 1 ] || [ "$COUNT8" -ne 2 ] || [ "$ALL8" -ne 2 ]; then
+  echo "FAIL: expected exit 1 with 2 violations, all R11; got exit $CODE8, $COUNT8 R11 of $ALL8 total:"
+  echo "$OUT8"
+  exit 1
+fi
+echo "✓ layer fixture caught ($COUNT8 violations, exit $CODE8)"
+
 echo "- canon-init writes where it says it writes:"
 ROOT=$PWD
 INIT_TMP=$(mktemp -d)
