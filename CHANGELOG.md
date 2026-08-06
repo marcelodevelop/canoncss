@@ -6,6 +6,26 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Fixed
+- **The burger is drawn now, not typed.** It was the only mark in the framework
+  the markup had to supply: the disclosure caret is generated, the stepper's
+  numbers and its tick are generated, and the mobile menu asked the author for a
+  literal `U+2630`. Two things were wrong with that. A glyph stored as a
+  character is one encoding pass from becoming something else, which is exactly
+  how the stepper's tick once shipped as `¹3`. And a screen reader announcing
+  "trigram for heaven" is not a menu button. The summary now draws three lines
+  and hides whatever word the author wrote, which stays as the accessible name,
+  so `<summary>Menú</summary>` renders as a burger and announces as "Menú". It
+  becomes a cross when open, so the control says what it does next.
+- **`data-cols` promised equal columns and did not deliver them.** The grid used
+  `repeat(N, 1fr)`, and a bare `1fr` is `minmax(auto, 1fr)`, so a track will not
+  shrink below its content's min-content width and one wide cell makes its
+  column wider than the rest. Measured on a real four-up product grid: the card
+  carrying a discount badge came out in a 238px column against 232. Six pixels
+  is the harmless version; a long unbreakable word does it hard.
+- **Comments in a `.css` file were linted as rules.** An app-layer file that
+  documented itself drew false R9 violations for rules it did not contain, and
+  worse, a brace in prose counted toward the app-layer rule total, which is the
+  one figure the escape hatch exists to produce.
 - **A tag written inside a JS comment was scanned as markup.** HTML comments and
   JSX `{/* */}` comments were already dropped; plain `//` and `/* */` ones were
   not, so prose describing a `<textarea>` produced an R10 for a control that

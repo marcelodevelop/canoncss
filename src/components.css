@@ -609,17 +609,71 @@
     position: relative;
   }
 
+  /* The burger is drawn, not typed. It used to be the author's job to put a
+     literal U+2630 in the summary, which was the only mark in the framework
+     the markup had to supply: the disclosure caret is generated, the stepper's
+     numbers and its tick are generated, and this one was not.
+     Two things were wrong with that. A glyph stored as a character is one
+     encoding pass from becoming something else, which is exactly how the
+     stepper's tick once shipped as "¹3". And a screen reader announcing
+     "trigram for heaven" is not a menu button.
+     So the summary now draws three lines and hides whatever word the author
+     wrote, which stays as the accessible name. `<summary>Menú</summary>`
+     renders as a burger and announces as "Menú". */
   [data-component="topbar"] > [data-slot="menu"] > summary {
     list-style: none;
     cursor: pointer;
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-xs) var(--space-sm);
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: var(--radius-md);
-    font-size: var(--text-xl);
     line-height: 1;
     user-select: none;
+    /* Hides the label without removing it from the accessibility tree. The
+       marks below are sized in rem, so they do not shrink with it. */
+    font-size: 0;
+  }
+
+  [data-component="topbar"] > [data-slot="menu"] > summary::before,
+  [data-component="topbar"] > [data-slot="menu"] > summary::after {
+    content: '';
+    position: absolute;
+    width: 1.125rem;
+    height: 2px;
+    background-color: currentColor;
+  }
+
+  /* Three lines from one element: the bar itself plus two shadows of it. */
+  [data-component="topbar"] > [data-slot="menu"] > summary::before {
+    box-shadow: 0 -0.375rem 0 currentColor, 0 0.375rem 0 currentColor;
+  }
+
+  [data-component="topbar"] > [data-slot="menu"] > summary::after {
+    opacity: 0;
+  }
+
+  /* Open, the three lines become a cross, so the control says what it does
+     next rather than what it did. */
+  [data-component="topbar"] > [data-slot="menu"][open] > summary::before {
+    box-shadow: none;
+    transform: rotate(45deg);
+  }
+
+  [data-component="topbar"] > [data-slot="menu"][open] > summary::after {
+    opacity: 1;
+    transform: rotate(-45deg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-component="topbar"] > [data-slot="menu"] > summary::before,
+    [data-component="topbar"] > [data-slot="menu"] > summary::after {
+      transition: transform var(--duration-fast) var(--ease-default),
+                  box-shadow var(--duration-fast) var(--ease-default),
+                  opacity var(--duration-fast) var(--ease-default);
+    }
   }
 
   [data-component="topbar"] > [data-slot="menu"] > summary::-webkit-details-marker {
