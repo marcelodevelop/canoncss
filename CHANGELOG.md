@@ -5,6 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 
 ## [Unreleased]
 
+### Fixed
+- **An arrow function hid every attribute after it from the linter.** The tag
+  body was matched with `[^<>]*`, which stops at the first `>`, and a JSX
+  handler contains one in its arrow. Every attribute written after a handler
+  was invisible to every per-tag rule, so `canon-lint` reported clean on markup
+  it had not finished reading. Found by running it over its own documentation
+  site, where R10 fired on a `<textarea>` that did have an `aria-label`.
+
+## [0.4.0] - 2026-08-06
+
+
 ### Added
 - **Two components and two things that needed none.** `alert` and `breadcrumb`
   join the vocabulary; `<progress>` and
@@ -66,23 +77,8 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   the markup carries no index to fall out of order. On a narrow screen only the
   current label survives, which is what makes every hand-built version of this
   overflow.
-- **`npm run repro -- --churn <base> <edited...>`**: measures how much of a page
-  an edit rewrites, in styling decisions and in lines, each normalised by the
-  base file. Reproduction measures writing a page twice; this measures the other
-  half of the work.
-- **R9: an override that overrides nothing.** A rule in `@layer canon.app` or
-  `@layer canon.theme` that restates a value the component already carries is
-  valid CSS, changes no pixel, and reads in review as the change having been
-  made. R7 catches this at the token level; R9 is the same failure one level up.
-  Only provably inert declarations are flagged: `bin/defaults.mjs`, generated
-  from `src/components.css` by `scripts/gen-defaults.mjs`, drops any property
-  the component's own variants disagree about.
-  - It exists because six of six agents wrote one. Those six files are now the
-    regression test: `npm test` fails if they stop being caught.
-  - **It found one in shipped code on its first run.** `themes/institutional.css`
-    restated `border: 1px solid var(--color-border)` on `card`, which the card
-    already had. The theme's hairline look comes from its flattened `--shadow-*`
-    tokens; that line did nothing. Removed.
+
+
 - **R10: a form control with no accessible name.** Not a general accessibility
   linter and it does not try to be. It checks one thing, for the same reason R7
   and R9 exist: the failure is silent. A `<select>` with no label renders
@@ -476,6 +472,34 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   stopped and said so and stayed lint-clean, and nothing registered when the
   Tailwind runs went through the floor instead.
 
+## [0.3.0] - 2026-08-05
+
+Reconstructed from the tag range `v0.2.1..v0.3.0`. This release was published to
+npm and never written down, which is the drift `scripts/check-release.mjs` now
+fails on.
+
+### Added
+- **R9: an override that overrides nothing.** A rule in `@layer canon.app` or
+  `@layer canon.theme` that restates a value the component already carries is
+  valid CSS, changes no pixel, and reads in review as the change having been
+  made. R7 catches this at the token level; R9 is the same failure one level up.
+  Only provably inert declarations are flagged: `bin/defaults.mjs`, generated
+  from `src/components.css` by `scripts/gen-defaults.mjs`, drops any property
+  the component's own variants disagree about.
+  - It exists because six of six agents wrote one. Those six files are now the
+    regression test: `npm test` fails if they stop being caught.
+  - **It found one in shipped code on its first run.** `themes/institutional.css`
+    restated `border: 1px solid var(--color-border)` on `card`, which the card
+    already had. The theme's hairline look comes from its flattened `--shadow-*`
+    tokens; that line did nothing. Removed.- **`npm run repro -- --churn <base> <edited...>`**: measures how much of a page
+  an edit rewrites, in styling decisions and in lines, each normalised by the
+  base file. Reproduction measures writing a page twice; this measures the other
+  half of the work.
+### Measured
+- **The checker written to refute this project's own claim did refute it**, and
+  the second spec killed the headline number a second time. Both results are in
+  RESEARCH.md rather than in a drawer.
+
 ## [0.2.1] - 2026-08-04
 
 Fixes a contradiction shipped in 0.2.0.
@@ -586,6 +610,16 @@ Three conditions, two specs, forty generations. Full tables in
 ### Fixed
 - The documented lint command. `npx canon-lint` resolves by package name and
   404s; the package is `canoncss`.
+
+## [0.1.4] - 2026-08-04
+## [0.1.3] - 2026-08-04
+## [0.1.2] - 2026-08-03
+## [0.1.1] - 2026-08-03
+
+Interim publishes during the 0.1.x to 0.2.0 work: R5, R7, `canon-init`, the two
+starter themes, the VS Code data file, and the first Tailwind control group.
+Their notes are under [0.2.0], written when the work was cut rather than split
+four ways after the fact.
 
 ## [0.1.0] - 2026-08-02
 
