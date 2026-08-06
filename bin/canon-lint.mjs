@@ -29,6 +29,46 @@ function blank(src, re) {
   return src.replace(re, (m) => m.replace(/[^\n]/g, ' '));
 }
 
+/** Blanks JavaScript comments, keeping every newline so line numbers hold.
+ *
+ *  Quotes are tracked only to avoid opening a comment inside one. The strings
+ *  themselves are left alone: a docs page writes its examples in them, and
+ *  those examples are markup worth checking. */
+function blankJsComments(src) {
+  let out = '';
+  let i = 0;
+  let quote = null;
+  while (i < src.length) {
+    const c = src[i];
+    const next = src[i + 1];
+    if (quote) {
+      if (c === '\\') { out += src.slice(i, i + 2); i += 2; continue; }
+      if (c === quote || c === '\n') quote = null;
+      out += c;
+      i++;
+      continue;
+    }
+    if (c === '"' || c === "'") { quote = c; out += c; i++; continue; }
+    // A URL is the only common `//` that is not a comment, and it always
+    // arrives as `://`. Anything else starting a line or following a space is
+    // prose.
+    if (c === '/' && next === '/' && src[i - 1] !== ':') {
+      while (i < src.length && src[i] !== '\n') { out += ' '; i++; }
+      continue;
+    }
+    if (c === '/' && next === '*') {
+      const end = src.indexOf('*/', i + 2);
+      const stop = end === -1 ? src.length : end + 2;
+      for (let j = i; j < stop; j++) out += src[j] === '\n' ? '\n' : ' ';
+      i = stop;
+      continue;
+    }
+    out += c;
+    i++;
+  }
+  return out;
+}
+
 /** Every opening tag, with its full attribute list, as [text, name] plus the
  *  `index` a matchAll result carries. Scans rather than regexes the body,
  *  because a JSX expression can contain `>` and quotes can contain both. */
@@ -298,10 +338,21 @@ function lintFile(file) {
     return { violations: css.violations, checked: 0, opaque: 0, appRules: css.rules, overrides: css.overrides };
   }
   // Ignore code-sample carriers: template literals (JSX docs), comments.
+  //
+  // HTML and JSX comments were already dropped here; plain JS ones were not,
+  // so a tag written in a `//` or `/* */` comment was scanned as markup. This
+  // file's own fixture tripped over it: prose describing a <textarea> produced
+  // an R10 for a control that does not exist.
+  //
+  // `//` is the delicate one, because it also appears in every https:// URL,
+  // and blanking real markup would make the linter miss violations, which is
+  // the failure it just got fixed for. So the scan tracks quotes and refuses
+  // to open a comment on a `//` that follows a colon.
   let src = raw;
   src = blank(src, /`[^`]*`/gs);
   src = blank(src, /<!--[\s\S]*?-->/g);
   src = blank(src, /\{\/\*[\s\S]*?\*\/\}/g);
+  src = blankJsComments(src);
 
   // R3 - <style> blocks
   for (const m of src.matchAll(/<style[\s>]/gi)) {

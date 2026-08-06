@@ -24,9 +24,12 @@ echo "✓ fixture caught ($COUNT violations, exit $CODE)"
 # written after a handler was invisible to every per-tag rule, so the linter
 # reported clean on markup it had not finished reading.
 #
-# The fixture asserts both directions at once: an R1 violation sitting after an
-# arrow function must be caught, and an aria-label sitting after one must be
-# seen, so R10 must NOT fire. Exactly one violation, and it must be R1.
+# The fixture asserts three things at once, and each one needs a different part
+# of the scanner to work: an R1 violation sitting after an arrow function must
+# be caught; an aria-label sitting after one must be seen, so R10 must not fire;
+# and the tags written in its own prose comments must be ignored, along with the
+# https:// URL that shares its syntax with a comment. Exactly one violation, and
+# it must be R1. Without the fixes it reports five.
 echo "- jsx fixture must fail with exactly 1 violation, an R1:"
 set +e
 OUTJ=$(node bin/canon-lint.mjs test-llm/jsx-tag-fixture.tsx)
