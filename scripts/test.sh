@@ -244,6 +244,13 @@ echo "✓ package ships the documented paths and no test fixtures"
 echo "- docs must match the vocabulary:"
 node scripts/check-docs.mjs
 
+# The repo has to agree with itself about what version it is. It did not, for
+# five releases: v0.1.1 through v0.4.0 were published to npm and every one of
+# them carries a package.json saying 0.1.0 and a stylesheet whose header says
+# v0.1.0. The bump happened at publish time and never came back.
+echo "- version must be consistent:"
+node scripts/check-release.mjs
+
 # MIGRATING.md is a table of measurements over the two corpora, and a table of
 # measurements nobody can regenerate is the drift this repo already fixed once
 # for the README. The census is the source; the doc has to agree with it.
