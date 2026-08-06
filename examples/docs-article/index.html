@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rate limits - Meridian API docs</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="#">Meridian</a>
+    <nav data-slot="nav">
+      <a href="#">Guides</a>
+      <a href="#" aria-current="page">API</a>
+      <a href="#">Changelog</a>
+    </nav>
+    <div data-slot="actions" data-layout="row" data-gap="sm" data-align="center">
+      <a data-component="button" data-variant="ghost" data-size="sm" href="#">Sign in</a>
+      <a data-component="button" data-variant="primary" data-size="sm" href="#">Get a key</a>
+    </div>
+    <details data-slot="menu">
+      <summary>Menu</summary>
+      <nav>
+        <a href="#">Guides</a>
+        <a href="#" aria-current="page">API</a>
+        <a href="#">Changelog</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="centered" data-width="prose" data-padding="xl">
+    <div data-layout="stack" data-gap="xl">
+
+      <nav data-component="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">API reference</a></li>
+          <li><a href="#" aria-current="page">Rate limits</a></li>
+        </ol>
+      </nav>
+
+      <div data-layout="stack" data-gap="sm">
+        <p data-tone="subtle" data-mono>API reference</p>
+        <h1>Rate limits</h1>
+        <p data-tone="subtle">Every key is bucketed per endpoint. Requests over
+          the ceiling get a 429 and a <code>Retry-After</code> header.</p>
+      </div>
+
+      <div data-component="alert" data-variant="warning">
+        <h2>The v1 limits retire on 1 March</h2>
+        <p>Keys still on v1 fall back to 60 requests a minute after that date.
+          Move to v2 headers before then.</p>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h2>Per-plan ceilings</h2>
+        <table data-component="table">
+          <caption>Requests per minute, per key</caption>
+          <thead>
+            <tr><th scope="col">Plan</th><th scope="col">Read</th><th scope="col">Write</th><th scope="col">Burst</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Free</td><td>60</td><td>10</td><td>—</td></tr>
+            <tr><td>Growth</td><td>600</td><td>120</td><td>2x for 10s</td></tr>
+            <tr><td>Scale</td><td>6,000</td><td>1,200</td><td>4x for 30s</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h2>Your current usage</h2>
+        <article data-component="card">
+          <div data-slot="header">This minute</div>
+          <div data-slot="body">
+            <div data-layout="stack" data-gap="sm">
+              <div data-layout="row" data-justify="between" data-align="center">
+                <span data-tone="subtle">Read requests</span>
+                <span><span data-component="stat">412</span> <span data-tone="subtle">/ 600</span></span>
+              </div>
+              <progress value="412" max="600"></progress>
+              <div data-layout="row" data-justify="between" data-align="center">
+                <span data-tone="subtle">Write requests</span>
+                <span><span data-component="stat">18</span> <span data-tone="subtle">/ 120</span></span>
+              </div>
+              <progress value="18" max="120"></progress>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h2>Notifications</h2>
+        <p>Tell us when to get in touch about a key approaching its ceiling.</p>
+        <div data-layout="stack" data-gap="sm">
+          <label><input type="checkbox" role="switch" checked> Email me at 80% of the limit</label>
+          <label><input type="checkbox" role="switch"> Send a webhook on every 429</label>
+          <label><input type="checkbox" role="switch" disabled> Page on-call (Scale plan only)</label>
+        </div>
+      </div>
+
+      <div data-component="alert" data-variant="success">
+        Saved. Notification settings apply to all keys in this workspace.
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <h2>Common questions</h2>
+        <details data-component="disclosure">
+          <summary>Does a 429 count against my quota?</summary>
+          <p>No. Rejected requests are not billed and do not consume budget.</p>
+        </details>
+        <details data-component="disclosure">
+          <summary>Are limits per key or per workspace?</summary>
+          <p>Per key. A workspace with four keys has four independent buckets.</p>
+        </details>
+      </div>
+
+      <hr data-component="divider">
+
+      <nav data-component="pagination" aria-label="Pagination">
+        <ol>
+          <li><a href="#" aria-disabled="true">Previous</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#" aria-current="page">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">Next</a></li>
+        </ol>
+      </nav>
+
+    </div>
+  </div>
+
+</body>
+</html>

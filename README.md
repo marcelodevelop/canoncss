@@ -33,7 +33,7 @@ or zero-install via CDN:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) - **~29.7kb raw, ~5.4kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) - **~34.2kb raw, ~6.1kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular - concatenate only the files you use.)
@@ -124,12 +124,26 @@ The API is `data-*` attributes, not classes:
 | Attribute | Purpose |
 |-----------|---------|
 | `data-layout` | 7 layout patterns: `stack` `row` `grid` `sidebar` `centered` `hero` `split` |
-| `data-component` | 15 components: `button` `card` `badge` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` `disclosure` `nav` `stepper` |
+| `data-component` | 18 components: `button` `card` `badge` `alert` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` `disclosure` `nav` `breadcrumb` `pagination` `stepper` |
 | `data-slot` | Named children (`header`, `body`, `footer`, `sidebar`, `main`, …) |
 | `data-gap` / `data-align` / `data-justify` | Layout modifiers |
 | `data-variant` / `data-size` / `data-state` | Component modifiers |
 
 Dark mode is one attribute: `<html data-theme="dark">`.
+
+Some things take no attribute at all, because the element or the ARIA role has
+already said what they are. A second name would be the same claim twice:
+
+```html
+<progress value="412" max="600"></progress>
+<label><input type="checkbox" role="switch" checked> Email notifications</label>
+```
+
+Checkbox, radio, `<progress>`, and anything with `role="switch"` are styled
+bare, the way `ul`, `blockquote` and `pre` are. This is the same reasoning as
+R5, from the other direction: if a role is a promise about behaviour, an element
+that already makes the promise does not need a `data-component` to repeat it.
+It keeps the closed vocabulary smaller than the set of things Canon can render.
 
 ## For LLMs
 
@@ -141,7 +155,7 @@ Three ways, pick one:
 - **Any coding agent** - copy [`prompts/AGENTS.md`](prompts/AGENTS.md) into your
   repo root (works with Cursor, Copilot, Codex, Claude Code).
 - **Raw prompt** - inject [`prompts/system-prompt.txt`](prompts/system-prompt.txt)
-  (6kb, roughly 1.5k tokens) as a system message. If output drifts, use
+  (6.7kb, roughly 1.7k tokens) as a system message. If output drifts, use
   [`prompts/system-prompt-full.txt`](prompts/system-prompt-full.txt), which adds
   canonical patterns and anti-patterns. See [`prompts/README.md`](prompts/README.md).
 

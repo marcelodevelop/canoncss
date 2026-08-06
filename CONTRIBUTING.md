@@ -126,6 +126,40 @@ When the answer is no, the request is often still real. It usually means the
 prompt should state the canonical construction, which is free, rather than the
 CSS growing a component, which is not.
 
+### The one time this rule was suspended, and why
+
+August 2026. `alert`, `breadcrumb` and `pagination` were added on **framework
+parity, not on measured divergence**. No generation experiment was run for
+them. That is the admission test being set aside, and it is written down here
+rather than quietly skipped, because a rule with an undocumented exception is
+just a rule nobody follows.
+
+The argument for suspending it is a real chicken and egg. The test needs
+several independent agents to diverge on a spec, and the most useful divergence
+comes from people building things nobody here would think to build. Canon has
+one production user, so the evidence the rule wants cannot exist yet in the
+volume the rule assumes. Waiting for it means shipping nothing an evaluator
+recognises, and an evaluator who bounces never becomes the evidence.
+
+The exception was kept narrow on purpose:
+
+- All three appear in **every** major framework (Bootstrap, Bulma, Material,
+  Chakra, shadcn/ui). Universal presence is weaker evidence than divergence,
+  but it is not no evidence: it is the industry having converged.
+- All three are zero-JS, which is non-negotiable, and that is what ruled out
+  tabs, toast, dropdown and carousel however common they are.
+- None of them overlaps something the vocabulary can already express. That test
+  did **not** get suspended, and it is the one that rejected a `field`
+  component for label-plus-control, because the prompt already states the
+  canonical construction (a stack with `data-gap="xs"`).
+- Two more gaps, `progress` and a switch, were closed **without** growing the
+  vocabulary at all, because the element and the ARIA role already declare
+  themselves. Capability rose by five and the closed vocabulary by three.
+
+This is a debt, not a precedent. The first real external users are the evidence
+these three were supposed to have, and if any of them turns out to be a name
+rather than a capability, it should come back out.
+
 ## Design principles (non-negotiable)
 
 - **One right way.** If a pattern can already be expressed, do not add a

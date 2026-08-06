@@ -77,6 +77,14 @@ COMPONENTS - `data-component` on semantic elements:
               `<summary>`; the caret is generated. Use for FAQ and any
               show-more section.
     divider   + data-variant={strong}
+    alert     a block-level message. + data-variant={success|warning|error}
+              (info is the default). Carries no role by itself: add
+              `role="status"` if it appears in response to something the user
+              did, `role="alert"` only if it must interrupt.
+    breadcrumb on `<nav>` wrapping an `<ol>` of ancestors. Separators are
+              generated; mark the last one `aria-current="page"`.
+    pagination on `<nav>` wrapping an `<ol>` of page links. Current is
+              `aria-current="page"`; a dead prev/next is `aria-disabled="true"`.
 
 UTILITIES - complete list; nothing else exists:
 
@@ -90,6 +98,11 @@ UTILITIES - complete list; nothing else exists:
 
 ul/ol/li, blockquote, pre/code all render correctly bare. Sidebar/section
 labels are `<p data-tone="subtle">`, never a heading element.
+
+`<progress value="60" max="100">` renders bare: the element is already the
+role. A switch is `<input type="checkbox" role="switch">`, also bare, because
+the role is the contract the same way `aria-current` is. Neither takes a
+`data-component`, for the reason checkbox and radio do not.
 
 Checkbox and radio inputs also render bare: never give them a
 `data-component`, since `type="checkbox"` already declares the role. A

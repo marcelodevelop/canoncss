@@ -6,6 +6,42 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Added
+- **Three components and two things that needed none.** `alert`, `breadcrumb`
+  and `pagination` join the vocabulary; `<progress>` and
+  `<input type="checkbox" role="switch">` are styled bare. Capability rose by
+  five and the closed vocabulary by three.
+  - The two bare ones follow the rule checkbox and radio already set in this
+    file: an element or an ARIA role that declares itself needs no attribute
+    repeating it. `data-component="progress"` would be the same claim twice.
+    This is R5 from the other direction, and it is how the vocabulary stays
+    smaller than the set of things Canon renders.
+  - `alert` is the gap `badge` could not fill. A badge is an inline span; there
+    was nothing that could hold a sentence, so a trial-expiry notice or a
+    form-level error went to the app layer. Its body text is `--color-content`
+    rather than the status colour, because a badge is three words and can be
+    tinted while a paragraph is read. It carries **no role by itself**: a
+    message present at render is ordinary content, and baking in `role="alert"`
+    would make every static callout interrupt a screen reader.
+  - `breadcrumb` and `pagination` both sit on `<nav>` around an `<ol>`, and
+    most of their CSS undoes what the reset does to `nav a`, which is tuned for
+    a sidebar. Pagination targets are 2.25rem square, above WCAG 2.5.8.
+  - All six forced-colours cases were handled in the same change rather than
+    left for later. `appearance: none` removes the control the UA would have
+    drawn and a forced palette then removes the background that replaced it, so
+    an unhandled `<progress>` renders as an empty track and an unhandled switch
+    as nothing at all.
+  - Contrast is gated, not asserted. The four alert backgrounds, the current
+    pagination link and the switch's thumb-against-track are in
+    `check-contrast.mjs` and clear AA in both shipped themes and both modes.
+    The tightest is the switch in its off position at 3.07:1 against a 3.0
+    threshold, which is exactly the kind of margin that needs a gate rather
+    than a promise.
+  - **This set aside the admission test in CONTRIBUTING**, which wants measured
+    divergence and got framework parity instead. The exception is documented
+    there with its reasoning and its limits rather than skipped quietly.
+- **`examples/docs-article/`**: an API reference page using all five, plus the
+  table, disclosure and topbar burger. Linted by `npm test` like every other
+  example, and verified at 375px with nothing escaping the viewport.
 - **`canon-lint --help`**, which used to fail with `ENOENT` on a file called
   `--help`. `canon-init` answered the flag and this did not, so the first thing
   a new user types came back as a filesystem error. It now prints usage and all
