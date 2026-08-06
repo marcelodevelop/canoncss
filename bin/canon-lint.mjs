@@ -29,6 +29,37 @@ function blank(src, re) {
   return src.replace(re, (m) => m.replace(/[^\n]/g, ' '));
 }
 
+/** Every opening tag, with its full attribute list, as [text, name] plus the
+ *  `index` a matchAll result carries. Scans rather than regexes the body,
+ *  because a JSX expression can contain `>` and quotes can contain both. */
+function* tags(src) {
+  const open = /<([a-zA-Z][a-zA-Z0-9-]*)/g;
+  let m;
+  while ((m = open.exec(src))) {
+    let i = open.lastIndex;
+    let depth = 0;
+    let quote = null;
+    for (; i < src.length; i++) {
+      const c = src[i];
+      if (quote) {
+        if (c === quote) quote = null;
+        continue;
+      }
+      if (c === '"' || c === "'" || c === '`') quote = c;
+      else if (c === '{') depth++;
+      else if (c === '}') depth--;
+      else if (c === '>' && depth <= 0) break;
+      // An unclosed tag: bail rather than swallow the rest of the file.
+      else if (c === '<' && depth <= 0) { i = -1; break; }
+    }
+    if (i === -1 || i >= src.length) continue;
+    const out = [src.slice(m.index, i + 1), m[1]];
+    out.index = m.index;
+    yield out;
+    open.lastIndex = i + 1;
+  }
+}
+
 function lineOf(src, index) {
   let line = 1;
   for (let i = 0; i < index; i++) if (src[i] === '\n') line++;
@@ -291,8 +322,20 @@ function lintFile(file) {
   // rigged comparison the study is written to avoid.
   const isCanonMarkup = /data-(component|layout|slot|x-component)=/.test(src);
 
-  // Per-tag checks
-  for (const tag of src.matchAll(/<([a-zA-Z][a-zA-Z0-9-]*)[^<>]*>/g)) {
+  // Per-tag checks.
+  //
+  // The tag body cannot be matched with [^<>]*, which is what this used to do.
+  // A JSX handler contains a `>`:
+  //
+  //   <textarea data-component="textarea" onChange={(e) => f(e)} aria-label="…" />
+  //
+  // and the scan stopped at the arrow, so every attribute after it was
+  // invisible. That silently UNDER-reports, which is the worst direction for a
+  // linter: aria-label went unseen and R10 fired on a control that had one.
+  // Every other per-tag rule had the same blind spot.
+  //
+  // Found by running this linter over its own documentation site.
+  for (const tag of tags(src)) {
     const text = tag[0];
     const name = tag[1];
     const line = lineOf(src, tag.index);
