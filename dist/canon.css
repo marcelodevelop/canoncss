@@ -795,9 +795,6 @@ opacity var(--duration-fast) var(--ease-default);
 [data-component="topbar"] > [data-slot="menu"] > summary::-webkit-details-marker {
 display: none;
 }
-[data-component="topbar"] > [data-slot="menu"][open] > summary {
-background-color: var(--color-surface-raised);
-}
 [data-component="topbar"] > [data-slot="menu"] > nav {
 position: absolute;
 right: 0;
