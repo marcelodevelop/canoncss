@@ -21,10 +21,16 @@
     display: grid;
   }
 
-  [data-layout="grid"][data-cols="1"] { grid-template-columns: repeat(1, 1fr); }
-  [data-layout="grid"][data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
-  [data-layout="grid"][data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
-  [data-layout="grid"][data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+  /* minmax(0, 1fr) and not 1fr. A bare 1fr is minmax(auto, 1fr), so a track
+     refuses to shrink below its content's min-content width and a single wide
+     cell makes its column bigger than the others. data-cols promises equal
+     columns, so it has to deliver them: measured on a four-up product grid
+     where one card carried a discount badge and its column came out 238px
+     against 232. A long unbreakable word does the same thing, harder. */
+  [data-layout="grid"][data-cols="1"] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  [data-layout="grid"][data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-layout="grid"][data-cols="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  [data-layout="grid"][data-cols="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   [data-layout="grid"][data-cols="auto"] {
     grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   }
@@ -112,14 +118,14 @@
   /* ── RESPONSIVE: mobile-first breakpoints ── */
   @media (max-width: 1024px) {
     [data-layout="grid"][data-cols="4"] {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 768px) {
     [data-layout="grid"][data-cols="3"],
     [data-layout="grid"][data-cols="4"] {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     [data-layout="split"] {
