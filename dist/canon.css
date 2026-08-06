@@ -751,14 +751,46 @@ position: relative;
 [data-component="topbar"] > [data-slot="menu"] > summary {
 list-style: none;
 cursor: pointer;
+position: relative;
 display: inline-flex;
 align-items: center;
 justify-content: center;
-padding: var(--space-xs) var(--space-sm);
+width: 2.75rem;
+height: 2.75rem;
 border-radius: var(--radius-md);
-font-size: var(--text-xl);
 line-height: 1;
 user-select: none;
+font-size: 0;
+}
+[data-component="topbar"] > [data-slot="menu"] > summary::before,
+[data-component="topbar"] > [data-slot="menu"] > summary::after {
+content: '';
+position: absolute;
+width: 1.125rem;
+height: 2px;
+background-color: currentColor;
+}
+[data-component="topbar"] > [data-slot="menu"] > summary::before {
+box-shadow: 0 -0.375rem 0 currentColor, 0 0.375rem 0 currentColor;
+}
+[data-component="topbar"] > [data-slot="menu"] > summary::after {
+opacity: 0;
+}
+[data-component="topbar"] > [data-slot="menu"][open] > summary::before {
+box-shadow: none;
+transform: rotate(45deg);
+}
+[data-component="topbar"] > [data-slot="menu"][open] > summary::after {
+opacity: 1;
+transform: rotate(-45deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+[data-component="topbar"] > [data-slot="menu"] > summary::before,
+[data-component="topbar"] > [data-slot="menu"] > summary::after {
+transition: transform var(--duration-fast) var(--ease-default),
+box-shadow var(--duration-fast) var(--ease-default),
+opacity var(--duration-fast) var(--ease-default);
+}
 }
 [data-component="topbar"] > [data-slot="menu"] > summary::-webkit-details-marker {
 display: none;

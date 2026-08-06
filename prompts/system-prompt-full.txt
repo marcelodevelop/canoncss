@@ -44,9 +44,11 @@ COMPONENTS - data-component on semantic elements:
   textarea  + data-size={sm|md|lg} + data-state={error|success}
   select    + data-size={sm|md|lg}
   topbar    > data-slot={brand|nav|actions|menu}. menu = mobile burger,
-            zero-JS: <details data-slot="menu"><summary>☰</summary>
+            zero-JS: <details data-slot="menu"><summary>Menu</summary>
             <nav>links</nav></details>; auto-hides on desktop and
-            replaces the inline nav on mobile.
+            replaces the inline nav on mobile. The burger is drawn by Canon
+            and the word you write is hidden, staying as the accessible
+            name - never put an icon character in there.
   modal     > data-slot=panel > data-slot={header|body|footer}
   avatar    + data-size={sm|md|lg}. A <span> with initials, or an <img> inside
             the span - never data-component on the <img> itself.
