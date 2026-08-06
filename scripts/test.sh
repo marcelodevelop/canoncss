@@ -19,6 +19,28 @@ if [ "$CODE" -ne 1 ] || [ "$COUNT" -ne 6 ]; then
 fi
 echo "✓ fixture caught ($COUNT violations, exit $CODE)"
 
+# The JSX tag scanner. The tag body used to be matched with [^<>]*, which stops
+# at the first `>`, and a JSX handler contains one in its arrow. Every attribute
+# written after a handler was invisible to every per-tag rule, so the linter
+# reported clean on markup it had not finished reading.
+#
+# The fixture asserts both directions at once: an R1 violation sitting after an
+# arrow function must be caught, and an aria-label sitting after one must be
+# seen, so R10 must NOT fire. Exactly one violation, and it must be R1.
+echo "- jsx fixture must fail with exactly 1 violation, an R1:"
+set +e
+OUTJ=$(node bin/canon-lint.mjs test-llm/jsx-tag-fixture.tsx)
+CODEJ=$?
+set -e
+R1J=$(echo "$OUTJ" | grep -cE '  R1  ')
+ALLJ=$(echo "$OUTJ" | grep -cE '  R[0-9]+  ')
+if [ "$CODEJ" -ne 1 ] || [ "$R1J" -ne 1 ] || [ "$ALLJ" -ne 1 ]; then
+  echo "FAIL: expected exit 1 with 1 violation, an R1; got exit $CODEJ, $R1J R1 of $ALLJ total:"
+  echo "$OUTJ"
+  exit 1
+fi
+echo "✓ jsx scanner reads past arrow functions ($ALLJ violation, exit $CODEJ)"
+
 echo "- app-layer fixture must fail with exactly 2 violations:"
 set +e
 OUT2=$(node bin/canon-lint.mjs test-llm/app-layer-fixture.css)
