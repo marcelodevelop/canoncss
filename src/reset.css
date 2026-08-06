@@ -64,8 +64,17 @@
     text-decoration-skip-ink: auto;
   }
 
-  /* A link inside <nav> is navigation, not prose: no underline, neutral tone. */
-  nav a {
+  /* A link inside <nav> is navigation, not prose: no underline, neutral tone.
+     Unless it already said what it is. An <a data-component="button"> inside a
+     <nav> is a button, and giving it the nav treatment as well means it picks
+     up the animated underline and, when it is the current one, an accent bar
+     across its bottom edge.
+     That is not hypothetical and it is not the consumer's fault: Canon's own
+     canonical pager is a <nav> full of button anchors, so the framework was
+     prescribing a construction its own reset then broke. Every button in the
+     pager carried the nav hover gradient and the current one wore a red line
+     under a black rectangle. */
+  nav a:not([data-component]) {
     color: var(--color-content-subtle);
     text-decoration: none;
     font-weight: var(--weight-medium);
@@ -76,14 +85,14 @@
                 background-color var(--duration-fast) var(--ease-default);
   }
 
-  nav a:hover {
+  nav a:not([data-component]):hover {
     color: var(--color-content);
     background-color: var(--color-surface-raised);
   }
 
   /* An animated underline on hover: the detail that separates nav from prose */
   @media (prefers-reduced-motion: no-preference) {
-    nav a {
+    nav a:not([data-component]) {
       background-image: linear-gradient(var(--color-accent), var(--color-accent));
       background-repeat: no-repeat;
       background-position: left calc(100% - 1px);
@@ -94,13 +103,13 @@
         background-color var(--duration-fast) var(--ease-default);
     }
 
-    nav a:hover {
+    nav a:not([data-component]):hover {
       background-size: 100% 2px;
     }
   }
 
   /* The active item: aria-current is the contract, the accent marks it */
-  nav a[aria-current="page"] {
+  nav a:not([data-component])[aria-current="page"] {
     color: var(--color-content);
     box-shadow: inset 0 -2px 0 var(--color-accent);
     border-radius: var(--radius-sm) var(--radius-sm) 0 0;
