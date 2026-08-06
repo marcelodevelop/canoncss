@@ -1,6 +1,6 @@
 {
   "name": "canoncss",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A CSS framework designed for LLMs. One right way to do each thing.",
   "main": "dist/canon.css",
   "style": "dist/canon.css",

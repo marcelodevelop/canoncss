@@ -5,6 +5,9 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-08-06
+
+
 ### Fixed
 - **The burger is drawn now, not typed.** It was the only mark in the framework
   the markup had to supply: the disclosure caret is generated, the stepper's
