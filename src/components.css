@@ -680,9 +680,14 @@
     display: none;
   }
 
-  [data-component="topbar"] > [data-slot="menu"][open] > summary {
-    background-color: var(--color-surface-raised);
-  }
+  /* The open state used to be a filled background here. It was the signal when
+     the burger was a static glyph, and it stopped being one the moment the
+     three lines started folding into a cross: the icon now says open, and the
+     fill only said it again, louder.
+     Louder was the problem. The fill was --color-surface-raised, which sits a
+     shade off --color-surface in the default theme and is invisible enough to
+     pass. In any theme where the two genuinely differ it is a bright rectangle
+     around the icon, which is how it was found. */
 
   [data-component="topbar"] > [data-slot="menu"] > nav {
     position: absolute;
