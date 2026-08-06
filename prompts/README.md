@@ -7,7 +7,7 @@ human reads is injected into an LLM so it generates consistent Canon markup.
 
 | File | Size | Use when |
 |------|------|----------|
-| `system-prompt.txt` | 6kb, ~1.5k tokens | Default. The full vocabulary + rules. |
+| `system-prompt.txt` | 6.7kb, ~1.7k tokens | Default. The full vocabulary + rules. |
 | `system-prompt-full.txt` | 11kb, ~2.8k tokens | The model keeps inventing markup, or you want canonical patterns and anti-patterns included. |
 | `AGENTS.md` | generated | Drop into a repo root for Cursor / Copilot / Codex / Claude Code. Auto-built from `system-prompt.txt` by `npm run build` - edit the source, not this file. |
 

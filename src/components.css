@@ -939,6 +939,247 @@
 
 
   /* ════════════════════════════════
+     ALERT
+  ════════════════════════════════
+     A block-level message about the state of something. Canon had `badge`,
+     which is an inline span, and nothing that could hold a sentence, so a
+     trial-expiry notice or a form-level error had no vocabulary and went to
+     the app layer.
+
+     The variants are the four Canon already has for status, so this adds a
+     component and no new modifier values.
+
+     It carries no role of its own on purpose. A message that is present when
+     the page renders is ordinary content and wants no role; one that appears
+     in response to something the user did wants role="status", and one that
+     interrupts wants role="alert". Baking in the loudest of those would make
+     every static callout shout at a screen reader. */
+  [data-component="alert"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    /* The bar is on the inline start so it flips with the writing direction. */
+    border-inline-start: 3px solid var(--color-info);
+    background-color: var(--color-info-subtle);
+    color: var(--color-content);
+  }
+
+  /* Body text stays --color-content rather than the status colour. A badge is
+     three words and can be tinted; a paragraph is read, and reading it in
+     8%-mixed vermilion is worse at every size. */
+  [data-component="alert"][data-variant="success"] {
+    border-inline-start-color: var(--color-success);
+    background-color: var(--color-success-subtle);
+  }
+
+  [data-component="alert"][data-variant="warning"] {
+    border-inline-start-color: var(--color-warning);
+    background-color: var(--color-warning-subtle);
+  }
+
+  [data-component="alert"][data-variant="error"] {
+    border-inline-start-color: var(--color-error);
+    background-color: var(--color-error-subtle);
+  }
+
+  /* A heading inside an alert is normalised the way a card header is: the
+     component owns its typography whichever tag the author reached for. */
+  [data-component="alert"] :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-sans);
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+    letter-spacing: normal;
+  }
+
+
+  /* ════════════════════════════════
+     BREADCRUMB
+  ════════════════════════════════
+     A trail of ancestors, on <nav> because it is navigation, wrapping an <ol>
+     because the order is the meaning. The separator is generated, so the
+     markup never carries a slash that a screen reader would read out.
+
+     Everything below undoes something the reset does to `nav a`, which is
+     tuned for a sidebar: the animated underline, the hover surface, the
+     padding and the accent rule under the current item. A breadcrumb is a
+     line of text, not a set of targets. */
+  [data-component="breadcrumb"] ol,
+  [data-component="breadcrumb"] ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  [data-component="breadcrumb"] li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    /* The reset stacks list items; this one is a row. */
+    margin-top: 0;
+  }
+
+  [data-component="breadcrumb"] li + li::before {
+    content: '/';
+    color: var(--color-content-subtle);
+    font-size: var(--text-sm);
+  }
+
+  [data-component="breadcrumb"] a {
+    padding: 0;
+    background-image: none;
+    border-radius: 0;
+  }
+
+  [data-component="breadcrumb"] a:hover {
+    background-color: transparent;
+    color: var(--color-content);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  [data-component="breadcrumb"] [aria-current] {
+    color: var(--color-content);
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+
+  /* ════════════════════════════════
+     PAGINATION
+  ════════════════════════════════
+     Also on <nav>, also an ordered list, and also undoing the sidebar
+     treatment. Unlike a breadcrumb these are targets, so they get a real hit
+     area: 2.25rem square is above the 24px of WCAG 2.5.8 and close enough to
+     the 44px of 2.5.5 to be comfortable on a phone. */
+  [data-component="pagination"] ol,
+  [data-component="pagination"] ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  [data-component="pagination"] li {
+    margin-top: 0;
+  }
+
+  [data-component="pagination"] a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding-inline: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-image: none;
+    color: var(--color-content);
+  }
+
+  [data-component="pagination"] a:hover {
+    background-color: var(--color-surface-raised);
+    border-color: var(--color-border-strong);
+  }
+
+  [data-component="pagination"] [aria-current] {
+    background-color: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-content-inverse);
+    box-shadow: none;
+  }
+
+  [data-component="pagination"] [aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+
+  /* ════════════════════════════════
+     PROGRESS AND SWITCH - no data-component
+  ════════════════════════════════
+     Both follow the rule checkbox and radio already set here: an element or a
+     role that declares itself needs no attribute repeating it. <progress> is
+     the role, and role="switch" is the role, so writing
+     data-component="progress" would be saying it twice. Capability without
+     vocabulary, which is the trade Canon should always take.
+
+     The reset already gives both the brand accent-color, which is what an
+     indeterminate <progress> animates with. This is the shape. */
+  progress {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    height: var(--space-sm);
+    border: none;
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface-sunken);
+    overflow: hidden;
+  }
+
+  /* The track and the fill are separate pseudo-elements per engine and neither
+     vendor accepts the other's, so they cannot be merged into one rule: a
+     selector list is dropped whole if any part of it is unknown. */
+  progress::-webkit-progress-bar {
+    background-color: var(--color-surface-sunken);
+    border-radius: var(--radius-full);
+  }
+
+  progress::-webkit-progress-value {
+    background-color: var(--color-brand);
+    border-radius: var(--radius-full);
+  }
+
+  progress::-moz-progress-bar {
+    background-color: var(--color-brand);
+    border-radius: var(--radius-full);
+  }
+
+  /* A switch is a checkbox whose change takes effect immediately, which is why
+     it looks nothing like one. role="switch" is the contract, the same way
+     aria-current is the contract for the current nav item. */
+  input[type="checkbox"][role="switch"] {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    width: 2.25rem;
+    height: 1.25rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-border-strong);
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  input[type="checkbox"][role="switch"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 2px;
+    translate: 0 -50%;
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-content-inverse);
+    transition: inset-inline-start var(--duration-fast) var(--ease-default);
+  }
+
+  input[type="checkbox"][role="switch"]:checked {
+    background-color: var(--color-brand);
+  }
+
+  input[type="checkbox"][role="switch"]:checked::before {
+    inset-inline-start: calc(100% - 1rem - 2px);
+  }
+
+  input[type="checkbox"][role="switch"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+
+  /* ════════════════════════════════
      FORCED COLOURS
   ════════════════════════════════
      Windows High Contrast and friends. The UA replaces every colour on the
@@ -988,6 +1229,42 @@
        page it is the one carrying "this is the plan we recommend". */
     [data-component="card"][data-variant="featured"] {
       border-width: 3px;
+    }
+
+    /* An alert is a tinted background and one coloured bar. The bar survives
+       as a border and the tint does not, so without a full border the block
+       stops being a block and becomes a paragraph with a line beside it. */
+    [data-component="alert"] {
+      border: 1px solid currentColor;
+      border-inline-start-width: 3px;
+    }
+
+    /* The current page is background and colour only, same as the stepper. */
+    [data-component="pagination"] [aria-current] {
+      border-width: 3px;
+    }
+
+    /* appearance: none removes the control the UA would have drawn, and then
+       the forced palette removes the background that replaced it. Both of
+       these would render as nothing at all: an empty track and an invisible
+       switch whose state cannot be read. Borders are the only thing a forced
+       palette keeps, so the state has to be carried by one.
+       Highlight is the system colour for a selected or active control, which
+       is what a switch that is on actually is. */
+    progress {
+      border: 1px solid currentColor;
+    }
+
+    input[type="checkbox"][role="switch"] {
+      border: 1px solid currentColor;
+    }
+
+    input[type="checkbox"][role="switch"]::before {
+      background-color: currentColor;
+    }
+
+    input[type="checkbox"][role="switch"]:checked {
+      background-color: Highlight;
     }
   }
 }

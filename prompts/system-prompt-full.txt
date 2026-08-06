@@ -60,6 +60,14 @@ COMPONENTS - data-component on semantic elements:
             <summary>; the caret is generated. Use for FAQ and any
             show-more section.
   divider   + data-variant={strong}
+  alert     a block-level message. + data-variant={success|warning|error}
+            (info is the default). Carries no role by itself: add
+            role="status" if it appears in response to something the user
+            did, role="alert" only if it must interrupt.
+  breadcrumb on <nav> wrapping an <ol> of ancestors. Separators are
+            generated; mark the last one aria-current="page".
+  pagination on <nav> wrapping an <ol> of page links. Current is
+            aria-current="page"; a dead prev/next is aria-disabled="true".
 
 UTILITIES - complete list; nothing else exists:
   data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|accent|success|error}
@@ -71,6 +79,10 @@ UTILITIES - complete list; nothing else exists:
 RENDER BARE - never give these a data-component:
   checkbox and radio inputs, and a <label> wrapping its own control, which
   lays itself out. ul/ol/li, blockquote and pre/code are styled too.
+  <progress> is already the role, so it is styled bare: <progress value="60"
+    max="100"></progress>.
+  A switch is <input type="checkbox" role="switch">. The role is the contract,
+    the same way aria-current is; there is no switch component.
 
 CANONICAL DEFAULTS - use these unless something forces another choice:
   Spacing: page sections data-gap="xl"; card bodies and field groups

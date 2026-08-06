@@ -33,6 +33,29 @@ export const accepted = (
     <p data-mono data-truncate>
       mono
     </p>
+    <div data-component="alert" data-variant="warning">
+      <h2>Heads up</h2>
+    </div>
+    <nav data-component="breadcrumb">
+      <ol>
+        <li>
+          <a href="/" aria-current="page">
+            Home
+          </a>
+        </li>
+      </ol>
+    </nav>
+    <nav data-component="pagination">
+      <ol>
+        <li>
+          <a href="/2">2</a>
+        </li>
+      </ol>
+    </nav>
+    {/* Neither of these takes a data-component: the element and the role are
+        already the declaration, so there is nothing for the vocabulary to add. */}
+    <progress value={412} max={600} />
+    <input type="checkbox" role="switch" defaultChecked />
   </div>
 );
 
@@ -50,6 +73,10 @@ export const rejected = (
     <button data-component="button" data-size="xl" />
     {/* @ts-expect-error 'tabs' is not a component and this is the whole point */}
     <div data-component="tabs" />
+    {/* @ts-expect-error 'progress' is styled bare, so it never became a component */}
+    <progress data-component="progress" />
+    {/* @ts-expect-error nor did 'switch': role="switch" is the whole contract */}
+    <input type="checkbox" data-component="switch" />
     {/* @ts-expect-error 'aside' is not a slot */}
     <div data-slot="aside" />
     {/* @ts-expect-error data-theme takes dark or light, nothing else */}

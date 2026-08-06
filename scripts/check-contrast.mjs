@@ -95,11 +95,25 @@ const PAIRS = [
   ['--color-error', '--color-error-subtle', 'badge error', 4.5],
   ['--color-info', '--color-info-subtle', 'badge info', 4.5],
   ['color-mix(in srgb, var(--color-warning) 80%, black)', '--color-warning-subtle', 'badge warning', 4.5],
+  // An alert holds a sentence rather than three words, so its body text is
+  // --color-content and not the status colour. Four backgrounds, one text
+  // colour, and all four are read at body size, so all four are 4.5.
+  ['--color-content', '--color-info-subtle', 'alert info', 4.5],
+  ['--color-content', '--color-success-subtle', 'alert success', 4.5],
+  ['--color-content', '--color-warning-subtle', 'alert warning', 4.5],
+  ['--color-content', '--color-error-subtle', 'alert error', 4.5],
+  ['--color-content-inverse', '--color-brand', 'pagination current', 4.5],
   // WCAG 1.4.11 wants 3:1 for what identifies a user interface component. An
   // input, select and textarea all sit on --color-surface, the same colour as
   // the page, so the border is the only thing that says where the control is.
   // That makes it in scope.
   ['--color-border-strong', '--color-surface', 'input/select boundary', 3.0],
+  // A switch says which way it is set with the thumb against the track, and
+  // nothing else: no tick, no label change. That makes the pair the thing that
+  // identifies the state, so 1.4.11 applies to it. The on position is the same
+  // pair as button primary and already covered; this is the off position,
+  // which is the tighter of the two in both shipped themes.
+  ['--color-content-inverse', '--color-border-strong', 'switch off', 3.0],
   // A card is a container rather than a control, so 1.4.11 does not apply and
   // this is reported without a verdict. It is still worth seeing: a card is
   // distinguished from the page by a border and a surface one step up, and
