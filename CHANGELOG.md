@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Fixed
+- **A tag written inside a JS comment was scanned as markup.** HTML comments and
+  JSX `{/* */}` comments were already dropped; plain `//` and `/* */` ones were
+  not, so prose describing a `<textarea>` produced an R10 for a control that
+  does not exist. `//` needed care, because it is also every `https://` link
+  ever written and blanking real markup would make the linter miss violations,
+  which is the failure directly below. The scan tracks quotes and will not open
+  a comment on a `//` that follows a colon. Strings are deliberately left alone:
+  a docs page writes its examples in them, and those are markup worth checking.
 - **An arrow function hid every attribute after it from the linter.** The tag
   body was matched with `[^<>]*`, which stops at the first `>`, and a JSX
   handler contains one in its arrow. Every attribute written after a handler

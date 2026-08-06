@@ -7,11 +7,20 @@
 // worst direction for a checking tool to be wrong in.
 //
 // Found by running canon-lint over its own documentation site, where R10 fired
-// on a textarea that did have an aria-label, three lines below an onChange.
+// on a <textarea> that did have an aria-label, three lines below an onChange.
 //
-// Note the prose above avoids angle brackets on purpose: canon-lint reads raw
-// text and does not strip JS comments, so a tag written inside one is scanned
-// like markup. That is a separate limitation and not what this fixture is for.
+// That sentence is the second assertion in this file. It writes <textarea> and
+// <select data-component="select"> in prose, and neither may be scanned as
+// markup: JS comments are blanked now, where before only HTML and JSX ones
+// were. An earlier version of this fixture had to avoid angle brackets to
+// stay green, which was the bug wearing a workaround.
+//
+// The URL below must survive that blanking, because `//` is also every https
+// link ever written, and eating one would blank real markup after it:
+// https://github.com/marcelodevelop/canoncss <div data-component="nope">
+//
+// Blanking too much is the dangerous direction. It does not add false
+// positives, it removes true ones, which is the failure this file exists for.
 //
 // Two assertions live here, and both need the scanner to get past the arrow:
 //
