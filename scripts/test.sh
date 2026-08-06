@@ -19,6 +19,27 @@ if [ "$CODE" -ne 1 ] || [ "$COUNT" -ne 6 ]; then
 fi
 echo "✓ fixture caught ($COUNT violations, exit $CODE)"
 
+# Comments in a .css file are not code. They were being linted as though they
+# were, which broke two things: an app-layer file documenting itself with a CSS
+# example drew violations for rules it did not contain, and worse, the rule
+# counter counts `{` so a brace in prose inflated the app-layer count. That
+# count is the number Canon uses to measure what it is missing for a codebase.
+#
+# The fixture must be clean AND report exactly 2 rules, which is the half that
+# catches the corrupted measurement.
+echo "- css comments must not be linted as rules:"
+set +e
+OUTC=$(node bin/canon-lint.mjs test-llm/css-comment-fixture.css)
+CODEC=$?
+set -e
+RULESC=$(echo "$OUTC" | grep -oE '[0-9]+ rules? in @layer' | grep -oE '^[0-9]+')
+if [ "$CODEC" -ne 0 ] || [ "$RULESC" != "2" ]; then
+  echo "FAIL: expected exit 0 and exactly 2 app-layer rules, got exit $CODEC and '$RULESC':"
+  echo "$OUTC"
+  exit 1
+fi
+echo "✓ comments are not rules (clean, $RULESC rules counted)"
+
 # The JSX tag scanner. The tag body used to be matched with [^<>]*, which stops
 # at the first `>`, and a JSX handler contains one in its arrow. Every attribute
 # written after a handler was invisible to every per-tag rule, so the linter
