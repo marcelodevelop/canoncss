@@ -1,0 +1,34 @@
+/* Regression fixture: comments in a CSS file are not code.
+ *
+ * canon-lint did not strip comments from .css files, so an app-layer file that
+ * documented itself was linted as though the documentation were rules. Two
+ * separate things went wrong, and the second is worse:
+ *
+ *   1. False violations. This exact example, written in a comment to explain
+ *      what Canon already does, drew two R9s for a rule the file did not have:
+ *          a[data-component="card"] { color: inherit; text-decoration: none }
+ *
+ *   2. A corrupted measurement. The rule counter counts `{`, and a brace in a
+ *      comment counted as a rule. The app-layer count is the number Canon uses
+ *      to measure what it is missing for a codebase, so prose was inflating the
+ *      one figure the escape hatch exists to produce.
+ *
+ * A hardcoded colour in a comment would have tripped R6 the same way:
+ *      background: #ff0000;
+ * and a hardcoded gap would have tripped it too:
+ *      padding: 24px;
+ *
+ * This file must lint clean and must report exactly 2 rules: the two real ones
+ * below, and none of the four fake ones above.
+ */
+
+@layer canon.app {
+  [data-x-component="lookbook"] img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  [data-x-component="lookbook"][data-x-slot="lead"] {
+    grid-column: 1 / -1;
+  }
+}

@@ -297,7 +297,17 @@ function lintLayers(src) {
   return violations;
 }
 
-function lintCss(file, src) {
+function lintCss(file, rawCss) {
+  // Comments are not code. Without this, a CSS example written inside one is
+  // linted as though it were a rule: an app-layer file documenting itself with
+  // `a[data-component="card"] { color: inherit }` in a comment drew two R9
+  // violations for a rule it did not contain, and R6 would read a hex colour
+  // in prose the same way. The JS side of this was fixed separately; this is
+  // the same hole in the other file type.
+  //
+  // Blanked rather than removed so every line number still points at the right
+  // line, and the rule counter still sees the real braces.
+  const src = blank(rawCss, /\/\*[\s\S]*?\*\//g);
   const violations = [];
   let rules = 0;
   for (const layer of appLayers(src)) {
