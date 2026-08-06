@@ -124,6 +124,37 @@ if [ "$CODE5" -ne 1 ] || [ "$COUNT5" -ne 6 ]; then
 fi
 echo "✓ restyle corpus caught ($COUNT5 violations, exit $CODE5)"
 
+# The admission corpus. Ten clean-context generations across two specs, run on
+# the vocabulary as it stood BEFORE alert, breadcrumb and pagination existed,
+# which is what makes it evidence: the models had to build those patterns out of
+# what was there, and the question was whether they built the same thing.
+#
+# It is a fixture rather than clean markup. The 15 R5 violations are all the
+# same generation noise, `<ul data-component="nav">` where the role belongs on
+# the wrapper, and they are left alone because this corpus is evidence and
+# editing it would delete the measurement. The assertion that matters is the
+# second one: R5 must be the ONLY rule these files break, so every other rule
+# keeps its coverage here.
+echo "- admission corpus: exactly 15 R5 and no other rule:"
+set +e
+OUT9=$(node bin/canon-lint.mjs test-llm/admission-docs test-llm/admission-tickets)
+CODE9=$?
+set -e
+R5N=$(echo "$OUT9" | grep -cE '  R5  ')
+ALL9=$(echo "$OUT9" | grep -cE '  R[0-9]+  ')
+if [ "$CODE9" -ne 1 ] || [ "$R5N" -ne 15 ] || [ "$ALL9" -ne 15 ]; then
+  echo "FAIL: expected exit 1 with 15 violations, all R5; got exit $CODE9, $R5N R5 of $ALL9 total:"
+  echo "$OUT9"
+  exit 1
+fi
+echo "✓ admission corpus baseline holds ($R5N R5 violations, no other rule)"
+
+# The result the corpus produced, kept executable so it cannot quietly rot.
+echo "- admission verdicts must still reproduce:"
+node scripts/admission.mjs test-llm/admission-docs --spec docs > /dev/null
+node scripts/admission.mjs test-llm/admission-tickets --spec tickets > /dev/null
+echo "✓ admission analysis runs on both specs"
+
 # The quietest of the three "valid CSS that does nothing" failures. R7 catches
 # a misspelled token, R9 a rule that restates a default, and R11 a misspelled
 # layer - which still renders, because an undeclared layer sorts after every

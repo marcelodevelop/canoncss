@@ -45,12 +45,12 @@ export const accepted = (
         </li>
       </ol>
     </nav>
-    <nav data-component="pagination">
-      <ol>
-        <li>
-          <a href="/2">2</a>
-        </li>
-      </ol>
+    {/* A pager is a construction, not a component: measured convergent across
+        ten clean-context generations, so it never entered the vocabulary. */}
+    <nav aria-label="Pagination" data-layout="row" data-gap="sm" data-align="center" data-wrap>
+      <a data-component="button" data-variant="primary" aria-current="page" href="/2">
+        2
+      </a>
     </nav>
     {/* Neither of these takes a data-component: the element and the role are
         already the declaration, so there is nothing for the vocabulary to add. */}
@@ -75,6 +75,8 @@ export const rejected = (
     <div data-component="tabs" />
     {/* @ts-expect-error 'progress' is styled bare, so it never became a component */}
     <progress data-component="progress" />
+    {/* @ts-expect-error 'pagination' was measured convergent and rejected */}
+    <nav data-component="pagination" />
     {/* @ts-expect-error nor did 'switch': role="switch" is the whole contract */}
     <input type="checkbox" data-component="switch" />
     {/* @ts-expect-error 'aside' is not a slot */}

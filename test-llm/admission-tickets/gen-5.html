@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tickets - Ridgeline Admin</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Ridgeline</a>
+    <nav data-slot="nav">
+      <a href="/inbox">Inbox</a>
+      <a href="/reports">Reports</a>
+      <a href="/customers">Customers</a>
+      <a href="/admin" aria-current="page">Admin</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="ghost" data-size="sm" href="/help">Help</a>
+      <span data-component="avatar" data-size="sm">MA</span>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/inbox">Inbox</a>
+        <a href="/reports">Reports</a>
+        <a href="/customers">Customers</a>
+        <a href="/admin" aria-current="page">Admin</a>
+        <a href="/help">Help</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <aside data-slot="sidebar">
+      <div data-layout="stack" data-gap="lg">
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">Admin</p>
+          <nav data-component="nav" aria-label="Admin sections">
+            <ul>
+              <li><a href="/admin">Overview</a></li>
+              <li><a href="/admin/tickets" aria-current="page">Tickets</a></li>
+              <li><a href="/admin/queues">Queues</a></li>
+              <li><a href="/admin/macros">Macros</a></li>
+              <li><a href="/admin/sla">SLA policies</a></li>
+            </ul>
+          </nav>
+        </div>
+        <hr data-component="divider">
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">Workspace</p>
+          <nav data-component="nav" aria-label="Workspace sections">
+            <ul>
+              <li><a href="/admin/people">People</a></li>
+              <li><a href="/admin/roles">Roles</a></li>
+              <li><a href="/admin/storage">Storage</a></li>
+              <li><a href="/admin/billing">Billing</a></li>
+              <li><a href="/admin/audit-log">Audit log</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </aside>
+
+    <main data-slot="main">
+      <div data-layout="stack" data-gap="xl">
+
+        <div data-layout="stack" data-gap="md">
+          <nav aria-label="Breadcrumb">
+            <ol data-layout="row" data-gap="xs" data-align="center" data-wrap>
+              <li><a data-component="button" data-variant="link" data-size="sm" href="/">Ridgeline</a></li>
+              <li data-tone="subtle">/</li>
+              <li><a data-component="button" data-variant="link" data-size="sm" href="/admin">Admin</a></li>
+              <li data-tone="subtle">/</li>
+              <li aria-current="page">Tickets</li>
+            </ol>
+          </nav>
+
+          <div data-layout="row" data-gap="md" data-align="center" data-justify="between" data-wrap>
+            <div data-layout="stack" data-gap="xs">
+              <h1>Tickets</h1>
+              <p data-tone="subtle">
+                <span data-component="stat">2,431</span>
+                <span data-tone="subtle">tickets in this workspace</span>
+              </p>
+            </div>
+            <div data-layout="row" data-gap="sm" data-align="center" data-wrap>
+              <a data-component="button" data-variant="ghost" data-size="sm" href="/admin">Back to Admin</a>
+              <a data-component="button" data-variant="secondary" data-size="sm" href="/admin/tickets/export">Export</a>
+              <a data-component="button" data-variant="primary" data-size="sm" href="/admin/tickets/new">New ticket</a>
+            </div>
+          </div>
+        </div>
+
+        <div data-component="card" data-tone="error">
+          <div data-slot="header">
+            <div data-layout="row" data-gap="sm" data-align="center" data-wrap>
+              <span data-component="badge" data-variant="error">Over quota</span>
+              <span>Tickets older than 90 days are scheduled for deletion</span>
+            </div>
+          </div>
+          <div data-slot="body">
+            <p>This workspace is over its storage quota. On 15 September 2026 every ticket last updated more than 90 days ago will be permanently deleted, along with its attachments. Deletion cannot be undone.</p>
+          </div>
+          <div data-slot="footer">
+            <div data-layout="row" data-gap="sm" data-wrap>
+              <a data-component="button" data-variant="danger" data-size="sm" href="/admin/storage">Review storage</a>
+              <a data-component="button" data-variant="link" data-size="sm" href="/admin/tickets?age=90d">See the 612 affected tickets</a>
+            </div>
+          </div>
+        </div>
+
+        <div data-component="card">
+          <div data-slot="header">Filter tickets</div>
+          <div data-slot="body">
+            <form data-layout="row" data-gap="md" data-align="end" data-wrap>
+              <div data-layout="stack" data-gap="xs">
+                <label for="ticket-search">Search</label>
+                <input data-component="input" data-size="md" type="search" id="ticket-search" name="q" placeholder="Ticket id, subject or requester">
+              </div>
+              <div data-layout="stack" data-gap="xs">
+                <label for="filter-status">Status</label>
+                <select data-component="select" data-size="md" id="filter-status" name="status">
+                  <option value="">All statuses</option>
+                  <option value="open">Open</option>
+                  <option value="waiting">Waiting</option>
+                  <option value="solved">Solved</option>
+                  <option value="escalated">Escalated</option>
+                </select>
+              </div>
+              <div data-layout="stack" data-gap="xs">
+                <label for="filter-updated">Last updated</label>
+                <select data-component="select" data-size="md" id="filter-updated" name="updated">
+                  <option value="">Any time</option>
+                  <option value="24h">Last 24 hours</option>
+                  <option value="7d">Last 7 days</option>
+                  <option value="30d">Last 30 days</option>
+                  <option value="90d">Older than 90 days</option>
+                </select>
+              </div>
+              <div data-layout="row" data-gap="sm">
+                <button data-component="button" data-variant="primary" data-size="md" type="submit">Apply</button>
+                <button data-component="button" data-variant="ghost" data-size="md" type="reset">Clear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div data-component="card">
+          <div data-slot="header">
+            <div data-layout="row" data-gap="sm" data-align="center" data-justify="between" data-wrap>
+              <span>All tickets</span>
+              <span data-tone="subtle">Showing 26 to 50 of 2,431</span>
+            </div>
+          </div>
+
+          <div data-slot="body">
+            <table data-component="table">
+              <caption class="sr-only">Tickets 26 to 50 of 2,431, page 2 of 98</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Ticket</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Requester</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Last updated</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8841">RDG-8841</a></th>
+                  <td data-truncate>Card declined on annual renewal</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">PN</span>
+                      <span>Priya Nandakumar</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="error">Escalated</span></td>
+                  <td data-tone="subtle">5 Aug 2026, 08:42</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8839">RDG-8839</a></th>
+                  <td data-truncate>SSO login loops back to the sign-in page</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">TO</span>
+                      <span>Tomas Oyelaran</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="info">Open</span></td>
+                  <td data-tone="subtle">5 Aug 2026, 07:15</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8834">RDG-8834</a></th>
+                  <td data-truncate>Export finishes but the CSV is empty</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">HL</span>
+                      <span>Hanne Lindqvist</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="warning">Waiting</span></td>
+                  <td data-tone="subtle">4 Aug 2026, 21:03</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8830">RDG-8830</a></th>
+                  <td data-truncate>Request to merge two workspace accounts</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">MC</span>
+                      <span>Marcus Cole</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="info">Open</span></td>
+                  <td data-tone="subtle">4 Aug 2026, 18:27</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8827">RDG-8827</a></th>
+                  <td data-truncate>Webhook retries stop after the first failure</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">AR</span>
+                      <span>Aisha Rahman</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="success">Solved</span></td>
+                  <td data-tone="subtle">4 Aug 2026, 16:50</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8822">RDG-8822</a></th>
+                  <td data-truncate>Billing address will not save for EU customers</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">LF</span>
+                      <span>Luca Ferretti</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="error">Escalated</span></td>
+                  <td data-tone="subtle">4 Aug 2026, 14:09</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8818">RDG-8818</a></th>
+                  <td data-truncate>Agent seats billed twice in July</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">SK</span>
+                      <span>Sofia Karlsen</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="warning">Waiting</span></td>
+                  <td data-tone="subtle">4 Aug 2026, 11:31</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8815">RDG-8815</a></th>
+                  <td data-truncate>Attachments over 10 MB fail silently</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">DN</span>
+                      <span>Daniel Nguyen</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="info">Open</span></td>
+                  <td data-tone="subtle">4 Aug 2026, 09:58</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8811">RDG-8811</a></th>
+                  <td data-truncate>Macro inserts the wrong signature block</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">GM</span>
+                      <span>Grace Mbeki</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="success">Solved</span></td>
+                  <td data-tone="subtle">3 Aug 2026, 22:44</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8806">RDG-8806</a></th>
+                  <td data-truncate>Cannot remove a deactivated agent from a queue</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">JV</span>
+                      <span>Jonas Vermeulen</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="warning">Waiting</span></td>
+                  <td data-tone="subtle">3 Aug 2026, 19:12</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8802">RDG-8802</a></th>
+                  <td data-truncate>Satisfaction survey sent to the wrong contact</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">EC</span>
+                      <span>Elena Cruz</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="info">Open</span></td>
+                  <td data-tone="subtle">3 Aug 2026, 15:36</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a data-component="button" data-variant="link" data-size="sm" data-mono href="/admin/tickets/RDG-8799">RDG-8799</a></th>
+                  <td data-truncate>API rate limit hit during nightly sync</td>
+                  <td>
+                    <div data-layout="row" data-gap="sm" data-align="center">
+                      <span data-component="avatar" data-size="sm">RO</span>
+                      <span>Ravi Oberoi</span>
+                    </div>
+                  </td>
+                  <td><span data-component="badge" data-variant="success">Solved</span></td>
+                  <td data-tone="subtle">3 Aug 2026, 10:05</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div data-slot="footer">
+            <div data-layout="row" data-gap="md" data-align="center" data-justify="between" data-wrap>
+              <div data-layout="stack" data-gap="xs">
+                <p>Page 2 of 98</p>
+                <p data-tone="subtle">Tickets 26 to 50 of 2,431, 25 per page</p>
+              </div>
+              <nav aria-label="Ticket pages">
+                <ol data-layout="row" data-gap="sm" data-align="center" data-wrap>
+                  <li><a data-component="button" data-variant="secondary" data-size="sm" href="?page=1">Previous</a></li>
+                  <li><a data-component="button" data-variant="ghost" data-size="sm" href="?page=1">1</a></li>
+                  <li><a data-component="button" data-variant="primary" data-size="sm" href="?page=2" aria-current="page">2</a></li>
+                  <li><a data-component="button" data-variant="ghost" data-size="sm" href="?page=3">3</a></li>
+                  <li><a data-component="button" data-variant="ghost" data-size="sm" href="?page=4">4</a></li>
+                  <li data-tone="subtle">...</li>
+                  <li><a data-component="button" data-variant="ghost" data-size="sm" href="?page=98">98</a></li>
+                  <li><a data-component="button" data-variant="secondary" data-size="sm" href="?page=3">Next</a></li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <details data-component="disclosure">
+          <summary>How the 90 day deletion is calculated</summary>
+          <p>A ticket counts as older than 90 days when its last updated date, not its created date, falls before 17 June 2026. Reopening a ticket resets the clock. Tickets on legal hold are never deleted, whatever their age.</p>
+          <ul>
+            <li>Solved and closed tickets are removed first.</li>
+            <li>Attachments are deleted with their ticket and cannot be restored.</li>
+            <li>Raising the quota before 15 September cancels the deletion entirely.</li>
+          </ul>
+        </details>
+
+      </div>
+    </main>
+  </div>
+
+  <dialog data-component="modal" open aria-labelledby="quota-modal-title" aria-describedby="quota-modal-body">
+    <div data-slot="panel">
+      <div data-slot="header">
+        <div data-layout="stack" data-gap="xs">
+          <span data-component="badge" data-variant="error">Action required</span>
+          <h2 id="quota-modal-title">This workspace is over its storage quota</h2>
+        </div>
+      </div>
+      <div data-slot="body" id="quota-modal-body">
+        <div data-layout="stack" data-gap="md">
+          <p>On <strong>15 September 2026</strong>, every ticket last updated more than 90 days ago will be permanently deleted from Ridgeline, together with its attachments. This cannot be undone.</p>
+          <div data-layout="row" data-gap="xl" data-wrap>
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">612</span>
+              <span data-tone="subtle">tickets to be deleted</span>
+            </div>
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">41</span>
+              <span data-tone="subtle">days remaining</span>
+            </div>
+            <div data-layout="stack" data-gap="xs">
+              <span data-component="stat">108%</span>
+              <span data-tone="subtle">of quota used</span>
+            </div>
+          </div>
+          <label>
+            <input type="checkbox" name="acknowledge" value="yes">
+            I understand that 612 tickets will be permanently deleted on 15 September 2026.
+          </label>
+        </div>
+      </div>
+      <div data-slot="footer">
+        <div data-layout="row" data-gap="sm" data-justify="end" data-wrap>
+          <a data-component="button" data-variant="secondary" href="/admin/storage">Review storage</a>
+          <button data-component="button" data-variant="primary" type="submit">Acknowledge and continue</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+</body>
+</html>

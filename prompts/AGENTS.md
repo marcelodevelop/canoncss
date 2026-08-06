@@ -64,8 +64,6 @@ COMPONENTS - data-component on semantic elements:
             did, role="alert" only if it must interrupt.
   breadcrumb on <nav> wrapping an <ol> of ancestors. Separators are
             generated; mark the last one aria-current="page".
-  pagination on <nav> wrapping an <ol> of page links. Current is
-            aria-current="page"; a dead prev/next is aria-disabled="true".
 
 UTILITIES - complete list; nothing else exists:
   data-padding={xs|sm|md|lg|xl|2xl}  data-tone={subtle|brand|accent|success|error}
@@ -84,6 +82,12 @@ PROSE - styled automatically, no attributes needed:
   labels are <p data-tone="subtle">, never a heading element.
 
 CANONICAL DEFAULTS - use these unless something forces another choice:
+  A pager is not a component and does not need one. Ten of ten
+    clean-context generations built the same thing without it, so it is a
+    canonical construction instead: <nav aria-label="Pagination"
+    data-layout="row" data-gap="sm" data-align="center" data-wrap> holding
+    button anchors, ghost for the other pages, primary plus
+    aria-current="page" for the current one, secondary for Previous and Next.
   Spacing: page sections data-gap="xl"; card bodies and field groups
     data-gap="md"; buttons sitting side by side data-gap="sm".
   A number with a unit: <span data-component="stat">$79</span> then

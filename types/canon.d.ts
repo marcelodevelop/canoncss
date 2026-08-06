@@ -47,9 +47,8 @@ declare module 'react' {
      * `stepper` on `<ol>`
      * `alert` on `<div>` | `<section>` | `<aside>`
      * `breadcrumb` on `<nav>`
-     * `pagination` on `<nav>`
      */
-    'data-component'?: 'button' | 'card' | 'badge' | 'input' | 'textarea' | 'select' | 'topbar' | 'modal' | 'avatar' | 'stat' | 'table' | 'divider' | 'disclosure' | 'nav' | 'stepper' | 'alert' | 'breadcrumb' | 'pagination' | undefined;
+    'data-component'?: 'button' | 'card' | 'badge' | 'input' | 'textarea' | 'select' | 'topbar' | 'modal' | 'avatar' | 'stat' | 'table' | 'divider' | 'disclosure' | 'nav' | 'stepper' | 'alert' | 'breadcrumb' | undefined;
 
     /**
      * Gap between children, from the space scale.

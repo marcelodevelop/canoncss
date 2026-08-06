@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GET /v2/shipments · Northwind API Reference</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Northwind</a>
+  <nav data-slot="nav">
+    <a href="/guides">Guides</a>
+    <a href="/reference" aria-current="page">API Reference</a>
+    <a href="/webhooks">Webhooks</a>
+    <a href="/sdks">SDKs</a>
+    <a href="/changelog">Changelog</a>
+  </nav>
+  <div data-slot="actions">
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/status">Status</a>
+    <a data-component="button" data-variant="primary" data-size="sm" href="/dashboard">Dashboard</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/guides">Guides</a>
+      <a href="/reference" aria-current="page">API Reference</a>
+      <a href="/webhooks">Webhooks</a>
+      <a href="/sdks">SDKs</a>
+      <a href="/changelog">Changelog</a>
+      <a href="/status">Status</a>
+      <a href="/dashboard">Dashboard</a>
+    </nav>
+  </details>
+</header>
+
+<div data-layout="centered" data-width="wide">
+  <div data-layout="sidebar" data-gap="xl">
+
+    <aside data-slot="sidebar" data-layout="stack" data-gap="lg">
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">API Reference</p>
+        <nav data-component="nav">
+          <a href="/reference/authentication">Authentication</a>
+          <a href="/reference/pagination">Pagination</a>
+          <a href="/reference/errors">Errors and retries</a>
+          <a href="/reference/rate-limits">Rate limits</a>
+        </nav>
+      </div>
+
+      <hr data-component="divider">
+
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">Shipments</p>
+        <nav data-component="nav">
+          <a href="/reference/shipments/overview">Overview</a>
+          <a href="/reference/shipments/object">The shipment object</a>
+          <a href="/reference/shipments/list" aria-current="page">GET /v2/shipments</a>
+          <a href="/reference/shipments/retrieve">GET /v2/shipments/{id}</a>
+          <a href="/reference/shipments/create">POST /v2/shipments</a>
+          <a href="/reference/shipments/cancel">POST /v2/shipments/{id}/cancel</a>
+          <a href="/reference/shipments/events">Shipment events</a>
+        </nav>
+      </div>
+
+      <hr data-component="divider">
+
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">Other resources</p>
+        <nav data-component="nav">
+          <a href="/reference/carriers">Carriers</a>
+          <a href="/reference/warehouses">Warehouses</a>
+          <a href="/reference/manifests">Manifests</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main data-slot="main" data-layout="stack" data-gap="xl">
+
+      <nav data-layout="row" data-gap="sm" data-wrap data-align="center" aria-label="Breadcrumb">
+        <a data-component="button" data-variant="link" data-size="sm" href="/">Northwind Docs</a>
+        <span data-tone="subtle">/</span>
+        <a data-component="button" data-variant="link" data-size="sm" href="/reference">API Reference</a>
+        <span data-tone="subtle">/</span>
+        <a data-component="button" data-variant="link" data-size="sm" href="/reference/logistics">Logistics</a>
+        <span data-tone="subtle">/</span>
+        <a data-component="button" data-variant="link" data-size="sm" href="/reference/shipments/overview">Shipments</a>
+        <span data-tone="subtle">/</span>
+        <span data-tone="subtle">List shipments</span>
+      </nav>
+
+      <div data-layout="stack" data-gap="sm">
+        <div data-layout="row" data-gap="sm" data-align="center" data-wrap>
+          <span data-component="badge" data-variant="info">GET</span>
+          <h1 data-mono>/v2/shipments</h1>
+        </div>
+        <p data-tone="subtle">List shipments for the authenticated account, newest first.</p>
+      </div>
+
+      <article data-component="card" data-variant="featured" data-tone="error">
+        <div data-slot="header" data-layout="row" data-gap="sm" data-align="center" data-wrap>
+          <span data-component="badge" data-variant="error" data-motion="pulse">Deprecated</span>
+          <span>This endpoint is being retired. Migrate to <code>/v3/shipments</code>.</span>
+        </div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <div data-layout="stack" data-gap="xs">
+            <span data-component="stat">1 March 2027</span>
+            <span data-tone="subtle">Last day <code>GET /v2/shipments</code> answers requests</span>
+          </div>
+          <p>
+            After that date every call to <code>/v2/shipments</code> returns <code>410 Gone</code>.
+            <code>/v3/shipments</code> is available today and accepts the same filters, with two
+            differences: cursor pagination replaces <code>page</code>, and <code>status</code>
+            accepts multiple values. Nothing else in the request changes.
+          </p>
+        </div>
+        <div data-slot="footer" data-layout="row" data-gap="sm" data-wrap>
+          <a data-component="button" data-variant="primary" href="/reference/shipments/v3/list">Read the v3 reference</a>
+          <a data-component="button" data-variant="secondary" href="/guides/migrate-v2-v3">Migration guide</a>
+        </div>
+      </article>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>What it does</h2>
+        <p>
+          Returns a paginated list of shipment records belonging to your account. Each record
+          carries the carrier, the current status, the origin and destination warehouses, and the
+          last scan event. Use the query parameters below to narrow the list by carrier, status,
+          or creation window. Results are ordered by <code>created_at</code> descending and are
+          scoped to the API key's organisation, so a key issued to one business unit never sees
+          another's freight.
+        </p>
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>Query parameters</h2>
+        <table data-component="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>carrier_id</code></td>
+              <td><code>string</code></td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>Return only shipments tendered to this carrier. Accepts a carrier ID such as <code>car_9f2c</code>.</td>
+            </tr>
+            <tr>
+              <td><code>status</code></td>
+              <td><code>string</code></td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>One of <code>draft</code>, <code>tendered</code>, <code>in_transit</code>, <code>delivered</code>, <code>exception</code>. v2 accepts a single value only.</td>
+            </tr>
+            <tr>
+              <td><code>created_after</code></td>
+              <td><code>string</code></td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>ISO 8601 timestamp. Only shipments created at or after this instant are returned.</td>
+            </tr>
+            <tr>
+              <td><code>warehouse_id</code></td>
+              <td><code>string</code></td>
+              <td><span data-component="badge" data-variant="warning">Required</span></td>
+              <td>Origin warehouse to list from. Required since v2.4; calls without it return <code>400</code>.</td>
+            </tr>
+            <tr>
+              <td><code>page</code></td>
+              <td><code>integer</code></td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>1-based page number. Defaults to <code>1</code>. Replaced by <code>cursor</code> in v3.</td>
+            </tr>
+            <tr>
+              <td><code>limit</code></td>
+              <td><code>integer</code></td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>Records per page, between <code>1</code> and <code>200</code>. Defaults to <code>50</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>Example response</h2>
+        <p data-tone="subtle"><code>200 OK</code></p>
+<pre><code>{
+  "object": "list",
+  "page": 1,
+  "limit": 50,
+  "total": 213,
+  "data": [
+    {
+      "id": "shp_8Q2mLd41",
+      "object": "shipment",
+      "status": "in_transit",
+      "carrier_id": "car_9f2c",
+      "warehouse_id": "whs_leeds_02",
+      "destination": {
+        "name": "Aker Nordic AS",
+        "city": "Bergen",
+        "country": "NO"
+      },
+      "tracking_number": "NW449120775SE",
+      "last_event": {
+        "code": "departed_facility",
+        "occurred_at": "2027-01-14T06:21:09Z"
+      },
+      "created_at": "2027-01-12T15:02:44Z"
+    }
+  ]
+}</code></pre>
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>Common questions</h2>
+
+        <details data-component="disclosure">
+          <summary>Why do I get a 400 when I omit warehouse_id?</summary>
+          <p>
+            Since v2.4 the origin warehouse is mandatory, because unscoped listing was timing out
+            for accounts with more than a hundred thousand shipments. Loop over the warehouses
+            returned by <code>GET /v2/warehouses</code> and issue one call per warehouse, or move
+            to <code>/v3/shipments</code>, where the filter is optional again.
+          </p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>Can I filter by more than one status at a time?</summary>
+          <p>
+            Not on v2. <code>status</code> takes a single value here, and passing a comma separated
+            list matches nothing rather than erroring. On <code>/v3/shipments</code> the parameter
+            repeats: <code>?status=in_transit&amp;status=exception</code>.
+          </p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>What happens to my integration on 1 March 2027?</summary>
+          <p>
+            Requests stop being served and return <code>410 Gone</code> with an error body pointing
+            at the v3 path. There is no grace period and no extension by request. From 1 December
+            2026 responses also carry a <code>Sunset</code> header so you can alert on it before
+            the cutoff.
+          </p>
+        </details>
+      </section>
+
+      <hr data-component="divider" data-variant="strong">
+
+      <section data-layout="stack" data-gap="md">
+        <div data-layout="stack" data-gap="xs">
+          <p data-tone="subtle">Shipments section, page 3 of 7</p>
+          <ol data-component="stepper">
+            <li data-state="complete">Overview</li>
+            <li data-state="complete">The shipment object</li>
+            <li aria-current="step">List shipments</li>
+            <li>Retrieve a shipment</li>
+            <li>Create a shipment</li>
+            <li>Cancel a shipment</li>
+            <li>Shipment events</li>
+          </ol>
+        </div>
+
+        <nav data-layout="row" data-gap="md" data-justify="between" data-wrap aria-label="Section pagination">
+          <div data-layout="stack" data-gap="xs">
+            <span data-tone="subtle">Previous</span>
+            <a data-component="button" data-variant="secondary" href="/reference/shipments/object">← The shipment object</a>
+          </div>
+          <div data-layout="stack" data-gap="xs" data-align="end">
+            <span data-tone="subtle">Next</span>
+            <a data-component="button" data-variant="secondary" href="/reference/shipments/retrieve">Retrieve a shipment →</a>
+          </div>
+        </nav>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

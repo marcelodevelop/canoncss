@@ -30,7 +30,7 @@
     },
     {
       "name": "data-component",
-      "description": "Canon component role. Must sit on its canonical element (R5).\n\nbutton: <button>, <a>\ncard: <article>, <div>, <section>, <li>, <a>, <blockquote>\nbadge: <span>\ninput: <input>\ntextarea: <textarea>\nselect: <select>\ntopbar: <header>\nmodal: <dialog>, <div>\navatar: <span>\nstat: <span>\ntable: <table>\ndivider: <hr>, <div>\ndisclosure: <details>\nnav: <nav>\nstepper: <ol>\nalert: <div>, <section>, <aside>\nbreadcrumb: <nav>\npagination: <nav>",
+      "description": "Canon component role. Must sit on its canonical element (R5).\n\nbutton: <button>, <a>\ncard: <article>, <div>, <section>, <li>, <a>, <blockquote>\nbadge: <span>\ninput: <input>\ntextarea: <textarea>\nselect: <select>\ntopbar: <header>\nmodal: <dialog>, <div>\navatar: <span>\nstat: <span>\ntable: <table>\ndivider: <hr>, <div>\ndisclosure: <details>\nnav: <nav>\nstepper: <ol>\nalert: <div>, <section>, <aside>\nbreadcrumb: <nav>",
       "values": [
         {
           "name": "button"
@@ -82,9 +82,6 @@
         },
         {
           "name": "breadcrumb"
-        },
-        {
-          "name": "pagination"
         }
       ]
     },

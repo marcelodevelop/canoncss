@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GET /v2/shipments — Shipments — Northwind API</title>
+<link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+<header data-component="topbar">
+  <a data-slot="brand" href="/">Northwind</a>
+  <nav data-slot="nav">
+    <a href="/docs/">Guides</a>
+    <a href="/docs/api/" aria-current="page">API reference</a>
+    <a href="/docs/sdks/">SDKs</a>
+    <a href="/docs/changelog/">Changelog</a>
+    <a href="/status/">Status</a>
+  </nav>
+  <div data-slot="actions" data-layout="row" data-gap="sm" data-align="center">
+    <a data-component="button" data-variant="ghost" data-size="sm" href="/support/">Support</a>
+    <a data-component="button" data-variant="primary" data-size="sm" href="/dashboard/">Dashboard</a>
+  </div>
+  <details data-slot="menu">
+    <summary>☰</summary>
+    <nav>
+      <a href="/docs/">Guides</a>
+      <a href="/docs/api/" aria-current="page">API reference</a>
+      <a href="/docs/sdks/">SDKs</a>
+      <a href="/docs/changelog/">Changelog</a>
+      <a href="/status/">Status</a>
+      <a href="/support/">Support</a>
+      <a href="/dashboard/">Dashboard</a>
+    </nav>
+  </details>
+</header>
+
+<div data-layout="centered" data-width="wide" data-padding="lg">
+  <div data-layout="sidebar" data-gap="xl">
+
+    <aside data-slot="sidebar" data-layout="stack" data-gap="lg">
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">API reference</p>
+        <ul data-component="nav">
+          <li><a href="/docs/api/authentication/">Authentication</a></li>
+          <li><a href="/docs/api/errors/">Errors</a></li>
+          <li><a href="/docs/api/pagination/">Pagination</a></li>
+          <li><a href="/docs/api/carriers/">Carriers</a></li>
+          <li><a href="/docs/api/shipments/">Shipments</a></li>
+          <li><a href="/docs/api/tracking/">Tracking</a></li>
+          <li><a href="/docs/api/webhooks/">Webhooks</a></li>
+        </ul>
+      </div>
+
+      <hr data-component="divider">
+
+      <div data-layout="stack" data-gap="xs">
+        <p data-tone="subtle">Shipments — page 3 of 7</p>
+        <ul data-component="nav">
+          <li><a href="/docs/api/shipments/">Overview</a></li>
+          <li><a href="/docs/api/shipments/object/">The shipment object</a></li>
+          <li><a href="/docs/api/shipments/list/" aria-current="page">GET /v2/shipments</a></li>
+          <li><a href="/docs/api/shipments/create/">POST /v2/shipments</a></li>
+          <li><a href="/docs/api/shipments/cancel/">Cancel a shipment</a></li>
+          <li><a href="/docs/api/shipments/webhooks/">Shipment webhooks</a></li>
+          <li><a href="/docs/api/shipments/limits/">Rate limits and quotas</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main data-slot="main" data-layout="stack" data-gap="xl">
+
+      <nav aria-label="Breadcrumb">
+        <ol data-layout="row" data-gap="xs" data-wrap data-align="center">
+          <li><a href="/docs/">Docs</a></li>
+          <li data-tone="subtle" aria-hidden="true">/</li>
+          <li><a href="/docs/api/">API reference</a></li>
+          <li data-tone="subtle" aria-hidden="true">/</li>
+          <li><a href="/docs/api/shipments/">Shipments</a></li>
+          <li data-tone="subtle" aria-hidden="true">/</li>
+          <li><a href="/docs/api/shipments/list/" aria-current="page">List shipments</a></li>
+        </ol>
+      </nav>
+
+      <div data-layout="stack" data-gap="sm">
+        <div data-layout="row" data-gap="sm" data-align="center" data-wrap>
+          <span data-component="badge" data-variant="info">GET</span>
+          <span data-component="badge" data-variant="error" data-motion="pulse">Deprecated</span>
+          <span data-tone="subtle">Shipments · page 3 of 7</span>
+        </div>
+        <h1>List shipments</h1>
+        <p data-mono>GET https://api.northwind.com/v2/shipments</p>
+      </div>
+
+      <div data-layout="stack" data-gap="md" data-tone="error" data-padding="lg" data-motion="rise">
+        <div data-layout="row" data-gap="sm" data-align="center" data-wrap>
+          <span data-component="badge" data-variant="error">Retiring 1 March 2027</span>
+        </div>
+        <h2>This endpoint is being retired</h2>
+        <p><strong>GET /v2/shipments stops responding on 1 March 2027.</strong> After that date every
+        call returns <code>410 Gone</code>. Move your integration to
+        <a href="/docs/api/v3/shipments/list/"><code>GET /v3/shipments</code></a> before then.</p>
+        <p>v3 keeps the same filters but returns cursor pagination by default and renames
+        <code>status</code> values to the carrier-neutral set. Nothing else in your request has to change.</p>
+        <div data-layout="row" data-gap="sm" data-wrap>
+          <a data-component="button" data-variant="primary" href="/docs/api/v3/shipments/list/">Read the v3 reference</a>
+          <a data-component="button" data-variant="secondary" href="/docs/guides/v2-to-v3/">Migration guide</a>
+        </div>
+      </div>
+
+      <div data-layout="stack" data-gap="md">
+        <p>Returns a paginated list of shipments belonging to the authenticated account, newest first.
+        Use the query parameters below to narrow the list by lifecycle status, origin hub, or last update
+        time. A shipment appears here from the moment a label is purchased until 24 months after delivery.</p>
+        <p data-tone="subtle">Requires an API key with the <code>shipments:read</code> scope.</p>
+      </div>
+
+      <hr data-component="divider">
+
+      <section data-layout="stack" data-gap="md">
+        <h2>Query parameters</h2>
+        <table data-component="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>status</code></td>
+              <td>string</td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>Filter by lifecycle state. One of <code>draft</code>, <code>in_transit</code>,
+              <code>delivered</code>, <code>exception</code>, <code>cancelled</code>. Repeat the
+              parameter to pass more than one value.</td>
+            </tr>
+            <tr>
+              <td><code>origin_hub</code></td>
+              <td>string</td>
+              <td><span data-component="badge" data-variant="warning">Required</span></td>
+              <td>Three-letter hub code the shipment departs from, such as <code>RTM</code> or
+              <code>MEM</code>. Accounts with a single hub may omit this only on v3.</td>
+            </tr>
+            <tr>
+              <td><code>updated_after</code></td>
+              <td>string (RFC 3339)</td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>Only return shipments changed at or after this timestamp. Use it to poll for
+              changes instead of re-reading the whole list.</td>
+            </tr>
+            <tr>
+              <td><code>limit</code></td>
+              <td>integer</td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>Number of shipments per page, between <code>1</code> and <code>200</code>.
+              Defaults to <code>50</code>.</td>
+            </tr>
+            <tr>
+              <td><code>cursor</code></td>
+              <td>string</td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>Opaque cursor taken from <code>next_cursor</code> in a previous response.
+              Omit it to start at the first page.</td>
+            </tr>
+            <tr>
+              <td><code>include</code></td>
+              <td>string</td>
+              <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+              <td>Expand related records. Accepts <code>packages</code>, <code>events</code>,
+              or both as a comma-separated list.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>Example response</h2>
+        <p data-tone="subtle">200 OK · <code>application/json</code></p>
+<pre><code>{
+  "object": "list",
+  "has_more": true,
+  "next_cursor": "c2hpcDpfMDkxNA",
+  "data": [
+    {
+      "id": "shp_8Q4T2VXK",
+      "object": "shipment",
+      "status": "in_transit",
+      "origin_hub": "RTM",
+      "destination": {
+        "city": "Lyon",
+        "country": "FR",
+        "postal_code": "69003"
+      },
+      "carrier": "northwind_ground",
+      "tracking_number": "NW884120995NL",
+      "packages": 2,
+      "weight_kg": 14.8,
+      "created_at": "2027-01-08T09:41:22Z",
+      "updated_at": "2027-01-09T17:02:55Z",
+      "estimated_delivery": "2027-01-12"
+    }
+  ]
+}</code></pre>
+      </section>
+
+      <section data-layout="stack" data-gap="md">
+        <h2>Common questions</h2>
+
+        <details data-component="disclosure">
+          <summary>Will my v2 calls break before 1 March 2027?</summary>
+          <p>No. v2 keeps working normally until that date, and we will not change its response
+          shape in the meantime. From 1 March 2027 the endpoint returns <code>410 Gone</code> with
+          an error body pointing at <code>/v3/shipments</code>. From 1 December 2026 responses also
+          carry a <code>Sunset</code> header so you can alert on it from your own logs.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>Why do I get 400 when I omit origin_hub?</summary>
+          <p>On v2, <code>origin_hub</code> is required for every account, including single-hub
+          accounts. Pass the hub code shown on your dashboard. On v3 the parameter is optional and
+          defaults to all hubs the key can read.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>How do I page through more than 200 shipments?</summary>
+          <p>Read <code>next_cursor</code> from the response and pass it back as <code>cursor</code>
+          on the next call. Stop when <code>has_more</code> is <code>false</code>. Do not build
+          cursors yourself; their format is not stable between versions.</p>
+        </details>
+
+        <details data-component="disclosure">
+          <summary>Is there a way to be told about changes instead of polling?</summary>
+          <p>Yes. Subscribe to the <code>shipment.updated</code> event described in
+          <a href="/docs/api/shipments/webhooks/">Shipment webhooks</a>. Polling with
+          <code>updated_after</code> is the fallback when you cannot receive inbound requests.</p>
+        </details>
+      </section>
+
+      <hr data-component="divider" data-variant="strong">
+
+      <section data-layout="stack" data-gap="md">
+        <h2 class="sr-only">Section navigation</h2>
+        <p data-tone="subtle">Shipments section — page 3 of 7</p>
+        <ol data-component="stepper">
+          <li data-state="complete"><a href="/docs/api/shipments/">Overview</a></li>
+          <li data-state="complete"><a href="/docs/api/shipments/object/">The shipment object</a></li>
+          <li aria-current="step">GET /v2/shipments</li>
+          <li><a href="/docs/api/shipments/create/">POST /v2/shipments</a></li>
+          <li><a href="/docs/api/shipments/cancel/">Cancel a shipment</a></li>
+          <li><a href="/docs/api/shipments/webhooks/">Shipment webhooks</a></li>
+          <li><a href="/docs/api/shipments/limits/">Rate limits and quotas</a></li>
+        </ol>
+
+        <div data-layout="row" data-gap="sm" data-justify="between" data-wrap>
+          <a data-component="button" data-variant="secondary" href="/docs/api/shipments/object/">
+            ← Previous: The shipment object
+          </a>
+          <a data-component="button" data-variant="secondary" href="/docs/api/shipments/create/">
+            Next: POST /v2/shipments →
+          </a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

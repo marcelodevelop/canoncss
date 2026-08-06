@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GET /v2/shipments - Northwind API Reference</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="../index.html">Northwind</a>
+    <nav data-slot="nav">
+      <a href="../guides/index.html">Guides</a>
+      <a href="../reference/index.html" aria-current="page">API Reference</a>
+      <a href="../sdks/index.html">SDKs</a>
+      <a href="../changelog/index.html">Changelog</a>
+      <a href="../status/index.html">Status</a>
+    </nav>
+    <div data-slot="actions">
+      <a data-component="button" data-variant="secondary" data-size="sm" href="../support/index.html">Support</a>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="../guides/index.html">Guides</a>
+        <a href="../reference/index.html" aria-current="page">API Reference</a>
+        <a href="../sdks/index.html">SDKs</a>
+        <a href="../changelog/index.html">Changelog</a>
+        <a href="../status/index.html">Status</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="centered" data-width="wide" data-padding="lg">
+    <div data-layout="stack" data-gap="xl">
+
+      <nav data-layout="row" data-gap="xs" data-align="center" data-wrap aria-label="Breadcrumb">
+        <a href="../index.html">Docs</a>
+        <span data-tone="subtle">/</span>
+        <a href="../reference/index.html">API Reference</a>
+        <span data-tone="subtle">/</span>
+        <a href="../reference/v2/index.html">v2</a>
+        <span data-tone="subtle">/</span>
+        <a href="./index.html">Shipments</a>
+        <span data-tone="subtle">/</span>
+        <span data-tone="subtle">List shipments</span>
+      </nav>
+
+      <div data-layout="sidebar" data-gap="xl">
+
+        <aside data-slot="sidebar">
+          <div data-layout="stack" data-gap="lg">
+            <div data-layout="stack" data-gap="xs">
+              <p data-tone="subtle">Shipments (7 pages)</p>
+              <ul data-component="nav">
+                <li><a href="./overview.html">1. Overview</a></li>
+                <li><a href="./create-a-shipment.html">2. Create a shipment</a></li>
+                <li><a href="./gen-2.html" aria-current="page">3. List shipments</a></li>
+                <li><a href="./shipment-events.html">4. Shipment events</a></li>
+                <li><a href="./labels-and-documents.html">5. Labels and documents</a></li>
+                <li><a href="./tracking-webhooks.html">6. Tracking webhooks</a></li>
+                <li><a href="./errors-and-retries.html">7. Errors and retries</a></li>
+              </ul>
+            </div>
+
+            <hr data-component="divider">
+
+            <div data-layout="stack" data-gap="xs">
+              <p data-tone="subtle">Other sections</p>
+              <ul data-component="nav">
+                <li><a href="../rates/index.html">Rates</a></li>
+                <li><a href="../addresses/index.html">Addresses</a></li>
+                <li><a href="../carriers/index.html">Carriers</a></li>
+                <li><a href="../customs/index.html">Customs</a></li>
+                <li><a href="../webhooks/index.html">Webhooks</a></li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+        <div data-slot="main">
+          <div data-layout="stack" data-gap="xl">
+
+            <div data-layout="stack" data-gap="sm">
+              <div data-layout="row" data-gap="sm" data-align="center" data-wrap>
+                <span data-component="badge" data-variant="info">GET</span>
+                <span data-component="badge" data-variant="error">Deprecated</span>
+                <span data-component="badge" data-variant="warning">Retires 1 March 2027</span>
+              </div>
+              <h1>GET /v2/shipments</h1>
+              <p>Returns a paginated list of shipments belonging to the authenticated
+                account, newest first. Use it to reconcile your own records against
+                Northwind, to poll for shipments whose status changed since your last
+                sync, or to page through a carrier's backlog. It reads only: it never
+                creates, books or cancels a shipment.</p>
+            </div>
+
+            <article data-component="card" data-tone="error" data-motion="pulse">
+              <div data-slot="header">
+                <span data-component="badge" data-variant="error">Deprecated endpoint</span>
+                This endpoint is being retired. Migrate to /v3/shipments.
+              </div>
+              <div data-slot="body">
+                <div data-layout="stack" data-gap="md">
+                  <div data-layout="stack" data-gap="xs">
+                    <span data-component="stat">1 March 2027</span>
+                    <span data-tone="subtle">Last day GET /v2/shipments answers requests</span>
+                  </div>
+                  <p>After that date every call to <code>/v2/shipments</code> returns
+                    <code>410 Gone</code>. There is no grace period and no extension for
+                    individual accounts. From 1 September 2026 the endpoint also begins
+                    returning a <code>Sunset</code> response header on every call.</p>
+                  <p>The replacement, <code>GET /v3/shipments</code>, accepts the same
+                    filters plus cursor pagination on every collection. The response
+                    envelope changed: <code>data</code> replaces <code>shipments</code>,
+                    and timestamps are RFC 3339 with an explicit offset.</p>
+                </div>
+              </div>
+              <div data-slot="footer">
+                <div data-layout="row" data-gap="sm" data-wrap>
+                  <a data-component="button" data-variant="primary" href="../v3/shipments/list.html">Read GET /v3/shipments</a>
+                  <a data-component="button" data-variant="secondary" href="../../guides/migrating-v2-to-v3.html">Migration guide</a>
+                </div>
+              </div>
+            </article>
+
+            <div data-layout="stack" data-gap="md">
+              <h2>Query parameters</h2>
+              <p>All parameters are optional unless marked required. Unknown parameters
+                are rejected with <code>400 invalid_parameter</code>.</p>
+              <table data-component="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>account_id</code></td>
+                    <td>string</td>
+                    <td><span data-component="badge" data-variant="warning">Required</span></td>
+                    <td>The account whose shipments are returned. Must be an account your
+                      API key can read, otherwise the call fails with <code>403</code>.</td>
+                  </tr>
+                  <tr>
+                    <td><code>status</code></td>
+                    <td>string</td>
+                    <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+                    <td>Filter by lifecycle state: <code>draft</code>, <code>booked</code>,
+                      <code>in_transit</code>, <code>delivered</code>, <code>cancelled</code>.
+                      Repeat the parameter to pass more than one value.</td>
+                  </tr>
+                  <tr>
+                    <td><code>updated_since</code></td>
+                    <td>string (ISO 8601)</td>
+                    <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+                    <td>Return only shipments modified at or after this instant. Values
+                      older than 400 days are clamped to the retention window.</td>
+                  </tr>
+                  <tr>
+                    <td><code>carrier_code</code></td>
+                    <td>string</td>
+                    <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+                    <td>Restrict results to a single carrier, for example <code>dhl_express</code>.
+                      See the Carriers section for the full list of codes.</td>
+                  </tr>
+                  <tr>
+                    <td><code>limit</code></td>
+                    <td>integer</td>
+                    <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+                    <td>Number of shipments per page, 1 to 100. Defaults to 25.</td>
+                  </tr>
+                  <tr>
+                    <td><code>page</code></td>
+                    <td>integer</td>
+                    <td><span data-component="badge" data-variant="neutral">Optional</span></td>
+                    <td>Offset page number, starting at 1. Offset paging is the v2
+                      behaviour; v3 uses an opaque <code>cursor</code> instead.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div data-layout="stack" data-gap="md">
+              <h2>Example response</h2>
+              <p><code>200 OK</code> for
+                <code>GET /v2/shipments?account_id=acct_7Kd2&amp;status=in_transit&amp;limit=2</code></p>
+              <pre><code>{
+  "shipments": [
+    {
+      "id": "shp_9f31c0a2",
+      "account_id": "acct_7Kd2",
+      "status": "in_transit",
+      "carrier_code": "dhl_express",
+      "tracking_number": "JD0142998877",
+      "origin": { "city": "Rotterdam", "country": "NL" },
+      "destination": { "city": "Bilbao", "country": "ES" },
+      "weight_kg": 18.4,
+      "created_at": "2026-07-28T09:12:44Z",
+      "updated_at": "2026-08-02T17:03:10Z"
+    },
+    {
+      "id": "shp_2c77be14",
+      "account_id": "acct_7Kd2",
+      "status": "in_transit",
+      "carrier_code": "maersk_lcl",
+      "tracking_number": "MSKU4471902",
+      "origin": { "city": "Gdansk", "country": "PL" },
+      "destination": { "city": "Leeds", "country": "GB" },
+      "weight_kg": 640.0,
+      "created_at": "2026-07-19T06:40:02Z",
+      "updated_at": "2026-08-01T22:18:55Z"
+    }
+  ],
+  "page": 1,
+  "limit": 2,
+  "total": 37
+}</code></pre>
+            </div>
+
+            <div data-layout="stack" data-gap="md">
+              <h2>Common questions</h2>
+              <div data-layout="stack" data-gap="sm">
+
+                <details data-component="disclosure">
+                  <summary>Can I keep calling /v2/shipments after 1 March 2027?</summary>
+                  <p>No. The route is removed, not frozen. Every request after that date
+                    returns <code>410 Gone</code> with an error body pointing at
+                    <code>/v3/shipments</code>. Pinning an older SDK version does not help,
+                    because the retirement happens server side.</p>
+                </details>
+
+                <details data-component="disclosure">
+                  <summary>Why does total sometimes change between pages?</summary>
+                  <p><code>total</code> is counted at the moment each page is served, so a
+                    shipment created or cancelled mid-walk shifts it. If you need a stable
+                    walk, filter with <code>updated_since</code> and treat the run as
+                    incremental rather than as a snapshot. The v3 endpoint solves this with
+                    cursor pagination, where a cursor stays valid for 24 hours.</p>
+                </details>
+
+                <details data-component="disclosure">
+                  <summary>How do I fetch shipments across several accounts?</summary>
+                  <p>One call per account. <code>account_id</code> takes a single value and
+                    cannot be repeated. Calls are rate limited per API key, not per account,
+                    at 600 requests per minute, so fan out with a small amount of
+                    concurrency and honour the <code>Retry-After</code> header on
+                    <code>429</code>.</p>
+                </details>
+
+                <details data-component="disclosure">
+                  <summary>Are cancelled shipments included by default?</summary>
+                  <p>Yes. With no <code>status</code> filter the response contains every
+                    lifecycle state, including <code>cancelled</code> and <code>draft</code>.
+                    Pass the states you want explicitly if your reconciliation job should
+                    ignore them.</p>
+                </details>
+
+              </div>
+            </div>
+
+            <hr data-component="divider" data-variant="strong">
+
+            <nav data-layout="row" data-gap="md" data-justify="between" data-align="center" data-wrap aria-label="Shipments section">
+              <a data-component="button" data-variant="secondary" href="./create-a-shipment.html">Previous: Create a shipment</a>
+              <span data-tone="subtle">Page 3 of 7 in Shipments</span>
+              <a data-component="button" data-variant="secondary" href="./shipment-events.html">Next: Shipment events</a>
+            </nav>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tickets · Ridgeline Admin</title>
+  <link rel="stylesheet" href="../../dist/canon.css">
+</head>
+<body>
+
+  <dialog data-component="modal" open aria-labelledby="purge-title" aria-describedby="purge-body">
+    <div data-slot="panel">
+      <div data-slot="header">
+        <span data-component="badge" data-variant="error">Action required</span>
+        <h2 id="purge-title">This workspace is over its storage quota</h2>
+      </div>
+      <div data-slot="body" data-layout="stack" data-gap="md">
+        <p id="purge-body">
+          Ridgeline storage is full. To bring the workspace back under quota, every ticket
+          last updated more than 90 days ago will be <strong>permanently deleted on 15 September</strong>.
+          Deleted tickets cannot be restored, and their attachments go with them.
+        </p>
+        <div data-layout="row" data-gap="lg" data-wrap>
+          <div data-layout="stack" data-gap="xs">
+            <span data-component="stat">104%</span>
+            <span data-tone="subtle">of storage quota used</span>
+          </div>
+          <div data-layout="stack" data-gap="xs">
+            <span data-component="stat">1,186</span>
+            <span data-tone="subtle">tickets due for deletion</span>
+          </div>
+          <div data-layout="stack" data-gap="xs">
+            <span data-component="stat">41</span>
+            <span data-tone="subtle">days remaining</span>
+          </div>
+        </div>
+        <p data-tone="subtle">
+          Export or reassign anything you still need before 15 September. Ask your workspace
+          owner to raise the quota if this date does not work for your team.
+        </p>
+        <label for="purge-ack">
+          <input type="checkbox" id="purge-ack" name="purge-ack">
+          I understand that tickets older than 90 days will be permanently deleted on 15 September.
+        </label>
+      </div>
+      <div data-slot="footer" data-layout="row" data-gap="sm" data-justify="end" data-wrap>
+        <a data-component="button" data-variant="ghost" href="/admin/storage">Review storage settings</a>
+        <button data-component="button" data-variant="primary" type="submit">Acknowledge and continue</button>
+      </div>
+    </div>
+  </dialog>
+
+  <header data-component="topbar">
+    <a data-slot="brand" href="/">Ridgeline</a>
+    <nav data-slot="nav">
+      <a href="/inbox">Inbox</a>
+      <a href="/reports">Reports</a>
+      <a href="/customers">Customers</a>
+      <a href="/admin" aria-current="page">Admin</a>
+    </nav>
+    <div data-slot="actions" data-layout="row" data-gap="sm" data-align="center">
+      <a data-component="button" data-variant="ghost" data-size="sm" href="/help">Help</a>
+      <span data-component="avatar" data-size="sm">MA</span>
+    </div>
+    <details data-slot="menu">
+      <summary>☰</summary>
+      <nav>
+        <a href="/inbox">Inbox</a>
+        <a href="/reports">Reports</a>
+        <a href="/customers">Customers</a>
+        <a href="/admin" aria-current="page">Admin</a>
+        <a href="/help">Help</a>
+      </nav>
+    </details>
+  </header>
+
+  <div data-layout="sidebar" data-gap="xl">
+
+    <div data-slot="sidebar" data-layout="stack" data-gap="lg">
+      <p data-tone="subtle">Admin</p>
+      <nav data-component="nav" aria-label="Admin sections">
+        <ul>
+          <li><a href="/admin">Overview</a></li>
+          <li><a href="/admin/tickets" aria-current="page">Tickets</a></li>
+          <li><a href="/admin/views">Views and queues</a></li>
+          <li><a href="/admin/macros">Macros</a></li>
+          <li><a href="/admin/sla">SLA policies</a></li>
+        </ul>
+      </nav>
+      <hr data-component="divider">
+      <p data-tone="subtle">Workspace</p>
+      <nav data-component="nav" aria-label="Workspace sections">
+        <ul>
+          <li><a href="/admin/people">People</a></li>
+          <li><a href="/admin/groups">Groups</a></li>
+          <li><a href="/admin/channels">Channels</a></li>
+          <li><a href="/admin/storage">Storage and retention</a></li>
+          <li><a href="/admin/audit">Audit log</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main data-slot="main" data-layout="stack" data-gap="xl">
+
+      <nav aria-label="Breadcrumb" data-layout="row" data-gap="xs" data-align="center" data-wrap>
+        <a data-component="button" data-variant="link" data-size="sm" href="/">Ridgeline</a>
+        <span data-tone="subtle" aria-hidden="true">/</span>
+        <a data-component="button" data-variant="link" data-size="sm" href="/admin">Admin</a>
+        <span data-tone="subtle" aria-hidden="true">/</span>
+        <span aria-current="page">Tickets</span>
+      </nav>
+
+      <div data-layout="row" data-gap="md" data-justify="between" data-align="center" data-wrap>
+        <div data-layout="stack" data-gap="xs">
+          <h1>Tickets</h1>
+          <p data-tone="subtle">All customer tickets in this workspace.</p>
+        </div>
+        <div data-layout="row" data-gap="sm" data-align="center">
+          <a data-component="button" data-variant="secondary" data-size="sm" href="/admin/tickets/export">Export CSV</a>
+          <a data-component="button" data-variant="primary" data-size="sm" href="/admin/tickets/new">New ticket</a>
+        </div>
+      </div>
+
+      <article data-component="card" data-tone="error">
+        <div data-slot="header" data-layout="row" data-gap="sm" data-align="center" data-wrap>
+          <span data-component="badge" data-variant="error">Over quota</span>
+          Storage is full — deletion scheduled for 15 September
+        </div>
+        <div data-slot="body" data-layout="stack" data-gap="md">
+          <p>
+            1,186 tickets last updated more than 90 days ago will be permanently deleted on
+            15 September. Export anything you need to keep before that date.
+          </p>
+        </div>
+        <div data-slot="footer" data-layout="row" data-gap="sm" data-wrap>
+          <a data-component="button" data-variant="danger" data-size="sm" href="/admin/storage">Review storage and retention</a>
+          <a data-component="button" data-variant="ghost" data-size="sm" href="/admin/tickets?age=90d">See the 1,186 tickets</a>
+        </div>
+      </article>
+
+      <form data-layout="row" data-gap="md" data-align="end" data-wrap aria-label="Filter tickets">
+        <div data-layout="stack" data-gap="xs">
+          <label for="ticket-search">Search tickets</label>
+          <input data-component="input" data-size="md" type="search" id="ticket-search" name="q" placeholder="Subject, requester or ticket id">
+        </div>
+        <div data-layout="stack" data-gap="xs">
+          <label for="filter-status">Status</label>
+          <select data-component="select" data-size="md" id="filter-status" name="status">
+            <option value="">All statuses</option>
+            <option value="open">Open</option>
+            <option value="waiting">Waiting</option>
+            <option value="solved">Solved</option>
+            <option value="escalated">Escalated</option>
+          </select>
+        </div>
+        <div data-layout="stack" data-gap="xs">
+          <label for="filter-group">Assigned group</label>
+          <select data-component="select" data-size="md" id="filter-group" name="group">
+            <option value="">All groups</option>
+            <option value="tier-1">Tier 1 support</option>
+            <option value="tier-2">Tier 2 support</option>
+            <option value="billing">Billing</option>
+            <option value="trust">Trust and safety</option>
+          </select>
+        </div>
+        <button data-component="button" data-variant="secondary" data-size="md" type="submit">Apply filters</button>
+      </form>
+
+      <div data-layout="row" data-gap="md" data-justify="between" data-align="center" data-wrap>
+        <div data-layout="stack" data-gap="xs">
+          <span data-component="stat">26–50</span>
+          <span data-tone="subtle">of 2,431 tickets · page 2 of 98</span>
+        </div>
+        <p data-tone="subtle">Sorted by last updated, newest first</p>
+      </div>
+
+      <table data-component="table">
+        <caption class="sr-only">Tickets 26 to 50 of 2,431, sorted by last updated</caption>
+        <thead>
+          <tr>
+            <th scope="col">Ticket</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Requester</th>
+            <th scope="col">Status</th>
+            <th scope="col">Last updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-mono>RDG-8842</th>
+            <td><a href="/admin/tickets/8842">Card declined on annual renewal</a></td>
+            <td>Priya Raman</td>
+            <td><span data-component="badge" data-variant="error">Escalated</span></td>
+            <td>4 Aug 2026, 16:52</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8839</th>
+            <td><a href="/admin/tickets/8839">SSO login loops back to the sign-in page</a></td>
+            <td>Dan Okafor</td>
+            <td><span data-component="badge" data-variant="info">Open</span></td>
+            <td>4 Aug 2026, 15:20</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8837</th>
+            <td><a href="/admin/tickets/8837">Export finishes but the CSV is empty</a></td>
+            <td>Marta Vidal</td>
+            <td><span data-component="badge" data-variant="info">Open</span></td>
+            <td>4 Aug 2026, 14:03</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8835</th>
+            <td><a href="/admin/tickets/8835">Requesting invoice reissue for July</a></td>
+            <td>Tobias Lindgren</td>
+            <td><span data-component="badge" data-variant="warning">Waiting</span></td>
+            <td>4 Aug 2026, 11:47</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8831</th>
+            <td><a href="/admin/tickets/8831">Webhook retries stop after the first failure</a></td>
+            <td>Chen Wei</td>
+            <td><span data-component="badge" data-variant="info">Open</span></td>
+            <td>3 Aug 2026, 22:15</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8828</th>
+            <td><a href="/admin/tickets/8828">Seat count wrong after removing a teammate</a></td>
+            <td>Amara Boateng</td>
+            <td><span data-component="badge" data-variant="warning">Waiting</span></td>
+            <td>3 Aug 2026, 19:40</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8824</th>
+            <td><a href="/admin/tickets/8824">Attachments over 10 MB fail silently</a></td>
+            <td>Jonas Weber</td>
+            <td><span data-component="badge" data-variant="error">Escalated</span></td>
+            <td>3 Aug 2026, 17:06</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8819</th>
+            <td><a href="/admin/tickets/8819">Password reset email never arrives</a></td>
+            <td>Sofia Marchetti</td>
+            <td><span data-component="badge" data-variant="success">Solved</span></td>
+            <td>3 Aug 2026, 09:58</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8815</th>
+            <td><a href="/admin/tickets/8815">Timezone on scheduled reports is off by one hour</a></td>
+            <td>Kwame Mensah</td>
+            <td><span data-component="badge" data-variant="success">Solved</span></td>
+            <td>2 Aug 2026, 20:31</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8811</th>
+            <td><a href="/admin/tickets/8811">Cannot merge two duplicate customer records</a></td>
+            <td>Elena Petrova</td>
+            <td><span data-component="badge" data-variant="warning">Waiting</span></td>
+            <td>2 Aug 2026, 13:12</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8807</th>
+            <td><a href="/admin/tickets/8807">Macro inserts the wrong signature block</a></td>
+            <td>Hugo Ferreira</td>
+            <td><span data-component="badge" data-variant="info">Open</span></td>
+            <td>2 Aug 2026, 08:44</td>
+          </tr>
+          <tr>
+            <th scope="row" data-mono>RDG-8803</th>
+            <td><a href="/admin/tickets/8803">API rate limit hit during nightly sync</a></td>
+            <td>Nadia Haddad</td>
+            <td><span data-component="badge" data-variant="success">Solved</span></td>
+            <td>1 Aug 2026, 23:29</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr data-component="divider">
+
+      <nav aria-label="Pagination" data-layout="row" data-gap="sm" data-align="center" data-justify="between" data-wrap>
+        <a data-component="button" data-variant="secondary" data-size="sm" href="/admin/tickets?page=1">Previous</a>
+        <div data-layout="row" data-gap="xs" data-align="center" data-wrap>
+          <a data-component="button" data-variant="ghost" data-size="sm" href="/admin/tickets?page=1">1</a>
+          <a data-component="button" data-variant="primary" data-size="sm" href="/admin/tickets?page=2" aria-current="page">2</a>
+          <a data-component="button" data-variant="ghost" data-size="sm" href="/admin/tickets?page=3">3</a>
+          <a data-component="button" data-variant="ghost" data-size="sm" href="/admin/tickets?page=4">4</a>
+          <a data-component="button" data-variant="ghost" data-size="sm" href="/admin/tickets?page=5">5</a>
+          <span data-tone="subtle" aria-hidden="true">…</span>
+          <a data-component="button" data-variant="ghost" data-size="sm" href="/admin/tickets?page=98">98</a>
+        </div>
+        <a data-component="button" data-variant="secondary" data-size="sm" href="/admin/tickets?page=3">Next</a>
+      </nav>
+
+      <details data-component="disclosure">
+        <summary>How this list is filtered</summary>
+        <p>
+          The list shows every ticket in the workspace, including closed and archived ones,
+          sorted by last updated. Tickets deleted under the retention policy leave the list
+          immediately and are not recoverable.
+        </p>
+      </details>
+
+    </main>
+  </div>
+
+</body>
+</html>

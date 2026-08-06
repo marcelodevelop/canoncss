@@ -33,7 +33,7 @@ or zero-install via CDN:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marcelodevelop/canoncss@main/dist/canon.css">
 ```
 
-Grab [`dist/canon.css`](dist/canon.css) - **~34.2kb raw, ~6.1kb gzipped**, smaller
+Grab [`dist/canon.css`](dist/canon.css) - **~33.3kb raw, ~6.0kb gzipped**, smaller
 than a single webfont. There is deliberately no modular install: at this size a
 pick-what-you-need build step would cost more in tooling than it saves in bytes.
 (If you insist, `src/` is modular - concatenate only the files you use.)
@@ -124,7 +124,7 @@ The API is `data-*` attributes, not classes:
 | Attribute | Purpose |
 |-----------|---------|
 | `data-layout` | 7 layout patterns: `stack` `row` `grid` `sidebar` `centered` `hero` `split` |
-| `data-component` | 18 components: `button` `card` `badge` `alert` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` `disclosure` `nav` `breadcrumb` `pagination` `stepper` |
+| `data-component` | 17 components: `button` `card` `badge` `alert` `input` `textarea` `select` `topbar` `modal` `avatar` `stat` `table` `divider` `disclosure` `nav` `breadcrumb` `stepper` |
 | `data-slot` | Named children (`header`, `body`, `footer`, `sidebar`, `main`, …) |
 | `data-gap` / `data-align` / `data-justify` | Layout modifiers |
 | `data-variant` / `data-size` / `data-state` | Component modifiers |
