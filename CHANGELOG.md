@@ -6,8 +6,8 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Added
-- **Three components and two things that needed none.** `alert`, `breadcrumb`
-  and `pagination` join the vocabulary; `<progress>` and
+- **Two components and two things that needed none.** `alert` and `breadcrumb`
+  join the vocabulary; `<progress>` and
   `<input type="checkbox" role="switch">` are styled bare. Capability rose by
   five and the closed vocabulary by three.
   - The two bare ones follow the rule checkbox and radio already set in this
@@ -22,9 +22,8 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
     tinted while a paragraph is read. It carries **no role by itself**: a
     message present at render is ordinary content, and baking in `role="alert"`
     would make every static callout interrupt a screen reader.
-  - `breadcrumb` and `pagination` both sit on `<nav>` around an `<ol>`, and
-    most of their CSS undoes what the reset does to `nav a`, which is tuned for
-    a sidebar. Pagination targets are 2.25rem square, above WCAG 2.5.8.
+  - `breadcrumb` sits on `<nav>` around an `<ol>`, and most of its CSS undoes
+    what the reset does to `nav a`, which is tuned for a sidebar.
   - All six forced-colours cases were handled in the same change rather than
     left for later. `appearance: none` removes the control the UA would have
     drawn and a forced palette then removes the background that replaced it, so
@@ -36,10 +35,10 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
     The tightest is the switch in its off position at 3.07:1 against a 3.0
     threshold, which is exactly the kind of margin that needs a gate rather
     than a promise.
-  - **This set aside the admission test in CONTRIBUTING**, which wants measured
-    divergence and got framework parity instead. The exception is documented
-    there with its reasoning and its limits rather than skipped quietly.
-- **`examples/docs-article/`**: an API reference page using all five, plus the
+  - These shipped by setting aside the admission test, which wants measured
+    divergence and got framework parity instead. **The test was then actually
+    run, and it removed one of the three.** See below.
+- **`examples/docs-article/`**: an API reference page using all of them, plus the
   table, disclosure and topbar burger. Linted by `npm test` like every other
   example, and verified at 375px with nothing escaping the viewport.
 - **`canon-lint --help`**, which used to fail with `ENOENT` on a file called
@@ -179,6 +178,32 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   - Every figure regenerates with `npm run census`, and `--check` asserts the
     doc still agrees, which `npm test` runs. A table of measurements nobody can
     reproduce is the drift `check-docs.mjs` already exists to prevent.
+
+- **The admission test was run, and it took `pagination` back out.** Ten
+  clean-context generations across two specs, on the vocabulary **as it stood
+  before** these components existed, so the models had to build the patterns
+  from what was there. Both specs described the need and never named a
+  component. `test-llm/admission-docs/`, `test-llm/admission-tickets/`, and
+  `scripts/admission.mjs`, which was written before the pages were read.
+  - All ten reached for all three patterns. `alert` and `breadcrumb` diverged
+    and stayed: 8 cards against 2 bare stacks for the notice, with the card
+    family unable to agree whether severity was `data-variant="featured"`,
+    `data-tone="error"` or the badge inside it; and an even 5/5 split between
+    `<a>` and `<button data-variant="link">` for a crumb, which are two
+    different keyboard and screen-reader contracts.
+  - `pagination` **converged and was removed**. Three of five wrote
+    `<nav aria-label="Pagination" data-layout="row" data-gap="sm"
+    data-align="center" data-wrap>` almost to the character, with ghost for
+    other pages, primary plus `aria-current="page"` for the current one, and
+    secondary for prev/next. The only variation was `data-gap` sm against md,
+    which is a modifier and not structure. That is the footer case again, and
+    the rule caught it two commits after the component shipped. The
+    construction is now stated in both prompts and the skill, which is what the
+    rule prescribes and costs nothing to maintain.
+  - Not acted on, but recorded: **three of five docs generations reused
+    `stepper` for "page 3 of 7"**, a checkout-steps component pressed into
+    service as a position indicator. The most interesting open question the run
+    produced, and too small an N on a sub-pattern to move on yet.
 
 ### Fixed
 - **A card ate a third of any long word it was given.** `overflow-wrap:

@@ -102,7 +102,6 @@ const PAIRS = [
   ['--color-content', '--color-success-subtle', 'alert success', 4.5],
   ['--color-content', '--color-warning-subtle', 'alert warning', 4.5],
   ['--color-content', '--color-error-subtle', 'alert error', 4.5],
-  ['--color-content-inverse', '--color-brand', 'pagination current', 4.5],
   // WCAG 1.4.11 wants 3:1 for what identifies a user interface component. An
   // input, select and textarea all sit on --color-surface, the same colour as
   // the page, so the border is the only thing that says where the control is.

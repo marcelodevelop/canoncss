@@ -160,6 +160,46 @@ This is a debt, not a precedent. The first real external users are the evidence
 these three were supposed to have, and if any of them turns out to be a name
 rather than a capability, it should come back out.
 
+### The debt was paid, and one of the three came back out
+
+The experiment was run rather than left owed. Ten clean-context generations
+across two specs, on the vocabulary **as it stood before these three existed**,
+which is what makes it evidence: the models had to build the patterns out of
+what was there. Both specs described the need and never named a component, so
+the construction was theirs to choose. `test-llm/admission-docs/` and
+`test-llm/admission-tickets/`; `node scripts/admission.mjs <dir> --spec <name>`
+reproduces the analysis, which was written before the pages were read.
+
+All ten reached for all three patterns. What they built:
+
+| Candidate | Reached for it | Built it differently | Verdict |
+|---|---|---|---|
+| Block-level notice | 10 of 10 | Yes: 8 cards against 2 bare stacks, and the card family could not agree whether severity was `data-variant="featured"`, `data-tone="error"`, or the badge inside it | **Kept** as `alert` |
+| Where am I | 10 of 10 | Yes: 5 built crumbs from `<a>` and 5 from `<button data-variant="link">`, a even split on two different keyboard and screen-reader contracts | **Kept** as `breadcrumb` |
+| Move through pages | 10 of 10 | **No.** Three of five wrote `<nav aria-label="Pagination" data-layout="row" data-gap="sm" data-align="center" data-wrap>` almost to the character, ghost for other pages, primary plus `aria-current="page"` for the current one, secondary for prev/next. The only variation was `data-gap` sm against md | **Removed** |
+
+The pager is the footer case again, and the rule caught it two commits after it
+shipped. Ten generations converged **structurally** and varied only in
+modifiers, which is the same distinction `npm run repro` draws: movement there
+changes how a page looks, not what it is. So the request was for a name and not
+a capability, and the fix the rule prescribes is free. The construction is now
+stated in both prompts and in the skill, where it costs nothing to maintain and
+cannot drift out of sync with a stylesheet.
+
+Two things worth keeping from the run that are not verdicts:
+
+- **Three of five docs generations reused `stepper` for "page 3 of 7"**, which
+  is a component for checkout and onboarding steps being pressed into service
+  as a position indicator. That is a component being misused because the gap
+  beside it was unfilled, and it is the most interesting open question the run
+  produced. It is not acted on here: the position indicator split three ways
+  across five files, which is a small N on a sub-pattern, and the rule wants a
+  spec of its own before anything is added for it.
+- **All 15 lint violations in the corpus were the same one**,
+  `<ul data-component="nav">` where the role belongs on the wrapper. Ordinary
+  generation noise, baselined in `npm test` rather than edited away, because
+  editing a corpus deletes the measurement it exists to hold.
+
 ## Design principles (non-negotiable)
 
 - **One right way.** If a pattern can already be expressed, do not add a

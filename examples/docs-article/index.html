@@ -117,15 +117,15 @@
 
       <hr data-component="divider">
 
-      <nav data-component="pagination" aria-label="Pagination">
-        <ol>
-          <li><a href="#" aria-disabled="true">Previous</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#" aria-current="page">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">Next</a></li>
-        </ol>
+      <!-- A pager is a construction, not a component: ten of ten clean-context
+           generations built this same shape without one. -->
+      <nav aria-label="Pagination" data-layout="row" data-gap="sm" data-align="center" data-wrap>
+        <a data-component="button" data-variant="secondary" href="#">Previous</a>
+        <a data-component="button" data-variant="ghost" href="#">1</a>
+        <a data-component="button" data-variant="primary" aria-current="page" href="#">2</a>
+        <a data-component="button" data-variant="ghost" href="#">3</a>
+        <a data-component="button" data-variant="ghost" href="#">4</a>
+        <a data-component="button" data-variant="secondary" href="#">Next</a>
       </nav>
 
     </div>

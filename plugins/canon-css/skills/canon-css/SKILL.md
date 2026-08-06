@@ -83,8 +83,6 @@ COMPONENTS - `data-component` on semantic elements:
               did, `role="alert"` only if it must interrupt.
     breadcrumb on `<nav>` wrapping an `<ol>` of ancestors. Separators are
               generated; mark the last one `aria-current="page"`.
-    pagination on `<nav>` wrapping an `<ol>` of page links. Current is
-              `aria-current="page"`; a dead prev/next is `aria-disabled="true"`.
 
 UTILITIES - complete list; nothing else exists:
 
@@ -93,6 +91,20 @@ UTILITIES - complete list; nothing else exists:
     data-motion={rise|float|pulse|lift}  (entrance | idle drift | attention |
       hover elevation; all auto-respect prefers-reduced-motion)
     class="sr-only"
+
+## A pager is a construction, not a component
+
+Ten of ten clean-context generations built the same thing without one, so it is
+written down rather than named:
+
+```html
+<nav aria-label="Pagination" data-layout="row" data-gap="sm" data-align="center" data-wrap>
+  <a data-component="button" data-variant="secondary" href="?page=1">Previous</a>
+  <a data-component="button" data-variant="ghost" href="?page=1">1</a>
+  <a data-component="button" data-variant="primary" aria-current="page" href="?page=2">2</a>
+  <a data-component="button" data-variant="secondary" href="?page=3">Next</a>
+</nav>
+```
 
 ## Prose - styled automatically, no attributes needed
 

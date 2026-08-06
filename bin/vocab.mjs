@@ -7,7 +7,7 @@
 export const LAYERS = ['canon.reset', 'canon.tokens', 'canon.layouts', 'canon.components', 'canon.utilities', 'canon.theme', 'canon.app'];
 
 export const LAYOUTS = new Set(['stack', 'row', 'grid', 'sidebar', 'centered', 'hero', 'split']);
-export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider', 'disclosure', 'nav', 'stepper', 'alert', 'breadcrumb', 'pagination']);
+export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider', 'disclosure', 'nav', 'stepper', 'alert', 'breadcrumb']);
 const SCALE = new Set(['xs', 'sm', 'md', 'lg', 'xl', '2xl']);
 
 export const VOCAB = {
@@ -52,10 +52,9 @@ export const ELEMENTS = {
   // A block-level message. Not <p>: it holds a heading and a paragraph, and a
   // <p> cannot contain either.
   alert: new Set(['div', 'section', 'aside']),
-  // Both are navigation and both wrap an ordered list, so both sit on <nav>
-  // for the same reason `nav` does.
+  // Navigation wrapping an ordered list, so it sits on <nav> for the same
+  // reason `nav` does.
   breadcrumb: new Set(['nav']),
-  pagination: new Set(['nav']),
 };
 
 export const DESC = {
