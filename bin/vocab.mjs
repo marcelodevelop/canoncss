@@ -10,6 +10,27 @@ export const LAYOUTS = new Set(['stack', 'row', 'grid', 'sidebar', 'centered', '
 export const COMPONENTS = new Set(['button', 'card', 'badge', 'input', 'textarea', 'select', 'topbar', 'modal', 'avatar', 'stat', 'table', 'divider', 'disclosure', 'nav', 'stepper', 'alert', 'breadcrumb']);
 const SCALE = new Set(['xs', 'sm', 'md', 'lg', 'xl', '2xl']);
 
+// R1: the variants each component actually styles. This is not one shared set,
+// and treating it as one was a silent no-op factory.
+//
+// Every variant selector in components.css is scoped:
+// [data-component="alert"][data-variant="error"]. So a value that belongs to
+// another component passes a flat check and then matches nothing. It happened
+// in a real app: <div data-component="alert" data-variant="danger"> in the
+// error banner of an upload screen. `danger` is button's. The banner lints
+// clean and renders with no red bar, which is the one place an error has to
+// look like one.
+//
+// A component absent from this map styles no variants at all, so data-variant
+// on it is dead too.
+export const VARIANTS = {
+  alert: new Set(['success', 'warning', 'error']),
+  badge: new Set(['neutral', 'brand', 'success', 'warning', 'error', 'info']),
+  button: new Set(['primary', 'secondary', 'ghost', 'danger', 'link']),
+  card: new Set(['featured']),
+  divider: new Set(['strong']),
+};
+
 export const VOCAB = {
   'data-layout': LAYOUTS,
   'data-component': COMPONENTS,
@@ -20,8 +41,10 @@ export const VOCAB = {
   'data-cols': new Set(['1', '2', '3', '4', 'auto']),
   'data-width': new Set(['prose', 'content', 'wide']),
   'data-size': new Set(['sm', 'md', 'lg']),
-  // ponytail: the union of every component's variants; split per component if it matters
-  'data-variant': new Set(['primary', 'secondary', 'ghost', 'danger', 'link', 'neutral', 'brand', 'success', 'warning', 'error', 'info', 'strong', 'featured']),
+  // The union, derived so it cannot drift from VARIANTS. It is what the editor
+  // suggests and what the linter falls back to when the component is not known
+  // at lint time, as in <Card data-variant="featured"> forwarding down.
+  'data-variant': new Set(Object.values(VARIANTS).flatMap((s) => [...s])),
   'data-state': new Set(['error', 'success', 'complete']),
   'data-tone': new Set(['subtle', 'brand', 'accent', 'success', 'error']),
   'data-hide': new Set(['mobile', 'desktop']),

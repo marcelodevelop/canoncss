@@ -5,6 +5,43 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 
 ## [Unreleased]
 
+### Fixed
+- **`data-variant` was checked against a set no component actually has.** Every
+  variant selector in `components.css` is scoped -
+  `[data-component="alert"][data-variant="error"]` - and the linter checked the
+  value against the union of all of them. So a variant borrowed from another
+  component passed and then matched nothing: valid markup, clean lint, no
+  styling. The R7 and R9 failure mode, one level up and in the HTML.
+
+  Found in a shipped app rather than by reading the source. An upload screen
+  had written `<div data-component="alert" data-variant="danger">`, because
+  `danger` is what a button uses. It rendered as a plain alert with no red bar,
+  on the one screen where an error has to look like an error, and the author
+  had run the linter.
+
+  `data-variant` is now validated against the component it sits on. Measured
+  across five projects before shipping: 1 of 22 component+variant pairs was
+  dead, and no project gained a false positive. A component with no variants at
+  all is reported too. `<Card data-variant="featured">` still falls back to the
+  union, because JSX forwards the attribute to an element this pass never sees.
+
+  Breaking in name only: the only markup it rejects is markup that was already
+  doing nothing.
+- **Canon's first words to a Next.js adopter were four violations from files
+  they did not write.** `create-next-app` ships `page.module.css` and
+  `globals.css`, both defining `--text-primary` and `--text-secondary`. Those
+  land in Canon's `--text-*` namespace without being tokens, so R7 correctly
+  reported that they override nothing and then suggested `--text-xs`, which is
+  advice for the wrong problem. The file wants deleting, not renaming, and
+  `globals.css` fights the reset besides. The violations still print and still
+  fail - a project may legitimately keep its own `globals.css` - but the
+  summary now names the file as scaffold and says so.
+- **Two shipped docs had drifted off the component count.** `EXTENDING.md`
+  opened on "Canon has fourteen components" and `MIGRATING.md` said 15, three
+  releases after it became 17, both in the first paragraph a reader lands on.
+  `check-docs.mjs` only ever read the README. It now reads every shipped doc
+  and understands spelled-out numbers, which is how one of them was written.
+
 ## [0.5.0] - 2026-08-06
 
 

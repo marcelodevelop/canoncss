@@ -137,7 +137,7 @@ Be honest with yourself about these rather than fighting them.
 - **Arbitrary values.** `top-[117px]` has no Canon spelling and is not supposed
   to. If a value has no token, it does not exist; either it becomes a token in
   your theme or the design was arbitrary.
-- **Utility-driven one-offs.** Canon has 15 components. A datepicker, a kanban
+- **Utility-driven one-offs.** Canon has 17 components. A datepicker, a kanban
   board, a file uploader: those are yours, in `data-x-component` and
   `@layer canon.app`. That is a supported door, not a defeat.
 - **Per-breakpoint layout.** Canon's layouts are responsive by construction and
