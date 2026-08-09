@@ -88,7 +88,7 @@ declare module 'react' {
     /**
      * Component variant.
      */
-    'data-variant'?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'link' | 'neutral' | 'brand' | 'success' | 'warning' | 'error' | 'info' | 'strong' | 'featured' | undefined;
+    'data-variant'?: 'success' | 'warning' | 'error' | 'neutral' | 'brand' | 'info' | 'primary' | 'secondary' | 'ghost' | 'danger' | 'link' | 'featured' | 'strong' | undefined;
 
     /**
      * Validation state of a form control.

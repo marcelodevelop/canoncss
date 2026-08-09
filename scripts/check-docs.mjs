@@ -55,6 +55,34 @@ for (const file of ['prompts/system-prompt.txt', 'prompts/system-prompt-full.txt
   }
 }
 
+// The README count was kept in sync above and the other shipped docs were not,
+// so they drifted exactly as predicted: EXTENDING.md opened on "Canon has
+// fourteen components" and MIGRATING.md said 15, three releases after it became
+// 17. Both were the first paragraph a reader lands on.
+//
+// Spelled-out numbers are read too, because that is how one of them was written
+// and a check that only understands digits would have passed it. CHANGELOG.md is
+// excluded on purpose: its counts describe the release they sit in and are
+// supposed to say 12.
+const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+  'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen',
+  'eighteen', 'nineteen', 'twenty'];
+const asNumber = (word) => {
+  const i = WORDS.indexOf(word.toLowerCase());
+  return i === -1 ? Number(word) : i;
+};
+
+for (const file of ['README.md', 'EXTENDING.md', 'MIGRATING.md', 'RESEARCH.md']) {
+  const src = readFileSync(file, 'utf-8');
+  const counts = { components: COMPONENTS.size, layouts: LAYOUTS.size };
+  for (const m of src.matchAll(new RegExp(`\\b(${WORDS.join('|')}|\\d+)\\s+(components|layouts)\\b`, 'gi'))) {
+    const actual = counts[m[2].toLowerCase()];
+    if (asNumber(m[1]) !== actual) {
+      failures.push(`${file} says "${m[1]} ${m[2]}", vocab.mjs has ${actual}`);
+    }
+  }
+}
+
 // Sizes drift the same way counts do, and worse, because nothing about editing
 // a stylesheet reminds you that a number in the README describes it. Every one
 // of these was wrong when it was checked: the CSS had grown from 24kb to 27kb,

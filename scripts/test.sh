@@ -347,4 +347,51 @@ node scripts/check-css.mjs dist/canon.css
 echo "- shipped themes and extensions must parse:"
 node scripts/check-css.mjs dist/canon.css themes/*.css extensions/*.css
 
+# data-variant is scoped to its component. It used to be checked against the
+# union of every component's variants, which let a value borrowed from another
+# component pass and then match no selector at all - the R7/R9 failure mode one
+# level up, in markup rather than CSS.
+#
+# Found in a shipped app, not reasoned about: an error banner written
+# <div data-component="alert" data-variant="danger"> because danger is what a
+# button uses. Lint clean, no red bar, on the one screen where an error has to
+# read as an error. Measured across five projects afterwards: 1 of 22
+# component+variant pairs was dead, and no other project gained a violation.
+#
+# Three failures and two passes. The passes are the half that matters: they
+# fail this test if data-variant is ever rejected outright.
+echo "- data-variant must be scoped to its component:"
+set +e
+OUTV=$(node bin/canon-lint.mjs test-llm/variant-scope-fixture.html 2>&1)
+CODEV=$?
+set -e
+COUNTV=$(echo "$OUTV" | grep -cE '  R1  ')
+TOTALV=$(echo "$OUTV" | grep -cE '  R[0-9]+  ')
+if [ "$CODEV" -ne 1 ] || [ "$COUNTV" -ne 3 ] || [ "$TOTALV" -ne 3 ]; then
+  echo "FAIL: expected exit 1 with exactly 3 violations, all R1; got exit $CODEV, $COUNTV R1 of $TOTALV:"
+  echo "$OUTV"
+  exit 1
+fi
+echo "✓ cross-component variants caught ($COUNTV, exit $CODEV)"
+
+# The first run a Next.js adopter ever does. create-next-app writes
+# page.module.css and globals.css, both of which define token-shaped custom
+# properties in Canon's namespace, so R7 fires four times on markup the user
+# never wrote and suggests renaming a property that should be deleted.
+#
+# The violations still print and still fail - a project may legitimately keep
+# its own globals.css and nothing here is hidden. What is asserted is that the
+# summary says which file it is and what to do with it.
+echo "- framework scaffold must be named in the summary:"
+set +e
+OUTS=$(node bin/canon-lint.mjs test-llm/scaffold-fixture 2>&1)
+CODES=$?
+set -e
+if [ "$CODES" -ne 1 ] || ! echo "$OUTS" | grep -q 'framework scaffold'; then
+  echo "FAIL: expected exit 1 and a scaffold note, got exit $CODES:"
+  echo "$OUTS"
+  exit 1
+fi
+echo "✓ scaffold named, not just flagged"
+
 echo "✓ all tests passed"

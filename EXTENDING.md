@@ -1,8 +1,8 @@
 # Building what Canon does not have
 
-Canon has fourteen components. Your product will need a fifteenth: a datepicker,
-a kanban board, a file uploader with drag and drop, an onboarding wizard with
-steps. Some of those will never be in Canon.
+Canon has seventeen components. Your product will need an eighteenth: a
+datepicker, a kanban board, a file uploader with drag and drop, an onboarding
+wizard with steps. Some of those will never be in Canon.
 
 This is how you build them so they still look and read like Canon. It is a
 supported path, not a workaround, and `canon-lint` checks it.

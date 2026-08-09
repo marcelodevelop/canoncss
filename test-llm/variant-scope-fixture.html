@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- data-variant is scoped to its component, and this fixture is the proof.
+     Every variant selector in components.css reads
+     [data-component="x"][data-variant="y"], so a value borrowed from another
+     component passes a flat vocabulary check and then matches nothing at all.
+
+     Found in a shipped app: the error banner of an upload screen was written
+     <div data-component="alert" data-variant="danger">, because `danger` is
+     what a button uses. It rendered as a plain alert with no red bar, on the
+     one screen where an error has to look like an error.
+
+     Three must fail, two must pass, and all three failures must be R1. The
+     passes are here so a fix that just rejects data-variant outright fails
+     this fixture too. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Variant scoping</title>
+  </head>
+  <body>
+    <!-- FAILS: danger belongs to button. Alert styles success|warning|error. -->
+    <div data-component="alert" data-variant="danger" role="alert">
+      <p>Could not read that file.</p>
+    </div>
+
+    <!-- FAILS: ghost belongs to button. -->
+    <span data-component="badge" data-variant="ghost">Draft</span>
+
+    <!-- FAILS: input styles no variants at all, so this is dead either way. -->
+    <input data-component="input" data-variant="primary" aria-label="Email" />
+
+    <!-- PASSES: error is alert's own. -->
+    <div data-component="alert" data-variant="error" role="alert">
+      <p>Could not read that file.</p>
+    </div>
+
+    <!-- PASSES: danger is button's own, on a button. -->
+    <button data-component="button" data-variant="danger">Delete</button>
+  </body>
+</html>

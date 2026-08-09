@@ -1,0 +1,15 @@
+/* A verbatim slice of what `create-next-app` writes, kept as a fixture because
+   it is the first thing canon-lint ever says to a Next.js adopter.
+   --text-primary sits in Canon's --text-* namespace without being a token, so
+   R7 is correct that it overrides nothing, and then offers "did you mean
+   --text-xs?" - advice for a problem this file does not have. The file is not
+   to be renamed, it is to be deleted, and it fights the reset besides.
+   Two violations, and the summary must name the file as scaffold. */
+:root {
+  --text-primary: #171717;
+  --text-secondary: #666666;
+}
+
+body {
+  color: var(--text-primary);
+}

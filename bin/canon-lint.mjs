@@ -4,13 +4,28 @@
 // Exit 0 = clean, 1 = violations, 2 = usage error.
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, extname } from 'node:path';
-import { VOCAB, ELEMENTS, COMPONENTS, LAYERS } from './vocab.mjs';
+import { join, extname, basename } from 'node:path';
+import { VOCAB, VARIANTS, ELEMENTS, COMPONENTS, LAYERS } from './vocab.mjs';
 import { TOKENS } from './tokens.mjs';
 import { DEFAULTS } from './defaults.mjs';
 
 const EXTS = new Set(['.html', '.htm', '.jsx', '.tsx', '.css']);
 const SKIP_DIRS = new Set(['node_modules', 'dist', '.next', '.git']);
+
+// Stylesheets a framework's create-* command writes and Canon replaces.
+//
+// Measured on a real adoption: `create-next-app` then Canon opens with 4 R7
+// violations, all from page.module.css and globals.css, which define
+// --text-primary and --text-secondary. Those sit in Canon's --text-* namespace
+// without being tokens, so R7 is right that they override nothing - and then
+// suggests "did you mean --text-xs?", which is advice for the wrong problem.
+// The file is not to be fixed, it is to be deleted, and globals.css fights the
+// reset besides.
+//
+// Violations still print and still fail: nothing is hidden, because a project
+// may well keep its own globals.css. Only the summary line is added, so the
+// first run somebody ever does says what to actually do about it.
+const SCAFFOLD = new Set(['page.module.css', 'globals.css']);
 
 function collect(path, out = []) {
   const st = statSync(path);
@@ -487,17 +502,35 @@ function lintFile(file) {
     }
 
     // R1 - closed vocabulary values
-    for (const [name, allowed] of Object.entries(VOCAB)) {
-      if (attrs.has(name)) {
-        const value = attrs.get(name);
-        if (value === '{expr}') {
-          opaque++;
-        } else {
-          checked++;
-          if (!allowed.has(value)) {
-            violations.push([line, 'R1', `${name}="${value}" is not in the vocabulary (${[...allowed].join('|')})`]);
-          }
+    for (const [attr, union] of Object.entries(VOCAB)) {
+      if (!attrs.has(attr)) continue;
+      const value = attrs.get(attr);
+      if (value === '{expr}') {
+        opaque++;
+        continue;
+      }
+      checked++;
+
+      // data-variant belongs to its component, not to the vocabulary at large.
+      // Checked against the union it passes and then matches no selector, so
+      // the value is scoped whenever the component is knowable here: a
+      // lowercase tag carrying a real data-component. JSX (<Card …>) forwards
+      // the attribute to an element this pass never sees, and a misspelled
+      // role already fails on its own line - both fall back to the union
+      // rather than reporting the same mistake twice.
+      const role = attrs.get('data-component');
+      const scoped =
+        attr === 'data-variant' && name === name.toLowerCase() && COMPONENTS.has(role);
+
+      if (scoped) {
+        const allowed = VARIANTS[role];
+        if (!allowed) {
+          violations.push([line, 'R1', `${role} has no variants - data-variant="${value}" does nothing`]);
+        } else if (!allowed.has(value)) {
+          violations.push([line, 'R1', `data-variant="${value}" is not a variant of ${role} (${[...allowed].join('|')}) - it renders as no variant at all`]);
         }
+      } else if (!union.has(value)) {
+        violations.push([line, 'R1', `${attr}="${value}" is not in the vocabulary (${[...union].join('|')})`]);
       }
     }
   }
@@ -556,12 +589,14 @@ let checked = 0;
 let opaque = 0;
 let appRules = 0;
 let overrides = 0;
+const scaffold = [];
 for (const file of files) {
   const result = lintFile(file);
   checked += result.checked;
   opaque += result.opaque;
   appRules += result.appRules ?? 0;
   overrides += result.overrides ?? 0;
+  if (result.violations.length && SCAFFOLD.has(basename(file))) scaffold.push(file);
   for (const [line, rule, msg] of result.violations) {
     console.log(`${file}:${line}  ${rule}  ${msg}`);
     total++;
@@ -592,6 +627,13 @@ function extensionReport() {
   return lines.length ? '\n' + lines.join('\n') : '';
 }
 
+function scaffoldReport() {
+  if (scaffold.length === 0) return '';
+  const one = scaffold.length === 1;
+  return `
+  ${scaffold.join(', ')} ${one ? 'is' : 'are'} framework scaffold, not yours. Canon replaces ${one ? 'it' : 'them'} - delete rather than fix.`;
+}
+
 function themeReport() {
   if (overrides === 0) return '';
   return `
@@ -619,7 +661,7 @@ function coverage() {
 const extensions = extensionReport();
 
 if (total > 0) {
-  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}${coverage()}${escapeHatch()}${themeReport()}${extensions}`);
+  console.error(`\n✗ ${total} violation${total === 1 ? '' : 's'} in ${files.length} file${files.length === 1 ? '' : 's'}${coverage()}${scaffoldReport()}${escapeHatch()}${themeReport()}${extensions}`);
   process.exit(1);
 }
 console.log(`✓ ${files.length} file${files.length === 1 ? '' : 's'} clean${coverage()}${escapeHatch()}${themeReport()}${extensions}`);

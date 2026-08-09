@@ -228,6 +228,24 @@
       "description": "Component variant.",
       "values": [
         {
+          "name": "success"
+        },
+        {
+          "name": "warning"
+        },
+        {
+          "name": "error"
+        },
+        {
+          "name": "neutral"
+        },
+        {
+          "name": "brand"
+        },
+        {
+          "name": "info"
+        },
+        {
           "name": "primary"
         },
         {
@@ -243,28 +261,10 @@
           "name": "link"
         },
         {
-          "name": "neutral"
-        },
-        {
-          "name": "brand"
-        },
-        {
-          "name": "success"
-        },
-        {
-          "name": "warning"
-        },
-        {
-          "name": "error"
-        },
-        {
-          "name": "info"
+          "name": "featured"
         },
         {
           "name": "strong"
-        },
-        {
-          "name": "featured"
         }
       ]
     },
