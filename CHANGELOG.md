@@ -6,6 +6,22 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Fixed
+- **`input[type="file"]` was the one native control Canon never styled.** Two
+  applications built on Canon left it bare, on the upload screen each product
+  was actually about, and it rendered as an OS-grey control matching nothing
+  else on the page.
+
+  It was read as a missing component at first, a dropzone or an uploader, and
+  it is not. Canon had already decided to style native controls by element
+  rather than by attribute: checkbox, radio, the switch and `progress` all work
+  bare, because `type="checkbox"` already declares the role and no attribute can
+  make the browser hand over the control it draws. A file input is the same
+  category and was simply skipped. That is also why neither author diverged and
+  neither thought they were extending anything: there was nothing to reach for.
+
+  The control now takes Canon's input chrome and `::file-selector-button` reads
+  as a secondary button, with a forced-colours border so the clickable half
+  stays visible. No new vocabulary, and the count stays at seventeen.
 - **`data-variant` was checked against a set no component actually has.** Every
   variant selector in `components.css` is scoped -
   `[data-component="alert"][data-variant="error"]` - and the linter checked the
