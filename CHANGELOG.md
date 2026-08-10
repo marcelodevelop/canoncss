@@ -5,6 +5,14 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-08-09
+
+Both changes below are corrections, and both are the reason this is a minor
+rather than a patch. The linter now rejects markup it used to accept, so a
+build that was green can go red, and `input[type="file"]` restyles a control
+that renders on pages already published. Neither should arrive in an
+`npm update` nobody chose.
+
 ### Fixed
 - **`input[type="file"]` was the one native control Canon never styled.** Two
   applications built on Canon left it bare, on the upload screen each product
