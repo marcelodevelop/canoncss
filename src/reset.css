@@ -13,6 +13,11 @@
   body {
     font-family: var(--font-sans);
     font-size: var(--text-md);
+    /* 400 is what the browser would use anyway, so this line changes nothing
+       by default. It exists because the token existed for five releases with
+       nothing reading it, and a shipped theme (soft) set it to 450 in the
+       reasonable belief that it did something. Now it does. */
+    font-weight: var(--weight-normal);
     line-height: var(--leading-normal);
     color: var(--color-content);
     background-color: var(--color-surface);

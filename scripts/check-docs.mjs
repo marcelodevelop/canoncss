@@ -5,7 +5,7 @@
 // one nobody remembers. It drifted the first time nav was added. A number a
 // human has to keep in sync is a number that will be wrong, so CI keeps it.
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { COMPONENTS, LAYOUTS } from '../bin/vocab.mjs';
 
@@ -79,6 +79,44 @@ for (const file of ['README.md', 'EXTENDING.md', 'MIGRATING.md', 'RESEARCH.md'])
     const actual = counts[m[2].toLowerCase()];
     if (asNumber(m[1]) !== actual) {
       failures.push(`${file} says "${m[1]} ${m[2]}", vocab.mjs has ${actual}`);
+    }
+  }
+}
+
+// Every token must be read by the framework. Three sat in tokens.css for five
+// releases consumed by nothing, and a shipped theme (soft) overrode one of
+// them in the reasonable belief that it did something: --weight-normal: 450,
+// counted as brand surface by the linter, rendering nothing. A token nothing
+// reads is the R7/R9 failure one level up, published as vocabulary.
+{
+  const defined = [...readFileSync('src/tokens.css', 'utf-8').matchAll(/^\s*(--[a-z0-9-]+)\s*:/gm)]
+    .map((m) => m[1]);
+  const consumers = ['src/reset.css', 'src/layouts.css', 'src/components.css', 'src/utilities.css']
+    .map((f) => readFileSync(f, 'utf-8'))
+    .join('\n');
+  for (const token of new Set(defined)) {
+    if (!consumers.includes(`var(${token}`)) {
+      failures.push(`${token} is defined in tokens.css and read by nothing - wire it or remove it`);
+    }
+  }
+}
+
+// The equal-column fix must not regress in the teaching materials. Canon's own
+// grid moved to minmax(0, 1fr) in 0.5.0 with a measured case, and the old
+// pattern survived in the README, EXTENDING.md and the reference extension -
+// the three places people copy from. A bare 1fr is minmax(auto, 1fr), so one
+// wide cell breaks the equal columns the example promises.
+{
+  const teaching = ['README.md', 'EXTENDING.md', 'MIGRATING.md',
+    ...readdirSync('extensions').filter((f) => f.endsWith('.css')).map((f) => `extensions/${f}`),
+    ...readdirSync('themes').filter((f) => f.endsWith('.css')).map((f) => `themes/${f}`)];
+  for (const file of teaching) {
+    const src = readFileSync(file, 'utf-8');
+    // The count is a bare word (a number, auto-fill) followed directly by 1fr:
+    // anything looser also matches the minmax(0, 1fr) inside the fixed form.
+    const line = src.split('\n').findIndex((l) => /repeat\(\s*[\w-]+\s*,\s*1fr\s*\)/.test(l));
+    if (line !== -1) {
+      failures.push(`${file}:${line + 1} uses repeat(N, 1fr) - a track will not shrink below its content; use minmax(0, 1fr)`);
     }
   }
 }

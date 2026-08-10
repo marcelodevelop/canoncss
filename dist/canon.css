@@ -13,6 +13,7 @@ tab-size: 4;
 body {
 font-family: var(--font-sans);
 font-size: var(--text-md);
+font-weight: var(--weight-normal);
 line-height: var(--leading-normal);
 color: var(--color-content);
 background-color: var(--color-surface);
@@ -185,11 +186,9 @@ Palatino, Georgia, serif;
 --weight-bold:   600;
 --leading-tight:  1.2;
 --leading-normal: 1.5;
---leading-loose:  1.75;
 --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
 --duration-fast:   150ms;
 --duration-normal: 200ms;
---duration-slow:   300ms;
 }
 [data-theme="dark"] {
 color-scheme: dark;

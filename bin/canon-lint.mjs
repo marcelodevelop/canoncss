@@ -359,6 +359,18 @@ function lintFile(file) {
   let checked = 0;
   let opaque = 0;
   if (extname(file) === '.css') {
+    // The framework's own stylesheet is not user CSS. canon-init copies it
+    // into the repo, so it sits inside the linted tree, and judging it broke
+    // two things at once. Its 76 token definitions (54 root + 22 dark) were
+    // counted as overrides, so a project with no theme at all reported 76 of
+    // "brand surface" - a floor that made Canon's defaults look unused when
+    // two real projects were shipping on exactly them. And any token Canon
+    // removes starts failing R7 in every vendored copy, which is the linter
+    // punishing people for a release they have not even taken yet.
+    // The header is written by build.sh, so it is the one reliable marker.
+    if (/^\/\* Canon CSS v\d+\.\d+\.\d+ \|/.test(raw)) {
+      return { violations: [], checked: 0, opaque: 0, appRules: 0, overrides: 0 };
+    }
     const css = lintCss(file, raw);
     return { violations: css.violations, checked: 0, opaque: 0, appRules: css.rules, overrides: css.overrides };
   }

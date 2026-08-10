@@ -80,7 +80,7 @@ Your CSS lives in `@layer canon.app` and is built from tokens:
 @layer canon.app {
   [data-x-component="datepicker"] {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: var(--space-xs);
     background: var(--color-surface-raised);
     border: 1px solid var(--color-border);

@@ -232,7 +232,7 @@ you:
 @layer canon.app {
   [data-x-component='datepicker'] {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: var(--space-xs);              /* tokens, not values */
     background: var(--color-surface-raised);
     border-radius: var(--radius-md);

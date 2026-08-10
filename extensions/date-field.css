@@ -105,7 +105,11 @@
   [data-x-slot='weekdays'],
   [data-x-slot='days'] {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    /* minmax(0, 1fr), not 1fr: a bare 1fr is minmax(auto, 1fr) and a track
+       will not shrink below its content, so one wide cell breaks the equal
+       columns. Canon's own grid was fixed for exactly this in 0.5.0 and this
+       file kept shipping the old pattern. */
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: var(--space-xs);
   }
 
