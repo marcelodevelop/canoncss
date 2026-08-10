@@ -5,6 +5,43 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 
 ## [Unreleased]
 
+### Fixed
+- **The linter judged the framework's own stylesheet as user CSS.**
+  `canon-init` copies `canon.css` into the repo, so it sits inside the linted
+  tree, and that polluted the one number the linter exists to report: its 76
+  token definitions (54 root + 22 dark) were counted as overrides, so a
+  project with **no theme at all** reported 76 of "brand surface". Every
+  measured project sat on a phantom floor of 76, which made Canon's defaults
+  look like something nobody shipped - and corrected, two of five real
+  projects turn out to run on exactly the defaults. Removing a token also
+  broke every vendored copy of the previous release retroactively, which is
+  how this was caught: the two dead tokens below started failing R7 in four
+  projects that had never heard of the change. A file opening with the
+  `/* Canon CSS vX.Y.Z |` header build.sh writes is now skipped entirely.
+- **A shipped theme was turning a knob wired to nothing.** Three tokens sat in
+  `tokens.css` for five releases consumed by no rule: `--weight-normal`,
+  `--leading-loose` and `--duration-slow`. That is the R7/R9 failure published
+  as vocabulary: `themes/soft.css` set `--weight-normal: 450` in the reasonable
+  belief that it thickened body text, the linter counted the override as brand
+  surface, and the page did not change. The body now reads
+  `font-weight: var(--weight-normal)` - no visual change on the default, since
+  400 is what the browser used anyway, and the soft theme finally does what its
+  author meant. The other two tokens are removed rather than wired: a token
+  earns its line by being read, and adding one back costs a minor when
+  something needs it. `check-docs` now fails on any token nothing consumes.
+- **The equal-column bug lived on in the teaching materials.** 0.5.0 moved
+  Canon's grid to `minmax(0, 1fr)` with a measured case, and the old
+  `repeat(7, 1fr)` survived in the README, `EXTENDING.md` and
+  `extensions/date-field.css` - the reference extension `canon-init` copies
+  into people's repos, and the three places extensions get copied from. All
+  three now match the framework, and `check-docs` greps the teaching materials
+  so the corrected pattern cannot drift back.
+
+### Removed
+- `--leading-loose` and `--duration-slow`. Defined since 0.1.0, read by
+  nothing, so overriding them was silently a no-op. No shipped theme and no
+  known project touches either.
+
 ## [0.6.0] - 2026-08-09
 
 Both changes below are corrections, and both are the reason this is a minor

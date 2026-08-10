@@ -82,13 +82,16 @@
 
     --leading-tight:  1.2;
     --leading-normal: 1.5;
-    --leading-loose:  1.75;
 
-    /* ── TRANSITIONS ── */
+    /* ── TRANSITIONS ──
+       Two durations, not three. --leading-loose and --duration-slow were
+       defined here for five releases and consumed by nothing, which made them
+       knobs wired to nothing: a theme could override either, the linter would
+       count it as brand surface, and the page would not change. A token earns
+       its line by being read. */
     --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
     --duration-fast:   150ms;
     --duration-normal: 200ms;
-    --duration-slow:   300ms;
   }
 
   /* ── DARK MODE - explicit only, never automatic.

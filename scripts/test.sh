@@ -394,4 +394,23 @@ if [ "$CODES" -ne 1 ] || ! echo "$OUTS" | grep -q 'framework scaffold'; then
 fi
 echo "✓ scaffold named, not just flagged"
 
+# The framework's own stylesheet must not be judged as user CSS. canon-init
+# copies it into the repo, so it sits inside the linted tree, and counting its
+# 76 token definitions as overrides gave every canon-init project a phantom
+# "brand surface" floor - a project with no theme at all reported 76. Worse,
+# any token Canon removes starts failing R7 in every vendored copy of the
+# previous release. dist/canon.css is the real artifact people copy, so it is
+# the fixture: clean, zero overrides counted, or the metric is polluted again.
+echo "- the framework's own stylesheet must lint as nothing at all:"
+set +e
+OUTF=$(node bin/canon-lint.mjs dist/canon.css 2>&1)
+CODEF=$?
+set -e
+if [ "$CODEF" -ne 0 ] || echo "$OUTF" | grep -q 'token override'; then
+  echo "FAIL: expected dist/canon.css to be skipped (exit 0, no overrides), got exit $CODEF:"
+  echo "$OUTF"
+  exit 1
+fi
+echo "✓ vendored framework css is skipped, not judged"
+
 echo "✓ all tests passed"
