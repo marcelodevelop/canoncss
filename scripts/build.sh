@@ -21,6 +21,16 @@ mkdir -p dist
 
 echo "✓ Built $OUTPUT ($(wc -c < $OUTPUT) bytes)"
 
+# The prompts carry the same provenance header dist does. They are the artifact
+# users copy into other repos, and the header is the only marker of which
+# vocabulary generation a stale copy teaches - it sat at v0.1 through five
+# releases because nothing wrote it. Line 1 only: system-prompt-full.txt shows
+# "v0.1" further down as example badge markup that a global substitution would
+# corrupt. Full x.y.z, because check-release matches \d+\.\d+\.\d+.
+for PROMPT in prompts/system-prompt.txt prompts/system-prompt-full.txt; do
+  sed -i "1s/^CANON CSS v[0-9][0-9.]*/CANON CSS v$V/" "$PROMPT"
+done
+
 # The AGENTS.md drop-in, generated from system-prompt.txt so there is one source.
 {
   echo "# Canon CSS - agent instructions"
