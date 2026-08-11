@@ -36,6 +36,20 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   into people's repos, and the three places extensions get copied from. All
   three now match the framework, and `check-docs` greps the teaching materials
   so the corrected pattern cannot drift back.
+- **The full prompt kept teaching the two tokens the release removed.** The
+  dead-token fix above called the pattern "the R7/R9 failure published as
+  vocabulary", and `prompts/system-prompt-full.txt` is exactly that file: it
+  went on listing `--leading-loose` and `--duration-slow` in its token table,
+  so the official prompt republished the same failure the release closed. A
+  theme author copying from it wrote `var(--duration-slow)` and got R7 "not a
+  Canon token" back from the linter shipped in the same package. The short
+  prompt and `AGENTS.md` were already clean; the full prompt now reads
+  `{tight|normal}` and `{fast|normal}`. `check-docs` gains the inverse of the
+  dead-token guard: every brace pattern in the two prompt token tables is
+  expanded and each expanded token must exist in `tokens.css`. Scoped to the
+  prompts on purpose - a broad scan of the other docs produced ~8 classes of
+  false positive (CLI flags, markdown table rules, glob notation, deliberate
+  typo examples).
 
 ### Removed
 - `--leading-loose` and `--duration-slow`. Defined since 0.1.0, read by
