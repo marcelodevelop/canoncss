@@ -398,8 +398,15 @@ function lintFile(file) {
 
   // Every id a <label for> points at, collected up front because a label is
   // free to sit after the control it names.
+  //
+  // htmlFor is React's only valid spelling of the attribute, and matching
+  // `for` alone made every correctly labelled control in a .jsx/.tsx file an
+  // R10: measured, 11 of 11 R10s in one React project were this false
+  // positive. The alternation also accepts htmlFor in .html files, where it is
+  // not a real attribute - measured incidence in the corpus is zero, accepted
+  // to keep the change small.
   const labelledIds = new Set(
-    [...src.matchAll(/<label[^>]*\bfor=["']([^"']+)["']/g)].map((m) => m[1]),
+    [...src.matchAll(/<label[^>]*\b(?:for|htmlFor)=["']([^"']+)["']/g)].map((m) => m[1]),
   );
 
   // R10 only judges Canon markup. A file with no Canon attribute anywhere is
@@ -477,10 +484,16 @@ function lintFile(file) {
         (id && labelledIds.has(id)) ||
         insideLabel(src, tag.index);
       if (!named) {
+        // React rejects `for` on a label, so telling a JSX author to add
+        // <label for> steers them to aria-label instead - the invisible name
+        // over the visible one, which is how a shipped form ended up with a
+        // label reading one thing and an aria-label reading another
+        // (WCAG 2.5.3). The message has to name the spelling the file accepts.
+        const forAttr = extname(file) === '.jsx' || extname(file) === '.tsx' ? 'htmlFor' : 'for';
         violations.push([
           line,
           'R10',
-          `<${name}> has no accessible name - add aria-label, or a <label for="…"> if it has a visible one`,
+          `<${name}> has no accessible name - add aria-label, or a <label ${forAttr}="…"> if it has a visible one`,
         ]);
       }
     }

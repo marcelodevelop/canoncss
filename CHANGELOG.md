@@ -18,6 +18,19 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   version. The enforcement is free: CI already runs the build and
   `git diff --exit-code`, so a version bump without a rebuild now fails CI the
   same way a stale dist does.
+- **R10 did not recognise React's spelling of `<label for>`.** The labelled-id
+  collector matched `for=` alone, and `htmlFor` is the only spelling React
+  accepts, so every correctly labelled control in a `.jsx`/`.tsx` file drew an
+  R10: measured in canon-stock, 11 of 11 R10s were this false positive. The
+  message made it worse - "add aria-label" on a control that already has a
+  visible label is the antipattern, and auto-reach followed it into a real
+  WCAG 2.5.3 divergence, a visible label reading "Repetila" beside an
+  aria-label reading "Repetir contrasena". The collector now accepts both
+  spellings, and the message suggests `htmlFor` in `.jsx`/`.tsx` files and
+  `for` everywhere else. Known limitation: `htmlFor={expr}` paired with
+  `id={expr}` is opaque to the scanner and stays flagged unless the control
+  carries `aria-label` - measured across the corpus, 2 occurrences, both of
+  which already do.
 - **The linter judged the framework's own stylesheet as user CSS.**
   `canon-init` copies `canon.css` into the repo, so it sits inside the linted
   tree, and that polluted the one number the linter exists to report: its 76
@@ -48,6 +61,20 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   into people's repos, and the three places extensions get copied from. All
   three now match the framework, and `check-docs` greps the teaching materials
   so the corrected pattern cannot drift back.
+- **The full prompt kept teaching the two tokens the release removed.** The
+  dead-token fix above called the pattern "the R7/R9 failure published as
+  vocabulary", and `prompts/system-prompt-full.txt` is exactly that file: it
+  went on listing `--leading-loose` and `--duration-slow` in its token table,
+  so the official prompt republished the same failure the release closed. A
+  theme author copying from it wrote `var(--duration-slow)` and got R7 "not a
+  Canon token" back from the linter shipped in the same package. The short
+  prompt and `AGENTS.md` were already clean; the full prompt now reads
+  `{tight|normal}` and `{fast|normal}`. `check-docs` gains the inverse of the
+  dead-token guard: every brace pattern in the two prompt token tables is
+  expanded and each expanded token must exist in `tokens.css`. Scoped to the
+  prompts on purpose - a broad scan of the other docs produced ~8 classes of
+  false positive (CLI flags, markdown table rules, glob notation, deliberate
+  typo examples).
 
 ### Removed
 - `--leading-loose` and `--duration-slow`. Defined since 0.1.0, read by
