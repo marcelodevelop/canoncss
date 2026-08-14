@@ -485,10 +485,10 @@ function lintFile(file) {
         insideLabel(src, tag.index);
       if (!named) {
         // React rejects `for` on a label, so telling a JSX author to add
-        // <label for> steers them to aria-label instead - the invisible name
-        // over the visible one, which is how a shipped form ended up with a
-        // label reading one thing and an aria-label reading another
-        // (WCAG 2.5.3). The message has to name the spelling the file accepts.
+        // <label for> names the one spelling the file cannot use, leaving
+        // aria-label as the only actionable half of the advice - the invisible
+        // name over the visible one. The message has to name the spelling the
+        // file accepts.
         const forAttr = extname(file) === '.jsx' || extname(file) === '.tsx' ? 'htmlFor' : 'for';
         violations.push([
           line,

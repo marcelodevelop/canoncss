@@ -3,9 +3,9 @@
 // React's only valid spelling of the label-association attribute is htmlFor;
 // the labelled-id collector matched `for` alone, so every correctly labelled
 // control in a .jsx/.tsx file drew an R10. Measured: 11 of 11 R10s in one
-// React project were this false positive, and the fix the old message
-// suggested - aria-label - produced a form whose visible label and accessible
-// name disagreed (WCAG 2.5.3) in another.
+// React project were this false positive, and the old message named the one
+// spelling that project could not use, leaving aria-label as the only
+// actionable advice on controls that already had a visible label.
 //
 // Two assertions, and the second is the one that keeps this honest:
 //
