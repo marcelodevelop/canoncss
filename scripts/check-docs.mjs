@@ -8,6 +8,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { COMPONENTS, LAYOUTS } from '../bin/vocab.mjs';
+import { TOKENS } from '../bin/tokens.mjs';
 
 const README = readFileSync('README.md', 'utf-8');
 const failures = [];
@@ -97,6 +98,31 @@ for (const file of ['README.md', 'EXTENDING.md', 'MIGRATING.md', 'RESEARCH.md'])
   for (const token of new Set(defined)) {
     if (!consumers.includes(`var(${token}`)) {
       failures.push(`${token} is defined in tokens.css and read by nothing - wire it or remove it`);
+    }
+  }
+}
+
+// The inverse of the dead-token check above: every token the prompts teach must
+// exist. 0.6.0 removed --leading-loose and --duration-slow from tokens.css and
+// the full prompt kept teaching both, so anyone copying from the official
+// prompt wrote var()s the framework never reads and canon-lint flagged as R7.
+//
+// Scoped to the two prompt token tables on purpose. A broad scan of README/
+// EXTENDING/MIGRATING/themes produced ~8 false-positive classes: CLI flags
+// (--theme, --churn), markdown table rules (|---|), glob notation
+// (--radius-*), and deliberate typo examples. Do not widen this.
+{
+  for (const file of ['prompts/system-prompt.txt', 'prompts/system-prompt-full.txt']) {
+    const src = readFileSync(file, 'utf-8');
+    // Brace patterns can wrap across lines (--color-{...} spans three), so the
+    // variant class deliberately matches newlines and each variant is trimmed.
+    for (const m of src.matchAll(/--([a-z0-9-]+)-\{([^}]+)\}/g)) {
+      for (const variant of m[2].split('|').map((v) => v.trim())) {
+        const token = `--${m[1]}-${variant}`;
+        if (!TOKENS.has(token)) {
+          failures.push(`${file} teaches ${token}, which tokens.css does not define - the prompt is publishing a ghost token`);
+        }
+      }
     }
   }
 }
