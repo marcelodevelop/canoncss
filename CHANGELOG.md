@@ -13,9 +13,9 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
   message compounded it by naming the one spelling the file could not use -
   it told a JSX author to write `<label for="…">`, which React rejects, so the
   only actionable half of the advice was aria-label, on controls that already
-  had a visible label. The collector now accepts both
-  spellings, and the message suggests `htmlFor` in `.jsx`/`.tsx` files and
-  `for` everywhere else. Known limitation: `htmlFor={expr}` paired with
+  had a visible label. The collector now accepts both spellings, and the
+  message suggests `htmlFor` in `.jsx`/`.tsx` files and `for` everywhere
+  else. Known limitation: `htmlFor={expr}` paired with
   `id={expr}` is opaque to the scanner and stays flagged unless the control
   carries `aria-label` - measured across the corpus, 2 occurrences, both of
   which already do.
