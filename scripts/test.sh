@@ -65,6 +65,26 @@ if [ "$CODEJ" -ne 1 ] || [ "$R1J" -ne 1 ] || [ "$ALLJ" -ne 1 ]; then
 fi
 echo "✓ jsx scanner reads past arrow functions ($ALLJ violation, exit $CODEJ)"
 
+# The htmlFor spelling. The labelled-id collector matched `for` alone, which
+# React does not accept, so every correctly labelled control in a .jsx/.tsx
+# file drew an R10 - 11 of 11 in one measured project. The fixture carries a
+# matched pair and a mismatched pair, and the mismatch is the half that
+# matters: it fails this test if accepting htmlFor ever slides into R10 not
+# firing on JSX at all.
+echo "- htmlFor fixture must fail with exactly 1 violation, an R10:"
+set +e
+OUTH=$(node bin/canon-lint.mjs test-llm/htmlfor-fixture.tsx)
+CODEH=$?
+set -e
+R10H=$(echo "$OUTH" | grep -cE '  R10  ')
+ALLH=$(echo "$OUTH" | grep -cE '  R[0-9]+  ')
+if [ "$CODEH" -ne 1 ] || [ "$R10H" -ne 1 ] || [ "$ALLH" -ne 1 ]; then
+  echo "FAIL: expected exit 1 with 1 violation, an R10; got exit $CODEH, $R10H R10 of $ALLH total:"
+  echo "$OUTH"
+  exit 1
+fi
+echo "✓ htmlFor names its control, mismatch still caught ($ALLH violation, exit $CODEH)"
+
 echo "- app-layer fixture must fail with exactly 2 violations:"
 set +e
 OUT2=$(node bin/canon-lint.mjs test-llm/app-layer-fixture.css)

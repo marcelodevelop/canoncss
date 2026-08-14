@@ -6,6 +6,19 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Fixed
+- **R10 did not recognise React's spelling of `<label for>`.** The labelled-id
+  collector matched `for=` alone, and `htmlFor` is the only spelling React
+  accepts, so every correctly labelled control in a `.jsx`/`.tsx` file drew an
+  R10: measured in canon-stock, 11 of 11 R10s were this false positive. The
+  message made it worse - "add aria-label" on a control that already has a
+  visible label is the antipattern, and auto-reach followed it into a real
+  WCAG 2.5.3 divergence, a visible label reading "Repetila" beside an
+  aria-label reading "Repetir contrasena". The collector now accepts both
+  spellings, and the message suggests `htmlFor` in `.jsx`/`.tsx` files and
+  `for` everywhere else. Known limitation: `htmlFor={expr}` paired with
+  `id={expr}` is opaque to the scanner and stays flagged unless the control
+  carries `aria-label` - measured across the corpus, 2 occurrences, both of
+  which already do.
 - **The linter judged the framework's own stylesheet as user CSS.**
   `canon-init` copies `canon.css` into the repo, so it sits inside the linted
   tree, and that polluted the one number the linter exists to report: its 76
