@@ -1,4 +1,4 @@
-CANON CSS v0.1 - write HTML using only this vocabulary.
+CANON CSS v0.6.0 - write HTML using only this vocabulary.
 
 Canon is a pure-CSS framework with a closed vocabulary. There is exactly one
 correct way to express each pattern. If a value has no token, it does not exist.

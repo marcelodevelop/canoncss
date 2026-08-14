@@ -43,6 +43,23 @@ if (!stated) {
   failures.push(`dist/canon.css says v${stated[1]}, package.json says ${version} - run npm run build`);
 }
 
+// The prompts are the artifact users are told to copy into their own repos,
+// and their header is the only marker of which vocabulary generation a stale
+// copy teaches. It said v0.1 through five releases while nothing checked it.
+// build.sh stamps it now, so as with dist this only fails on a skipped build.
+for (const file of ['prompts/system-prompt.txt', 'prompts/system-prompt-full.txt', 'prompts/AGENTS.md']) {
+  const lines = readFileSync(file, 'utf-8').split('\n');
+  // AGENTS.md wraps system-prompt.txt in a fenced block, so its stamp is the
+  // first line carrying one rather than line one of the file.
+  const head = file.endsWith('.md') ? (lines.find((l) => l.startsWith('CANON CSS v')) ?? '') : lines[0];
+  const says = head.match(/^CANON CSS v(\d+\.\d+\.\d+) /);
+  if (!says) {
+    failures.push(`${file} does not state a full x.y.z version in its header`);
+  } else if (says[1] !== version) {
+    failures.push(`${file} says v${says[1]}, package.json says ${version} - run npm run build`);
+  }
+}
+
 // A version with no notes is a release nobody can read.
 const changelog = readFileSync('CHANGELOG.md', 'utf-8');
 if (!new RegExp(`^## \\[${version.replace(/\./g, '\\.')}\\]`, 'm').test(changelog)) {

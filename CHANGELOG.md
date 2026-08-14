@@ -6,6 +6,18 @@ Format: [Keep a Changelog](https://keepachangelog.com). Versioning: [SemVer](htt
 ## [Unreleased]
 
 ### Fixed
+- **The prompts claimed v0.1 through five releases.** All three shipped prompt
+  files opened with `CANON CSS v0.1` - stamped at 0.1.0 and never touched while
+  the package moved to 0.6.0. Nothing parses that line, but the documented
+  consumption model is copying the prompt into other repos, and the header is
+  the only provenance marker saying which vocabulary generation a stale copy
+  teaches. `check-release` guarded the header of `dist/canon.css` and never
+  these. `build.sh` now stamps line 1 of both prompt sources with the full
+  `vX.Y.Z` from package.json (`AGENTS.md` inherits it through its existing
+  generation), and `check-release` asserts all three headers state the package
+  version. The enforcement is free: CI already runs the build and
+  `git diff --exit-code`, so a version bump without a rebuild now fails CI the
+  same way a stale dist does.
 - **R10 did not recognise React's spelling of `<label for>`.** The labelled-id
   collector matched `for=` alone, and `htmlFor` is the only spelling React
   accepts, so every correctly labelled control in a `.jsx`/`.tsx` file drew an

@@ -4,7 +4,7 @@
 > .cursor/rules). Any coding agent will then generate valid Canon markup.
 
 ```
-CANON CSS v0.1 - write HTML using only this vocabulary.
+CANON CSS v0.6.0 - write HTML using only this vocabulary.
 
 TOKENS (CSS custom properties - never hardcode a value):
   --space-{xs|sm|md|lg|xl|2xl}
